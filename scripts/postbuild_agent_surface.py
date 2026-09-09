@@ -180,7 +180,7 @@ def main():
                  "Amazonbot", "DuckAssistBot", "MistralAI-User"]
     ai_block = "".join(f"User-agent: {a}\nAllow: /\n\n" for a in ai_agents)
     (site / "robots.txt").write_text(
-        "# AI Automation and Agents — University of Arizona AI2S course site\n"
+        "# AI Automation and Agents — University of New Mexico (CARC) course site\n"
         f"# {base}\n"
         "# This course is published for people AND for AI agents.\n"
         "User-agent: *\n"

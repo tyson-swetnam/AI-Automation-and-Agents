@@ -1,8 +1,8 @@
 [project]
 site_name = "AI Automation and Agents"
 site_url = "https://tyson-swetnam.github.io/AI-Automation-and-Agents/"
-site_description = "AI Automation and Agents: a five-module course from the Arizona Institute for Artificial Intelligence (AI2S) at The University of Arizona on AI agents, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
-site_author = "Arizona Institute for Artificial Intelligence (AI2S), The University of Arizona"
+site_description = "AI Automation and Agents: a five-module course from the Center for Advanced Research Computing (CARC) at the University of New Mexico on AI agents, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
+site_author = "Center for Advanced Research Computing, University of New Mexico"
 copyright = "&copy; 2026 The Regents of the University of New Mexico &mdash; <a href='https://carc.unm.edu/'>Center for Advanced Research Computing</a>. <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>. Course developed at the University of Arizona (<a href='https://responsibleai.arizona.edu/ai2s'>AI2S</a>) and released CC0."
 
 repo_url = "https://github.com/tyson-swetnam/AI-Automation-and-Agents"
@@ -141,8 +141,8 @@ code = "Roboto Mono"
 [project.theme.icon]
 repo = "fontawesome/brands/github"
 
-# University of Arizona palette: the "custom" primary/accent colors are
-# defined in docs/stylesheets/extra.css (Arizona Blue #0c234b, Arizona Red #ab0520).
+# University of New Mexico palette: the "custom" primary/accent colors are
+# defined in docs/stylesheets/extra.css (UNM Cherry #ba0c2f, UNM Turquoise #007a86).
 [[project.theme.palette]]
 media = "(prefers-color-scheme)"
 toggle.icon = "lucide/sun-moon"
@@ -166,11 +166,11 @@ toggle.name = "Switch to system preference"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
-link = "https://github.com/UA-AI2S"
+link = "https://github.com/UNM-CARC"
 
 [[project.extra.social]]
 icon = "fontawesome/solid/globe"
-link = "https://responsibleai.arizona.edu/ai2s"
+link = "https://carc.unm.edu/"
 
 [project.markdown_extensions]
 abbr = {}
@@ -205,4 +205,4 @@ pymdownx.tabbed.combine_header_slug = true
 pymdownx.tasklist.custom_checkbox = true
 pymdownx.tilde = {}
 
-# No analytics: add a [project.extra.analytics] block only if AI2S supplies a property.
+# No analytics: add a [project.extra.analytics] block only if UNM CARC supplies a property.

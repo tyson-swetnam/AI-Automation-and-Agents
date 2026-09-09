@@ -1,51 +1,48 @@
 /* ==========================================================================
    AI Automation and Agents course theme
-   University of Arizona brand: Arizona Blue #0C234B + Arizona Red #AB0520,
-   with the secondary palette (Azurite, Midnight, Oasis, Sky, Bloom, River,
-   Leaf, Warm Gray, Cool Gray) for accents.
-   Structure adapted from the UNM CARC documentation theme (gradient identity
-   header, card-based landing page) for the Zensical modern theme.
+   University of New Mexico brand: UNM Cherry #BA0C2F + UNM Turquoise #007A86,
+   with Silver #A7A8AA and derived tints for accents.
+   Palette and structure follow the UNM CARC documentation theme (gradient
+   identity header, card-based landing page) for the Zensical modern theme.
    ========================================================================== */
 
 /* --- Brand color tokens ------------------------------------------------- */
 
 :root > * {
-  --md-primary-fg-color:        #0c234b;   /* Arizona Blue */
-  --md-primary-fg-color--light: #1e5288;   /* Azurite */
-  --md-primary-fg-color--dark:  #001c48;   /* Midnight */
-  --md-accent-fg-color:         #ab0520;   /* Arizona Red */
-  --md-accent-fg-color--transparent: rgba(171, 5, 32, 0.1);
+  --md-primary-fg-color:        #ba0c2f;   /* UNM Cherry */
+  --md-primary-fg-color--light: #d64d6d;
+  --md-primary-fg-color--dark:  #8a0923;
+  --md-accent-fg-color:         #007a86;   /* UNM Turquoise */
+  --md-accent-fg-color--transparent: rgba(0, 122, 134, 0.1);
 
-  --ua-blue:       #0c234b;
-  --ua-red:        #ab0520;
-  --ua-azurite:    #1e5288;
-  --ua-midnight:   #001c48;
-  --ua-oasis:      #378dbd;
-  --ua-sky:        #81d3eb;
-  --ua-bloom:      #ef4056;
-  --ua-river:      #007d84;
-  --ua-leaf:       #70b865;
-  --ua-warm-gray:  #f4ede5;
-  --ua-cool-gray:  #e2e9eb;
+  --unm-cherry:            #ba0c2f;
+  --unm-cherry-light:      #d64d6d;
+  --unm-cherry-dark:       #6d0a1f;
+  --unm-turquoise:         #007a86;
+  --unm-turquoise-bright:  #00a9ba;
+  --unm-silver:            #a7a8aa;
+  --unm-warm-gray:         #f4ede5;
+  --unm-cool-gray:         #e2e9eb;
   --course-gradient: linear-gradient(105deg,
-      #001c48 0%,
-      #0c234b 45%,
-      #1e5288 72%,
-      #8b0015 90%,
-      #ab0520 100%);
+      #4d0715 0%,
+      #8a0923 30%,
+      #ba0c2f 58%,
+      #7c2440 74%,
+      #0b5f6a 92%,
+      #007a86 100%);
 }
 
 /* Dark scheme: lift the palette for contrast on slate backgrounds */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color:        #81d3eb;   /* Sky */
-  --md-primary-fg-color--light: #b3e5f4;
-  --md-primary-fg-color--dark:  #378dbd;   /* Oasis */
-  --md-accent-fg-color:         #ef4056;   /* Bloom */
-  --md-accent-fg-color--transparent: rgba(239, 64, 86, 0.1);
-  --md-typeset-a-color:         #81d3eb;   /* Sky links for legibility */
+  --md-primary-fg-color:        #ff5c7c;
+  --md-primary-fg-color--light: #ff8ba3;
+  --md-primary-fg-color--dark:  #d64d6d;
+  --md-accent-fg-color:         #35c9d6;
+  --md-accent-fg-color--transparent: rgba(53, 201, 214, 0.1);
+  --md-typeset-a-color:         #4fd3e0;   /* turquoise links for legibility */
 }
 
-/* --- Identity header (Midnight -> Arizona Blue -> Azurite -> Arizona Red) -- */
+/* --- Identity header (cherry-to-turquoise gradient) --------------------- */
 
 .md-header,
 .md-tabs {
@@ -109,7 +106,7 @@
 }
 
 [data-md-color-scheme="slate"] .course-hero .course-hero__title {
-  background: linear-gradient(105deg, #81d3eb 0%, #378dbd 45%, #ef4056 100%);
+  background: linear-gradient(105deg, #ff8ba3 0%, #ff5c7c 45%, #35c9d6 100%);
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -142,7 +139,7 @@
   color: #ffffff;
 }
 
-/* Card grids: Arizona Red hover treatment */
+/* Card grids: turquoise hover treatment */
 .md-typeset .grid.cards > ul > li,
 .md-typeset .grid > .card {
   border-radius: 0.5rem;
@@ -151,19 +148,19 @@
 
 .md-typeset .grid.cards > ul > li:hover,
 .md-typeset .grid > .card:hover {
-  border-color: var(--ua-red);
-  box-shadow: 0 6px 16px rgba(171, 5, 32, 0.18);
+  border-color: var(--unm-turquoise);
+  box-shadow: 0 6px 16px rgba(0, 122, 134, 0.18);
   transform: translateY(-2px);
 }
 
 [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li:hover,
 [data-md-color-scheme="slate"] .md-typeset .grid > .card:hover {
-  border-color: var(--ua-bloom);
-  box-shadow: 0 6px 16px rgba(239, 64, 86, 0.22);
+  border-color: var(--unm-turquoise-bright);
+  box-shadow: 0 6px 16px rgba(0, 169, 186, 0.22);
 }
 
 .md-typeset .grid.cards > ul > li > hr {
-  background: linear-gradient(90deg, var(--ua-blue), var(--ua-red));
+  background: linear-gradient(90deg, var(--unm-cherry), var(--unm-turquoise));
   height: 2px;
   border: 0;
 }
@@ -187,13 +184,13 @@
 }
 
 .course-links a:hover {
-  border-color: var(--ua-red);
-  color: var(--ua-red);
+  border-color: var(--unm-turquoise);
+  color: var(--unm-turquoise);
 }
 
 [data-md-color-scheme="slate"] .course-links a:hover {
-  border-color: var(--ua-bloom);
-  color: var(--ua-bloom);
+  border-color: var(--unm-turquoise-bright);
+  color: var(--unm-turquoise-bright);
 }
 
 /* Attribution line (CC badge + institutions) */
@@ -283,25 +280,25 @@ iframe.course-video {
 /* Question admonitions: UA River instead of Material's default green */
 .md-typeset .admonition.question,
 .md-typeset details.question {
-  border-color: var(--ua-river);
+  border-color: var(--unm-turquoise);
 }
 
 .md-typeset .question > .admonition-title,
 .md-typeset .question > summary {
-  background-color: rgba(0, 125, 132, 0.1);
+  background-color: rgba(0, 122, 134, 0.1);
 }
 
 .md-typeset .question > .admonition-title::before,
 .md-typeset .question > summary::before {
-  background-color: var(--ua-river);
+  background-color: var(--unm-turquoise);
 }
 
 [data-md-color-scheme="slate"] .md-typeset .admonition.question,
 [data-md-color-scheme="slate"] .md-typeset details.question {
-  border-color: var(--ua-sky);
+  border-color: var(--unm-turquoise-bright);
 }
 
 [data-md-color-scheme="slate"] .md-typeset .question > .admonition-title::before,
 [data-md-color-scheme="slate"] .md-typeset .question > summary::before {
-  background-color: var(--ua-sky);
+  background-color: var(--unm-turquoise-bright);
 }

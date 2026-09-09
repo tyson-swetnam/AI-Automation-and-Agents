@@ -2,7 +2,7 @@
 title: "License and attribution"
 description: "The course is published under Creative Commons Attribution 4.0 International, with the site code under BSD 3-Clause: what the license lets you do, how to attribute it, where the course came from, and which material is not covered."
 type: Policy
-tags: [course, student-facing, license, attribution, creative-commons, open-educational-resources, ai2s]
+tags: [course, student-facing, license, attribution, creative-commons, open-educational-resources, unm-carc]
 status: stable
 generated:
   by: "claude/fable-5-1"

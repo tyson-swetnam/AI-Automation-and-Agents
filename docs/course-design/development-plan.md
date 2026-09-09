@@ -21,7 +21,7 @@ wiki_page: Development-Plan
 ---
 # Course Development Plan
 
-*The course team tracks development milestones in a shared spreadsheet (a University of Arizona login may be required).*
+*The course team tracks development milestones in a shared spreadsheet (an institutional login may be required).*
 
 !!! note "Draft"
 

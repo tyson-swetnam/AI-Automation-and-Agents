@@ -282,7 +282,7 @@ PAGES += [
          "Pointer to the Google Sheets milestone tracker used to plan and track development of the course.",
          "Course Design", _tags(None, "course-design", "milestones", audience="instructor-facing"), status="draft",
          audience="instructor-facing",
-         lead="The course team tracks development milestones in a shared spreadsheet (a University of Arizona login may be required)."),
+         lead="The course team tracks development milestones in a shared spreadsheet (an institutional login may be required)."),
     Page("Course-Review-Analysis-v1.md", "course-design/course-review-2026-07.md", "Course Review Analysis (July 2026)",
          "Internal pedagogical review of the five-module course written from a graduate student's perspective, flagging overview/content mismatches, prerequisite escalation, and writing-load imbalance as of July 2026.",
          "Course Design", _tags(None, "course-design", "review", audience="instructor-facing"), status="deprecated",

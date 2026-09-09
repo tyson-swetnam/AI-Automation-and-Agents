@@ -22,7 +22,7 @@ sources:
 # Course syllabus
 
 *AI Automation & Agents - Build Workflows. Deploy Agents. Work Smarter.*
-Course 2 of the AI Education Series, University of Arizona Online. Non-credit
+Course 2 of the AI Education Series, University of New Mexico. Non-credit
 professional development, 40 hours. Syllabus version 2.0, revised April 2026.
 
 [:material-file-pdf-box: Download the syllabus (PDF)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){ .md-button .md-button--primary target=_blank }

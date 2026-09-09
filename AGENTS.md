@@ -1,7 +1,7 @@
 # Agent guide -- AI Automation and Agents
 
 This repository is the course site for **AI Automation and Agents**
-(University of Arizona AI2S), built with [Zensical](https://zensical.org) and
+(University of New Mexico, CARC), built with [Zensical](https://zensical.org) and
 deployed to <https://tyson-swetnam.github.io/AI-Automation-and-Agents/>. The
 `docs/` tree is an **Open Knowledge Format (OKF) v0.2 knowledge bundle**
 ([spec](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)):

@@ -42,7 +42,7 @@ sources:
 
 # How this course works
 
-*AI Automation and Agents* is Course 2 of the University of Arizona AI Education
+*AI Automation and Agents* is Course 2 of the University of New Mexico AI Education
 Series: five self-paced modules of about eight hours each (40 hours in total),
 offered as non-credit professional development with optional instructor-led
 cohort sessions. Every module has the same shape, so once you have worked
@@ -246,7 +246,7 @@ sources:
 # Course syllabus
 
 *AI Automation & Agents - Build Workflows. Deploy Agents. Work Smarter.*
-Course 2 of the AI Education Series, University of Arizona Online. Non-credit
+Course 2 of the AI Education Series, University of New Mexico. Non-credit
 professional development, 40 hours. Syllabus version 2.0, revised April 2026.
 
 [:material-file-pdf-box: Download the syllabus (PDF)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){ .md-button .md-button--primary target=_blank }
@@ -13136,7 +13136,7 @@ wiki_page: Development-Plan
 ---
 # Course Development Plan
 
-*The course team tracks development milestones in a shared spreadsheet (a University of Arizona login may be required).*
+*The course team tracks development milestones in a shared spreadsheet (an institutional login may be required).*
 
 !!! note "Draft"
 
@@ -13952,7 +13952,7 @@ PHASE 3: SYNTHESIZE (2 hours)
 title: "License and attribution"
 description: "The course is published under Creative Commons Attribution 4.0 International, with the site code under BSD 3-Clause: what the license lets you do, how to attribute it, where the course came from, and which material is not covered."
 type: Policy
-tags: [course, student-facing, license, attribution, creative-commons, open-educational-resources, ai2s]
+tags: [course, student-facing, license, attribution, creative-commons, open-educational-resources, unm-carc]
 status: stable
 generated:
   by: "claude/fable-5-1"

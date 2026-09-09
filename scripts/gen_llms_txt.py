@@ -166,8 +166,8 @@ def header(base: str) -> list[str]:
         "# AI Automation and Agents",
         "",
         "> Course website for \"AI Automation and Agents\", a five-module course "
-        "from the Arizona Institute for Artificial Intelligence (AI2S), Office of "
-        "Responsible Artificial Intelligence, The University of Arizona. Learners "
+        "from the Center for Advanced Research Computing (CARC) at the University "
+        "of New Mexico. Learners "
         "move from the agent loop and the no-code / low-code / code-first "
         "automation spectrum (Module 1) through agent reasoning architectures and "
         "tool integration with LangChain (Module 2), memory architectures and "

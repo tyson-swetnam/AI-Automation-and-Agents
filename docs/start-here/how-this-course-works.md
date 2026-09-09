@@ -36,7 +36,7 @@ sources:
 
 # How this course works
 
-*AI Automation and Agents* is Course 2 of the University of Arizona AI Education
+*AI Automation and Agents* is Course 2 of the University of New Mexico AI Education
 Series: five self-paced modules of about eight hours each (40 hours in total),
 offered as non-credit professional development with optional instructor-led
 cohort sessions. Every module has the same shape, so once you have worked

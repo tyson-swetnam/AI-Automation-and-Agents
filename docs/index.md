@@ -1,7 +1,7 @@
 ---
 okf_version: "0.2"
 title: "AI Automation and Agents"
-description: "A five-module University of Arizona AI2S course that takes learners from AI prompts to AI agents and automated workflows: agent theory, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
+description: "A five-module University of New Mexico course that takes learners from AI prompts to AI agents and automated workflows: agent theory, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
 license: "CC-BY-4.0"
 hide:
   - navigation
