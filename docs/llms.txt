@@ -90,7 +90,7 @@ Trust and lifecycle signals:
 
 ## About
 
-- [License and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/): The course is published under Creative Commons Attribution 4.0 International, with the site code under BSD 3-Clause: who holds copyright over which part, what the license lets you do, how to attribute it, and which material is not covered.
+- [License and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/): The course is published under Creative Commons Attribution 4.0 International, with the site code under BSD 3-Clause: what the license lets you do, how to attribute it, where the course came from, and which material is not covered.
 - [Contributing to the course site](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/): How to fix a page, the OKF frontmatter contract every content page follows, how to read a failing CI check, how to build the site locally, what the pipeline scripts own, and the house style.
 - [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/): How AI agents and harnesses should consume this course site: llms.txt, per-page Markdown with OKF frontmatter, trust and lifecycle signals, and the rules for tutoring learners without revealing answer keys.
 - [Wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/): Where every page of the original GitHub wiki lives on this site: migrated, split, archived, or dropped.

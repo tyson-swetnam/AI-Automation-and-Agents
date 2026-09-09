@@ -8,8 +8,9 @@ https://carc.unm.edu/.
 Applies to the source code in this repository: the migration and validation
 scripts in scripts/, the site configuration (zensical.toml) and the
 stylesheet. The course content, including the lab notebooks and the
-interactive quiz and survey activities authored by the AI2S course team, is
-licensed separately under CC BY 4.0; see LICENSE.
+interactive quiz and survey activities, is licensed separately under
+CC BY 4.0; see LICENSE, which also records the course's origin at the
+University of Arizona under CC0.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

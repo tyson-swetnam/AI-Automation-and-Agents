@@ -85,8 +85,9 @@ TOOL_TAGS = {
 }
 RESERVED = {"index.md", "log.md"}
 DEPRECATED_DIRS = {"archive", "course-design"}
-# Pages that legitimately list wiki URLs (the redirect table and the change log).
-WIKI_URL_ALLOWED = {"about/wiki-crosswalk.md", "log.md"}
+# Pages that legitimately list wiki URLs: the redirect table, the change log, and the
+# license page (which cites the upstream CC0 original the course came from).
+WIKI_URL_ALLOWED = {"about/wiki-crosswalk.md", "log.md", "about/license-and-attribution.md"}
 # Directories whose files must be referenced from at least one page.
 REFERENCED_ROOTS = ("materials", "assets/images", "assets/files")
 EXTERNAL_SCHEMES = {"http", "https", "mailto", "tel", "data", "javascript", "ftp", "ftps", "sftp"}

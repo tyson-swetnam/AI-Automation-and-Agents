@@ -1,38 +1,44 @@
-AI Automation and Agents - course content
-=========================================
+AI Automation and Agents
+========================
 
-This repository holds two bodies of work with different copyright holders.
-Both are licensed under the Creative Commons Attribution 4.0 International
-License (CC BY 4.0), whose full text follows.
+Copyright (c) 2026 The Regents of the University of New Mexico
 
-1. COURSE CONTENT
-   Copyright (c) 2026 The University of Arizona
-   Arizona Institute for Artificial Intelligence (AI2S) and the Office of
-   Responsible Artificial Intelligence.
+Developed by: The Center for Advanced Research Computing (CARC) at The
+University of New Mexico and individual contributors. Find out more at
+https://carc.unm.edu/.
 
-   The course text, images, lab notebooks and interactive activities were
-   written by the AI2S course team and migrated from
-   https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki. Each page
-   records its source wiki page and authors in its frontmatter.
-
-2. THE SITE AND ITS TOOLING
-   Copyright (c) 2026 The Regents of the University of New Mexico
-
-   Developed by: The Center for Advanced Research Computing (CARC) at The
-   University of New Mexico and individual contributors. Find out more at
-   https://carc.unm.edu/.
-
-   Covers the pages written for this site (the landing page, the Start here
-   and About sections, the instructor materials page, the section indexes and
-   the change log), the Open Knowledge Format structure, and the site design.
+This work - the course pages, images, downloadable materials, the Open
+Knowledge Format structure and the site design - is licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0), whose
+full text follows.
 
 Source code - the migration and validation scripts in scripts/, the site
 configuration and the stylesheet - is licensed separately under the BSD
 3-Clause License; see LICENSE-CODE.
 
+
+ORIGIN AND CREDIT
+-----------------
+
+The course was developed at the Arizona Institute for Artificial Intelligence
+(AI2S) and the Office of Responsible Artificial Intelligence at the University
+of Arizona, and released there under the CC0 1.0 Universal public domain
+dedication. That original remains in the public domain and is available on
+those terms from
+
+    https://github.com/UA-AI2S/AI-Automation-and-Agents
+    https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki
+
+CC0 imposes no conditions, so credit here is given as scholarly practice
+rather than as a license requirement. The course was written by Carlos
+Lizarraga-Celaya, Michelle Yung, Michele Cosi and Tyson Swetnam. Every page
+migrated from the wiki records its source page, its authors and the date of
+its last change in the frontmatter, so the provenance travels with the
+content.
+
 Third-party material quoted, summarised or linked from the course (papers,
 standards, vendor documentation, videos) keeps its own terms and is cited
-where it appears. The University of Arizona and University of New Mexico
+where it appears. The University of New Mexico and University of Arizona
 names, logos and wordmarks are trademarks of those universities and are not
 covered by this license.
 

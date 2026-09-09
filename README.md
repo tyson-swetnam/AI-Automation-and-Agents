@@ -208,15 +208,14 @@ is approved for Free Cultural Works and meets the Open Definition, so the
 course qualifies as an open educational resource; reuse and adaptation,
 including commercial reuse, need only credit the original.
 
-Copyright is split, because the repository holds two bodies of work. The
-course itself - the module pages, images, lab notebooks and interactive
-activities - is copyright 2026 the Arizona Institute for Artificial
-Intelligence (AI2S) and the Office of Responsible Artificial Intelligence at
-the University of Arizona, who wrote it. The site built around it - the
-landing page, the Start here and About sections, the section indexes, the
-Open Knowledge Format structure and the design - is copyright 2026 The
-Regents of the University of New Mexico, Center for Advanced Research
-Computing. Both are CC BY 4.0.
+Copyright 2026 The Regents of the University of New Mexico, Center for
+Advanced Research Computing. The course was developed at the Arizona
+Institute for Artificial Intelligence (AI2S) and the Office of Responsible
+Artificial Intelligence at the University of Arizona and released there under
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/); that original
+remains public domain and available upstream. Credit to Carlos
+Lizárraga-Celaya, Michelle Yung, Michele Cosi and Tyson Swetnam is scholarly
+practice, not a license condition.
 
 The site's own source code is licensed separately under the BSD 3-Clause
 License (`LICENSE-CODE`, UNM Regents), because Creative Commons licenses are

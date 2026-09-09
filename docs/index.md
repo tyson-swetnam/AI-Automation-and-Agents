@@ -177,5 +177,5 @@ Upon successful completion of this course, learners will be able to:
 
 <div class="course-attribution" markdown>
 [![CC BY 4.0](assets/cc-by.png){ width="100" }](https://creativecommons.org/licenses/by/4.0/){ target=_blank }
-Course content 2026 [Arizona Institute for Artificial Intelligence (AI2S)](https://responsibleai.arizona.edu/ai2s){ target=_blank } and the [Office of Responsible Artificial Intelligence](https://responsibleai.arizona.edu/){ target=_blank }, The University of Arizona. This site 2026 The Regents of the University of New Mexico, [Center for Advanced Research Computing](https://carc.unm.edu/){ target=_blank }. See [license and attribution](about/license-and-attribution.md).
+2026 The Regents of the University of New Mexico, [Center for Advanced Research Computing](https://carc.unm.edu/){ target=_blank }. Developed at the University of Arizona, [AI2S](https://responsibleai.arizona.edu/ai2s){ target=_blank } and the [Office of Responsible Artificial Intelligence](https://responsibleai.arizona.edu/){ target=_blank }, and released there under CC0. See [license and attribution](about/license-and-attribution.md).
 </div>
