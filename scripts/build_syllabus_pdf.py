@@ -23,6 +23,7 @@ import re
 import sys
 from pathlib import Path
 
+from reportlab import rl_config
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import LETTER
@@ -42,6 +43,11 @@ INSTITUTION = "Center for Advanced Research Computing, University of New Mexico"
 SITE_URL = "https://tyson-swetnam.github.io/AI-Automation-and-Agents/"
 # Bumped deliberately, never from the clock, so reruns are byte-stable.
 REVISION = "Revised September 2026"
+
+# Without this reportlab stamps the current time and a random document id into
+# every render, so the committed PDF would show as changed on each rebuild even
+# when the syllabus did not. Invariant mode fixes both and keeps the diff honest.
+rl_config.invariant = 1
 
 # UNM brand
 CHERRY = colors.HexColor("#ba0c2f")
@@ -260,14 +266,21 @@ def coverage_gaps(pdf: Path) -> list[str]:
     # restatement of them is dropped on purpose; see parse_lead.
     expected_absent = {f"{COURSE_TITLE} - {COURSE_TAGLINE}"}
 
-    gaps, skip = [], False
+    gaps, skip_section, in_block = [], False, False
     for line in body.split("\n"):
         st = line.strip()
+        # An admonition or collapsible owns its indented lines and nothing after
+        # them. Ending the block at the first unindented line matters: leaving the
+        # flag set until the next heading would drop the rest of the section from
+        # coverage, which is exactly the silent loss this function exists to catch.
+        if in_block and st and not line.startswith((" ", "\t")):
+            in_block = False
         if st.startswith("## "):
-            skip = st[3:].strip() in SKIP_SECTIONS
-        elif st.startswith("??? "):
-            skip = True
-        if skip or not st or st.startswith(("#", "[", "<", "---")):
+            skip_section = st[3:].strip() in SKIP_SECTIONS
+            in_block = False
+        elif st.startswith(("??? ", "!!! ")):
+            in_block = True
+        if skip_section or in_block or not st or st.startswith(("#", "[", "<", "---")):
             continue
         frag = INLINE_LINK.sub(r"\1", st)
         frag = re.sub(r"<([^<>]+)>", r"\1", frag)

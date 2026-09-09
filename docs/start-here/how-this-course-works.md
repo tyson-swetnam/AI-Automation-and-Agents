@@ -7,7 +7,7 @@ time_estimate: "10 minutes"
 status: stable
 generated:
   by: "claude/fable-5-1"
-  at: "2026-09-08T00:00:00Z"
+  at: "2026-09-09T00:00:00Z"
 sources:
   - id: wiki-home
     resource: "https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki"
