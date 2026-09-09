@@ -69,8 +69,14 @@ URLs.
 
 ## Answer-key policy
 
-Answer keys are **public but collapsed**. This is the disposition the course
-owners have for now; the alternatives are listed in the open items below.
+Answer keys are **public but collapsed**, and the course owners have decided
+to keep them that way (2026-09-09). The quizzes are written to be
+self-evaluating: a learner answers, then reveals the feedback for every
+option, not just the correct one. Keys are therefore visible to anyone who
+opens a collapsible, and they appear in `llms-full.txt` and in each page's
+Markdown mirror, so an AI assistant reading the site can see them too. Use the
+LMS copy of a quiz whenever an attempt needs to be graded rather than
+self-checked.
 
 - **Chapter quizzes** (five per module, 25 questions per module, 125 in
   total). Each question's answer and feedback sits in a
@@ -169,10 +175,9 @@ human-reviewed pages when answers conflict (see
 
 ## Open items for the course owners
 
-1. Keep answer keys public-but-collapsed and instructor solutions public in
-   the repository, or move them to the LMS / a private repository. At
-   minimum, decide whether the concept quiz's key table should be hidden
-   until the learner submits (a small change to `module1_quiz.html`).
+1. Keep the instructor solution notebooks public in this repository, or move
+   them to a private repository before the course runs. (Answer keys are
+   settled: they stay public, see the policy above.)
 2. Confirm the two-attempt rule for the concept quiz and the attempt policy
    for chapter quizzes in the LMS.
 3. Decide who holds verification identities (`human:<netid>`) and when the
