@@ -107,8 +107,8 @@ nav = [
 [project.theme]
 variant = "modern"
 language = "en"
-logo = "assets/ua.png"
-favicon = "assets/ua.ico"
+logo = "assets/carc-logo.svg"
+favicon = "assets/unm.ico"
 # No toc.integrate: it conflicts with navigation.indexes section landing pages.
 features = [
   "announce.dismiss",
