@@ -105,6 +105,7 @@ foundation for diagnosing failures in any RAG system.
 vector store indexing, semantic retrieval, and augmented generation.
 
 **Reading 1: [Langchain Retrieval Documentation](https://docs.langchain.com/oss/python/deepagents/retrieval){target=_blank}**
+
 - Take note of the different building blocks LangChain provides for RAG (document loaders, text splitters, embedding models, vector stores, retrievers) and map them to the stages of the RAG pipeline.
 
 ### Chapter 2 Quiz
@@ -197,15 +198,18 @@ retrieved chunks may be near-identical, providing redundant context. MMR balance
 to the query with dissimilarity to already-retrieved chunks, producing a diverse set of relevant
 context. MMR is preferred whenever the corpus has significant redundancy or whenever diverse
 perspectives on a query are desirable.
+
 * **Metadata Filtering:** Vector store metadata (document date, author, category, section header)
 can be used as pre-retrieval filters: 'retrieve only from documents tagged as Policy documents
 published after 2023.' Metadata filtering dramatically reduces the search space and improves
 precision for queries with implicit temporal or categorical constraints that are not captured in the
 query embedding.
+
 * **Re-ranking:** Post-retrieval re-ranking applies a cross-encoder model (more accurate but more
 expensive than the bi-encoder used for initial retrieval) to re-score and re-order the initially
 retrieved chunks before context injection. Re-ranking is an Advanced RAG technique that
 significantly improves retrieval precision at the cost of additional inference time.
+
 * **Context Compression (LLMLingua):** Context compression tools such as LLMLingua use a
 small LLM to compress each retrieved chunk by removing sentences that are not relevant to the
 specific query, before injecting into the generation context. This reduces context tokens while
@@ -255,6 +259,7 @@ diagnostic signature and a distinct remediation strategy:
 * Gao, Y., Xiong, Y., Gao, X., Jia, K., Pan, J., Bi, Y., ... & Wang, H. (2023). [Retrieval-augmented generation for large language models: A survey](https://arxiv.org/pdf/2312.10997){target=_blank}. arXiv preprint arXiv:2312.10997, 2(1), 32.
 
 **Reading 5 - Es et al. (2023): RAGAS Framework [~10 min]**
+
 * [Es, S. et al. (2023). RAGAS: Automated evaluation of retrieval augmented generation.
 arXiv:2309.15217.](https://aclanthology.org/2024.eacl-demo.16.pdf){target=_blank} 
    * Read: Section 3: Evaluation Strategies. 

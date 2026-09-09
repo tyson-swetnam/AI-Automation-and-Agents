@@ -203,9 +203,11 @@ for n in range(1, 6):
                       stale_after=STALE_TOOLS))
     if n <= 3:
         src = "Module-2:-Additional-Suggested--Resources.md" if n == 2 else f"Module-{n}:-Additional-Suggested-Resources.md"
+        # every resources page quotes framework APIs, so all three carry tool tags + stale_after
+        extra_res = ["langchain", "crewai"] if n == 1 else []
         PAGES.append(Page(src, f"modules/module-{n}/resources.md", f"Module {n}: Additional Suggested Resources",
-                          RES_DESC[n], "Resource List", _tags(n, "resources"), module=n,
-                          stale_after=STALE_TOOLS if n > 1 else ""))
+                          RES_DESC[n], "Resource List", _tags(n, "resources", *extra_res), module=n,
+                          stale_after=STALE_TOOLS))
 
 PAGES += [
     Page("Module-1-Act-3:-What-is-an-agent?.md", "modules/module-1/readings/what-is-an-agent.md",
@@ -301,7 +303,7 @@ PATCHES: dict[str, list[tuple[str, str]]] = {
     "modules/module-1/foundational-concepts.md": [
         ("* Merrill, M. D. (2002). [First principles of instruction](https://link.springer.com/content/pdf/10.1007/bf02505024.pdf). Educational technology research and development, 50(3), 43-59 (**👁️‍🗨️ 👁️‍🗨️ 👁️‍🗨️ Remove this source - not related to course**)\n", ""),
         ("* Wiggins, G. P., & McTighe, J. (2005). [Understanding by design](https://pdfs.semanticscholar.org/03e8/20730a873e7f44dbb1f64e4f047b9b321460.pdf). Ascd (**👁️‍🗨️ 👁️‍🗨️ 👁️‍🗨️ Remove this source - not related to course**)\n", ""),
-        ("### Three Automation Paradigms:", "**Three automation paradigms**"),
+        ("### Three Automation Paradigms:", "**Three automation paradigms**\n"),
     ],
     "modules/module-1/activities.md": [
         ("### a. Self-Check Prompts", "## a. Self-Check Prompts"),
@@ -351,6 +353,11 @@ PATCHES: dict[str, list[tuple[str, str]]] = {
 
 # Regex clean-ups applied after PATCHES (pattern, replacement) keyed by dest.
 REGEX_PATCHES: dict[str, list[tuple[str, str]]] = {
+    # The wiki's "Connecting CrewAi and LangChain" section is a verbatim copy of the LangChain
+    # example above it (same intro, same code, same closing paragraph): drop the duplicate.
+    "modules/module-1/resources.md": [
+        (r"\*\*Connecting CrewAi and LangChain\*\*\n\nHere is a quick code example[\s\S]*?\n```\n\nIn this setup, the `@tool` decorator[^\n]*\n", ""),
+    ],
     # the quiz specification draft has 14 empty "Question N" headings after the single authored question
     "archive/module-1/concept-quiz-spec-draft.md": [
         (r"(?:^#{3,4} Question (?:[2-9]|1[0-5])\s*\n+)+\Z",
@@ -569,6 +576,37 @@ def heading_level(line: str) -> int:
     return len(re.match(r"^(#+)", line).group(1))
 
 
+LIST_ITEM_RE = re.compile(r"^(?P<indent>[ \t]*)(?:[-*+]|\d+[.)])\s+\S")
+
+
+def ensure_blank_before_lists(text: str) -> str:
+    """Insert a blank line between a paragraph line and a list that follows it.
+
+    GitHub's Markdown starts a list right after a paragraph line; Python-Markdown (what
+    Zensical renders with) does not, and swallows the items into the paragraph with their
+    literal "- "/"1. " markers visible. The wiki relies on the GitHub behaviour in dozens
+    of places, so normalize it here. Fenced code is already masked when this runs.
+    """
+    lines = text.split("\n")
+    out: list[str] = []
+    for line in lines:
+        m = LIST_ITEM_RE.match(line)
+        if m and out:
+            prev = out[-1]
+            indent = m.group("indent")
+            same_block = prev.strip() and prev[:len(indent)] == indent and not prev[len(indent):len(indent) + 1].isspace()
+            prev_is_list = bool(LIST_ITEM_RE.match(prev))
+            prev_is_boundary = (
+                not prev.strip()
+                or prev.lstrip().startswith(("#", "|", "!!!", "???", ">", "\x00FENCE"))
+                or prev.rstrip().endswith(("  ", "<br>", "<br/>"))
+            )
+            if same_block and not prev_is_list and not prev_is_boundary:
+                out.append("")
+        out.append(line)
+    return "\n".join(out)
+
+
 def relpath(target: str, dest: str) -> str:
     """Relative link from page `dest` (docs-relative) to docs-relative `target`."""
     return posixpath.relpath(target, posixpath.dirname(dest) or ".")
@@ -639,7 +677,9 @@ def strip_comments_and_banners(text: str) -> tuple[str, bool]:
         text = re.sub(r"^\s*\U0001F6A7.*$\n?", "", text, flags=re.M)
     # reviewer parentheticals like (** 👁️‍🗨️ ... **) and the eye emoji itself
     text = re.sub(r"\s*\(\*\*\s*(?:" + re.escape(EYE) + r"\s*)+[^*]*?\*\*\)", "", text)
-    text = text.replace(EYE + " ", "").replace(EYE, "")
+    # strip the emoji and any spaces that followed it (spaces only, never a newline), so a
+    # leading "**👁️‍🗨️  Reading Guide" does not leave "** Reading Guide" with unclosable bold
+    text = re.sub(re.escape(EYE) + r" *", "", text)
     text = text.replace(":open_file_folder:", "")
     return text, under_construction
 
@@ -706,7 +746,8 @@ def convert_alerts(text: str) -> str:
         if body and m:
             tm = re.match(r"^\s*(?:\U0001F4CC\s*)?\*\*(?P<t>[^*]+?)\s*:?\*\*\s*:?\s*(?P<rest>.*)$", body[0])
             if tm:
-                title = tm.group("t").replace("\U0001F4CC", "").strip().rstrip(":").strip()
+                # keep the 📌 pin: the source page tells readers annotations carry that icon
+                title = tm.group("t").strip().rstrip(":").strip()
                 rest = tm.group("rest").strip()
                 body[0] = rest
                 if not rest:
@@ -919,6 +960,7 @@ def fix_headings(text: str, page: Page) -> str:
         if time_note:
             fixed.append("")
             fixed.append(time_note)
+            fixed.append("")   # the estimate is its own paragraph; a list may follow it
     lines = fixed
 
     # 3. Module 5 addendum: merge "## Chapter N Reading Guide/Quiz" + "### Subtitle"
@@ -931,7 +973,9 @@ def fix_headings(text: str, page: Page) -> str:
             while j < len(lines) and not lines[j].strip():
                 j += 1
             if j < len(lines) and re.match(r"^### \S", lines[j]):
-                merged.append(f"## {m.group(1)}: {lines[j][4:].strip()}")
+                subtitle = lines[j][4:].strip()
+                sep = " — " if ":" in subtitle else ": "   # avoid "Quiz: Responsible AI: Governance"
+                merged.append(f"## {m.group(1)}{sep}{subtitle}")
                 k = j + 1
                 continue
         merged.append(lines[k])
@@ -1109,8 +1153,12 @@ def fix_misc(text: str, page: Page) -> str:
     text = "\n".join(out)
     if page.pandoc:
         text = re.sub(r"(?<=\S) --- (?=\S)", " — ", text)
+        text = re.sub(r"(?<=\w)---(?=\w)", "—", text)
         text = re.sub(r"(?<=\w)--(?=\w)", "–", text)
-    text = re.sub(r"^→\s*\*\*(\d+)\.\s*", r"\1. **", text, flags=re.M)
+    # the wiki numbers the ReAct stages "**1. Perceive:**" then "&rarr; **2. Plan...**";
+    # make the arrow optional so all four become one ordered list numbered 1-4
+    text = re.sub(r"^(?:→\s*)?\*\*(\d+)\.\s*", r"\1. **", text, flags=re.M)
+    text = ensure_blank_before_lists(text)
     # rules: drop those adjacent to headings/admonitions, consecutive ones, and at the ends
     lines = text.split("\n")
     cleaned: list[str] = []
@@ -1122,7 +1170,7 @@ def fix_misc(text: str, page: Page) -> str:
                     or nxt.startswith(("???", "!!!")) or prev.startswith("    ") or re.match(r"^\*Estimated time", prev):
                 continue
         cleaned.append(l)
-    text = "\n".join(cleaned)
+    text = ensure_blank_before_lists("\n".join(cleaned))
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip("\n") + "\n"
 

@@ -136,49 +136,67 @@ advance the five General Course Skills, contributing differentiated module-level
 
 * Anderson, L. W., & Krathwohl, D. R. (Eds.). (2001). A taxonomy for learning, teaching, and assessing: A revision of Bloom's
 Taxonomy of educational objectives. Longman.
+
 * Ausubel, D. P. (1968). Educational psychology: A cognitive view. Holt, Rinehart & Winston.
 * Black, P., & Wiliam, D. (1998). Assessment and classroom learning. Assessment in Education: Principles, Policy & Practice,
 5(1), 7–74. https://doi.org/10.1080/0969595980050102
+
 * Collins, A., Brown, J. S., & Newman, S. E. (1989). Cognitive apprenticeship: Teaching the crafts of reading, writing, and
 mathematics. In L. B. Resnick (Ed.), [Knowing, learning, and instruction: Essays in honor of Robert Glaser (pp. 453–494)](https://apps.dtic.mil/sti/tr/pdf/ADA178530.pdf){target=_blank}. Lawrence Erlbaum Associates.
+
 * Craik, F. I. M., & Lockhart, R. S. (1972). Levels of processing: A framework for memory research. Journal of Verbal Learning
 and Verbal Behavior, 11(6), 671–684. https://doi.org/10.1016/S0022-5371(72)80001-X
+
 * Flavell, J. H. (1979). [Metacognition and cognitive monitoring: A new area of cognitive-developmental inquiry](https://corepractice-linlithgowacademy.co.uk/_documents/%5B1060731%5Dflavell1979MetacognitionAndCogntiveMonitoring.pdf){target=_blank}. American
 Psychologist, 34(10), 906–911. https://doi.org/10.1037/0003-066X.34.10.906
+
 * Floridi, L., Cowls, J., Beltrametti, M., Chatila, R., Chazerand, P., Dignum, V., Lukovits, C., Madelin, R., Pagallo, U., Rossi, F.,
 Schafer, B., Valcke, P., & Vayena, E. (2018). AI4People — An ethical framework for a good AI society: Opportunities, risks,
 principles, and recommendations. Minds and Machines, 28(4), 689–707. https://doi.org/10.1007/s11023-018-9482-5
+
 * Gagne, R. M., Briggs, L. J., & Wager, W. W. (1992). Principles of instructional design (4th ed.). Harcourt Brace Jovanovich.
 * Garrison, D. R., Anderson, T., & Archer, W. (2000). Critical inquiry in a text-based environment: Computer conferencing in
 higher education. The Internet and Higher Education, 2(2–3), 87–105. https://doi.org/10.1016/S1096-7516(00)00016-6
+
 * Kolb, D. A. (1984). Experiential learning: Experience as the source of learning and development. Prentice Hall.
 * Long, D., & Magerko, B. (2020). What is AI literacy? Competencies and design considerations. Proceedings of the 2020 CHI
 Conference on Human Factors in Computing Systems (pp. 1–16). ACM. https://doi.org/10.1145/3313831.3376727
+
 * Mayer, R. E. (2009). Multimedia learning (2nd ed.). Cambridge University Press.
 * Merrill, M. D. (2002). First principles of instruction. Educational Technology Research and Development, 50(3), 43–59.
 https://doi.org/10.1007/BF02505024
+
 * National Institute of Standards and Technology. (2023). AI risk management framework (AI RMF 1.0). U.S. Department of
 Commerce. https://doi.org/10.6028/NIST.AI.100-1
+
 * Ng, D. T. K., Leung, J. K. L., Chu, S. K. W., & Qiao, M. S. (2021). Conceptualizing AI literacy: An exploratory review. Computers
 and Education: Artificial Intelligence, 2, 100041. https://doi.org/10.1016/j.caeai.2021.100041
+
 * Novak, J. D. (1990). Concept mapping: A useful tool for science education. Journal of Research in Science Teaching, 27(10),
 937–949. https://doi.org/10.1002/tea.3660271003
+
 * Roediger, H. L., & Karpicke, J. D. (2006). Test-enhanced learning: Taking memory tests improves long-term retention.
 Psychological Science, 17(3), 249–255. https://doi.org/10.1111/j.1467-9280.2006.01693.x
+
 * Schön, D. A. (1983). The reflective practitioner: How professionals think in action. Basic Books.
 * Swan, K., Garrison, D. R., & Richardson, J. C. (2009). A constructivist approach to online learning: The Community of Inquiry
 framework. In C. R. Payne (Ed.), Information technology and constructivism in higher education: Progressive learning
 frameworks (pp. 43–57). IGI Global.
+
 * Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. Cognitive Science, 12(2), 257–285.
 https://doi.org/10.1207/s15516709cog1202_4
+
 * Sweller, J. (1994). Cognitive load theory, learning difficulty, and instructional design. Learning and Instruction, 4(4), 295–312.
 https://doi.org/10.1016/0959-4752(94)90003-5
+
 * Vygotsky, L. S. (1978). Mind in society: The development of higher psychological processes. Harvard University Press.
 * Wiggins, G., & McTighe, J. (2005). Understanding by design (2nd ed.). ASCD.
 Wing, J. M. (2006). Computational thinking. Communications of the ACM, 49(3), 33–35.
 https://doi.org/10.1145/1118178.1118215
+
 * Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. The Knowledge Engineering Review, 10(2),
 115–152. https://doi.org/10.1017/S0269888900008122
+
 * Zimmerman, B. J. (2002). Becoming a self-regulated learner: An overview. Theory Into Practice, 41(2), 64–70.
 https://doi.org/10.1207/s15430421tip4102_2
 

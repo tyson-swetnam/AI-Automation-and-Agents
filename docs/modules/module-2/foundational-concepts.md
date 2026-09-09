@@ -41,6 +41,7 @@ actually reason and act?
 The Module 2 readings introduce five interconnected frameworks that
 form the technical and analytical vocabulary of contemporary LLM-based agent design.
 These frameworks address:
+
 - How agents reason (Chain-of-Thought, ReAct, Tree of Thoughts, LATS)
 - How they act through tools (`create_agent` architecture)
 - How their reasoning can be interpreted and critiqued (trace analysis)
@@ -131,6 +132,7 @@ architectural selection in professional practice:
 * Zhou, A., Yan, K., Shlapentokh-Rothman, M., Wang, H., & Wang, Y. X. (2023). [Language agent tree search unifies reasoning acting and planning in language models](https://arxiv.org/pdf/2310.04406){target=_blank}. arXiv preprint arXiv:2310.04406
 
 **Reading 1 — Chain of Thought Prompting [~ 10 min]**
+
 * Wei, J. et al. (2022). [Chain-of-thought prompting elicits reasoning in large language
 models](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf){target=_blank}. NeurIPS 2022. 
     * Read: Abstract + Section 2 (Chain-of-Thought Prompting) and Figure 1. You may skim Section 4 (Experimental Setup) but are not required to read it in full.
@@ -139,6 +141,7 @@ standard few-shot prompting? What task class shows the largest CoT benefit, and
 why?
 
 **Reading 2 — ReAct: Reason + Act [~ 12 min]**
+
 * Yao, S. et al. (2022). [ReAct: Synergizing reasoning and acting in language models](https://arxiv.org/pdf/2210.03629){target=_blank}.
 ICLR 2023. 
    * Read: Sections 1 and 2 (Introduction + ReAct: Synergizing Reasoning and Acting). 
@@ -179,17 +182,22 @@ The agent returned by `create_agent` runs a LangGraph-backed ReAct loop internal
 
 Tool descriptions are the contract between the agent and the tool ecosystem. An effective tool
 description answers five questions precisely:
+
 * **What does this tool do?** State the tool's function in one sentence using active verbs and
 concrete output types. Example: 'Searches the web and returns the top-5 result snippets for a
 given query string.'
+
 * **When should the agent use it?** Specify the conditions under which this tool is appropriate, and
 explicitly note conditions where it is NOT appropriate. This prevents incorrect tool selection.
+
 * **What arguments does it require?** List every argument with its type, format, and any
 constraints. Ambiguous argument specifications produce hallucinated values, especially for
 structured data types.
+
 * **What does the output look like?** Describe the output format so the agent can parse it
 correctly. If the tool returns JSON, describe the schema. If it returns plain text, describe its
 structure.
+
 * **What errors can it produce?** List the error states the tool may return and what the agent
 should do on each error. Undocumented errors produce agents that silently misinterpret failure
 states as data.
@@ -212,6 +220,7 @@ states as data.
 * Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., ... & Amodei, D. (2020). [Language models are few-shot learners](https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf){target=_blank}. Advances in neural information processing systems, 33, 1877-1901
 
 **Reading 5 — LangChain `create_agent` [~10 min]**
+
 * LangChain Documentation: [`create_agent` API Reference and Tool Creation
 Reference](https://reference.langchain.com/python/langchain/agents/factory/create_agent){target=_blank}.
    * Read the entire `create_agent` API Reference section. Pay particular attention to: the role of the `tools` parameter in constructing the tool registry, how tool descriptions embedded in `BaseTool` objects are used for selection at inference time, and how `response_format` constrains the agent's output.

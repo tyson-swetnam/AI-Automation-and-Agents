@@ -130,7 +130,7 @@ Grade weights for each module are stated in that module's overview; see
 
 ## Read the syllabus online
 
-<object class="course-pdf" data="../../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" type="application/pdf">
-  <p>Your browser cannot display the PDF here.
-  <a href="../../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" target="_blank" rel="noopener">Download the syllabus (PDF, 19 pages)</a> instead.</p>
-</object>
+<iframe class="course-pdf" src="../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" title="AI Automation and Agents course syllabus (PDF)" loading="lazy"></iframe>
+
+If your browser cannot display the PDF above,
+[download the syllabus (PDF, 19 pages)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){target=_blank} instead.

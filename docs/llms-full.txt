@@ -1060,10 +1060,13 @@ and refining the workflows you identify here. Begin it thoughtfully.
 5. Identifying automation candidates: high-repetition, rule-based, and time-consuming tasks
 6. Overview of the automation landscape: no-code (n8n, Cowork), low-code (LangChain), and code-first
 (custom Python agents)
+
 7. Introduction to key open-source frameworks: LangChain, LangGraph, CrewAI, Ollama — what each does
 and when to use it
+
 8. What agents can and cannot do: setting realistic expectations and avoiding common over-automation
 mistakes
+
 9. Introduction to the Claude Desktop app: Chat, Cowork, and Code tabs explained
 10. Key vocabulary: agent, pipeline, trigger, tool call, MCP, RAG, sandbox, orchestration, and 15+ additional
 terms
@@ -1075,6 +1078,7 @@ terms
 1. Distinguish an AI agent from chatbots, APIs, scripts, and search engines.
 2. Classify automation paradigms (no-code, low-code, code-first) by trade-off
 dimensions.
+
 3. Operate Claude Desktop on a basic agentic task.
 4. Execute three structured LLM interactions with behavioral observation.
 5. Decompose three real workflows using the Workflow Mapping Template.
@@ -1091,11 +1095,14 @@ dimensions.
 ## Grade Weight Summary
 
 *Estimated time: ~1 min*
+
 - Workflow Audit Project : PRIMARY MODULE GRADE — see rubric
 - Discussion Forum Post + Peer Reply : Completion grade (graded for participation, not
 content quality)
+
 - Lab Submissions (Units 3, 5, 6): Formative only — required for portfolio, not graded
 numerically
+
 - Concept Quiz : Formative only — two attempts; best score retained
 
 ## Diagnostic Self-survey
@@ -1184,10 +1191,12 @@ development:**
 and observe outcomes across a structured loop — delegating nothing to chance and
 nothing to the user once set in motion. Understanding this distinction is a non-
 negotiable prerequisite for all subsequent course modules.
+
 - The automation landscape is a spectrum, not a binary choice. Three paradigms —
 no-code, low-code, and code-first — address different user profiles, risk tolerances,
 and organizational requirements. Exercising professional judgment about which
 paradigm to select for a given workflow is a high-value skill.
+
 - Your own professional practice is the course’s primary raw material. The Workflow
 Audit Project you produce in this module is not a homework exercise — it is the
 foundational portfolio artifact that every subsequent module will build upon. The
@@ -1210,6 +1219,7 @@ about workflows, and what responsible deployment requires from the first day of 
 #### Chapter 1 Lesson
 
 *Estimated time: ~14 min*
+
 Public discourse around AI often confuses four structurally distinct entities: chatbots,
 search engines, rule-based automation scripts, and AI agents. This is not a minor
 terminological imprecision — it leads to fundamental errors in system design, risk assessment,
@@ -1230,10 +1240,13 @@ contemporary practice through a four-stage agent loop:
 
 * **Autonomy:** The agent operates without continuous human direction. It makes decisions based
 on its own internal state and goals, not external prompts at each step.
+
 * **Reactivity:** The agent perceives its environment and responds to changes in that environment
 in a timely fashion — it is not executing a fixed script.
+
 * **Pro-activeness:** The agent does not merely react to stimuli; it exhibits goal-directed behavior,
 taking initiative to achieve design objectives.
+
 * **Social ability:** The agent can interact with other agents (and humans) using defined
 communication protocols — essential for multi-agent systems introduced in Module 4.
 
@@ -1264,6 +1277,7 @@ communication protocols — essential for multi-agent systems introduced in Modu
 #### Chapter 2 Lesson
 
 *Estimated time: ~10 min*
+
 Automation tools exist on a spectrum defined by two axes: required user technical skill and system
 flexibility. Understanding where each tool class sits on this spectrum — and why — is a core
 professional competency. Choosing the wrong paradigm for an organizational workflow wastes
@@ -1271,6 +1285,7 @@ engineering resources, introduces data governance risks, or creates a system the
 cannot maintain.
 
 **Three automation paradigms**
+
 - No-code
 - Low-code
 - Code-first
@@ -1368,7 +1383,7 @@ The vocabulary of this assessment — rule-based, high-stakes, reversibility, bl
 
 * Wing, J. M. (2006). [Computational thinking](https://dl.acm.org/doi/pdf/10.1145/1118178.1118215){target=_blank}. Communications of the ACM, 49(3), 33-35
 
-[** Reading Guide Chapter 4 - Workflow thinking**](reading-guides.md#reading-guide-2) - Wooldridge & Jennings (1995): Intelligent Agents
+[**Reading Guide Chapter 4 - Workflow thinking**](reading-guides.md#reading-guide-2) - Wooldridge & Jennings (1995): Intelligent Agents
 
 #### Chapter 4 Quiz
 
@@ -1395,6 +1410,7 @@ The NIST AI RMF 1.0 identifies four core functions — Govern, Map, Measure, Man
 
 Floridi et al.'s (2018) AI4People framework articulates five ethical principles for AI systems that
 professional practitioners should be able to identify and apply: 
+
 * beneficence (AI should benefit people), 
 * non-maleficence (AI should not harm people), 
 * autonomy (AI should preserve human agency), 
@@ -1456,6 +1472,7 @@ These reading guides are designed to accompany the assigned sources for each cha
 ## Reading Guide 1 — Chapter 1: Redefining Intelligence — What AI Agents Actually Are { #reading-guide-1 }
 
 **Sources covered:**
+
 - Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. *The Knowledge Engineering Review, 10*(2), 115–152.
 - LangChain Conceptual Guide: What are Agents?
 - Video: "What are Agents?" — IBM Technology
@@ -1524,6 +1541,7 @@ Wooldridge and Jennings (1995) is the canonical theoretical treatment of intelli
 > **Note on sequence:** Reading Guide 2 accompanies Chapter 4 content because its primary source — Wooldridge & Jennings (1995) — is shared with Chapter 1. Reading Guide 2 focuses on how that foundational theory connects to workflow decomposition and computational thinking, which are the analytical tools you will apply in the Workflow Audit Project.
 
 **Sources covered:**
+
 - Wing, J. M. (2006). Computational thinking. *Communications of the ACM, 49*(3), 33–35.
 - Wooldridge, M., & Jennings, N. R. (1995). *(Re-read: Sections on agent environment and agent architecture)* — Reading 2
 
@@ -1581,6 +1599,7 @@ Jeannette Wing's 2006 essay is one of the most cited papers in computing educati
 ## Reading Guide 3 — Chapter 3: AI Literacy as a New Professional Imperative { #reading-guide-3 }
 
 **Sources covered:**
+
 - Ng, D. T. K., Leung, J. K. L., Chu, S. K. W., & Qiao, M. S. (2021). Conceptualizing AI literacy: An exploratory review. *Computers and Education: Artificial Intelligence, 2*, 100041.
 - Long, D., & Magerko, B. (2020, April). What is AI literacy? Competencies and design considerations. *Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems* (pp. 1–16).
 
@@ -1642,6 +1661,7 @@ Ng et al. (2021) conducted a systematic review of the AI literacy literature and
 > **Note on sequence:** Reading Guide 4 accompanies Chapter 2 because Reading 4 (Automation Landscape Overview) is the primary source for this chapter. The AI literacy papers (Long & Magerko; Ng et al.) appear in the Chapter 2 resource list as contextual background for evaluating paradigm choices; they are covered in depth in Reading Guide 3.
 
 **Sources covered:**
+
 - Reading 4: Automation Landscape Overview *(internal course reading)*
 - Long, D., & Magerko, B. (2020) and Ng et al. (2021) *(as contextual framework for paradigm evaluation — see Reading Guide 3 for full treatment)*
 
@@ -1700,6 +1720,7 @@ The AI literacy frameworks (Long & Magerko; Ng et al.) provide the evaluative me
 ## Reading Guide 5 — Chapter 5: Responsible AI — From Principle to Practice, Starting Now { #reading-guide-5 }
 
 **Sources covered:**
+
 - National Institute of Standards and Technology. (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1.
 - Floridi, L., Cowls, J., Beltrametti, M., Chatila, R., et al. (2018). AI4People — An ethical framework for a good AI society: Opportunities, risks, principles, and recommendations. *Minds and Machines, 28*(4), 689–707.
 
@@ -1932,6 +1953,7 @@ In the agent panel, submit the following instruction exactly as written:
 > 'List all .txt files in this folder and create a summary document named summary.md that lists each file name followed by the first sentence of its content.'
 
 Watch the agent's response in real time and note:
+
 - Did it correctly identify all .txt files?
 - Does the summary.md output match the instruction?
 - Did the agent take any action you did not expect?
@@ -1949,6 +1971,7 @@ Open the generated summary.md file and verify its contents.
 Design and submit one instruction of your own. The instruction should represent a simple file organization or document drafting task. Constraints: (1) the task must be completable using only local folder contents; (2) the task must require at least two distinct operations (e.g., 'find' and then 'create', not just 'list').
 
 Reflect on three things:
+
 1. The exact instruction you submitted.
 2. What the agent produced — be specific, not general.
 3. One revision you would make to the instruction if you ran it again, and why.
@@ -2063,6 +2086,7 @@ judgment requirement) that drove the surprise.
 ### Step 2 Peer reply
 
 *Estimated time: ~10 minutes*
+
 * Peer reply: 50–80 words. Either ask one specific clarifying question about your classmate's
 assessment ('You scored the consequence severity at 3 - what specific reversal mechanism did you
 assume that brought the score down from 5?') or offer an alternative assessment citing the course
@@ -2800,7 +2824,7 @@ assesses, and you get feedback on each answer as soon as you submit.
 [Open the quiz full screen](../../materials/module1/module1_quiz.html){ .md-button .md-button--primary target=_blank }
 [Printable PDF](../../materials/module1/Module_1_Quiz.pdf){ .md-button target=_blank }
 
-<iframe class="course-embed" src="../../../materials/module1/module1_quiz.html" title="Module 1 Concept Quiz" loading="lazy"></iframe>
+<iframe class="course-embed" src="../../materials/module1/module1_quiz.html" title="Module 1 Concept Quiz" loading="lazy"></iframe>
 
 If the drag-and-drop sequencing in Part C does not work on your device (some
 touch screens and screen readers), use the full-screen version or the
@@ -2889,7 +2913,7 @@ them. It is **ungraded** and takes about **10 minutes**.
 [Open the survey full screen](../../materials/module1/diagnostic_survey.html){ .md-button .md-button--primary target=_blank }
 [Printable PDF](../../materials/module1/Diagnostic_Knowledge_Survey.pdf){ .md-button target=_blank }
 
-<iframe class="course-embed" src="../../../materials/module1/diagnostic_survey.html" title="Module 1 Diagnostic Knowledge Survey" loading="lazy"></iframe>
+<iframe class="course-embed" src="../../materials/module1/diagnostic_survey.html" title="Module 1 Diagnostic Knowledge Survey" loading="lazy"></iframe>
 
 !!! info "Where your answers go"
 
@@ -2921,8 +2945,11 @@ tags:
 - agent-loop
 - automation-paradigms
 - workflow-audit
+- langchain
+- crewai
 module: 1
 status: stable
+stale_after: '2027-09-01T00:00:00Z'
 generated:
   by: process:scripts/migrate_wiki.py
   at: '2026-09-08T00:00:00Z'
@@ -2953,6 +2980,7 @@ wiki_page: Module-1:-Additional-Suggested-Resources
 * **Prompt Engineering:** The technique of carefully crafting inputs to guide the LLM using clear instructions, personas, delimiters, and step-by-step logic
 
 **Connections to AI Agents**. Understanding these generative AI concepts is the bedrock of developing AI agents
+
 * The LLM acts as the core reasoning engine for the agent, allowing it to perform complex tasks that were once exclusive to humans
 * Furthermore, prompt engineering is the primary method developers use to program how an agent behaves and makes decisions
 * Advanced techniques like RAG are also critical for agents, as they overcome an LLM's static training data by allowing the agent to actively retrieve external, up-to-date information while completing its goals
@@ -2971,15 +2999,18 @@ A major takeaway from this is that as AI technology advances, these strict bound
 ## Developing AI agents
 
 **Development Environments & UI Tools**
+
 * **Jupyter Notebook & Google Colab:** Web-based environments that allow you to combine live code, visualizations, and text. Colab operates in the cloud and provides free access to powerful hardware like GPUs.
 * **VS Code:** A highly customizable code editor that acts as a full integrated development environment (IDE).
 * **Streamlit & Gradio:** Rapid development tools that let you easily build interactive, web-based user interfaces for your AI models using just a few lines of Python.
 
 **Foundational Platforms & Languages**
+
 * **Hugging Face:** An open-source community hub where developers can access and share thousands of pre-trained models, datasets, and libraries.
 * **Python:** The dominant programming language for AI development, favored because of its extensive ecosystem of machine learning libraries.
 
 **Deploying and Customizing LLMs**
+
 * **Deployment Options:** Developers can access LLMs via cloud APIs (like OpenAI) for high scalability, or run models entirely locally using tools like Ollama to prioritize data privacy and reduce costs.
 * **Fine-Tuning:** The process of taking a general, pre-trained model and training it further on a smaller, task-specific dataset to make it highly specialized.
 * **Retrieval-Augmented Generation (RAG):** A technique that connects an LLM to an external database, allowing it to retrieve relevant, up-to-date information to answer a query. This significantly reduces "hallucinations" (made-up facts).
@@ -2989,6 +3020,7 @@ A major takeaway from this is that as AI technology advances, these strict bound
 An AI agent is a system that uses a large language model (LLM) as its cognitive engine to dynamically perceive its environment, make autonomous decisions, and take actions to meet specific goals. 
 
 Here is how an agent differs from other familiar technologies:
+
 *   **Chatbot:** A chatbot is primarily designed for dialogue and conversational turn-taking. While a chatbot just talks, an agent can autonomously plan and execute multi-step tasks to achieve a goal.
 *   **API Call:** An API is simply a gateway used to request and exchange data between software. An agent *uses* APIs as tools to perform actions, but the API itself possesses no reasoning or autonomy.
 *   **Rule-Based Automation Script:** Automation scripts (like traditional RPA) follow a rigid, developer-specified sequence of "if-then" rules. Agents can adapt to highly unstructured inputs and decide their own control flow at runtime.
@@ -2996,7 +3028,7 @@ Here is how an agent differs from other familiar technologies:
 
 The core functioning of an agent relies on a continuous cycle, often modeled after the ReAct (Reasoning and Acting) loop:
 
-**1. Perceive:** The agent receives an input or gathers current state information from its environment, such as a user prompt or system event.
+1. **Perceive:** The agent receives an input or gathers current state information from its environment, such as a user prompt or system event.
 
 2. **Plan (Thought):** The LLM acts as the reasoning engine to analyze the context, break the problem into steps, and determine which tool is most appropriate to use next.
 
@@ -3088,32 +3120,6 @@ result = crew.kickoff()
 
 In this low-code setup, you don't have to write the complex logic for how the AI "thinks" or decides what to do next. You simply define the agent's personality and objectives, give it a task, and the framework's underlying LLM handles the execution. 
 
-**Connecting CrewAi and LangChain**
-
-Here is a quick code example showing how to define and connect a tool in LangChain:
-
-```python
-from langchain_core.tools import tool
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
-
-# 1. Define a tool using the @tool decorator
-@tool
-def add_numbers(x: int, y: int) -> int:
-    """Adds two numbers and returns the sum."""
-    return x + y
-
-# 2. Initialize the LLM and bind the tool
-llm = ChatOpenAI(model_name="gpt-4o")
-llm_with_tools = llm.bind_tools([add_numbers])
-
-# 3. Ask a question and let the LLM invoke the tool
-messages = [HumanMessage("What is 11 + 49?")]
-ai_msg = llm_with_tools.invoke(messages)
-```
-
-In this setup, the `@tool` decorator registers the custom Python function and automatically generates a schema that describes its inputs and outputs to the model. By using `bind_tools`, you give the LLM the awareness and ability to select and execute the tool whenever the user's prompt requires it.
-
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Additional-Suggested-Resources){target=_blank} (wiki page last changed 2026-07-14). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/resources.md){target=_blank}.</p>
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/what-is-an-agent/
@@ -3166,11 +3172,11 @@ wiki_page: Module-1-Act-3:-What-is-an-agent?
 
 ### Contents of this package
 
-**1.** Section 1 — LangChain Conceptual Guide: What Are Agents?
+1. **** Section 1 — LangChain Conceptual Guide: What Are Agents?
 
-**2.** Section 2 — Annotated Excerpt: Wooldridge & Jennings (1995), ["Intelligent Agents: Theory and Practice"](https://www.cs.ox.ac.uk/people/michael.wooldridge/pubs/ker95.pdf){target=_blank}
+2. **** Section 2 — Annotated Excerpt: Wooldridge & Jennings (1995), ["Intelligent Agents: Theory and Practice"](https://www.cs.ox.ac.uk/people/michael.wooldridge/pubs/ker95.pdf){target=_blank}
 
-**3.** Section 3 — Glossary Pre-Fill Sheet (12 Key Terms)
+3. **** Section 3 — Glossary Pre-Fill Sheet (12 Key Terms)
 
 ### Learning Objectives
 
@@ -3230,7 +3236,7 @@ feedback (Observation) steps. The loop operates as follows:
 
 The ReAct pattern is significant because it makes the agent's reasoning process explicit and inspectable. Unlike chain-of-thought prompting alone (which remains internal to the model), the action-observation interleaving grounds each reasoning step in empirical feedback from the environment, mitigating hallucination and enabling adaptive multi-step problem-solving.
 
-!!! info "Connection to Classic Agent Theory"
+!!! info "📌 Connection to Classic Agent Theory"
 
     The Thought–Action–Observation loop maps directly onto the perception–deliberation–action cycle described in classical
     agent architectures (Section 2). The "Observation" phase corresponds to Wooldridge & Jennings' notion of an agent "perceiving its environment"; the "Thought" phase to deliberative reasoning;
@@ -3272,7 +3278,7 @@ LangGraph supports conditional branching, parallel execution of agent sub-tasks,
 
 The concept of an agent has become important in both artificial intelligence (AI) and mainstream computer science. Our aim in this paper is to point the reader at what we perceive to be the most important theoretical and practical issues associated with the design and construction of intelligent agents. Agent theory is concerned with the question of what an agent is, and the use of mathematical formalisms for representing and reasoning about the properties of agents. Agent architectures can be thought of as software engineering models of agents; researchers in this area are primarily concerned with the problem of designing software or hardware systems that will satisfy the properties specified by agent theorists. Finally, agent languages are software systems for programming and experimenting with agents; these may embody principles proposed by theorists.
 
-!!! info "Annotation: The Three-Layer Framework"
+!!! info "📌 Annotation: The Three-Layer Framework"
 
     Wooldridge & Jennings organise agent research into three mutually reinforcing layers: (1) theory (formal properties and logic),
     (2) architectures (engineering implementations), and (3) languages (programming abstractions). This taxonomy remains foundational today. Modern frameworks such as LangChain
@@ -3290,7 +3296,7 @@ Perhaps the most general way in which the term "agent" is used is to denote a ha
 | **Reactivity** | Agents perceive their environment (which may be the physical world, a user via a graphical interface, a collection of other agents, the Internet, or all of these combined) and respond in a timely fashion to changes that occur in it. |
 | **Pro-activeness** | Agents do not simply act in response to their environment; they are able to exhibit goal-directed behaviour by taking the initiative. |
 
-!!! info "Annotation: Mapping to LLM Agents"
+!!! info "📌 Annotation: Mapping to LLM Agents"
 
     These four properties map directly onto the design goals of modern LLM-based agents: Autonomy → the agent acts without step-by-step human instruction
     (ReAct loop without human intervention); Social Ability → multi-agent systems communicate via shared message formats (e.g., LangChain messages, OpenAI function-call JSON);
@@ -3299,7 +3305,7 @@ Perhaps the most general way in which the term "agent" is used is to denote a ha
 
 ### 2.3 The Stronger Notion: Mentalistic Agency and Rationality
 
-For some researchers---particularly those working in AI---the term "agent" has a stronger and more specific meaning. These researchers generally mean an agent to be a computer system that, in addition to having the properties identified above, is either conceptualised or implemented using concepts that are more usually applied to humans. It is quite common in AI to characterise an agent using mentalistic notions such as knowledge, belief, intention, and obligation (Shoham, 1993).
+For some researchers—particularly those working in AI—the term "agent" has a stronger and more specific meaning. These researchers generally mean an agent to be a computer system that, in addition to having the properties identified above, is either conceptualised or implemented using concepts that are more usually applied to humans. It is quite common in AI to characterise an agent using mentalistic notions such as knowledge, belief, intention, and obligation (Shoham, 1993).
 
 In addition to the four weak-agency properties, the following attributes are discussed in the context of the stronger notion of agency:
 
@@ -3309,9 +3315,9 @@ In addition to the four weak-agency properties, the following attributes are dis
 >
 > **Benevolence:** The assumption that agents do not have conflicting goals, and that every agent will therefore always try to do what is asked of it (Rosenschein & Genesereth, 1985, p. 91).
 >
-> **Rationality:** (Crudely) the assumption that an agent will act in order to achieve its goals, and will not act in such a way as to prevent its goals being achieved---at least insofar as its beliefs permit (Galliers, 1988b, pp. 49–54).
+> **Rationality:** (Crudely) the assumption that an agent will act in order to achieve its goals, and will not act in such a way as to prevent its goals being achieved—at least insofar as its beliefs permit (Galliers, 1988b, pp. 49–54).
 
-!!! info "Annotation: Rationality in Formal Agent Theory"
+!!! info "📌 Annotation: Rationality in Formal Agent Theory"
 
     The notion of rationality introduced here is a conceptual precursor to the formal BDI (Belief–Desire–Intention) model.
     In BDI theory (Rao & Georgeff, 1991), a rational agent selects intentions that are consistent with its beliefs about the world and its desires about future states. Rationality does
@@ -3328,10 +3334,10 @@ An obvious question is whether it is legitimate or useful to attribute beliefs, 
 > accurate picture of the system's architecture and working is available, a mechanistic, design stance explanation of its behaviour may not be practicable. The intentional notions are
 > thus abstraction tools, which provide us with a convenient and familiar way of describing, explaining, and predicting the behaviour of complex systems.*
 
-!!! info "Annotation: The Intentional Stance and LLMs"
+!!! info "📌 Annotation: The Intentional Stance and LLMs"
 
     Dennett's intentional stance is particularly relevant to LLM-based agents, whose internal computations are largely opaque.
-    We routinely say that an LLM "believes" something, "wants" to produce a coherent answer, or "intends" to call a tool---even though the model is, mechanistically, a statistical
+    We routinely say that an LLM "believes" something, "wants" to produce a coherent answer, or "intends" to call a tool—even though the model is, mechanistically, a statistical
     next-token predictor. Wooldridge & Jennings' justification for the intentional stance provides a rigorous philosophical grounding for this common engineering practice.
     The stance is useful not because LLMs literally have minds, but because the intentional vocabulary allows us to design, debug, and predict agent behaviour at a tractable level of abstraction.
 
@@ -3342,9 +3348,9 @@ For the purposes of this survey, the two most important categories of intentiona
 | **Category** | **Constituent Attitudes and Significance** |
 | :-- | :-- |
 | **Information Attitudes (what the agent knows about the world)** | Belief: The agent's representation of the current state of the world, which may be incomplete or incorrect. Knowledge: A stronger form of belief, typically assumed to be veridical (true). Formally, if i knows φ, then φ is true. |
-| **Pro-Attitudes (what motivates the agent to act)** | Desire: A state of affairs the agent wishes to bring about. Intention: A desire the agent has committed to pursuing---one it actively plans and acts to realise. Obligation: A constraint on the agent's behaviour arising from social or contractual norms. Commitment: The agent's disposition to persist with an intention even when circumstances change. |
+| **Pro-Attitudes (what motivates the agent to act)** | Desire: A state of affairs the agent wishes to bring about. Intention: A desire the agent has committed to pursuing—one it actively plans and acts to realise. Obligation: A constraint on the agent's behaviour arising from social or contractual norms. Commitment: The agent's disposition to persist with an intention even when circumstances change. |
 
-!!! info "Annotation: BDI Architecture"
+!!! info "📌 Annotation: BDI Architecture"
 
     The information / pro-attitude taxonomy is the theoretical foundation for the BDI (Belief–Desire–Intention) architecture, first formally
     specified by Rao & Georgeff (1991). BDI remains influential in both academic agent theory and practical systems (PRS, dMARS, JADE, Jason). In LLM agents, beliefs correspond to
@@ -3371,7 +3377,7 @@ Cohen and Levesque (1990) identified seven properties that must be satisfied by 
 
 7.  Agents need not intend all the expected side effects of their intentions.
 
-!!! info "Annotation: Intentions and LLM Agent Design"
+!!! info "📌 Annotation: Intentions and LLM Agent Design"
 
     These seven properties have direct implications for LLM-agent engineering. Property 3 (retry on failure) motivates self-reflection
     and re-planning loops in agents. Property 2 (non-conflicting intentions) motivates constraint-checking in multi-agent task allocation. Property 7 (no obligation for side effects) informs
@@ -3389,13 +3395,13 @@ For practical AI systems, neither extreme is desirable. A fully corrigible agent
     Corrigible (no autonomy) ↔ Supervised Autonomy ↔ Goal-Directed Autonomy ↔ Fully Autonomous.
     Contemporary best practice in AI deployment targets supervised or goal-directed autonomy, with human-in-the-loop checkpoints at high-risk decision nodes.
 
-The degree of autonomy exhibited by an agent is closely linked to its level of social integration. An agent that operates within a multi-agent system must balance its own goal-directed autonomy with cooperative norms established with other agents. This tension---between individual rationality and collective coordination---is one of the central problems in multi-agent systems research and is directly relevant to the design of modern AI pipelines that orchestrate multiple specialised sub-agents.
+The degree of autonomy exhibited by an agent is closely linked to its level of social integration. An agent that operates within a multi-agent system must balance its own goal-directed autonomy with cooperative norms established with other agents. This tension—between individual rationality and collective coordination—is one of the central problems in multi-agent systems research and is directly relevant to the design of modern AI pipelines that orchestrate multiple specialised sub-agents.
 
-!!! info "Annotation: Autonomy in Contemporary AI Governance"
+!!! info "📌 Annotation: Autonomy in Contemporary AI Governance"
 
     The autonomy spectrum discussed by Wooldridge & Jennings anticipates contemporary debates in AI safety and governance.
     Anthropic's Constitutional AI, OpenAI's alignment frameworks, and the EU AI Act all implicitly invoke the autonomy spectrum: high-risk AI systems (those with significant real-world
-    consequences) are required to maintain human oversight, limiting their autonomy. Understanding autonomy as a property along a spectrum---rather than a binary attribute---is essential
+    consequences) are required to maintain human oversight, limiting their autonomy. Understanding autonomy as a property along a spectrum—rather than a binary attribute—is essential
     for responsible agent deployment.
 
 **Question: Can you draw the agent loop from memory?**
@@ -3440,7 +3446,7 @@ Student Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ Date: \_\_\
 | **Complete the definition:** | *A desire to which the agent has \_\_\_\_\_\_\_\_\_\_, leading it to formulate and execute \_\_\_\_\_\_\_\_\_\_; intentions \_\_\_\_\_\_\_\_\_\_ resources and constrain the adoption of conflicting intentions.* |
 | **9. Rationality (Agent Theory)** | *\[Hint: W&J §1.1.3\]* |
 | **Context** | A property of the stronger notion of agency; an agent is rational if its actions are consistent with its goals given its beliefs. |
-| **Complete the definition:** | *The property by which an agent acts in order to achieve its \_\_\_\_\_\_\_\_\_\_, and will not act in such a way as to \_\_\_\_\_\_\_\_\_\_ its goals being achieved---at least insofar as its \_\_\_\_\_\_\_\_\_\_ permit.* |
+| **Complete the definition:** | *The property by which an agent acts in order to achieve its \_\_\_\_\_\_\_\_\_\_, and will not act in such a way as to \_\_\_\_\_\_\_\_\_\_ its goals being achieved—at least insofar as its \_\_\_\_\_\_\_\_\_\_ permit.* |
 | **10. ReAct Loop** | *\[Hint: LangChain §1.3; Yao et al. (2022)\]* |
 | **Context** | The predominant execution paradigm in LangChain-style agents, introduced by Yao et al. (2022). |
 | **Complete the definition:** | *An agent execution pattern that interleaves \_\_\_\_\_\_\_\_\_\_ (reasoning traces) with \_\_\_\_\_\_\_\_\_\_ (tool invocations) and \_\_\_\_\_\_\_\_\_\_ (environmental feedback), iterating until a terminal condition is met.* |
@@ -3999,6 +4005,7 @@ actually reason and act?
 The Module 2 readings introduce five interconnected frameworks that
 form the technical and analytical vocabulary of contemporary LLM-based agent design.
 These frameworks address:
+
 - How agents reason (Chain-of-Thought, ReAct, Tree of Thoughts, LATS)
 - How they act through tools (`create_agent` architecture)
 - How their reasoning can be interpreted and critiqued (trace analysis)
@@ -4089,6 +4096,7 @@ architectural selection in professional practice:
 * Zhou, A., Yan, K., Shlapentokh-Rothman, M., Wang, H., & Wang, Y. X. (2023). [Language agent tree search unifies reasoning acting and planning in language models](https://arxiv.org/pdf/2310.04406){target=_blank}. arXiv preprint arXiv:2310.04406
 
 **Reading 1 — Chain of Thought Prompting [~ 10 min]**
+
 * Wei, J. et al. (2022). [Chain-of-thought prompting elicits reasoning in large language
 models](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf){target=_blank}. NeurIPS 2022. 
     * Read: Abstract + Section 2 (Chain-of-Thought Prompting) and Figure 1. You may skim Section 4 (Experimental Setup) but are not required to read it in full.
@@ -4097,6 +4105,7 @@ standard few-shot prompting? What task class shows the largest CoT benefit, and
 why?
 
 **Reading 2 — ReAct: Reason + Act [~ 12 min]**
+
 * Yao, S. et al. (2022). [ReAct: Synergizing reasoning and acting in language models](https://arxiv.org/pdf/2210.03629){target=_blank}.
 ICLR 2023. 
    * Read: Sections 1 and 2 (Introduction + ReAct: Synergizing Reasoning and Acting). 
@@ -4137,17 +4146,22 @@ The agent returned by `create_agent` runs a LangGraph-backed ReAct loop internal
 
 Tool descriptions are the contract between the agent and the tool ecosystem. An effective tool
 description answers five questions precisely:
+
 * **What does this tool do?** State the tool's function in one sentence using active verbs and
 concrete output types. Example: 'Searches the web and returns the top-5 result snippets for a
 given query string.'
+
 * **When should the agent use it?** Specify the conditions under which this tool is appropriate, and
 explicitly note conditions where it is NOT appropriate. This prevents incorrect tool selection.
+
 * **What arguments does it require?** List every argument with its type, format, and any
 constraints. Ambiguous argument specifications produce hallucinated values, especially for
 structured data types.
+
 * **What does the output look like?** Describe the output format so the agent can parse it
 correctly. If the tool returns JSON, describe the schema. If it returns plain text, describe its
 structure.
+
 * **What errors can it produce?** List the error states the tool may return and what the agent
 should do on each error. Undocumented errors produce agents that silently misinterpret failure
 states as data.
@@ -4170,6 +4184,7 @@ states as data.
 * Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., ... & Amodei, D. (2020). [Language models are few-shot learners](https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf){target=_blank}. Advances in neural information processing systems, 33, 1877-1901
 
 **Reading 5 — LangChain `create_agent` [~10 min]**
+
 * LangChain Documentation: [`create_agent` API Reference and Tool Creation
 Reference](https://reference.langchain.com/python/langchain/agents/factory/create_agent){target=_blank}.
    * Read the entire `create_agent` API Reference section. Pay particular attention to: the role of the `tools` parameter in constructing the tool registry, how tool descriptions embedded in `BaseTool` objects are used for selection at inference time, and how `response_format` constrains the agent's output.
@@ -4323,6 +4338,7 @@ These guides structure your engagement with the assigned readings. For each guid
 ## Reading Guide 1 — Chapter 1: The Four Agent Reasoning Paradigms { #reading-guide-1 }
 
 **Assigned Readings:**
+
 - Reading 1: Wei, J., et al. (2022). *Chain-of-thought prompting elicits reasoning in large language models.* NeurIPS 2022. Read: Abstract + Section 2 + Figure 1.
 - Reading 2: Yao, S., et al. (2022). *ReAct: Synergizing reasoning and acting in language models.* ICLR 2023. Read: Sections 1–2.
 - Reading 3: Yao, S., et al. (2023). *Tree of thoughts: Deliberate problem solving with large language models.* NeurIPS 2023. Read: Sections 1–2.
@@ -4404,6 +4420,7 @@ Construct a four-row reference table in your notes with columns: **Paradigm | Ex
 ## Reading Guide 2 — Chapter 2: Tool Integration Architecture { #reading-guide-2 }
 
 **Assigned Reading:**
+
 - Reading 5: LangChain Documentation — *AgentExecutor Conceptual Guide and Tool Creation Reference.* Read the complete AgentExecutor Conceptual Guide. Focus: tool registry role, tool description use for tool selection, output parser conversion of LLM text to structured tool calls.
 - Video 2: Sam Witteveen — *"Understanding ReACT with LangChain"* (~22 min). Watch focus: conceptual distinction between CoT and ReAct; the observation integration step.
 
@@ -4460,6 +4477,7 @@ Write a complete tool description for a hypothetical "company database lookup" t
 ## Reading Guide 3 — Chapter 3: Reasoning Trace Interpretation and Critique { #reading-guide-3 }
 
 **Sources (no new numbered reading assigned — draws on previously assigned readings and lesson content):**
+
 - Yao, S., et al. (2022). ReAct. Sections 1–2 (already read in Guide 1B).
 - LangChain AgentExecutor verbose output (from Lab Exercise Step 1).
 - Zhou, A., et al. (2023). LATS. Section 1 (accessible from Chapter 1 lesson).
@@ -4523,6 +4541,7 @@ Final Answer: Brazil's GDP is $2.08 trillion and its inflation rate is 4.6%.
 ## Reading Guide 4 — Chapter 4: Prompt Engineering for Agent Behavioral Control { #reading-guide-4 }
 
 **Assigned Reading:**
+
 - Reading 7: Liu, P., et al. (2023). *Pre-train, prompt, and predict: A systematic survey of prompting methods in NLP.* ACM Computing Surveys, 55(9). Read: Section 3 (A Formal Description of Prompting) + Section 4 (Prompt Engineering). Focus: four-component prompt architecture and cross-mapping to AgentExecutor components.
 
 *(Reference readings: Brown et al. 2020, Wei et al. 2022 — revisit as needed for few-shot context; LangChain AgentExecutor system prompt design.)*
@@ -4589,6 +4608,7 @@ Verify that every cell is filled from Liu et al.'s text and the lesson content �
 ## Reading Guide 5 — Chapter 5: Architectural Trade-off Assessment for Production Deployment { #reading-guide-5 }
 
 **Sources (no new numbered reading assigned — draws on lesson content + prior readings and EU AI Act reference):**
+
 - Chapter 5 lesson: Six-Dimensions Trade-Off Assessment framework + EU AI Act (2024) Article 13.
 - Synthesize from all four prior paradigm readings (Wei et al. 2022, Yao et al. 2022 — ReAct, Yao et al. 2023 — ToT, Zhou et al. 2023 — LATS) and the four-paradigm comparative table from Chapter 1.
 
@@ -4770,6 +4790,7 @@ Your discussion post will be a Project Proposal Outline for your capstone projec
 * State the specific application (not just the domain). Not: 'a legal assistant'. Yes: 'an
 agent that reviews employment contracts for non-compete clause enforceability under
 California law'.
+
 * Identify the intended user and use context: who will interact with this agent, in what
 professional setting, and with what prior AI literacy level?
 
@@ -4778,6 +4799,7 @@ professional setting, and with what prior AI literacy level?
 * Specify one of the four Module 2 paradigms (CoT, ReAct, ToT, LATS). Do not say 'I
 haven't decided' — commit to a choice with a preliminary justification, even if you
 expect to revise it after peer feedback.
+
 * Provide a two-sentence justification that references at least one assigned reading.
 Example: 'I selected ReAct because the task requires retrieval of real-time contract
 precedents from legal databases, which requires tool invocation at each reasoning
@@ -4788,6 +4810,7 @@ external information lookup because...'
 
 * List at minimum two tools with one-sentence descriptions each. Include: the tool name,
 what external system it connects to, and the type of input it accepts.
+
 * Identify one tool whose description you anticipate needing to iterate on — based on
 your Task 1 experience — and explain why.
 
@@ -4843,7 +4866,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb"
     title: "Module-2-Guided-Lab-Notebook.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 2 Lab: Building a Multi-Tool ReAct Agent
@@ -4874,6 +4896,7 @@ sources:
 ### How this notebook is structured
 
 There are four steps. Each step has:
+
 - **Pre-written code** — run it as-is to understand what's happening
 - **Extension zones** — marked `# STUDENT EXTENSION POINT` — where you add or modify code
 - **A self-check** at the end to verify your output before moving on
@@ -5047,6 +5070,7 @@ Scroll through the output above. You should see **all five of these labels** in 
 | `Final Answer:` | The model's response to the original question |
 
 **If any label is missing:** The agent is not running the ReAct pattern correctly. Common causes:
+
 - Missing or invalid API key → re-check the key in Section 1A
 - `Final Answer` appears immediately without searching → the system prompt text `'Always search for current information before making factual claims'` must be present — verify it above
 - DuckDuckGo returns an error → wait 30 seconds and re-run (free tier has rate limits)
@@ -5058,6 +5082,7 @@ Scroll through the output above. You should see **all five of these labels** in 
 **Heading:** `Step 1 — Single-Tool Agent`
 
 Answer these four questions:
+
 1. **Thought (first step):** Copy the exact text of the first `Thought:` in the trace
 2. **Tool invoked:** Which tool was called?
 3. **Observation summary:** What did the search return? (1–2 sentences)
@@ -5172,6 +5197,7 @@ Create a table with the following structure (one row per prompt):
 | C | ... | ... | Yes / No |
 
 Then add one more entry:
+
 - **Action 8 result:** Did changing the REPL description to `'Use for advanced tasks'` change which tool was selected for Prompt A? Why or why not?
 
 ---
@@ -5179,6 +5205,7 @@ Then add one more entry:
 **Time:** ~30 minutes
 
 Production agents must fail gracefully. In this step you will:
+
 1. Trigger a real tool failure and observe the raw (unhandled) behavior
 2. Implement an error handling wrapper that returns a structured error message instead of a Python traceback
 3. Confirm the agent now responds usefully instead of crashing or hallucinating
@@ -5268,6 +5295,7 @@ If a traceback still appears: the wrapper is not being applied. Check that `tool
 **Heading:** `Step 3 — Error Handling`
 
 Record the following:
+
 - **(a) Before the wrapper:** What did the agent do when the tool failed? (Looped? Hallucinated? Produced a traceback in Final Answer?)
 - **(b) After the wrapper:** How did the agent's behavior change? What appeared in the `Observation`?
 - **(c) User utility assessment:** Was the graceful degradation response useful to a hypothetical end user? Why or why not? (2–3 sentences)
@@ -5277,6 +5305,7 @@ Record the following:
 **Time:** ~20 minutes
 
 System instructions and few-shot examples are the primary controls for agent behavior. In this step you will:
+
 1. Add an **output format constraint** to the system instruction and observe the change
 2. Add a **few-shot demonstration** to the prompt and assess whether the agent mimics it
 
@@ -5414,6 +5443,7 @@ print(result_fewshot["output"])
 **Heading:** `Step 4 — Prompt Engineering`
 
 Record the following:
+
 - **(a) Format constraint text:** Copy the exact text of your output format constraint
 - **(b) Before/after comparison:** Quote the Final Answer from Step 2 (Prompt A, no constraint) and the Final Answer from Action 14 (Prompt A, with constraint). How did the structure change?
 - **(c) Few-shot influence:** Did the agent's reasoning trace in Action 15 mimic your demonstration's format? Cite specific evidence from the trace.
@@ -5429,6 +5459,7 @@ Before submitting, confirm all four checks:
 - [ ] Step 4 shows a before/after comparison of Final Answer format
 
 **Submit to GitHub:**
+
 - File: `Module2_Unit3_Lab_[YourName].ipynb`
 - All cells must be executed with visible output
 
@@ -5446,6 +5477,7 @@ AGENT_INSTRUCTION_LOG = """
 === AGENT INSTRUCTION LOG ===
 
 --- Step 1 — Single-Tool Agent ---
+
 1. First Thought:
 2. Tool invoked:
 3. Observation summary:
@@ -6241,6 +6273,7 @@ The main difference between the two is how they explore solutions: ReAct follows
 The Belief-Desire-Intention (BDI) architecture is a classic model that describes an agent's decision-making process using human-like mental states. 
 
 Here is how the three parts break down, especially in the context of modern AI:
+
 *   **Beliefs:** What the agent "knows" about its environment, which includes its pre-trained knowledge and any real-time data it retrieves.
 *   **Desires:** The end goals the agent wants to achieve, which typically map directly to the overarching objective or user prompt.
 *   **Intentions:** The specific plans and action sequences (like tool calls) the agent actively commits to executing to fulfill its desires.
@@ -6250,6 +6283,7 @@ Here is how the three parts break down, especially in the context of modern AI:
 In LangChain, the ReAct loop is practically managed by a runtime component called the `AgentExecutor`. 
 
 Here is how it physically orchestrates the ReAct loop:
+
 *   **Thought & Action:** The LLM analyzes the user's prompt and decides it needs external information. It outputs a reasoning trace (the "thought") and requests a specific tool call (the "action").
 *   **Execution:** The `AgentExecutor` steps in, physically runs the requested tool (like a web search API or custom Python function), and captures the result.
 *   **Observation:** The executor feeds this result (the "observation") back into the LLM's context window so the model can read it.
@@ -6294,6 +6328,7 @@ Here is a breakdown of the functional components in a tool-calling agent:
 *   **Memory Module:** The system that tracks past conversation history, tool outputs, and observations to maintain context across the interaction.
 
 During a single task episode, the information flows in this sequence:
+
 1.  The user's input is combined with past context from the **Memory Module** and sent to the **LLM Backbone**.
 2.  The LLM analyzes the request alongside the available capabilities in the **Tool Registry**. It decides a tool is needed and outputs a structured tool request.
 3.  The **Action Executor** intercepts this request, physically runs the specified tool, and retrieves the result.
@@ -6386,6 +6421,7 @@ This module covers the design, implementation, and evaluation of memory architec
 ## Topics Covered
 
 *Estimated time: ~2 min*
+
 * **Parametric vs. non-parametric memory** — the foundational distinction between what a model knows from training and what it retrieves at runtime
 * **Six-stage RAG pipeline** — document ingestion, text splitting, embedding, vector indexing, retrieval, and augmented generation as a structured engineering discipline
 * **LangChain conversational memory types** — four memory architectures with distinct cost-fidelity trade-offs
@@ -6400,6 +6436,7 @@ This module covers the design, implementation, and evaluation of memory architec
 - Explain the stages of a Retrieval-Augmented Generation (RAG) pipeline.
 - Compare LangChain conversational memory types across key implementation
 criteria.
+
 - Implement an end-to-end RAG pipeline using LangChain.
 - Configure a conversational agent with persistent memory.
 - Evaluate RAG system failures and recommend remediation strategies.
@@ -6542,6 +6579,7 @@ foundation for diagnosing failures in any RAG system.
 vector store indexing, semantic retrieval, and augmented generation.
 
 **Reading 1: [Langchain Retrieval Documentation](https://docs.langchain.com/oss/python/deepagents/retrieval){target=_blank}**
+
 - Take note of the different building blocks LangChain provides for RAG (document loaders, text splitters, embedding models, vector stores, retrievers) and map them to the stages of the RAG pipeline.
 
 ### Chapter 2 Quiz
@@ -6634,15 +6672,18 @@ retrieved chunks may be near-identical, providing redundant context. MMR balance
 to the query with dissimilarity to already-retrieved chunks, producing a diverse set of relevant
 context. MMR is preferred whenever the corpus has significant redundancy or whenever diverse
 perspectives on a query are desirable.
+
 * **Metadata Filtering:** Vector store metadata (document date, author, category, section header)
 can be used as pre-retrieval filters: 'retrieve only from documents tagged as Policy documents
 published after 2023.' Metadata filtering dramatically reduces the search space and improves
 precision for queries with implicit temporal or categorical constraints that are not captured in the
 query embedding.
+
 * **Re-ranking:** Post-retrieval re-ranking applies a cross-encoder model (more accurate but more
 expensive than the bi-encoder used for initial retrieval) to re-score and re-order the initially
 retrieved chunks before context injection. Re-ranking is an Advanced RAG technique that
 significantly improves retrieval precision at the cost of additional inference time.
+
 * **Context Compression (LLMLingua):** Context compression tools such as LLMLingua use a
 small LLM to compress each retrieved chunk by removing sentences that are not relevant to the
 specific query, before injecting into the generation context. This reduces context tokens while
@@ -6692,6 +6733,7 @@ diagnostic signature and a distinct remediation strategy:
 * Gao, Y., Xiong, Y., Gao, X., Jia, K., Pan, J., Bi, Y., ... & Wang, H. (2023). [Retrieval-augmented generation for large language models: A survey](https://arxiv.org/pdf/2312.10997){target=_blank}. arXiv preprint arXiv:2312.10997, 2(1), 32.
 
 **Reading 5 - Es et al. (2023): RAGAS Framework [~10 min]**
+
 * [Es, S. et al. (2023). RAGAS: Automated evaluation of retrieval augmented generation.
 arXiv:2309.15217.](https://aclanthology.org/2024.eacl-demo.16.pdf){target=_blank} 
    * Read: Section 3: Evaluation Strategies. 
@@ -6744,6 +6786,7 @@ These reading guides accompany the assigned sources for each chapter of Module 3
 ## Reading Guide 1 — Chapter 1: Parametric vs. Non-Parametric Memory { #reading-guide-1 }
 
 **Sources covered:**
+
 - Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *NeurIPS 2020*. *(Abstract + Sections 1–2)*
 - Bommasani, R., et al. (2021). On the opportunities and risks of foundation models. *arXiv:2108.07258*. *(Section 2.1 only)*
 - Video 1: "What is Retrieval-Augmented Generation (RAG)?" — IBM Technology (~6 min)
@@ -6812,6 +6855,7 @@ This distinction — parametric vs. non-parametric memory — is the conceptual 
 ## Reading Guide 2 — Chapter 2: The Six-Stage RAG Pipeline — Architecture, Design Decisions, and Downstream Consequences { #reading-guide-2 }
 
 **Sources covered:**
+
 - Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *NeurIPS 2020*. *(Re-read: focus on the two-component architecture)*
 - Gao, Y., et al. (2023). Retrieval-augmented generation for large language models: A survey. *arXiv:2312.10997*. *(Sections 1–3)*
 - LangChain Documentation: Document Loaders, Text Splitters, Vector Stores, RetrievalQA
@@ -6913,22 +6957,26 @@ Each conversation gets a unique `session_id`, so one chain can serve many concur
 Each pattern trades off token cost against context fidelity:
 
 **Buffer**
+
 - Stores every message verbatim.
 - Token cost grows linearly with each turn.
 - Best for: short conversations (&lt;10 turns) where complete fidelity matters (e.g., medical record review, compliance dialogue).
 
 **Window**
+
 - Keeps only the last *k* turns; drops older messages.
 - Token cost is stable once the window is full.
 - Best for: customer support, coding assistants — where recent context matters most and early turns can be dropped.
 
 **Summary**
+
 - Uses an LLM to compress older messages into a running summary; keeps recent messages verbatim.
 - Token cost is low and stable.
 - Risk: *semantic drift* — specific details (names, numbers, exact phrasing) may not survive summarization.
 - Best for: extended multi-session discussions where key decisions must persist but exact wording doesn't.
 
 **Hybrid (Summary + Buffer)**
+
 - Rolling summary of older turns + verbatim buffer of recent turns.
 - Token cost is low to moderate.
 - Best for: long, dense conversations (debugging, iterative drafting) needing both recency and long-range context.
@@ -6969,6 +7017,7 @@ For Buffer and Summary: sketch the token-count curve (y-axis: tokens in context;
 
 **Task C — Scenario Classification**
 For each scenario, identify the best memory pattern and write a one-sentence justification:
+
 1. A legal assistant that must recall exact clause language from turn 3 in a 7-turn session.
 2. A customer support bot handling 10,000 simultaneous sessions of ~15 turns each.
 3. A debugging assistant with 40+ turn sessions where the user references decisions from 25 turns ago.
@@ -7001,6 +7050,7 @@ In two sentences, explain how `RunnableWithMessageHistory` makes a stateless LLM
 ## Reading Guide 4 — Chapter 4: Retrieval Optimization and Context Window Management { #reading-guide-4 }
 
 **Sources covered:**
+
 - Gao, Y., et al. (2023). Retrieval-augmented generation for large language models: A survey. *arXiv:2312.10997*. *(Section 5 — Advanced RAG patterns)*
 - LangChain Expression Language (LCEL) Documentation
 - Es, S., et al. (2024). RAGAS: Automated evaluation of retrieval augmented generation. *EACL 2024*. *(Background — for optimization feedback loops)*
@@ -7060,6 +7110,7 @@ A Naive RAG pipeline makes two implicit assumptions that often fail in practice:
 ## Reading Guide 5 — Chapter 5: RAGAS Evaluation — From Subjective Impression to Structured, Reproducible Diagnosis { #reading-guide-5 }
 
 **Sources covered:**
+
 - Es, S., James, J., Anke, L. E., & Schockaert, S. (2024). RAGAS: Automated evaluation of retrieval augmented generation. *EACL 2024*. *(Abstract + Sections 1–2)*
 - Gao, Y., et al. (2023). *(Background context on RAG failure modes)*
 
@@ -7291,7 +7342,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb"
     title: "Module-3-Lab.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 3 Lab: Building a RAG Pipeline with LangChain + Chroma
@@ -8803,10 +8853,12 @@ wiki_page: Module-4:-Foundational-Concepts
  - **Benefit:** By dividing complex work across agents with focused responsibilities, a multi-agent system can produce higher-quality, more reliable outcomes than any single generalist agent operating alone.
 
 The theoretical foundation for multi-agent AI systems predates the LLM era by decades.
+
 - Wooldridge and Jennings (1995) identified sociability — the ability of agents to interact with one another — as one of the four aspects of agency.
 - Hutchins (1995): complex work
 in human organizations is routinely distributed across individuals and artifacts, with no single
 participant holding all relevant information.
+
 - Stone and Veloso (2000) present a taxonomy of coordination mechanisms and communication protocols in multi-agent robotic systems.
 - Guo et al. (2024) extend this work into the LLM era, documenting where these systems
 succeed, where they fail, and when a esingle well-dsigned agent is the better choice.
@@ -8997,18 +9049,22 @@ In their comparison of single-agent vs. multi-agent systems on benchmark tasks l
 As discussed in Chapter 1, multi-agent is not always the right choice. The decision requires evidence. To determine whether MAS is justified for a given task, evaluate across four dimensions:
 
 **Task Accuracy**
+
 - **Measure:** Run both systems (single-agent and multi-agent) on the same set of benchmark tasks. Grade each output using a scoring rubric, then compare average scores.
 - **Interpret:** A statistically meaningful accuracy gain justifies MAS complexity. If the difference is small enough that it could be due to random variation in scoring, it does not justify the added cost.
 
 **Total Token Consumption**
+
 - **Measure:** The total number of tokens used to complete a task — including every message agents send to each other, not just the final output.
 - **Interpret:** More tokens means higher API cost. A multi-agent system that is slightly more accurate but uses 4× more tokens may not be worth the expense.
 
 **Wall-Clock Latency**
+
 - **Measure:** How long (in seconds) from when the user submits a task to when they receive the final output. Report mean, P90 (90% of requests finish within this time), and P99 (99% finish within this time).
 - **Interpret:** Average latency can hide problems. A multi-agent system may be fast most of the time but occasionally very slow when coordination goes wrong. P90 and P99 reveal these worst-case delays — which matter most when real users are waiting for a response.
 
 **Coordination Overhead**
+
 - **Measure:** How much of the total token usage goes to agents talking to each other (delegating, checking in, combining results) versus actually doing the work.
 - **Interpret:** If the system spends more effort coordinating than producing useful output, it is over-engineered. A coordination overhead ratio above 40% is a signal to simplify the architecture.
 
@@ -9061,6 +9117,7 @@ These reading guides accompany the assigned sources for each chapter of Module 4
 ## Reading Guide 1 — Chapter 1: Why Multi-Agent Systems Exist { #reading-guide-1 }
 
 **Sources covered:**
+
 - Guo, T., et al. (2024). Large language model based multi-agents: A survey of progress and challenges. *arXiv:2402.01680*. *(Section 3 — read; Section 4 — skim)*
 - Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. *The Knowledge Engineering Review, 10*(2), 115–152. *(Sociability property)*
 - Hutchins, E. (1995). *Cognition in the Wild*. MIT Press. *(Distributed cognition framework)*
@@ -9122,6 +9179,7 @@ The theoretical foundations come from three decades of prior work. Wooldridge an
 ## Reading Guide 2 — Chapter 2: How Do Agents Coordinate With One Another? { #reading-guide-2 }
 
 **Sources covered:**
+
 - Stone, P., & Veloso, M. (2000). Multiagent systems: A survey from a machine learning perspective. *Autonomous Robots, 8*(3), 345–383. *(Section 3 — coordination mechanisms)*
 - Wu, Q., et al. (2024). AutoGen: Enabling next-gen LLM applications via multi-agent conversations. *First Conference on Language Modeling*. *(Coordination model)*
 - Hong, S., et al. (2024). MetaGPT: Meta programming for a multi-agent collaborative framework. *ICLR 2024*. *(Sections 1–2 — role specification and pipeline architecture)*
@@ -9186,6 +9244,7 @@ The four coordination architecture patterns — Hierarchical Supervisor-Worker, 
 ## Reading Guide 3 — Chapter 3: The Three Orchestration Frameworks — LangGraph, AutoGen, and CrewAI { #reading-guide-3 }
 
 **Sources covered:**
+
 - LangGraph Documentation: Multi-Agent Architectures and Multi-Agent Supervisor
 - Wu, Q., et al. (2024). AutoGen: Enabling next-gen LLM applications via multi-agent conversations. *First Conference on Language Modeling*. *(Sections 1–3)*
 - Guo, T., et al. (2024). Large language model based multi-agents: A survey of progress and challenges. *(Framework observability and debugging critique)*
@@ -9256,6 +9315,7 @@ Guo et al. (2024) provide a critical lens: high-level framework abstractions can
 ## Reading Guide 4 — Chapter 4: Coordination Failure Taxonomy — Four Failure Modes, Four Structural Causes { #reading-guide-4 }
 
 **Sources covered:**
+
 - Cemri, M., et al. (2026). Why do multi-agent LLM systems fail? *Advances in Neural Information Processing Systems, 38*. *(Sections 1 and 4 — MAST taxonomy)*
 - Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. *(Coordination and cooperation sections)*
 - Stone, P., & Veloso, M. (2000). Multiagent systems: A survey from a machine learning perspective. *(Section 3 — coordination mechanisms)*
@@ -9316,6 +9376,7 @@ Cemri et al. (2026) introduce MAST (Multi-Agent System Failure Taxonomy) to addr
 ## Reading Guide 5 — Chapter 5: Evidence-Based Benchmarking — When Does Multi-Agent Add Value? { #reading-guide-5 }
 
 **Sources covered:**
+
 - Wu, Q., et al. (2024). AutoGen: Enabling next-gen LLM applications via multi-agent conversations. *(Evaluation sections)*
 - Hong, S., et al. (2024). MetaGPT. *(Evaluation and benchmarking methodology)*
 - Guo, T., et al. (2024). Large language model based multi-agents: A survey. *(Critical evaluation methodology)*
@@ -9536,7 +9597,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb"
     title: "Module4_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 4 Lab: Three-Role Pipeline in LangGraph and CrewAI
@@ -10808,22 +10868,27 @@ wiki_page: Module-5:-Foundational-Concepts
 Sculley et al. (2015) identified a problem often learned the hard way: machine learning systems accumulate hidden technical debt that only becomes visible under production conditions. They categorized five types of debt, and while their framework predates LLM agents, each category still applies to agent systems:
 
 **Entanglement.** Changing one component unexpectedly affects behavior elsewhere.
+
 - **In agent systems:** You tweak one agent's system prompt, and a downstream agent that parses its output starts failing because the output format shifted subtly.
 - **How to prevent it:** Define explicit output schemas between agents so changes are caught by validation before they cascade.
 
 **Unstable data dependencies.** Upstream data changes silently corrupt behavior.
+
 - **In agent systems:** Your RAG pipeline's retrieval quality degrades because the vector store was re-indexed with different chunking parameters.
 - **How to prevent it:** Run automated retrieval quality checks after any data source update.
 
 **Feedback loops.** A deployed system's outputs influence its future inputs.
+
 - **In agent systems:** One agent writes a result to shared state, and a later agent reads it as ground truth without verifying it. If that first result was wrong, the error propagates forward and compounds.
 - **How to prevent it:** Tag agent-generated content so it can be distinguished from original sources, and validate before reuse.
 
 **Configuration debt.** Undocumented parameters make systems brittle.
+
 - **In agent systems:** Prompts, temperature settings, tool configurations, and model version selections are scattered across multiple files with no versioning, no tests, and no single source of truth.
 - **How to prevent it:** Store all configuration in a single versioned location and require changes to go through the same review process as code.
 
 **Undeclared consumers.** Downstream systems depend on outputs without being tracked.
+
 - **In agent systems:** You change your agent's output format and discover that other processes were parsing that output. If the dependency isn't documented, there's no way to know the change will break anything until it does.
 - **How to prevent it:** Version your agent's output schema and document what depends on it.
 
@@ -11223,6 +11288,7 @@ Vendor-neutral instrumentation. Instrument once, route to any backend. Understan
 **What to Monitor**
 
 Six signals that indicate production problems:
+
 1. Error rate spike
 2. Token cost anomaly (often runaway loops or unbounded context)
 3. Retrieval quality degradation
@@ -11250,6 +11316,7 @@ Six signals that indicate production problems:
 These are the ten most critical risks for any LLM-powered system. For each, know the risk name, what it means in plain terms, and one example of how it applies to an agent:
 
 Key entries to internalize:
+
 - **LLM01 Prompt Injection:** Input alters the model's behavior in unintended ways
 - **LLM02 Sensitive Information Disclosure:** System exposes data through unauthorized channels
 - **LLM03 Excessive Agency:** Agent has too much functionality, too many permissions, or too much autonomy
@@ -11260,6 +11327,7 @@ Key entries to internalize:
 These extend the LLM Top 10 to autonomous agents. The Agentic list focuses on how autonomy, delegation, and multi-step execution amplify risks:
 
 Key entries to internalize:
+
 - **ASI01 Agent Goal Hijack:** Attacker redirects what the agent is trying to do
 - **ASI06 Memory & Context Poisoning:** False data planted in memory corrupts future reasoning
 - **ASI07 Insecure Inter-Agent Communication:** Messages between agents lack authentication
@@ -11273,7 +11341,7 @@ Key entries to internalize:
 
 **Task B:** For each of the following scenarios, identify which Agentic Top 10 entry applies: (1) An attacker poisons a shared memory store so a downstream agent makes biased decisions. (2) Agent A sends a forged message to Agent B, and Agent B acts on it without verifying the source. (3) A malicious MCP server is loaded at runtime.
 
-## Chapter 5 Reading Guide: Responsible AI: Governance, Compliance, and Accountability { #reading-guide-5 }
+## Chapter 5 Reading Guide — Responsible AI: Governance, Compliance, and Accountability { #reading-guide-5 }
 
 **Assigned Video:** [AI Governance and the EU AI Act: What Developers Need to Know](https://www.youtube.com/watch?v=GELAXU9XReI){target=_blank} (~15 minutes)
 **Estimated time:** 25 minutes (chapter) + 15 minutes (video)
@@ -11296,6 +11364,7 @@ The chapter illustrates all four using a claims-processing agent example. Unders
 **EU AI Act: Four-Tier Classification**
 
 Know the four tiers (Unacceptable, High Risk, Limited Risk, Minimal Risk), what compliance obligations each carries, and one agent example per tier. Key points:
+
 - Classification depends on deployment context, not architecture
 - The same agent could be minimal or high risk depending on what decisions it informs
 - Non-compliance with high-risk obligations carries fines up to 3% of global annual revenue
@@ -11506,7 +11575,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb"
     title: "Module5_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline
@@ -11533,6 +11601,7 @@ sources:
 Estimated time: **~120 minutes** · Learning outcomes: **LO 5.4 and LO 5.5**
 
 In this lab, you'll do two things:
+
 1. **Lab A** — Wire up LangSmith tracing on a simple agent, run it 10 times, and analyze the traces (latency, tokens, errors).
 2. **Lab B** — Build an automated test suite that catches when your agent's behavior gets worse (a "regression").
 
@@ -11642,6 +11711,7 @@ Think of LangSmith traces like a debugger's call stack — they show you exactly
 ### Step A1: Build a Two-Tool ReAct Agent (~15 min)
 
 We'll create a simple agent with two tools:
+
 - **search** — looks up factual information (simulated for reproducibility)
 - **calculator** — evaluates math expressions
 
@@ -11732,6 +11802,7 @@ elif PROVIDER == "ollama":
 AGENT_SYSTEM_PROMPT = """You are a helpful research assistant. You have access to a search tool and a calculator.
 
 Guidelines:
+
 - Use the search tool for factual questions.
 - Use the calculator for math.
 - For multi-step questions, break them into parts and use tools as needed.
@@ -11800,6 +11871,7 @@ Skip this cell to keep using the simulated search (recommended for first run-thr
 #### Verify: Run one test and check LangSmith
 
 Before running all 10, let's confirm tracing works. After running this cell:
+
 1. Go to [smith.langchain.com](https://smith.langchain.com)
 2. Open the `module5-observability-lab` project
 3. Verify you see one trace
@@ -11856,6 +11928,7 @@ for cat in sorted(set(prompt_categories)):
 #### TODO: Run all 10 prompts and collect results
 
 Write a loop that:
+
 1. Records the start time with `time.time()`
 2. Invokes the agent with the prompt, passing `tags` and `metadata` in the config
 3. Records the end time and computes latency
@@ -12002,6 +12075,7 @@ You may also design your own comparison — just keep it to one variable so the 
 **Hypothesis**: TODO: State a specific, falsifiable prediction about what you expect to see in the data.
 
 **Conditions**:
+
 - **Condition A**: TODO
 - **Condition B**: TODO
 - **Condition C** (optional): TODO (or remove if using only 2 conditions)
@@ -12116,6 +12190,7 @@ TODO: State your hypothesis and whether it was supported or refuted by the data.
 #### Analysis (minimum 200 words)
 
 TODO: Interpret your results. Address these questions:
+
 - Was your hypothesis supported? By how much?
 - Which metric showed the biggest difference between conditions? Why?
 - Did any condition perform unexpectedly? What does the trace data reveal about why?
@@ -12707,7 +12782,7 @@ A customer-facing chatbot powered by an LLM discloses its full system prompt —
 
     **D** ❌ Sensitive Information Disclosure (LLM02) covers exposing user or training data through unauthorized channels, but it is distinct from LLM08 (which specifically covers exposing system instructions and operational context). The second issue is not a supply chain problem — the agent's components are not compromised; the attacker is actively exploiting a known vulnerability using the agent's own tools.
 
-## Chapter 5 Quiz: Responsible AI: Governance, Compliance, and Accountability { #chapter-5-quiz }
+## Chapter 5 Quiz — Responsible AI: Governance, Compliance, and Accountability { #chapter-5-quiz }
 
 ### Question 5.1
 
@@ -12971,49 +13046,67 @@ advance the five General Course Skills, contributing differentiated module-level
 
 * Anderson, L. W., & Krathwohl, D. R. (Eds.). (2001). A taxonomy for learning, teaching, and assessing: A revision of Bloom's
 Taxonomy of educational objectives. Longman.
+
 * Ausubel, D. P. (1968). Educational psychology: A cognitive view. Holt, Rinehart & Winston.
 * Black, P., & Wiliam, D. (1998). Assessment and classroom learning. Assessment in Education: Principles, Policy & Practice,
 5(1), 7–74. https://doi.org/10.1080/0969595980050102
+
 * Collins, A., Brown, J. S., & Newman, S. E. (1989). Cognitive apprenticeship: Teaching the crafts of reading, writing, and
 mathematics. In L. B. Resnick (Ed.), [Knowing, learning, and instruction: Essays in honor of Robert Glaser (pp. 453–494)](https://apps.dtic.mil/sti/tr/pdf/ADA178530.pdf){target=_blank}. Lawrence Erlbaum Associates.
+
 * Craik, F. I. M., & Lockhart, R. S. (1972). Levels of processing: A framework for memory research. Journal of Verbal Learning
 and Verbal Behavior, 11(6), 671–684. https://doi.org/10.1016/S0022-5371(72)80001-X
+
 * Flavell, J. H. (1979). [Metacognition and cognitive monitoring: A new area of cognitive-developmental inquiry](https://corepractice-linlithgowacademy.co.uk/_documents/%5B1060731%5Dflavell1979MetacognitionAndCogntiveMonitoring.pdf){target=_blank}. American
 Psychologist, 34(10), 906–911. https://doi.org/10.1037/0003-066X.34.10.906
+
 * Floridi, L., Cowls, J., Beltrametti, M., Chatila, R., Chazerand, P., Dignum, V., Lukovits, C., Madelin, R., Pagallo, U., Rossi, F.,
 Schafer, B., Valcke, P., & Vayena, E. (2018). AI4People — An ethical framework for a good AI society: Opportunities, risks,
 principles, and recommendations. Minds and Machines, 28(4), 689–707. https://doi.org/10.1007/s11023-018-9482-5
+
 * Gagne, R. M., Briggs, L. J., & Wager, W. W. (1992). Principles of instructional design (4th ed.). Harcourt Brace Jovanovich.
 * Garrison, D. R., Anderson, T., & Archer, W. (2000). Critical inquiry in a text-based environment: Computer conferencing in
 higher education. The Internet and Higher Education, 2(2–3), 87–105. https://doi.org/10.1016/S1096-7516(00)00016-6
+
 * Kolb, D. A. (1984). Experiential learning: Experience as the source of learning and development. Prentice Hall.
 * Long, D., & Magerko, B. (2020). What is AI literacy? Competencies and design considerations. Proceedings of the 2020 CHI
 Conference on Human Factors in Computing Systems (pp. 1–16). ACM. https://doi.org/10.1145/3313831.3376727
+
 * Mayer, R. E. (2009). Multimedia learning (2nd ed.). Cambridge University Press.
 * Merrill, M. D. (2002). First principles of instruction. Educational Technology Research and Development, 50(3), 43–59.
 https://doi.org/10.1007/BF02505024
+
 * National Institute of Standards and Technology. (2023). AI risk management framework (AI RMF 1.0). U.S. Department of
 Commerce. https://doi.org/10.6028/NIST.AI.100-1
+
 * Ng, D. T. K., Leung, J. K. L., Chu, S. K. W., & Qiao, M. S. (2021). Conceptualizing AI literacy: An exploratory review. Computers
 and Education: Artificial Intelligence, 2, 100041. https://doi.org/10.1016/j.caeai.2021.100041
+
 * Novak, J. D. (1990). Concept mapping: A useful tool for science education. Journal of Research in Science Teaching, 27(10),
 937–949. https://doi.org/10.1002/tea.3660271003
+
 * Roediger, H. L., & Karpicke, J. D. (2006). Test-enhanced learning: Taking memory tests improves long-term retention.
 Psychological Science, 17(3), 249–255. https://doi.org/10.1111/j.1467-9280.2006.01693.x
+
 * Schön, D. A. (1983). The reflective practitioner: How professionals think in action. Basic Books.
 * Swan, K., Garrison, D. R., & Richardson, J. C. (2009). A constructivist approach to online learning: The Community of Inquiry
 framework. In C. R. Payne (Ed.), Information technology and constructivism in higher education: Progressive learning
 frameworks (pp. 43–57). IGI Global.
+
 * Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. Cognitive Science, 12(2), 257–285.
 https://doi.org/10.1207/s15516709cog1202_4
+
 * Sweller, J. (1994). Cognitive load theory, learning difficulty, and instructional design. Learning and Instruction, 4(4), 295–312.
 https://doi.org/10.1016/0959-4752(94)90003-5
+
 * Vygotsky, L. S. (1978). Mind in society: The development of higher psychological processes. Harvard University Press.
 * Wiggins, G., & McTighe, J. (2005). Understanding by design (2nd ed.). ASCD.
 Wing, J. M. (2006). Computational thinking. Communications of the ACM, 49(3), 33–35.
 https://doi.org/10.1145/1118178.1118215
+
 * Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. The Knowledge Engineering Review, 10(2),
 115–152. https://doi.org/10.1017/S0269888900008122
+
 * Zimmerman, B. J. (2002). Becoming a self-regulated learner: An overview. Theory Into Practice, 41(2), 64–70.
 https://doi.org/10.1207/s15430421tip4102_2
 
@@ -13325,6 +13418,7 @@ The course demonstrates strong conceptual scaffolding in its early modules and a
 ### Critical Issue: Overview vs. Content Mismatch
 
 The module title says "No-Code Automation" and the Overview describes building pipelines with Claude Cowork and n8n. The actual Foundational Concepts and Activities teach:
+
 - Four reasoning paradigms (CoT, ReAct, ToT, LATS)
 - AgentExecutor architecture in LangChain
 - Prompt engineering for agent control
@@ -13386,11 +13480,13 @@ The content itself marks AgentExecutor as LEGACY within LangChain. Teaching stud
 ### Critical Issue: Overview vs. Content Mismatch (Again)
 
 The Overview promises:
+
 - Model Context Protocol (MCP) for desktop extensions
 - Web connectors and integrations
 - Building a Research Assistant Workflow with Claude Cowork
 
 The actual content delivers:
+
 - RAG pipeline architecture (six stages)
 - Vector database concepts and chunking strategies
 - Four LangChain memory types (ConversationBuffer, Summary, WindowBuffer, EntityMemory)
@@ -13475,6 +13571,7 @@ MCP receives at most a passing mention in the actual lesson content. A student w
 ### Critical Issue: Missing Track A (Claude Code)
 
 The Overview describes a dual-track approach:
+
 - **Track A:** Claude Code for multi-agent orchestration
 - **Track B:** Open-source frameworks (LangGraph, CrewAI)
 
@@ -13555,6 +13652,7 @@ This is the third consecutive module (2, 3, 4) where the Overview promises conte
 ### Critical Issue: Technical Complexity Mismatch with Audience
 
 Module 5 covers:
+
 - Docker containerization and Kubernetes orchestration
 - API gateway patterns and autoscaling
 - LangSmith and LangFuse observability platforms
@@ -13662,6 +13760,7 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 **Root Cause Hypothesis:** The course was initially designed around Anthropic's tool ecosystem (Cowork, Claude Code, MCP) for a non-technical audience, then pivoted to open-source frameworks (LangChain/LangGraph) for technical depth, but the Overviews were never updated to reflect the pivot.
 
 **Recommendation:** Conduct a systematic Overview rewrite for Modules 2-4. Each Overview should accurately describe:
+
 - What students will learn (concepts)
 - What students will build (activities)
 - What tools they will use (technologies)
@@ -13674,6 +13773,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 **The stated promise:** No prior programming experience required for Modules 1-3; guided notebooks for Modules 4-5.
 
 **The reality:**
+
 - Module 1: No programming. Promise kept.
 - Module 2: Python/LangChain in Colab. Promise broken.
 - Module 3: RAG pipeline implementation in Python. Promise broken.
@@ -13681,6 +13781,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 - Module 5: LangSmith instrumentation, CI/CD pipelines. Deep technical engagement.
 
 **Recommendation:** Either:
+
 - **(Option A) Acknowledge the escalation honestly.** State upfront: "This course uses Python in Google Colab starting in Module 2. You will read and modify code, not write it from scratch. No prior experience is required, but comfort with structured text and logical thinking is essential." Add a 30-minute "Colab + Python Reading" orientation before Module 2.
 - **(Option B) Create genuine no-code tracks.** For Modules 2-4, offer a Claude Cowork/Claude Code track that achieves the same conceptual learning objectives without Python. This is more work but honors the accessibility promise.
 
@@ -13689,6 +13790,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 **Target ratio:** 60% doing / 25% reading / 15% writing
 
 **Approximate actual ratios for Modules 3-5:**
+
 - Module 3: 35% doing / 30% reading / 35% writing
 - Module 4: 35% doing / 25% reading / 40% writing
 - Module 5: 25% doing / 30% reading / 45% writing
@@ -13696,6 +13798,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 The writing load escalates precisely as technical complexity increases, creating a compounding difficulty problem.
 
 **Recommendation:** Apply a "one major deliverable per module" rule for Modules 3-5:
+
 - Module 3: Memory Architecture Specification Brief (merge RAGAS interpretation into lab reflection)
 - Module 4: Multi-Agent System Analysis Report (merge failure diagnosis and comparative evaluation)
 - Module 5: Comprehensive Capstone Proposal (merge evaluation and governance into capstone sections)
@@ -13707,6 +13810,7 @@ Each module retains one substantial written deliverable plus lightweight lab ref
 **Stated budget:** 8 hours per module
 
 **Estimated realistic time for target audience (non-CS graduate students):**
+
 - Module 1: 8-9 hours (acceptable)
 - Module 2: 9-10 hours (slightly over)
 - Module 3: 8.5-11 hours (problematic)
@@ -13716,6 +13820,7 @@ Each module retains one substantial written deliverable plus lightweight lab ref
 **Total course as designed:** 52-60 hours for non-CS students vs. 40 hours stated.
 
 **Recommendation:** The cuts recommended in each module section above should bring totals closer to budget:
+
 - Module 3: Reduce to ~8-9 hrs (consolidate deliverables, simplify unit structure)
 - Module 4: Reduce to ~9-10 hrs (provide pre-built alternatives, consolidate deliverables, add Track A)
 - Module 5: Reduce to ~9-10 hrs (eliminate infrastructure hands-on, simplify CI/CD, expand capstone time)
@@ -13729,6 +13834,7 @@ Accept that Modules 4-5 will run slightly over 8 hours for non-CS students. This
 **Modules 3-5 design:** "Discussion posts" that are actually architecture brief presentations requiring peer review of technical specifications. These are not discussions — they are mini-deliverables dressed as discussions.
 
 **Recommendation:** Decide what discussions are FOR in this course:
+
 - **(Option A) Community building and reflection.** Keep them short (200 words), focused on experience sharing ("What surprised you about RAG evaluation?"), and separate from graded technical work.
 - **(Option B) Peer review of technical work.** Rename them "Peer Review Exchanges," allocate appropriate time (45-60 min rather than 30 min), and grade on review quality rather than post quality.
 
@@ -13741,6 +13847,7 @@ The course references these tools: Ollama, Openwork, Claude Cowork, Claude Code,
 **That is 16 distinct tools/platforms across 5 modules.** For non-CS students, each new tool carries onboarding overhead (account creation, UI learning, troubleshooting). The cognitive load of tool-switching may exceed the cognitive load of the actual content.
 
 **Recommendation:** Establish a "core tool stack" and an "extended tool stack":
+
 - **Core (all students):** Ollama, Claude Cowork, Google Colab, LangSmith
 - **Extended (CS-background students):** LangChain, LangGraph, CrewAI, Docker, RAGAS
 - **Reference only (conceptual understanding):** Kubernetes, OpenTelemetry, HELM, AutoGen, LangFuse, n8n
@@ -14404,6 +14511,7 @@ wiki_page: Module-1-Act-8:-Module-1-Concept-Quiz
 A 15-question auto-graded quiz with two attempts permitted, with the best score recorded. 
 
 Question types include: 
+
 - six multiple-choice definitions, 
 - four sequencing questions requiring correct ordering of the agent loop stages and the automation paradigm spectrum, 
 - three scenario-classification questions, 
@@ -14658,10 +14766,13 @@ and refining the workflows you identify here. Begin it thoughtfully.
 * Identifying automation candidates: high-repetition, rule-based, and time-consuming tasks
 * Overview of the automation landscape: no-code (n8n, Cowork), low-code (LangChain), and code-first
 (custom Python agents)
+
 * Introduction to key open-source frameworks: LangChain, LangGraph, CrewAI, Ollama — what each does
 and when to use it
+
 * What agents can and cannot do: setting realistic expectations and avoiding common over-automation
 mistakes
+
 * Introduction to the Claude Desktop app: Chat, Cowork, and Code tabs explained
 * Key vocabulary: agent, pipeline, trigger, tool call, MCP, RAG, sandbox, orchestration, and 15+ additional
 terms
@@ -15013,7 +15124,7 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 ## 2026-09-08
 
 * **Initialization**: Created this site as an [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md){target=_blank} knowledge bundle built with [Zensical](https://zensical.org){target=_blank}, following the pattern of the [UNM CARC documentation](https://carc.unm.edu/docs/){target=_blank}. Every content page carries frontmatter with `type`, provenance (`generated`, `sources`, `authorship`) and lifecycle (`status`, `stale_after`); section `index.md` files are directory listings; this file is the dated change log.
-* **Migration**: Migrated the 42 pages of the [AI Automation and Agents v2 GitHub wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki){target=_blank} (commit `fcc9835d10d3`) with `scripts/migrate_wiki.py`: 37 wiki files became 43 site pages (the five "Addendum" pages were each split into a reading-guides page and a chapter-quizzes page). Raw HTML heroes became responsive images, GitHub alerts and one-column callout tables became admonitions, exposed answer keys became collapsed `??? success` blocks, letter and roman heading prefixes were removed, wiki links were rewritten to relative site links, and each page's `Created/Updated` footer moved into the frontmatter. Every migrated page is **unverified** pending instructor review; see the [wiki-to-site crosswalk](about/wiki-crosswalk.md) for the full mapping.
+* **Migration**: Migrated the 42 pages of the [AI Automation and Agents v2 GitHub wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki){target=_blank} (commit `fcc9835d10d3`) with `scripts/migrate_wiki.py`: 38 wiki files became 43 site pages (the five "Addendum" pages were each split into a reading-guides page and a chapter-quizzes page). Raw HTML heroes became responsive images, GitHub alerts and one-column callout tables became admonitions, exposed answer keys became collapsed `??? success` blocks, letter and roman heading prefixes were removed, wiki links were rewritten to relative site links, and each page's `Created/Updated` footer moved into the frontmatter. Every migrated page is **unverified** pending instructor review; see the [wiki-to-site crosswalk](about/wiki-crosswalk.md) for the full mapping.
 * **Creation**: Wrote the landing page, [Start here](start-here/index.md) (how the course works, syllabus, labs and notebooks), the [Module 1 concept quiz](modules/module-1/concept-quiz.md) and [diagnostic survey](modules/module-1/diagnostic-survey.md) pages that embed the interactive HTML activities, the [instructor materials](course-design/instructor-materials.md) page, and the [About](about/index.md) section (license and attribution, contributing, for AI agents, crosswalk). Rendered the four learner lab notebooks as read-only pages with Open-in-Colab buttons (`scripts/render_notebooks.py`).
 * **Creation**: Added the machine-readable surface: `llms.txt` and `llms-full.txt`, a Markdown mirror of every page at its URL plus `index.md`, `okf:*` meta tags, and `robots.txt` (`scripts/gen_llms_txt.py`, `scripts/postbuild_agent_surface.py`). Course images referenced by pages were copied into `docs/assets/images/` downscaled to at most 1600 px wide (`scripts/optimize_images.py`); originals stay in `images/`.
 * **Deprecation**: Moved superseded wiki pages to the [archive](archive/index.md) with `status: deprecated` and a pointer to the live page: the June 2026 Module 1 overview draft, the two early Module 1 lab checklists (Claude Desktop, Ollama), the Module 1 concept-quiz specification stub, the guided workflow-mapping stub, and the retired Module 2 self-assessment quizzes. The [July 2026 course review](course-design/course-review-2026-07.md) is kept under Course design as a historical document.

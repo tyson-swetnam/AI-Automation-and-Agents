@@ -29,7 +29,7 @@ Rules (E = error, fails the run; W = warning):
        not indented 4+ spaces inside a `???` collapsible
   Links (Markdown links/images, reference definitions, raw HTML src=/href=)
     E  relative target does not resolve under docs/ (Markdown targets resolve
-       against the source file, raw HTML against the rendered directory URL)
+       against the source file; Zensical rewrites raw HTML the same way)
     E  #fragment matches neither a heading slug (Python-Markdown toc slugify,
        `_1` suffixes for duplicates) nor a pinned `{ #id }` on the target
     E  target under instructor/ or otherwise outside docs/
@@ -572,8 +572,12 @@ def check_body(page: Page, report: Report) -> None:
 
 def check_links(page: Page, pages: dict[Path, Page], docs: Path, report: Report) -> None:
     source_dir = page.path.parent
-    # use_directory_urls: a/b.md renders at a/b/index.html, so raw HTML resolves from a/b/.
-    rendered_dir = source_dir if page.is_index else page.path.with_suffix("")
+    # Zensical rewrites raw-HTML src=/href= paths the same way it rewrites Markdown links:
+    # they are authored relative to the SOURCE file and re-emitted relative to the rendered
+    # directory URL (verified: src="../../materials/x" in docs/modules/module-1/concept-quiz.md
+    # ships as src="../../../materials/x" at /modules/module-1/concept-quiz/). A path that does
+    # not resolve under docs/ is passed through untouched and will almost certainly 404.
+    rendered_dir = source_dir
     for lineno, raw, in_code in iter_fenced_aware_lines(page.body, page.offset):
         if in_code:
             continue

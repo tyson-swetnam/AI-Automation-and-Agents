@@ -526,7 +526,7 @@ A customer-facing chatbot powered by an LLM discloses its full system prompt —
 
     **D** ❌ Sensitive Information Disclosure (LLM02) covers exposing user or training data through unauthorized channels, but it is distinct from LLM08 (which specifically covers exposing system instructions and operational context). The second issue is not a supply chain problem — the agent's components are not compromised; the attacker is actively exploiting a known vulnerability using the agent's own tools.
 
-## Chapter 5 Quiz: Responsible AI: Governance, Compliance, and Accountability { #chapter-5-quiz }
+## Chapter 5 Quiz — Responsible AI: Governance, Compliance, and Accountability { #chapter-5-quiz }
 
 ### Question 5.1
 

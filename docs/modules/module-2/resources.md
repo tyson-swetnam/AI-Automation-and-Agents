@@ -77,6 +77,7 @@ The main difference between the two is how they explore solutions: ReAct follows
 The Belief-Desire-Intention (BDI) architecture is a classic model that describes an agent's decision-making process using human-like mental states. 
 
 Here is how the three parts break down, especially in the context of modern AI:
+
 *   **Beliefs:** What the agent "knows" about its environment, which includes its pre-trained knowledge and any real-time data it retrieves.
 *   **Desires:** The end goals the agent wants to achieve, which typically map directly to the overarching objective or user prompt.
 *   **Intentions:** The specific plans and action sequences (like tool calls) the agent actively commits to executing to fulfill its desires.
@@ -86,6 +87,7 @@ Here is how the three parts break down, especially in the context of modern AI:
 In LangChain, the ReAct loop is practically managed by a runtime component called the `AgentExecutor`. 
 
 Here is how it physically orchestrates the ReAct loop:
+
 *   **Thought & Action:** The LLM analyzes the user's prompt and decides it needs external information. It outputs a reasoning trace (the "thought") and requests a specific tool call (the "action").
 *   **Execution:** The `AgentExecutor` steps in, physically runs the requested tool (like a web search API or custom Python function), and captures the result.
 *   **Observation:** The executor feeds this result (the "observation") back into the LLM's context window so the model can read it.
@@ -130,6 +132,7 @@ Here is a breakdown of the functional components in a tool-calling agent:
 *   **Memory Module:** The system that tracks past conversation history, tool outputs, and observations to maintain context across the interaction.
 
 During a single task episode, the information flows in this sequence:
+
 1.  The user's input is combined with past context from the **Memory Module** and sent to the **LLM Backbone**.
 2.  The LLM analyzes the request alongside the available capabilities in the **Tool Registry**. It decides a tool is needed and outputs a structured tool request.
 3.  The **Action Executor** intercepts this request, physically runs the specified tool, and retrieves the result.

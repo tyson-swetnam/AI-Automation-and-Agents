@@ -38,6 +38,7 @@ These guides structure your engagement with the assigned readings. For each guid
 ## Reading Guide 1 — Chapter 1: The Four Agent Reasoning Paradigms { #reading-guide-1 }
 
 **Assigned Readings:**
+
 - Reading 1: Wei, J., et al. (2022). *Chain-of-thought prompting elicits reasoning in large language models.* NeurIPS 2022. Read: Abstract + Section 2 + Figure 1.
 - Reading 2: Yao, S., et al. (2022). *ReAct: Synergizing reasoning and acting in language models.* ICLR 2023. Read: Sections 1–2.
 - Reading 3: Yao, S., et al. (2023). *Tree of thoughts: Deliberate problem solving with large language models.* NeurIPS 2023. Read: Sections 1–2.
@@ -119,6 +120,7 @@ Construct a four-row reference table in your notes with columns: **Paradigm | Ex
 ## Reading Guide 2 — Chapter 2: Tool Integration Architecture { #reading-guide-2 }
 
 **Assigned Reading:**
+
 - Reading 5: LangChain Documentation — *AgentExecutor Conceptual Guide and Tool Creation Reference.* Read the complete AgentExecutor Conceptual Guide. Focus: tool registry role, tool description use for tool selection, output parser conversion of LLM text to structured tool calls.
 - Video 2: Sam Witteveen — *"Understanding ReACT with LangChain"* (~22 min). Watch focus: conceptual distinction between CoT and ReAct; the observation integration step.
 
@@ -175,6 +177,7 @@ Write a complete tool description for a hypothetical "company database lookup" t
 ## Reading Guide 3 — Chapter 3: Reasoning Trace Interpretation and Critique { #reading-guide-3 }
 
 **Sources (no new numbered reading assigned — draws on previously assigned readings and lesson content):**
+
 - Yao, S., et al. (2022). ReAct. Sections 1–2 (already read in Guide 1B).
 - LangChain AgentExecutor verbose output (from Lab Exercise Step 1).
 - Zhou, A., et al. (2023). LATS. Section 1 (accessible from Chapter 1 lesson).
@@ -238,6 +241,7 @@ Final Answer: Brazil's GDP is $2.08 trillion and its inflation rate is 4.6%.
 ## Reading Guide 4 — Chapter 4: Prompt Engineering for Agent Behavioral Control { #reading-guide-4 }
 
 **Assigned Reading:**
+
 - Reading 7: Liu, P., et al. (2023). *Pre-train, prompt, and predict: A systematic survey of prompting methods in NLP.* ACM Computing Surveys, 55(9). Read: Section 3 (A Formal Description of Prompting) + Section 4 (Prompt Engineering). Focus: four-component prompt architecture and cross-mapping to AgentExecutor components.
 
 *(Reference readings: Brown et al. 2020, Wei et al. 2022 — revisit as needed for few-shot context; LangChain AgentExecutor system prompt design.)*
@@ -304,6 +308,7 @@ Verify that every cell is filled from Liu et al.'s text and the lesson content �
 ## Reading Guide 5 — Chapter 5: Architectural Trade-off Assessment for Production Deployment { #reading-guide-5 }
 
 **Sources (no new numbered reading assigned — draws on lesson content + prior readings and EU AI Act reference):**
+
 - Chapter 5 lesson: Six-Dimensions Trade-Off Assessment framework + EU AI Act (2024) Article 13.
 - Synthesize from all four prior paradigm readings (Wei et al. 2022, Yao et al. 2022 — ReAct, Yao et al. 2023 — ToT, Zhou et al. 2023 — LATS) and the four-paradigm comparative table from Chapter 1.
 

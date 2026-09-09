@@ -120,6 +120,7 @@ Vendor-neutral instrumentation. Instrument once, route to any backend. Understan
 **What to Monitor**
 
 Six signals that indicate production problems:
+
 1. Error rate spike
 2. Token cost anomaly (often runaway loops or unbounded context)
 3. Retrieval quality degradation
@@ -147,6 +148,7 @@ Six signals that indicate production problems:
 These are the ten most critical risks for any LLM-powered system. For each, know the risk name, what it means in plain terms, and one example of how it applies to an agent:
 
 Key entries to internalize:
+
 - **LLM01 Prompt Injection:** Input alters the model's behavior in unintended ways
 - **LLM02 Sensitive Information Disclosure:** System exposes data through unauthorized channels
 - **LLM03 Excessive Agency:** Agent has too much functionality, too many permissions, or too much autonomy
@@ -157,6 +159,7 @@ Key entries to internalize:
 These extend the LLM Top 10 to autonomous agents. The Agentic list focuses on how autonomy, delegation, and multi-step execution amplify risks:
 
 Key entries to internalize:
+
 - **ASI01 Agent Goal Hijack:** Attacker redirects what the agent is trying to do
 - **ASI06 Memory & Context Poisoning:** False data planted in memory corrupts future reasoning
 - **ASI07 Insecure Inter-Agent Communication:** Messages between agents lack authentication
@@ -170,7 +173,7 @@ Key entries to internalize:
 
 **Task B:** For each of the following scenarios, identify which Agentic Top 10 entry applies: (1) An attacker poisons a shared memory store so a downstream agent makes biased decisions. (2) Agent A sends a forged message to Agent B, and Agent B acts on it without verifying the source. (3) A malicious MCP server is loaded at runtime.
 
-## Chapter 5 Reading Guide: Responsible AI: Governance, Compliance, and Accountability { #reading-guide-5 }
+## Chapter 5 Reading Guide — Responsible AI: Governance, Compliance, and Accountability { #reading-guide-5 }
 
 **Assigned Video:** [AI Governance and the EU AI Act: What Developers Need to Know](https://www.youtube.com/watch?v=GELAXU9XReI){target=_blank} (~15 minutes)
 **Estimated time:** 25 minutes (chapter) + 15 minutes (video)
@@ -193,6 +196,7 @@ The chapter illustrates all four using a claims-processing agent example. Unders
 **EU AI Act: Four-Tier Classification**
 
 Know the four tiers (Unacceptable, High Risk, Limited Risk, Minimal Risk), what compliance obligations each carries, and one agent example per tier. Key points:
+
 - Classification depends on deployment context, not architecture
 - The same agent could be minimal or high risk depending on what decisions it informs
 - Non-compliance with high-risk obligations carries fines up to 3% of global annual revenue

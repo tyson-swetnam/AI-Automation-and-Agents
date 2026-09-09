@@ -22,7 +22,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb"
     title: "Module-3-Lab.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 3 Lab: Building a RAG Pipeline with LangChain + Chroma

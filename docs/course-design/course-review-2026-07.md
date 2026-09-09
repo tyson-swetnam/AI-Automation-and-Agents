@@ -85,6 +85,7 @@ The course demonstrates strong conceptual scaffolding in its early modules and a
 ### Critical Issue: Overview vs. Content Mismatch
 
 The module title says "No-Code Automation" and the Overview describes building pipelines with Claude Cowork and n8n. The actual Foundational Concepts and Activities teach:
+
 - Four reasoning paradigms (CoT, ReAct, ToT, LATS)
 - AgentExecutor architecture in LangChain
 - Prompt engineering for agent control
@@ -146,11 +147,13 @@ The content itself marks AgentExecutor as LEGACY within LangChain. Teaching stud
 ### Critical Issue: Overview vs. Content Mismatch (Again)
 
 The Overview promises:
+
 - Model Context Protocol (MCP) for desktop extensions
 - Web connectors and integrations
 - Building a Research Assistant Workflow with Claude Cowork
 
 The actual content delivers:
+
 - RAG pipeline architecture (six stages)
 - Vector database concepts and chunking strategies
 - Four LangChain memory types (ConversationBuffer, Summary, WindowBuffer, EntityMemory)
@@ -235,6 +238,7 @@ MCP receives at most a passing mention in the actual lesson content. A student w
 ### Critical Issue: Missing Track A (Claude Code)
 
 The Overview describes a dual-track approach:
+
 - **Track A:** Claude Code for multi-agent orchestration
 - **Track B:** Open-source frameworks (LangGraph, CrewAI)
 
@@ -315,6 +319,7 @@ This is the third consecutive module (2, 3, 4) where the Overview promises conte
 ### Critical Issue: Technical Complexity Mismatch with Audience
 
 Module 5 covers:
+
 - Docker containerization and Kubernetes orchestration
 - API gateway patterns and autoscaling
 - LangSmith and LangFuse observability platforms
@@ -422,6 +427,7 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 **Root Cause Hypothesis:** The course was initially designed around Anthropic's tool ecosystem (Cowork, Claude Code, MCP) for a non-technical audience, then pivoted to open-source frameworks (LangChain/LangGraph) for technical depth, but the Overviews were never updated to reflect the pivot.
 
 **Recommendation:** Conduct a systematic Overview rewrite for Modules 2-4. Each Overview should accurately describe:
+
 - What students will learn (concepts)
 - What students will build (activities)
 - What tools they will use (technologies)
@@ -434,6 +440,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 **The stated promise:** No prior programming experience required for Modules 1-3; guided notebooks for Modules 4-5.
 
 **The reality:**
+
 - Module 1: No programming. Promise kept.
 - Module 2: Python/LangChain in Colab. Promise broken.
 - Module 3: RAG pipeline implementation in Python. Promise broken.
@@ -441,6 +448,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 - Module 5: LangSmith instrumentation, CI/CD pipelines. Deep technical engagement.
 
 **Recommendation:** Either:
+
 - **(Option A) Acknowledge the escalation honestly.** State upfront: "This course uses Python in Google Colab starting in Module 2. You will read and modify code, not write it from scratch. No prior experience is required, but comfort with structured text and logical thinking is essential." Add a 30-minute "Colab + Python Reading" orientation before Module 2.
 - **(Option B) Create genuine no-code tracks.** For Modules 2-4, offer a Claude Cowork/Claude Code track that achieves the same conceptual learning objectives without Python. This is more work but honors the accessibility promise.
 
@@ -449,6 +457,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 **Target ratio:** 60% doing / 25% reading / 15% writing
 
 **Approximate actual ratios for Modules 3-5:**
+
 - Module 3: 35% doing / 30% reading / 35% writing
 - Module 4: 35% doing / 25% reading / 40% writing
 - Module 5: 25% doing / 30% reading / 45% writing
@@ -456,6 +465,7 @@ The Overviews should be written LAST, after content is finalized, to ensure alig
 The writing load escalates precisely as technical complexity increases, creating a compounding difficulty problem.
 
 **Recommendation:** Apply a "one major deliverable per module" rule for Modules 3-5:
+
 - Module 3: Memory Architecture Specification Brief (merge RAGAS interpretation into lab reflection)
 - Module 4: Multi-Agent System Analysis Report (merge failure diagnosis and comparative evaluation)
 - Module 5: Comprehensive Capstone Proposal (merge evaluation and governance into capstone sections)
@@ -467,6 +477,7 @@ Each module retains one substantial written deliverable plus lightweight lab ref
 **Stated budget:** 8 hours per module
 
 **Estimated realistic time for target audience (non-CS graduate students):**
+
 - Module 1: 8-9 hours (acceptable)
 - Module 2: 9-10 hours (slightly over)
 - Module 3: 8.5-11 hours (problematic)
@@ -476,6 +487,7 @@ Each module retains one substantial written deliverable plus lightweight lab ref
 **Total course as designed:** 52-60 hours for non-CS students vs. 40 hours stated.
 
 **Recommendation:** The cuts recommended in each module section above should bring totals closer to budget:
+
 - Module 3: Reduce to ~8-9 hrs (consolidate deliverables, simplify unit structure)
 - Module 4: Reduce to ~9-10 hrs (provide pre-built alternatives, consolidate deliverables, add Track A)
 - Module 5: Reduce to ~9-10 hrs (eliminate infrastructure hands-on, simplify CI/CD, expand capstone time)
@@ -489,6 +501,7 @@ Accept that Modules 4-5 will run slightly over 8 hours for non-CS students. This
 **Modules 3-5 design:** "Discussion posts" that are actually architecture brief presentations requiring peer review of technical specifications. These are not discussions — they are mini-deliverables dressed as discussions.
 
 **Recommendation:** Decide what discussions are FOR in this course:
+
 - **(Option A) Community building and reflection.** Keep them short (200 words), focused on experience sharing ("What surprised you about RAG evaluation?"), and separate from graded technical work.
 - **(Option B) Peer review of technical work.** Rename them "Peer Review Exchanges," allocate appropriate time (45-60 min rather than 30 min), and grade on review quality rather than post quality.
 
@@ -501,6 +514,7 @@ The course references these tools: Ollama, Openwork, Claude Cowork, Claude Code,
 **That is 16 distinct tools/platforms across 5 modules.** For non-CS students, each new tool carries onboarding overhead (account creation, UI learning, troubleshooting). The cognitive load of tool-switching may exceed the cognitive load of the actual content.
 
 **Recommendation:** Establish a "core tool stack" and an "extended tool stack":
+
 - **Core (all students):** Ollama, Claude Cowork, Google Colab, LangSmith
 - **Extended (CS-background students):** LangChain, LangGraph, CrewAI, Docker, RAGAS
 - **Reference only (conceptual understanding):** Kubernetes, OpenTelemetry, HELM, AutoGen, LangFuse, n8n

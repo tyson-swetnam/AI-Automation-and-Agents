@@ -50,6 +50,7 @@ This module covers the design, implementation, and evaluation of memory architec
 ## Topics Covered
 
 *Estimated time: ~2 min*
+
 * **Parametric vs. non-parametric memory** — the foundational distinction between what a model knows from training and what it retrieves at runtime
 * **Six-stage RAG pipeline** — document ingestion, text splitting, embedding, vector indexing, retrieval, and augmented generation as a structured engineering discipline
 * **LangChain conversational memory types** — four memory architectures with distinct cost-fidelity trade-offs
@@ -64,6 +65,7 @@ This module covers the design, implementation, and evaluation of memory architec
 - Explain the stages of a Retrieval-Augmented Generation (RAG) pipeline.
 - Compare LangChain conversational memory types across key implementation
 criteria.
+
 - Implement an end-to-end RAG pipeline using LangChain.
 - Configure a conversational agent with persistent memory.
 - Evaluate RAG system failures and recommend remediation strategies.

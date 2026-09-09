@@ -68,10 +68,13 @@ and refining the workflows you identify here. Begin it thoughtfully.
 * Identifying automation candidates: high-repetition, rule-based, and time-consuming tasks
 * Overview of the automation landscape: no-code (n8n, Cowork), low-code (LangChain), and code-first
 (custom Python agents)
+
 * Introduction to key open-source frameworks: LangChain, LangGraph, CrewAI, Ollama — what each does
 and when to use it
+
 * What agents can and cannot do: setting realistic expectations and avoiding common over-automation
 mistakes
+
 * Introduction to the Claude Desktop app: Chat, Cowork, and Code tabs explained
 * Key vocabulary: agent, pipeline, trigger, tool call, MCP, RAG, sandbox, orchestration, and 15+ additional
 terms

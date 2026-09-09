@@ -35,6 +35,7 @@ wiki_page: Module-1-Act-8:-Module-1-Concept-Quiz
 A 15-question auto-graded quiz with two attempts permitted, with the best score recorded. 
 
 Question types include: 
+
 - six multiple-choice definitions, 
 - four sequencing questions requiring correct ordering of the agent loop stages and the automation paradigm spectrum, 
 - three scenario-classification questions, 

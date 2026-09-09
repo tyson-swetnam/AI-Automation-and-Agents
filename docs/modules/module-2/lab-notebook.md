@@ -21,7 +21,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb"
     title: "Module-2-Guided-Lab-Notebook.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 2 Lab: Building a Multi-Tool ReAct Agent
@@ -52,6 +51,7 @@ sources:
 ### How this notebook is structured
 
 There are four steps. Each step has:
+
 - **Pre-written code** — run it as-is to understand what's happening
 - **Extension zones** — marked `# STUDENT EXTENSION POINT` — where you add or modify code
 - **A self-check** at the end to verify your output before moving on
@@ -225,6 +225,7 @@ Scroll through the output above. You should see **all five of these labels** in 
 | `Final Answer:` | The model's response to the original question |
 
 **If any label is missing:** The agent is not running the ReAct pattern correctly. Common causes:
+
 - Missing or invalid API key → re-check the key in Section 1A
 - `Final Answer` appears immediately without searching → the system prompt text `'Always search for current information before making factual claims'` must be present — verify it above
 - DuckDuckGo returns an error → wait 30 seconds and re-run (free tier has rate limits)
@@ -236,6 +237,7 @@ Scroll through the output above. You should see **all five of these labels** in 
 **Heading:** `Step 1 — Single-Tool Agent`
 
 Answer these four questions:
+
 1. **Thought (first step):** Copy the exact text of the first `Thought:` in the trace
 2. **Tool invoked:** Which tool was called?
 3. **Observation summary:** What did the search return? (1–2 sentences)
@@ -350,6 +352,7 @@ Create a table with the following structure (one row per prompt):
 | C | ... | ... | Yes / No |
 
 Then add one more entry:
+
 - **Action 8 result:** Did changing the REPL description to `'Use for advanced tasks'` change which tool was selected for Prompt A? Why or why not?
 
 ---
@@ -357,6 +360,7 @@ Then add one more entry:
 **Time:** ~30 minutes
 
 Production agents must fail gracefully. In this step you will:
+
 1. Trigger a real tool failure and observe the raw (unhandled) behavior
 2. Implement an error handling wrapper that returns a structured error message instead of a Python traceback
 3. Confirm the agent now responds usefully instead of crashing or hallucinating
@@ -446,6 +450,7 @@ If a traceback still appears: the wrapper is not being applied. Check that `tool
 **Heading:** `Step 3 — Error Handling`
 
 Record the following:
+
 - **(a) Before the wrapper:** What did the agent do when the tool failed? (Looped? Hallucinated? Produced a traceback in Final Answer?)
 - **(b) After the wrapper:** How did the agent's behavior change? What appeared in the `Observation`?
 - **(c) User utility assessment:** Was the graceful degradation response useful to a hypothetical end user? Why or why not? (2–3 sentences)
@@ -455,6 +460,7 @@ Record the following:
 **Time:** ~20 minutes
 
 System instructions and few-shot examples are the primary controls for agent behavior. In this step you will:
+
 1. Add an **output format constraint** to the system instruction and observe the change
 2. Add a **few-shot demonstration** to the prompt and assess whether the agent mimics it
 
@@ -592,6 +598,7 @@ print(result_fewshot["output"])
 **Heading:** `Step 4 — Prompt Engineering`
 
 Record the following:
+
 - **(a) Format constraint text:** Copy the exact text of your output format constraint
 - **(b) Before/after comparison:** Quote the Final Answer from Step 2 (Prompt A, no constraint) and the Final Answer from Action 14 (Prompt A, with constraint). How did the structure change?
 - **(c) Few-shot influence:** Did the agent's reasoning trace in Action 15 mimic your demonstration's format? Cite specific evidence from the trace.
@@ -607,6 +614,7 @@ Before submitting, confirm all four checks:
 - [ ] Step 4 shows a before/after comparison of Final Answer format
 
 **Submit to GitHub:**
+
 - File: `Module2_Unit3_Lab_[YourName].ipynb`
 - All cells must be executed with visible output
 
@@ -624,6 +632,7 @@ AGENT_INSTRUCTION_LOG = """
 === AGENT INSTRUCTION LOG ===
 
 --- Step 1 — Single-Tool Agent ---
+
 1. First Thought:
 2. Tool invoked:
 3. Observation summary:

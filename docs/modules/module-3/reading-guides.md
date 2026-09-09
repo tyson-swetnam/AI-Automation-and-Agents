@@ -36,6 +36,7 @@ These reading guides accompany the assigned sources for each chapter of Module 3
 ## Reading Guide 1 — Chapter 1: Parametric vs. Non-Parametric Memory { #reading-guide-1 }
 
 **Sources covered:**
+
 - Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *NeurIPS 2020*. *(Abstract + Sections 1–2)*
 - Bommasani, R., et al. (2021). On the opportunities and risks of foundation models. *arXiv:2108.07258*. *(Section 2.1 only)*
 - Video 1: "What is Retrieval-Augmented Generation (RAG)?" — IBM Technology (~6 min)
@@ -104,6 +105,7 @@ This distinction — parametric vs. non-parametric memory — is the conceptual 
 ## Reading Guide 2 — Chapter 2: The Six-Stage RAG Pipeline — Architecture, Design Decisions, and Downstream Consequences { #reading-guide-2 }
 
 **Sources covered:**
+
 - Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *NeurIPS 2020*. *(Re-read: focus on the two-component architecture)*
 - Gao, Y., et al. (2023). Retrieval-augmented generation for large language models: A survey. *arXiv:2312.10997*. *(Sections 1–3)*
 - LangChain Documentation: Document Loaders, Text Splitters, Vector Stores, RetrievalQA
@@ -205,22 +207,26 @@ Each conversation gets a unique `session_id`, so one chain can serve many concur
 Each pattern trades off token cost against context fidelity:
 
 **Buffer**
+
 - Stores every message verbatim.
 - Token cost grows linearly with each turn.
 - Best for: short conversations (&lt;10 turns) where complete fidelity matters (e.g., medical record review, compliance dialogue).
 
 **Window**
+
 - Keeps only the last *k* turns; drops older messages.
 - Token cost is stable once the window is full.
 - Best for: customer support, coding assistants — where recent context matters most and early turns can be dropped.
 
 **Summary**
+
 - Uses an LLM to compress older messages into a running summary; keeps recent messages verbatim.
 - Token cost is low and stable.
 - Risk: *semantic drift* — specific details (names, numbers, exact phrasing) may not survive summarization.
 - Best for: extended multi-session discussions where key decisions must persist but exact wording doesn't.
 
 **Hybrid (Summary + Buffer)**
+
 - Rolling summary of older turns + verbatim buffer of recent turns.
 - Token cost is low to moderate.
 - Best for: long, dense conversations (debugging, iterative drafting) needing both recency and long-range context.
@@ -261,6 +267,7 @@ For Buffer and Summary: sketch the token-count curve (y-axis: tokens in context;
 
 **Task C — Scenario Classification**
 For each scenario, identify the best memory pattern and write a one-sentence justification:
+
 1. A legal assistant that must recall exact clause language from turn 3 in a 7-turn session.
 2. A customer support bot handling 10,000 simultaneous sessions of ~15 turns each.
 3. A debugging assistant with 40+ turn sessions where the user references decisions from 25 turns ago.
@@ -293,6 +300,7 @@ In two sentences, explain how `RunnableWithMessageHistory` makes a stateless LLM
 ## Reading Guide 4 — Chapter 4: Retrieval Optimization and Context Window Management { #reading-guide-4 }
 
 **Sources covered:**
+
 - Gao, Y., et al. (2023). Retrieval-augmented generation for large language models: A survey. *arXiv:2312.10997*. *(Section 5 — Advanced RAG patterns)*
 - LangChain Expression Language (LCEL) Documentation
 - Es, S., et al. (2024). RAGAS: Automated evaluation of retrieval augmented generation. *EACL 2024*. *(Background — for optimization feedback loops)*
@@ -352,6 +360,7 @@ A Naive RAG pipeline makes two implicit assumptions that often fail in practice:
 ## Reading Guide 5 — Chapter 5: RAGAS Evaluation — From Subjective Impression to Structured, Reproducible Diagnosis { #reading-guide-5 }
 
 **Sources covered:**
+
 - Es, S., James, J., Anke, L. E., & Schockaert, S. (2024). RAGAS: Automated evaluation of retrieval augmented generation. *EACL 2024*. *(Abstract + Sections 1–2)*
 - Gao, Y., et al. (2023). *(Background context on RAG failure modes)*
 

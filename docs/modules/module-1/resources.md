@@ -10,8 +10,11 @@ tags:
 - agent-loop
 - automation-paradigms
 - workflow-audit
+- langchain
+- crewai
 module: 1
 status: stable
+stale_after: '2027-09-01T00:00:00Z'
 generated:
   by: process:scripts/migrate_wiki.py
   at: '2026-09-08T00:00:00Z'
@@ -42,6 +45,7 @@ wiki_page: Module-1:-Additional-Suggested-Resources
 * **Prompt Engineering:** The technique of carefully crafting inputs to guide the LLM using clear instructions, personas, delimiters, and step-by-step logic
 
 **Connections to AI Agents**. Understanding these generative AI concepts is the bedrock of developing AI agents
+
 * The LLM acts as the core reasoning engine for the agent, allowing it to perform complex tasks that were once exclusive to humans
 * Furthermore, prompt engineering is the primary method developers use to program how an agent behaves and makes decisions
 * Advanced techniques like RAG are also critical for agents, as they overcome an LLM's static training data by allowing the agent to actively retrieve external, up-to-date information while completing its goals
@@ -60,15 +64,18 @@ A major takeaway from this is that as AI technology advances, these strict bound
 ## Developing AI agents
 
 **Development Environments & UI Tools**
+
 * **Jupyter Notebook & Google Colab:** Web-based environments that allow you to combine live code, visualizations, and text. Colab operates in the cloud and provides free access to powerful hardware like GPUs.
 * **VS Code:** A highly customizable code editor that acts as a full integrated development environment (IDE).
 * **Streamlit & Gradio:** Rapid development tools that let you easily build interactive, web-based user interfaces for your AI models using just a few lines of Python.
 
 **Foundational Platforms & Languages**
+
 * **Hugging Face:** An open-source community hub where developers can access and share thousands of pre-trained models, datasets, and libraries.
 * **Python:** The dominant programming language for AI development, favored because of its extensive ecosystem of machine learning libraries.
 
 **Deploying and Customizing LLMs**
+
 * **Deployment Options:** Developers can access LLMs via cloud APIs (like OpenAI) for high scalability, or run models entirely locally using tools like Ollama to prioritize data privacy and reduce costs.
 * **Fine-Tuning:** The process of taking a general, pre-trained model and training it further on a smaller, task-specific dataset to make it highly specialized.
 * **Retrieval-Augmented Generation (RAG):** A technique that connects an LLM to an external database, allowing it to retrieve relevant, up-to-date information to answer a query. This significantly reduces "hallucinations" (made-up facts).
@@ -78,6 +85,7 @@ A major takeaway from this is that as AI technology advances, these strict bound
 An AI agent is a system that uses a large language model (LLM) as its cognitive engine to dynamically perceive its environment, make autonomous decisions, and take actions to meet specific goals. 
 
 Here is how an agent differs from other familiar technologies:
+
 *   **Chatbot:** A chatbot is primarily designed for dialogue and conversational turn-taking. While a chatbot just talks, an agent can autonomously plan and execute multi-step tasks to achieve a goal.
 *   **API Call:** An API is simply a gateway used to request and exchange data between software. An agent *uses* APIs as tools to perform actions, but the API itself possesses no reasoning or autonomy.
 *   **Rule-Based Automation Script:** Automation scripts (like traditional RPA) follow a rigid, developer-specified sequence of "if-then" rules. Agents can adapt to highly unstructured inputs and decide their own control flow at runtime.
@@ -85,7 +93,7 @@ Here is how an agent differs from other familiar technologies:
 
 The core functioning of an agent relies on a continuous cycle, often modeled after the ReAct (Reasoning and Acting) loop:
 
-**1. Perceive:** The agent receives an input or gathers current state information from its environment, such as a user prompt or system event.
+1. **Perceive:** The agent receives an input or gathers current state information from its environment, such as a user prompt or system event.
 
 2. **Plan (Thought):** The LLM acts as the reasoning engine to analyze the context, break the problem into steps, and determine which tool is most appropriate to use next.
 
@@ -176,31 +184,5 @@ result = crew.kickoff()
 ```
 
 In this low-code setup, you don't have to write the complex logic for how the AI "thinks" or decides what to do next. You simply define the agent's personality and objectives, give it a task, and the framework's underlying LLM handles the execution. 
-
-**Connecting CrewAi and LangChain**
-
-Here is a quick code example showing how to define and connect a tool in LangChain:
-
-```python
-from langchain_core.tools import tool
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
-
-# 1. Define a tool using the @tool decorator
-@tool
-def add_numbers(x: int, y: int) -> int:
-    """Adds two numbers and returns the sum."""
-    return x + y
-
-# 2. Initialize the LLM and bind the tool
-llm = ChatOpenAI(model_name="gpt-4o")
-llm_with_tools = llm.bind_tools([add_numbers])
-
-# 3. Ask a question and let the LLM invoke the tool
-messages = [HumanMessage("What is 11 + 49?")]
-ai_msg = llm_with_tools.invoke(messages)
-```
-
-In this setup, the `@tool` decorator registers the custom Python function and automatically generates a schema that describes its inputs and outputs to the model. By using `bind_tools`, you give the LLM the awareness and ability to select and execute the tool whenever the user's prompt requires it.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Additional-Suggested-Resources){target=_blank} (wiki page last changed 2026-07-14). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/resources.md){target=_blank}.</p>

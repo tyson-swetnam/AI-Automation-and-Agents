@@ -44,10 +44,12 @@ wiki_page: Module-4:-Foundational-Concepts
  - **Benefit:** By dividing complex work across agents with focused responsibilities, a multi-agent system can produce higher-quality, more reliable outcomes than any single generalist agent operating alone.
 
 The theoretical foundation for multi-agent AI systems predates the LLM era by decades.
+
 - Wooldridge and Jennings (1995) identified sociability — the ability of agents to interact with one another — as one of the four aspects of agency.
 - Hutchins (1995): complex work
 in human organizations is routinely distributed across individuals and artifacts, with no single
 participant holding all relevant information.
+
 - Stone and Veloso (2000) present a taxonomy of coordination mechanisms and communication protocols in multi-agent robotic systems.
 - Guo et al. (2024) extend this work into the LLM era, documenting where these systems
 succeed, where they fail, and when a esingle well-dsigned agent is the better choice.
@@ -238,18 +240,22 @@ In their comparison of single-agent vs. multi-agent systems on benchmark tasks l
 As discussed in Chapter 1, multi-agent is not always the right choice. The decision requires evidence. To determine whether MAS is justified for a given task, evaluate across four dimensions:
 
 **Task Accuracy**
+
 - **Measure:** Run both systems (single-agent and multi-agent) on the same set of benchmark tasks. Grade each output using a scoring rubric, then compare average scores.
 - **Interpret:** A statistically meaningful accuracy gain justifies MAS complexity. If the difference is small enough that it could be due to random variation in scoring, it does not justify the added cost.
 
 **Total Token Consumption**
+
 - **Measure:** The total number of tokens used to complete a task — including every message agents send to each other, not just the final output.
 - **Interpret:** More tokens means higher API cost. A multi-agent system that is slightly more accurate but uses 4× more tokens may not be worth the expense.
 
 **Wall-Clock Latency**
+
 - **Measure:** How long (in seconds) from when the user submits a task to when they receive the final output. Report mean, P90 (90% of requests finish within this time), and P99 (99% finish within this time).
 - **Interpret:** Average latency can hide problems. A multi-agent system may be fast most of the time but occasionally very slow when coordination goes wrong. P90 and P99 reveal these worst-case delays — which matter most when real users are waiting for a response.
 
 **Coordination Overhead**
+
 - **Measure:** How much of the total token usage goes to agents talking to each other (delegating, checking in, combining results) versus actually doing the work.
 - **Interpret:** If the system spends more effort coordinating than producing useful output, it is over-engineered. A coordination overhead ratio above 40% is a signal to simplify the architecture.
 

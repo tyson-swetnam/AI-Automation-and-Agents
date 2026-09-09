@@ -163,6 +163,7 @@ In the agent panel, submit the following instruction exactly as written:
 > 'List all .txt files in this folder and create a summary document named summary.md that lists each file name followed by the first sentence of its content.'
 
 Watch the agent's response in real time and note:
+
 - Did it correctly identify all .txt files?
 - Does the summary.md output match the instruction?
 - Did the agent take any action you did not expect?
@@ -180,6 +181,7 @@ Open the generated summary.md file and verify its contents.
 Design and submit one instruction of your own. The instruction should represent a simple file organization or document drafting task. Constraints: (1) the task must be completable using only local folder contents; (2) the task must require at least two distinct operations (e.g., 'find' and then 'create', not just 'list').
 
 Reflect on three things:
+
 1. The exact instruction you submitted.
 2. What the agent produced — be specific, not general.
 3. One revision you would make to the instruction if you ran it again, and why.
@@ -294,6 +296,7 @@ judgment requirement) that drove the surprise.
 ### Step 2 Peer reply
 
 *Estimated time: ~10 minutes*
+
 * Peer reply: 50–80 words. Either ask one specific clarifying question about your classmate's
 assessment ('You scored the consequence severity at 3 - what specific reversal mechanism did you
 assume that brought the score down from 5?') or offer an alternative assessment citing the course

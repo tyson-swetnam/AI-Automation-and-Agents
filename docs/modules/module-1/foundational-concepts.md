@@ -50,10 +50,12 @@ development:**
 and observe outcomes across a structured loop — delegating nothing to chance and
 nothing to the user once set in motion. Understanding this distinction is a non-
 negotiable prerequisite for all subsequent course modules.
+
 - The automation landscape is a spectrum, not a binary choice. Three paradigms —
 no-code, low-code, and code-first — address different user profiles, risk tolerances,
 and organizational requirements. Exercising professional judgment about which
 paradigm to select for a given workflow is a high-value skill.
+
 - Your own professional practice is the course’s primary raw material. The Workflow
 Audit Project you produce in this module is not a homework exercise — it is the
 foundational portfolio artifact that every subsequent module will build upon. The
@@ -76,6 +78,7 @@ about workflows, and what responsible deployment requires from the first day of 
 #### Chapter 1 Lesson
 
 *Estimated time: ~14 min*
+
 Public discourse around AI often confuses four structurally distinct entities: chatbots,
 search engines, rule-based automation scripts, and AI agents. This is not a minor
 terminological imprecision — it leads to fundamental errors in system design, risk assessment,
@@ -96,10 +99,13 @@ contemporary practice through a four-stage agent loop:
 
 * **Autonomy:** The agent operates without continuous human direction. It makes decisions based
 on its own internal state and goals, not external prompts at each step.
+
 * **Reactivity:** The agent perceives its environment and responds to changes in that environment
 in a timely fashion — it is not executing a fixed script.
+
 * **Pro-activeness:** The agent does not merely react to stimuli; it exhibits goal-directed behavior,
 taking initiative to achieve design objectives.
+
 * **Social ability:** The agent can interact with other agents (and humans) using defined
 communication protocols — essential for multi-agent systems introduced in Module 4.
 
@@ -130,6 +136,7 @@ communication protocols — essential for multi-agent systems introduced in Modu
 #### Chapter 2 Lesson
 
 *Estimated time: ~10 min*
+
 Automation tools exist on a spectrum defined by two axes: required user technical skill and system
 flexibility. Understanding where each tool class sits on this spectrum — and why — is a core
 professional competency. Choosing the wrong paradigm for an organizational workflow wastes
@@ -137,6 +144,7 @@ engineering resources, introduces data governance risks, or creates a system the
 cannot maintain.
 
 **Three automation paradigms**
+
 - No-code
 - Low-code
 - Code-first
@@ -234,7 +242,7 @@ The vocabulary of this assessment — rule-based, high-stakes, reversibility, bl
 
 * Wing, J. M. (2006). [Computational thinking](https://dl.acm.org/doi/pdf/10.1145/1118178.1118215){target=_blank}. Communications of the ACM, 49(3), 33-35
 
-[** Reading Guide Chapter 4 - Workflow thinking**](reading-guides.md#reading-guide-2) - Wooldridge & Jennings (1995): Intelligent Agents
+[**Reading Guide Chapter 4 - Workflow thinking**](reading-guides.md#reading-guide-2) - Wooldridge & Jennings (1995): Intelligent Agents
 
 #### Chapter 4 Quiz
 
@@ -261,6 +269,7 @@ The NIST AI RMF 1.0 identifies four core functions — Govern, Map, Measure, Man
 
 Floridi et al.'s (2018) AI4People framework articulates five ethical principles for AI systems that
 professional practitioners should be able to identify and apply: 
+
 * beneficence (AI should benefit people), 
 * non-maleficence (AI should not harm people), 
 * autonomy (AI should preserve human agency), 

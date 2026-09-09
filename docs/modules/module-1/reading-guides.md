@@ -34,6 +34,7 @@ These reading guides are designed to accompany the assigned sources for each cha
 ## Reading Guide 1 — Chapter 1: Redefining Intelligence — What AI Agents Actually Are { #reading-guide-1 }
 
 **Sources covered:**
+
 - Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. *The Knowledge Engineering Review, 10*(2), 115–152.
 - LangChain Conceptual Guide: What are Agents?
 - Video: "What are Agents?" — IBM Technology
@@ -102,6 +103,7 @@ Wooldridge and Jennings (1995) is the canonical theoretical treatment of intelli
 > **Note on sequence:** Reading Guide 2 accompanies Chapter 4 content because its primary source — Wooldridge & Jennings (1995) — is shared with Chapter 1. Reading Guide 2 focuses on how that foundational theory connects to workflow decomposition and computational thinking, which are the analytical tools you will apply in the Workflow Audit Project.
 
 **Sources covered:**
+
 - Wing, J. M. (2006). Computational thinking. *Communications of the ACM, 49*(3), 33–35.
 - Wooldridge, M., & Jennings, N. R. (1995). *(Re-read: Sections on agent environment and agent architecture)* — Reading 2
 
@@ -159,6 +161,7 @@ Jeannette Wing's 2006 essay is one of the most cited papers in computing educati
 ## Reading Guide 3 — Chapter 3: AI Literacy as a New Professional Imperative { #reading-guide-3 }
 
 **Sources covered:**
+
 - Ng, D. T. K., Leung, J. K. L., Chu, S. K. W., & Qiao, M. S. (2021). Conceptualizing AI literacy: An exploratory review. *Computers and Education: Artificial Intelligence, 2*, 100041.
 - Long, D., & Magerko, B. (2020, April). What is AI literacy? Competencies and design considerations. *Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems* (pp. 1–16).
 
@@ -220,6 +223,7 @@ Ng et al. (2021) conducted a systematic review of the AI literacy literature and
 > **Note on sequence:** Reading Guide 4 accompanies Chapter 2 because Reading 4 (Automation Landscape Overview) is the primary source for this chapter. The AI literacy papers (Long & Magerko; Ng et al.) appear in the Chapter 2 resource list as contextual background for evaluating paradigm choices; they are covered in depth in Reading Guide 3.
 
 **Sources covered:**
+
 - Reading 4: Automation Landscape Overview *(internal course reading)*
 - Long, D., & Magerko, B. (2020) and Ng et al. (2021) *(as contextual framework for paradigm evaluation — see Reading Guide 3 for full treatment)*
 
@@ -278,6 +282,7 @@ The AI literacy frameworks (Long & Magerko; Ng et al.) provide the evaluative me
 ## Reading Guide 5 — Chapter 5: Responsible AI — From Principle to Practice, Starting Now { #reading-guide-5 }
 
 **Sources covered:**
+
 - National Institute of Standards and Technology. (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1.
 - Floridi, L., Cowls, J., Beltrametti, M., Chatila, R., et al. (2018). AI4People — An ethical framework for a good AI society: Opportunities, risks, principles, and recommendations. *Minds and Machines, 28*(4), 689–707.
 

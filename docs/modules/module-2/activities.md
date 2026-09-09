@@ -118,6 +118,7 @@ Your discussion post will be a Project Proposal Outline for your capstone projec
 * State the specific application (not just the domain). Not: 'a legal assistant'. Yes: 'an
 agent that reviews employment contracts for non-compete clause enforceability under
 California law'.
+
 * Identify the intended user and use context: who will interact with this agent, in what
 professional setting, and with what prior AI literacy level?
 
@@ -126,6 +127,7 @@ professional setting, and with what prior AI literacy level?
 * Specify one of the four Module 2 paradigms (CoT, ReAct, ToT, LATS). Do not say 'I
 haven't decided' — commit to a choice with a preliminary justification, even if you
 expect to revise it after peer feedback.
+
 * Provide a two-sentence justification that references at least one assigned reading.
 Example: 'I selected ReAct because the task requires retrieval of real-time contract
 precedents from legal databases, which requires tool invocation at each reasoning
@@ -136,6 +138,7 @@ external information lookup because...'
 
 * List at minimum two tools with one-sentence descriptions each. Include: the tool name,
 what external system it connects to, and the type of input it accepts.
+
 * Identify one tool whose description you anticipate needing to iterate on — based on
 your Task 1 experience — and explain why.
 

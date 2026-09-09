@@ -35,6 +35,7 @@ These reading guides accompany the assigned sources for each chapter of Module 4
 ## Reading Guide 1 — Chapter 1: Why Multi-Agent Systems Exist { #reading-guide-1 }
 
 **Sources covered:**
+
 - Guo, T., et al. (2024). Large language model based multi-agents: A survey of progress and challenges. *arXiv:2402.01680*. *(Section 3 — read; Section 4 — skim)*
 - Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. *The Knowledge Engineering Review, 10*(2), 115–152. *(Sociability property)*
 - Hutchins, E. (1995). *Cognition in the Wild*. MIT Press. *(Distributed cognition framework)*
@@ -96,6 +97,7 @@ The theoretical foundations come from three decades of prior work. Wooldridge an
 ## Reading Guide 2 — Chapter 2: How Do Agents Coordinate With One Another? { #reading-guide-2 }
 
 **Sources covered:**
+
 - Stone, P., & Veloso, M. (2000). Multiagent systems: A survey from a machine learning perspective. *Autonomous Robots, 8*(3), 345–383. *(Section 3 — coordination mechanisms)*
 - Wu, Q., et al. (2024). AutoGen: Enabling next-gen LLM applications via multi-agent conversations. *First Conference on Language Modeling*. *(Coordination model)*
 - Hong, S., et al. (2024). MetaGPT: Meta programming for a multi-agent collaborative framework. *ICLR 2024*. *(Sections 1–2 — role specification and pipeline architecture)*
@@ -160,6 +162,7 @@ The four coordination architecture patterns — Hierarchical Supervisor-Worker, 
 ## Reading Guide 3 — Chapter 3: The Three Orchestration Frameworks — LangGraph, AutoGen, and CrewAI { #reading-guide-3 }
 
 **Sources covered:**
+
 - LangGraph Documentation: Multi-Agent Architectures and Multi-Agent Supervisor
 - Wu, Q., et al. (2024). AutoGen: Enabling next-gen LLM applications via multi-agent conversations. *First Conference on Language Modeling*. *(Sections 1–3)*
 - Guo, T., et al. (2024). Large language model based multi-agents: A survey of progress and challenges. *(Framework observability and debugging critique)*
@@ -230,6 +233,7 @@ Guo et al. (2024) provide a critical lens: high-level framework abstractions can
 ## Reading Guide 4 — Chapter 4: Coordination Failure Taxonomy — Four Failure Modes, Four Structural Causes { #reading-guide-4 }
 
 **Sources covered:**
+
 - Cemri, M., et al. (2026). Why do multi-agent LLM systems fail? *Advances in Neural Information Processing Systems, 38*. *(Sections 1 and 4 — MAST taxonomy)*
 - Wooldridge, M., & Jennings, N. R. (1995). Intelligent agents: Theory and practice. *(Coordination and cooperation sections)*
 - Stone, P., & Veloso, M. (2000). Multiagent systems: A survey from a machine learning perspective. *(Section 3 — coordination mechanisms)*
@@ -290,6 +294,7 @@ Cemri et al. (2026) introduce MAST (Multi-Agent System Failure Taxonomy) to addr
 ## Reading Guide 5 — Chapter 5: Evidence-Based Benchmarking — When Does Multi-Agent Add Value? { #reading-guide-5 }
 
 **Sources covered:**
+
 - Wu, Q., et al. (2024). AutoGen: Enabling next-gen LLM applications via multi-agent conversations. *(Evaluation sections)*
 - Hong, S., et al. (2024). MetaGPT. *(Evaluation and benchmarking methodology)*
 - Guo, T., et al. (2024). Large language model based multi-agents: A survey. *(Critical evaluation methodology)*

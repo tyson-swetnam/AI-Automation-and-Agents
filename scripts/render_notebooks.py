@@ -40,6 +40,9 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from migrate_wiki import ensure_blank_before_lists  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 # Clone of the v2 course repo (UA-AI2S/AI-Automation-and-Agents-v2) used only
@@ -208,7 +211,9 @@ def transform_body(md: str) -> str:
             level = min(len(m.group(1)) + 1, 6)
             line = "#" * level + line[len(m.group(1)):]
         out.append(line)
-    return "\n".join(out).strip("\n") + "\n"
+    # Python-Markdown needs a blank line between a paragraph and a list that follows it,
+    # otherwise the items render with literal "- " markers (same rule the wiki migration applies).
+    return ensure_blank_before_lists("\n".join(out)).strip("\n") + "\n"
 
 
 def page_title(module: int, heading: str) -> str:

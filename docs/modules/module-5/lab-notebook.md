@@ -23,7 +23,6 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb"
     title: "Module5_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
-    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline
@@ -50,6 +49,7 @@ sources:
 Estimated time: **~120 minutes** · Learning outcomes: **LO 5.4 and LO 5.5**
 
 In this lab, you'll do two things:
+
 1. **Lab A** — Wire up LangSmith tracing on a simple agent, run it 10 times, and analyze the traces (latency, tokens, errors).
 2. **Lab B** — Build an automated test suite that catches when your agent's behavior gets worse (a "regression").
 
@@ -159,6 +159,7 @@ Think of LangSmith traces like a debugger's call stack — they show you exactly
 ### Step A1: Build a Two-Tool ReAct Agent (~15 min)
 
 We'll create a simple agent with two tools:
+
 - **search** — looks up factual information (simulated for reproducibility)
 - **calculator** — evaluates math expressions
 
@@ -249,6 +250,7 @@ elif PROVIDER == "ollama":
 AGENT_SYSTEM_PROMPT = """You are a helpful research assistant. You have access to a search tool and a calculator.
 
 Guidelines:
+
 - Use the search tool for factual questions.
 - Use the calculator for math.
 - For multi-step questions, break them into parts and use tools as needed.
@@ -317,6 +319,7 @@ Skip this cell to keep using the simulated search (recommended for first run-thr
 #### Verify: Run one test and check LangSmith
 
 Before running all 10, let's confirm tracing works. After running this cell:
+
 1. Go to [smith.langchain.com](https://smith.langchain.com)
 2. Open the `module5-observability-lab` project
 3. Verify you see one trace
@@ -373,6 +376,7 @@ for cat in sorted(set(prompt_categories)):
 #### TODO: Run all 10 prompts and collect results
 
 Write a loop that:
+
 1. Records the start time with `time.time()`
 2. Invokes the agent with the prompt, passing `tags` and `metadata` in the config
 3. Records the end time and computes latency
@@ -519,6 +523,7 @@ You may also design your own comparison — just keep it to one variable so the 
 **Hypothesis**: TODO: State a specific, falsifiable prediction about what you expect to see in the data.
 
 **Conditions**:
+
 - **Condition A**: TODO
 - **Condition B**: TODO
 - **Condition C** (optional): TODO (or remove if using only 2 conditions)
@@ -633,6 +638,7 @@ TODO: State your hypothesis and whether it was supported or refuted by the data.
 #### Analysis (minimum 200 words)
 
 TODO: Interpret your results. Address these questions:
+
 - Was your hypothesis supported? By how much?
 - Which metric showed the biggest difference between conditions? Why?
 - Did any condition perform unexpectedly? What does the trace data reveal about why?

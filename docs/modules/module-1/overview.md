@@ -67,10 +67,13 @@ and refining the workflows you identify here. Begin it thoughtfully.
 5. Identifying automation candidates: high-repetition, rule-based, and time-consuming tasks
 6. Overview of the automation landscape: no-code (n8n, Cowork), low-code (LangChain), and code-first
 (custom Python agents)
+
 7. Introduction to key open-source frameworks: LangChain, LangGraph, CrewAI, Ollama — what each does
 and when to use it
+
 8. What agents can and cannot do: setting realistic expectations and avoiding common over-automation
 mistakes
+
 9. Introduction to the Claude Desktop app: Chat, Cowork, and Code tabs explained
 10. Key vocabulary: agent, pipeline, trigger, tool call, MCP, RAG, sandbox, orchestration, and 15+ additional
 terms
@@ -82,6 +85,7 @@ terms
 1. Distinguish an AI agent from chatbots, APIs, scripts, and search engines.
 2. Classify automation paradigms (no-code, low-code, code-first) by trade-off
 dimensions.
+
 3. Operate Claude Desktop on a basic agentic task.
 4. Execute three structured LLM interactions with behavioral observation.
 5. Decompose three real workflows using the Workflow Mapping Template.
@@ -98,11 +102,14 @@ dimensions.
 ## Grade Weight Summary
 
 *Estimated time: ~1 min*
+
 - Workflow Audit Project : PRIMARY MODULE GRADE — see rubric
 - Discussion Forum Post + Peer Reply : Completion grade (graded for participation, not
 content quality)
+
 - Lab Submissions (Units 3, 5, 6): Formative only — required for portfolio, not graded
 numerically
+
 - Concept Quiz : Formative only — two attempts; best score retained
 
 ## Diagnostic Self-survey

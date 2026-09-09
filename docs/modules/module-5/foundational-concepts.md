@@ -45,22 +45,27 @@ wiki_page: Module-5:-Foundational-Concepts
 Sculley et al. (2015) identified a problem often learned the hard way: machine learning systems accumulate hidden technical debt that only becomes visible under production conditions. They categorized five types of debt, and while their framework predates LLM agents, each category still applies to agent systems:
 
 **Entanglement.** Changing one component unexpectedly affects behavior elsewhere.
+
 - **In agent systems:** You tweak one agent's system prompt, and a downstream agent that parses its output starts failing because the output format shifted subtly.
 - **How to prevent it:** Define explicit output schemas between agents so changes are caught by validation before they cascade.
 
 **Unstable data dependencies.** Upstream data changes silently corrupt behavior.
+
 - **In agent systems:** Your RAG pipeline's retrieval quality degrades because the vector store was re-indexed with different chunking parameters.
 - **How to prevent it:** Run automated retrieval quality checks after any data source update.
 
 **Feedback loops.** A deployed system's outputs influence its future inputs.
+
 - **In agent systems:** One agent writes a result to shared state, and a later agent reads it as ground truth without verifying it. If that first result was wrong, the error propagates forward and compounds.
 - **How to prevent it:** Tag agent-generated content so it can be distinguished from original sources, and validate before reuse.
 
 **Configuration debt.** Undocumented parameters make systems brittle.
+
 - **In agent systems:** Prompts, temperature settings, tool configurations, and model version selections are scattered across multiple files with no versioning, no tests, and no single source of truth.
 - **How to prevent it:** Store all configuration in a single versioned location and require changes to go through the same review process as code.
 
 **Undeclared consumers.** Downstream systems depend on outputs without being tracked.
+
 - **In agent systems:** You change your agent's output format and discover that other processes were parsing that output. If the dependency isn't documented, there's no way to know the change will break anything until it does.
 - **How to prevent it:** Version your agent's output schema and document what depends on it.
 
