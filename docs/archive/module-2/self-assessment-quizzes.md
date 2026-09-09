@@ -79,13 +79,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 1"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Wei et al. explicitly identify CoT as an emergent property absent below a scale threshold — not a fine-tuning or retrieval technique. |
-| Q2 | B | ReAct's defining contribution is the Thought/Act/Observe cycle that grounds reasoning in real-world tool feedback unavailable to CoT. |
-| Q3 | C | Chapter 1 states ToT is justified when intermediate states can be evaluated before the full solution is known and backtracking is necessary. Options A and D describe conditions favoring ReAct; B favors CoT. |
-| Q4 | B | LATS nodes represent action-observation pairs, enabling real-world grounding of deliberate search — the mechanism that distinguishes LATS from ToT. |
-| Q5 | C | CoT has no tool calls (lowest cost); ReAct adds one tool call per reasoning loop; ToT multiplies candidate branches; LATS adds real-world tool calls at every search node (highest cost). |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Wei et al. explicitly identify CoT as an emergent property absent below a scale threshold — not a fine-tuning or retrieval technique. |
+    | Q2 | B | ReAct's defining contribution is the Thought/Act/Observe cycle that grounds reasoning in real-world tool feedback unavailable to CoT. |
+    | Q3 | C | Chapter 1 states ToT is justified when intermediate states can be evaluated before the full solution is known and backtracking is necessary. Options A and D describe conditions favoring ReAct; B favors CoT. |
+    | Q4 | B | LATS nodes represent action-observation pairs, enabling real-world grounding of deliberate search — the mechanism that distinguishes LATS from ToT. |
+    | Q5 | C | CoT has no tool calls (lowest cost); ReAct adds one tool call per reasoning loop; ToT multiplies candidate branches; LATS adds real-world tool calls at every search node (highest cost). |
 
 ## Quiz 2 — Chapter 2: Tool Integration Architecture
 
@@ -126,13 +126,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 2"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | The `tools` parameter populates the tool registry; tool descriptions embedded in each `BaseTool` are the mechanism for inference-time selection. |
-| Q2 | C | `system_prompt` injects persistent behavioral instructions before any user turn — it is the primary behavioral control lever. |
-| Q3 | A | Vague tool descriptions cause incorrect tool selection. An underspecified REPL description allows the agent to default to web search even for computation tasks. |
-| Q4 | C | The scope boundary clause is explicitly identified in Chapter 2 as the mechanism that prevents over-invocation by excluding specific use cases. |
-| Q5 | B | Chapter 2 states that unlike `AgentExecutor`, `create_agent` delegates state management and loop control to LangGraph's execution graph, enabling native compatibility with checkpointing, streaming, and multi-agent orchestration. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | The `tools` parameter populates the tool registry; tool descriptions embedded in each `BaseTool` are the mechanism for inference-time selection. |
+    | Q2 | C | `system_prompt` injects persistent behavioral instructions before any user turn — it is the primary behavioral control lever. |
+    | Q3 | A | Vague tool descriptions cause incorrect tool selection. An underspecified REPL description allows the agent to default to web search even for computation tasks. |
+    | Q4 | C | The scope boundary clause is explicitly identified in Chapter 2 as the mechanism that prevents over-invocation by excluding specific use cases. |
+    | Q5 | B | Chapter 2 states that unlike `AgentExecutor`, `create_agent` delegates state management and loop control to LangGraph's execution graph, enabling native compatibility with checkpointing, streaming, and multi-agent orchestration. |
 
 ## Quiz 3 — Chapter 3: Reasoning Trace Interpretation and Critique
 
@@ -173,13 +173,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 3"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Chapter 3 defines the reasoning trace as the complete log of reasoning steps, tool calls, and observations — the primary production diagnostic artifact. |
-| Q2 | C | The agent produced a reasoning step that justified bypassing tool invocation. This is reasoning-action decoupling: the thought and the required action are misaligned. |
-| Q3 | B | The tool selected (web search) was appropriate; the failure was in the argument passed to it. Malformed arguments are tool argument specification errors. |
-| Q4 | B | The Final Answer reveals only the outcome; the trace reveals every decision point where a failure could have been introduced, making it the actionable diagnostic artifact. |
-| Q5 | C | The observation contained the correct answer; the agent's Thought incorrectly assessed it as inconclusive. This is observation misinterpretation, not an argument or tool selection error. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Chapter 3 defines the reasoning trace as the complete log of reasoning steps, tool calls, and observations — the primary production diagnostic artifact. |
+    | Q2 | C | The agent produced a reasoning step that justified bypassing tool invocation. This is reasoning-action decoupling: the thought and the required action are misaligned. |
+    | Q3 | B | The tool selected (web search) was appropriate; the failure was in the argument passed to it. Malformed arguments are tool argument specification errors. |
+    | Q4 | B | The Final Answer reveals only the outcome; the trace reveals every decision point where a failure could have been introduced, making it the actionable diagnostic artifact. |
+    | Q5 | C | The observation contained the correct answer; the agent's Thought incorrectly assessed it as inconclusive. This is observation misinterpretation, not an argument or tool selection error. |
 
 ## Quiz 4 — Chapter 4: Prompt Engineering for Agent Behavioral Control
 
@@ -220,13 +220,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 4"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Chapter 4 explicitly enumerates system instructions, tool descriptions, few-shot CoT scaffolds, and output format constraints as the four independently configurable dimensions. |
-| Q2 | B | Chapter 4 maps the four control components directly to agent configuration: system instructions → `system_prompt`, tool descriptions → tool definitions, few-shot demonstrations → structured example turns, and output constraints → `response_format`. |
-| Q3 | B | Chapter 4 explicitly warns against treating behavioral problems as prompting problems that are fixed by appending sentences — this accumulates fragile, unpredictably interacting constraints. |
-| Q4 | C | Chapter 4 states that plain-text examples placed in the system instruction are ignored. The demonstration must be formatted as a `Human:`/`AI:` turn pair with all six trace labels to influence output format. |
-| Q5 | B | Chapter 4 defines the professional approach as: define boundaries at design time, test systematically, and instrument in production — behavioral control as architecture, not as a post-hoc patch. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Chapter 4 explicitly enumerates system instructions, tool descriptions, few-shot CoT scaffolds, and output format constraints as the four independently configurable dimensions. |
+    | Q2 | B | Chapter 4 maps the four control components directly to agent configuration: system instructions → `system_prompt`, tool descriptions → tool definitions, few-shot demonstrations → structured example turns, and output constraints → `response_format`. |
+    | Q3 | B | Chapter 4 explicitly warns against treating behavioral problems as prompting problems that are fixed by appending sentences — this accumulates fragile, unpredictably interacting constraints. |
+    | Q4 | C | Chapter 4 states that plain-text examples placed in the system instruction are ignored. The demonstration must be formatted as a `Human:`/`AI:` turn pair with all six trace labels to influence output format. |
+    | Q5 | B | Chapter 4 defines the professional approach as: define boundaries at design time, test systematically, and instrument in production — behavioral control as architecture, not as a post-hoc patch. |
 
 ## Quiz 5 — Chapter 5: Architectural Trade-off Assessment for Production Deployment
 
@@ -267,12 +267,12 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 5"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Article 13 requires operators to be able to understand and interpret system outputs — for agent systems this directly targets the interpretability and auditability of the reasoning trace, not latency, tool count, or context size. |
-| Q2 | B | Chapter 5 states that a LATS agent's branching trace is harder to audit than a ReAct agent's linear trace — this is the primary regulatory consideration under Article 13 for high-risk domains. |
-| Q3 | C | Chapter 5 explicitly frames architectural selection as a multi-objective optimization across six dimensions requiring documented, evidence-based justification — not a benchmark race or a pure compliance exercise. |
-| Q4 | C | A valid trade-off statement names both competing properties (inference cost vs. reasoning depth) and the contextual constraint (fixed budget in high-volume deployment) that resolves the trade-off in favor of ReAct. Options A and B are partially correct but miss the cost-depth trade-off structure. |
-| Q5 | B | LATS is justified when: the state space is large with many possible solution paths; intermediate states can be evaluated; early commitment to a wrong path is catastrophically costly; and latency is not the primary constraint. Scenario B satisfies all four conditions; the others require low latency or involve linear tasks. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Article 13 requires operators to be able to understand and interpret system outputs — for agent systems this directly targets the interpretability and auditability of the reasoning trace, not latency, tool count, or context size. |
+    | Q2 | B | Chapter 5 states that a LATS agent's branching trace is harder to audit than a ReAct agent's linear trace — this is the primary regulatory consideration under Article 13 for high-risk domains. |
+    | Q3 | C | Chapter 5 explicitly frames architectural selection as a multi-objective optimization across six dimensions requiring documented, evidence-based justification — not a benchmark race or a pure compliance exercise. |
+    | Q4 | C | A valid trade-off statement names both competing properties (inference cost vs. reasoning depth) and the contextual constraint (fixed budget in high-volume deployment) that resolves the trade-off in favor of ReAct. Options A and B are partially correct but miss the cost-depth trade-off structure. |
+    | Q5 | B | LATS is justified when: the state space is large with many possible solution paths; intermediate states can be evaluated; early commitment to a wrong path is catastrophically costly; and latency is not the primary constraint. Scenario B satisfies all four conditions; the others require low latency or involve linear tasks. |
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-Addendum-%E2%80%90-OLD){target=_blank} (wiki page last changed 2026-08-06). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/archive/module-2/self-assessment-quizzes.md){target=_blank}.</p>

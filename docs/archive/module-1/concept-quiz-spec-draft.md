@@ -45,9 +45,9 @@ Question types include:
 
 In the BDI (Belief-Desire-Intention) framework, which term specifically describes the agent's internal representation of the state of its environment, which may be incomplete or incorrect?
 
-A. Intention
-B. Belief
-C. Desire
+- **A.** Intention
+- **B.** Belief
+- **C.** Desire
 D. Obligation
 
 ??? success "Answer and rationale"

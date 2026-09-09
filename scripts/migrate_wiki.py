@@ -234,7 +234,7 @@ PAGES += [
          "Worksheet: AI Agents Glossary",
          "Fill-in glossary worksheet of AI-agent concepts and tools (agent, context window, embedding, RAG, MCP, prompt injection, n8n, LangGraph, Claude Code, Ollama, and more) with columns for definition, own words, and one example.",
          "Worksheet", _tags(1, "worksheet", "glossary"), module=1, status="draft",
-         lead="Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A downloadable Word version is linked below."),
+         lead="Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A [Word version of this worksheet](../../../materials/module1/Illustrated_AI_Glossary.docx) is available to download."),
     Page("Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram.md",
          "modules/module-1/worksheets/automation-paradigms-comparison.md",
          "Worksheet: Automation Paradigms Comparison",
@@ -360,6 +360,8 @@ REGEX_PATCHES: dict[str, list[tuple[str, str]]] = {
     ],
     # the quiz specification draft has 14 empty "Question N" headings after the single authored question
     "archive/module-1/concept-quiz-spec-draft.md": [
+        # the four options are <br>-separated lines; make them a real list
+        (r"^([A-D])\.\s+(.+?)\s*<br>\s*$", r"- **\1.** \2"),
         (r"(?:^#{3,4} Question (?:[2-9]|1[0-5])\s*\n+)+\Z",
          "*Questions 2-15 were never authored in this wiki draft; the complete quiz is the live [Module 1 Concept Quiz](../../modules/module-1/concept-quiz.md).*\n"),
     ],
@@ -1121,6 +1123,7 @@ def convert_links(text: str, page: Page) -> str:
 def fix_misc(text: str, page: Page) -> str:
     lines = text.split("\n")
     out: list[str] = []
+    last_top_level_list_item = False
     for l in lines:
         s = l
         if page.pandoc and re.match(r"^\s+-{6,}(\s+-+)*\s*$", s):
@@ -1137,9 +1140,14 @@ def fix_misc(text: str, page: Page) -> str:
             s = re.sub(r"^\s*<p>\s*", "", s)
             s = s.replace("</p>", "")
         else:
-            s = s.lstrip()
+            # keep a 4-space indent (a table nested in an admonition or ??? collapsible
+            # body); drop a stray 1-3 space indent, and never let the whitespace collapse
+            # below eat the indent itself
+            raw_indent = len(s) - len(s.lstrip())
+            indent = "    " if raw_indent >= 4 else ""
+            s = s.strip()
             s = s.replace("&emsp;", "")
-            s = re.sub(r"[ \t]{2,}", " ", s)
+            s = indent + re.sub(r"[ \t]{2,}", " ", s)
             cells = [c.strip() for c in s.strip().strip("|").split("|")]
             if page.pandoc and cells and all(not c for c in cells):
                 s = "| Term | Details |"   # Act-3 glossary table has an empty header row
@@ -1148,7 +1156,18 @@ def fix_misc(text: str, page: Page) -> str:
         s = s.replace("&rarr;", "→")
         s = re.sub(r"<(?=\d)", "&lt;", s)
         s = re.sub(r"^(\s*)\+\s+", r"\1- ", s)
-        s = re.sub(r"^ {2}(?=([-*+]|\d+\.)\s)", "    ", s)
+        # the wiki nests sub-bullets with 2-3 spaces, which GitHub accepts but
+        # Python-Markdown flattens; promote them to a real 4-space nest, but only
+        # when the enclosing list item starts at column 0
+        m_list = re.match(r"^(?P<indent> {1,3})(?:[-*+]|\d+[.)])\s+\S", s)
+        if m_list and last_top_level_list_item:
+            s = "    " + s.lstrip()
+        elif re.match(r"^(?:[-*+]|\d+[.)])\s+\S", s):
+            last_top_level_list_item = True
+        elif not s.strip():
+            pass
+        elif not s.startswith(" "):
+            last_top_level_list_item = False
         out.append(s)
     text = "\n".join(out)
     if page.pandoc:
@@ -1210,10 +1229,12 @@ def fix_gdocs(text: str) -> str:
         lang, end_re, gate_re = active
         if l.strip() == "```":
             continue  # inner fences around tables become part of the template
-        if gate_re and gate_re.match(l):
+        if gate_re and gate_re.search(l):
             gate_seen = True
         unescaped = UNESCAPE_RE.sub(r"\1", l)
-        if gate_seen and end_re.match(l):
+        # search, not match: several end markers sit at the end of a line
+        # ("Untitled.ipynb   \# non-descriptive"), and an unmatched end swallows the page tail
+        if gate_seen and end_re.search(l):
             if not re.match(r"^\\---", l):
                 fenced.append(unescaped)
             while fenced and not fenced[-1].strip():

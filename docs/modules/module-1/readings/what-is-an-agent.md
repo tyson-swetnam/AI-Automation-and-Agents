@@ -324,7 +324,7 @@ Student Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ Date: \_\_\
 | **10. ReAct Loop** | *\[Hint: LangChain §1.3; Yao et al. (2022)\]* |
 | **Context** | The predominant execution paradigm in LangChain-style agents, introduced by Yao et al. (2022). |
 | **Complete the definition:** | *An agent execution pattern that interleaves \_\_\_\_\_\_\_\_\_\_ (reasoning traces) with \_\_\_\_\_\_\_\_\_\_ (tool invocations) and \_\_\_\_\_\_\_\_\_\_ (environmental feedback), iterating until a terminal condition is met.* |
-| **11. Tool (LangChain)** | *\[Hint: LangChain §1.2\]* | 
+| **11. Tool (LangChain)** | *\[Hint: LangChain §1.2\]* |
 | **Context** | A callable function exposed to an LLM agent that extends its capabilities beyond parametric knowledge. |
 | **Complete the definition:** | *A callable component with a \_\_\_\_\_\_\_\_\_\_, a natural-language \_\_\_\_\_\_\_\_\_\_, and a typed \_\_\_\_\_\_\_\_\_\_, which extends an LLM agent's reach into external systems such as APIs, databases, or code interpreters.* |
 | **12. Multi-agent System** | *\[Hint: W&J §1; Jennings (1993); LangGraph documentation\]* |

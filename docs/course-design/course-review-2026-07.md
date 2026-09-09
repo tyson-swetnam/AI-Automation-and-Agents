@@ -110,13 +110,13 @@ The content itself marks AgentExecutor as LEGACY within LangChain. Teaching stud
 ### Areas for Improvement
 
 1. **The Overview must be rewritten to match the actual content,** OR the content must be rewritten to match the Overview. These are two different courses:
-   - **Option A (Rewrite Overview):** Rename to something like "Agent Reasoning: How AI Systems Think and Act." Remove Cowork/n8n promises. Be transparent that this module introduces Python-in-Colab as a learning tool.
-   - **Option B (Rewrite Content):** Actually deliver no-code automation with Cowork and n8n. Move reasoning paradigms to conceptual readings only. Make the lab a Cowork pipeline build. This would be a major rewrite but would honor the course's accessibility promise.
+    - **Option A (Rewrite Overview):** Rename to something like "Agent Reasoning: How AI Systems Think and Act." Remove Cowork/n8n promises. Be transparent that this module introduces Python-in-Colab as a learning tool.
+    - **Option B (Rewrite Content):** Actually deliver no-code automation with Cowork and n8n. Move reasoning paradigms to conceptual readings only. Make the lab a Cowork pipeline build. This would be a major rewrite but would honor the course's accessibility promise.
 
 2. **Programming prerequisite gap.** The course states "no prior programming experience" for Modules 1-3, but Module 2's guided lab requires students to work in Google Colab with Python/LangChain code. Even if the notebook is pre-written, students need to understand imports, function calls, and output interpretation. This needs either:
-   - Explicit acknowledgment that Module 2 introduces code-reading (not code-writing) as a skill
-   - A "Python for Non-Programmers" primer (30-min pre-lab resource)
-   - Redesign to actually be no-code
+    - Explicit acknowledgment that Module 2 introduces code-reading (not code-writing) as a skill
+    - A "Python for Non-Programmers" primer (30-min pre-lab resource)
+    - Redesign to actually be no-code
 
 3. **AgentExecutor deprecation.** Either update to current LangChain patterns (langgraph prebuilt agents) or frame the content explicitly as "historical architecture study" with a forward pointer to Module 4's LangGraph content.
 
@@ -181,15 +181,15 @@ MCP receives at most a passing mention in the actual lesson content. A student w
 1. **Overview must be rewritten** to reflect actual content. Suggested title adjustment: "AI Memory Systems: RAG, Vector Databases, and Evaluation." Remove MCP and Cowork promises unless corresponding activities are created.
 
 2. **Where does MCP actually get taught?** If MCP is a course-level learning objective, it needs a home. Options:
-   - Add a 45-min MCP lab to Module 3 (requires cutting something else)
-   - Move MCP to Module 4 where it could complement the multi-agent discussion
-   - Create a dedicated MCP mini-module or integrate it into Module 1's Cowork/Openwork labs
-   - Remove MCP from course objectives entirely
+    - Add a 45-min MCP lab to Module 3 (requires cutting something else)
+    - Move MCP to Module 4 where it could complement the multi-agent discussion
+    - Create a dedicated MCP mini-module or integrate it into Module 1's Cowork/Openwork labs
+    - Remove MCP from course objectives entirely
 
 3. **Writing load is heavy.** Three substantial deliverables in one module:
-   - RAGAS Interpretation Worksheet (likely 400-500 words of analysis)
-   - RAG Failure Diagnosis Report (likely 500-700 words)
-   - Memory Architecture Specification Brief (likely 600-800 words)
+    - RAGAS Interpretation Worksheet (likely 400-500 words of analysis)
+    - RAG Failure Diagnosis Report (likely 500-700 words)
+    - Memory Architecture Specification Brief (likely 600-800 words)
 
    Combined, students may write 1,500-2,000 words of technical analysis in a single module. For a course targeting 15% writing, this skews heavily toward written output at the expense of hands-on time.
 
@@ -216,10 +216,10 @@ MCP receives at most a passing mention in the actual lesson content. A student w
 1. **(Critical) Rewrite the Overview** to accurately describe RAG/Memory content. Remove or drastically reduce MCP promises.
 
 2. **(Critical) Reduce writing load.** Recommendation: Merge the RAGAS Interpretation Worksheet into the Case Study activity (Unit 5) as an embedded component rather than a standalone deliverable. This eliminates one grading artifact while preserving the learning. Revised weighting:
-   - RAG Failure Diagnosis Report: 30% (absorbs some RAGAS interpretation)
-   - Memory Architecture Specification Brief: 35%
-   - Lab Completion + Reflection: 20%
-   - Discussion Participation: 15%
+    - RAG Failure Diagnosis Report: 30% (absorbs some RAGAS interpretation)
+    - Memory Architecture Specification Brief: 35%
+    - Lab Completion + Reflection: 20%
+    - Discussion Participation: 15%
 
 3. **(High) Add a "Module 2 Lab Skills Check" bridge** at the start of Unit 3. A 15-minute orientation that says: "You'll need these Colab skills from Module 2. If you struggled there, review [specific resources] before proceeding."
 
@@ -261,14 +261,14 @@ This is the third consecutive module (2, 3, 4) where the Overview promises conte
 ### Areas for Improvement
 
 1. **Track A (Claude Code) must either be implemented or removed from the Overview.** Options:
-   - **(Recommended) Add a Track A alternative lab** (Unit 3 variant) where students use Claude Code to orchestrate a multi-agent workflow. This would require creating new lab content but would honor the dual-track promise and serve non-CS students who struggled with Colab.
-   - **Remove Track A from the Overview** and acknowledge this is a code-first module. Less work, but further erodes the course's accessibility claims.
-   - **Make Track A the primary and Track B the alternative.** This inverts the current design but better serves non-CS students.
+    - **(Recommended) Add a Track A alternative lab** (Unit 3 variant) where students use Claude Code to orchestrate a multi-agent workflow. This would require creating new lab content but would honor the dual-track promise and serve non-CS students who struggled with Colab.
+    - **Remove Track A from the Overview** and acknowledge this is a code-first module. Less work, but further erodes the course's accessibility claims.
+    - **Make Track A the primary and Track B the alternative.** This inverts the current design but better serves non-CS students.
 
 2. **Prerequisite escalation is steep.** Module 4 expects students to:
-   - Build state graphs in LangGraph (requires understanding nodes, edges, state management)
-   - Compare across frameworks (requires running both LangGraph and CrewAI/AutoGen)
-   - Diagnose coordination failures (requires understanding distributed systems concepts)
+    - Build state graphs in LangGraph (requires understanding nodes, edges, state management)
+    - Compare across frameworks (requires running both LangGraph and CrewAI/AutoGen)
+    - Diagnose coordination failures (requires understanding distributed systems concepts)
 
    A non-CS student who struggled through Modules 2-3's Colab labs will face even greater difficulty here. The jump from "run a pre-built notebook" to "build a state graph" is significant.
 
@@ -297,10 +297,10 @@ This is the third consecutive module (2, 3, 4) where the Overview promises conte
 2. **(Critical) Reduce scope of Unit 4.** The "learn a new framework AND benchmark it in 2.5 hours" requirement is unrealistic. Recommendation: Provide a pre-configured CrewAI notebook with a working multi-agent system. Students analyze and modify it rather than building from scratch. The benchmark becomes "compare this pre-built CrewAI system against your LangGraph lab" rather than "build two systems and compare." Time savings: ~1 hour.
 
 3. **(High) Consolidate written deliverables.** Merge the Comparative Evaluation Report and Coordination Failure Diagnosis into a single "Multi-Agent System Analysis Report" with sections for:
-   - Architecture comparison (LangGraph vs. alternative): 300 words
-   - Failure mode identification and diagnosis: 300 words  
-   - Performance benchmarking results: 200 words
-   - Architectural recommendation: 200 words
+    - Architecture comparison (LangGraph vs. alternative): 300 words
+    - Failure mode identification and diagnosis: 300 words  
+    - Performance benchmarking results: 200 words
+    - Architectural recommendation: 200 words
 
    Total: 1,000 words, one report, covering both evaluation and failure diagnosis. Weight: 45%. This frees up time currently spent on report formatting and transitions.
 
@@ -358,9 +358,9 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 5. **EU AI Act content will date quickly.** The Act is still being implemented with delegated acts and standards emerging through 2025-2027. Content should be framed as "the EU AI Act framework and compliance methodology" rather than specific article-level requirements that may shift.
 
 6. **Writing load peaks here.** Three major deliverables plus the capstone:
-   - 6-Dimension Evaluation Report (25%)
-   - EU AI Act Governance Analysis (20%)  
-   - Comprehensive Proposal / Capstone (30%)
+    - 6-Dimension Evaluation Report (25%)
+    - EU AI Act Governance Analysis (20%)  
+    - Comprehensive Proposal / Capstone (30%)
 
    Students are producing their most sophisticated written work while simultaneously learning the most technically complex material. This is a peak-load problem.
 
@@ -382,17 +382,17 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 ### Concrete Recommendations
 
 1. **(Critical) Radically reduce infrastructure scope.** Replace Chapters 2 (Production Infrastructure) with "Production Deployment Concepts for AI Practitioners" — a 45-minute reading that covers:
-   - Why containerization matters (reproducibility, isolation) — conceptual only, no Dockerfiles
-   - What orchestration does (scaling, fault tolerance) — conceptual only, no K8s YAML
-   - API gateway patterns (rate limiting, authentication) — as a consumer, not implementer
-   - The deployment spectrum: "Here's what your DevOps team handles; here's what you need to specify"
+    - Why containerization matters (reproducibility, isolation) — conceptual only, no Dockerfiles
+    - What orchestration does (scaling, fault tolerance) — conceptual only, no K8s YAML
+    - API gateway patterns (rate limiting, authentication) — as a consumer, not implementer
+    - The deployment spectrum: "Here's what your DevOps team handles; here's what you need to specify"
 
    **Time savings: ~2 hours** (eliminating hands-on infrastructure work students will never do without DevOps support).
 
 2. **(Critical) Eliminate Lab B (CI/CD pipeline) or replace with conceptual exercise.** Non-CS students will not build CI/CD pipelines. Instead, provide a pre-built pipeline and have students:
-   - Read and interpret the pipeline configuration (15 min)
-   - Identify what each stage evaluates (15 min)
-   - Propose one additional evaluation stage with justification (15 min)
+    - Read and interpret the pipeline configuration (15 min)
+    - Identify what each stage evaluates (15 min)
+    - Propose one additional evaluation stage with justification (15 min)
 
    **Time savings: ~1 hour** while preserving the learning objective ("understand how evaluation integrates into deployment").
 
@@ -401,16 +401,16 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 4. **(High) Focus observability on LangSmith only.** Remove OpenTelemetry and LangFuse from required content. Frame them as "additional resources for students with DevOps backgrounds." Lab A becomes purely LangSmith-focused: "Trace an agent's execution, identify a performance bottleneck, propose a fix." This is achievable for non-CS students using LangSmith's UI.
 
 5. **(High) Restructure the 6-Dimension Evaluation Report.** Provide students with:
-   - A pre-evaluated system with metrics across 6 dimensions
-   - 3 of the 6 dimensions already analyzed (as examples)
-   - Students complete the remaining 3 dimensions
+    - A pre-evaluated system with metrics across 6 dimensions
+    - 3 of the 6 dimensions already analyzed (as examples)
+    - Students complete the remaining 3 dimensions
 
    This reduces scope while maintaining analytical rigor. The scaffolding helps non-CS students understand the evaluation methodology before applying it independently.
 
 6. **(Medium) Frame EU AI Act content as methodology, not memorization.** Rather than requiring students to map specific articles, teach them the COMPLIANCE METHODOLOGY:
-   - How to determine an AI system's risk category
-   - What documentation is required at each category
-   - How to conduct a gap analysis (the process, not the specific gaps)
+    - How to determine an AI system's risk category
+    - What documentation is required at each category
+    - How to conduct a gap analysis (the process, not the specific gaps)
 
    This survives regulatory updates and teaches transferable governance skills.
 

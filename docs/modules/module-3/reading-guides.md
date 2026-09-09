@@ -404,9 +404,9 @@ Es et al. (2024) introduced RAGAS to solve a reproducibility and scalability pro
 #### Section B — Failure Mode Diagnosis
 
 6. RAGAS metrics map to three RAG failure modes. Complete the following mapping from the chapter lesson:
-   - Low faithfulness + high context recall → failure mode: ____ → primary remediation: ____
-   - Low context recall + high faithfulness → failure mode: ____ → primary remediation: ____
-   - Low context precision + low faithfulness → failure mode: ____ → primary remediation: ____
+    - Low faithfulness + high context recall → failure mode: ____ → primary remediation: ____
+    - Low context recall + high faithfulness → failure mode: ____ → primary remediation: ____
+    - Low context precision + low faithfulness → failure mode: ____ → primary remediation: ____
 
 7. A RAG system produces the following RAGAS scores: faithfulness = 0.92, answer relevance = 0.88, context precision = 0.45, context recall = 0.87. Diagnose the system's primary failure mode and specify which pipeline stage is most likely responsible. Propose one concrete remediation and predict which metric would improve first if the remediation is effective.
 

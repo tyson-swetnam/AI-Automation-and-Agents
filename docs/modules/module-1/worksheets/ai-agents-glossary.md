@@ -26,7 +26,7 @@ wiki_page: Module-1-Act-6:-AI-Agents-Glossary
 ---
 # Worksheet: AI Agents Glossary
 
-*Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A downloadable Word version is linked below.*
+*Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A [Word version of this worksheet](../../../materials/module1/Illustrated_AI_Glossary.docx) is available to download.*
 
 !!! note "Draft"
 

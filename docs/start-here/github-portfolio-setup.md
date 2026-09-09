@@ -429,14 +429,13 @@ agent_evaluation_results.csv
 Final Version (2).ipynb               # spaces, ambiguous versioning
 
 Untitled.ipynb                        # non-descriptive
+```
 
 ### Essential Documentation
 
-- [GitHub Getting Started Guide](https://docs.github.com/en/get-started) — official onboarding documentation covering account setup, repositories, and basic Git.  
-- [GitHub Markdown Syntax Reference](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) — all formatting options available in README and log files.  
-- [Pro Git (free book)](https://git-scm.com/book/en/v2) — the definitive reference for Git version control; Chapters 1–3 cover everything needed for this course.  
-- [GitHub CLI Manual](https://cli.github.com/manual/) — command-line interface for managing repositories without leaving your terminal.
-
-```
+- [GitHub Getting Started Guide](https://docs.github.com/en/get-started){target=_blank} — official onboarding documentation covering account setup, repositories, and basic Git.  
+- [GitHub Markdown Syntax Reference](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax){target=_blank} — all formatting options available in README and log files.  
+- [Pro Git (free book)](https://git-scm.com/book/en/v2){target=_blank} — the definitive reference for Git version control; Chapters 1–3 cover everything needed for this course.  
+- [GitHub CLI Manual](https://cli.github.com/manual/){target=_blank} — command-line interface for managing repositories without leaving your terminal.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Github-Portfolio-Tutorial){target=_blank} (wiki page last changed 2026-09-02). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/start-here/github-portfolio-setup.md){target=_blank}.</p>

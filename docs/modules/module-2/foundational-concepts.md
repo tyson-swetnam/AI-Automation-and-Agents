@@ -135,8 +135,8 @@ architectural selection in professional practice:
 
 * Wei, J. et al. (2022). [Chain-of-thought prompting elicits reasoning in large language
 models](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf){target=_blank}. NeurIPS 2022. 
-    * Read: Abstract + Section 2 (Chain-of-Thought Prompting) and Figure 1. You may skim Section 4 (Experimental Setup) but are not required to read it in full.
-    * Extract: What is a reasoning trace in the CoT sense? What does CoT add to
+  * Read: Abstract + Section 2 (Chain-of-Thought Prompting) and Figure 1. You may skim Section 4 (Experimental Setup) but are not required to read it in full.
+  * Extract: What is a reasoning trace in the CoT sense? What does CoT add to
 standard few-shot prompting? What task class shows the largest CoT benefit, and
 why?
 
@@ -226,8 +226,8 @@ Reference](https://reference.langchain.com/python/langchain/agents/factory/creat
    * Read the entire `create_agent` API Reference section. Pay particular attention to: the role of the `tools` parameter in constructing the tool registry, how tool descriptions embedded in `BaseTool` objects are used for selection at inference time, and how `response_format` constrains the agent's output.
 
 * **Video 2 — "[Understanding ReACT with LangChain](https://www.youtube.com/watch?v=Eug2clsLtFs){target=_blank}"** - Sam Witteveen (~22 min)
-   * Watch focus: the conceptual distinction between CoT and ReAct and the observation integration step.
-   * As you watch, map what you see in the video to the structural definitions from Reading 2. If the video uses a different term for the same concept, note both.
+    * Watch focus: the conceptual distinction between CoT and ReAct and the observation integration step.
+    * As you watch, map what you see in the video to the structural definitions from Reading 2. If the video uses a different term for the same concept, note both.
 
 ### Chapter 2 Quiz
 

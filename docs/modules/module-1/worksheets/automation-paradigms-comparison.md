@@ -33,13 +33,13 @@ wiki_page: Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram
 
 | Feature | No-Code | Low-Code | Code-First |
 | :-- | :-: | :-: | :-: |
-| primary tools | | | | 
-| technical skill | | | | 
-| setup effort | | | | 
-| learning curve | | | | 
-| flexibility | | | | 
-| cost | | | | 
-| data-governance | | | | 
-| best for | | | | 
+| primary tools | | | |
+| technical skill | | | |
+| setup effort | | | |
+| learning curve | | | |
+| flexibility | | | |
+| cost | | | |
+| data-governance | | | |
+| best for | | | |
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram){target=_blank} (wiki page last changed 2026-05-01). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/worksheets/automation-paradigms-comparison.md){target=_blank}.</p>

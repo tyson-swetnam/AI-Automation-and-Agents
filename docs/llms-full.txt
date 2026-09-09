@@ -354,10 +354,10 @@ Grade weights for each module are stated in that module's overview; see
 
 ## Read the syllabus online
 
-<object class="course-pdf" data="../../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" type="application/pdf">
-  <p>Your browser cannot display the PDF here.
-  <a href="../../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" target="_blank" rel="noopener">Download the syllabus (PDF, 19 pages)</a> instead.</p>
-</object>
+<iframe class="course-pdf" src="../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" title="AI Automation and Agents course syllabus (PDF)" loading="lazy"></iframe>
+
+If your browser cannot display the PDF above,
+[download the syllabus (PDF, 19 pages)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){target=_blank} instead.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/
 
@@ -792,15 +792,14 @@ agent_evaluation_results.csv
 Final Version (2).ipynb               # spaces, ambiguous versioning
 
 Untitled.ipynb                        # non-descriptive
+```
 
 ### Essential Documentation
 
-- [GitHub Getting Started Guide](https://docs.github.com/en/get-started) — official onboarding documentation covering account setup, repositories, and basic Git.  
-- [GitHub Markdown Syntax Reference](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) — all formatting options available in README and log files.  
-- [Pro Git (free book)](https://git-scm.com/book/en/v2) — the definitive reference for Git version control; Chapters 1–3 cover everything needed for this course.  
-- [GitHub CLI Manual](https://cli.github.com/manual/) — command-line interface for managing repositories without leaving your terminal.
-
-```
+- [GitHub Getting Started Guide](https://docs.github.com/en/get-started){target=_blank} — official onboarding documentation covering account setup, repositories, and basic Git.  
+- [GitHub Markdown Syntax Reference](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax){target=_blank} — all formatting options available in README and log files.  
+- [Pro Git (free book)](https://git-scm.com/book/en/v2){target=_blank} — the definitive reference for Git version control; Chapters 1–3 cover everything needed for this course.  
+- [GitHub CLI Manual](https://cli.github.com/manual/){target=_blank} — command-line interface for managing repositories without leaving your terminal.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Github-Portfolio-Tutorial){target=_blank} (wiki page last changed 2026-09-02). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/start-here/github-portfolio-setup.md){target=_blank}.</p>
 
@@ -3450,7 +3449,7 @@ Student Name: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ Date: \_\_\
 | **10. ReAct Loop** | *\[Hint: LangChain §1.3; Yao et al. (2022)\]* |
 | **Context** | The predominant execution paradigm in LangChain-style agents, introduced by Yao et al. (2022). |
 | **Complete the definition:** | *An agent execution pattern that interleaves \_\_\_\_\_\_\_\_\_\_ (reasoning traces) with \_\_\_\_\_\_\_\_\_\_ (tool invocations) and \_\_\_\_\_\_\_\_\_\_ (environmental feedback), iterating until a terminal condition is met.* |
-| **11. Tool (LangChain)** | *\[Hint: LangChain §1.2\]* | 
+| **11. Tool (LangChain)** | *\[Hint: LangChain §1.2\]* |
 | **Context** | A callable function exposed to an LLM agent that extends its capabilities beyond parametric knowledge. |
 | **Complete the definition:** | *A callable component with a \_\_\_\_\_\_\_\_\_\_, a natural-language \_\_\_\_\_\_\_\_\_\_, and a typed \_\_\_\_\_\_\_\_\_\_, which extends an LLM agent's reach into external systems such as APIs, databases, or code interpreters.* |
 | **12. Multi-agent System** | *\[Hint: W&J §1; Jennings (1993); LangGraph documentation\]* |
@@ -3775,7 +3774,7 @@ wiki_page: Module-1-Act-6:-AI-Agents-Glossary
 ---
 # Worksheet: AI Agents Glossary
 
-*Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A downloadable Word version is linked below.*
+*Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A [Word version of this worksheet](../../../materials/module1/Illustrated_AI_Glossary.docx) is available to download.*
 
 !!! note "Draft"
 
@@ -3860,14 +3859,14 @@ wiki_page: Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram
 
 | Feature | No-Code | Low-Code | Code-First |
 | :-- | :-: | :-: | :-: |
-| primary tools | | | | 
-| technical skill | | | | 
-| setup effort | | | | 
-| learning curve | | | | 
-| flexibility | | | | 
-| cost | | | | 
-| data-governance | | | | 
-| best for | | | | 
+| primary tools | | | |
+| technical skill | | | |
+| setup effort | | | |
+| learning curve | | | |
+| flexibility | | | |
+| cost | | | |
+| data-governance | | | |
+| best for | | | |
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram){target=_blank} (wiki page last changed 2026-05-01). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/worksheets/automation-paradigms-comparison.md){target=_blank}.</p>
 
@@ -4099,8 +4098,8 @@ architectural selection in professional practice:
 
 * Wei, J. et al. (2022). [Chain-of-thought prompting elicits reasoning in large language
 models](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf){target=_blank}. NeurIPS 2022. 
-    * Read: Abstract + Section 2 (Chain-of-Thought Prompting) and Figure 1. You may skim Section 4 (Experimental Setup) but are not required to read it in full.
-    * Extract: What is a reasoning trace in the CoT sense? What does CoT add to
+  * Read: Abstract + Section 2 (Chain-of-Thought Prompting) and Figure 1. You may skim Section 4 (Experimental Setup) but are not required to read it in full.
+  * Extract: What is a reasoning trace in the CoT sense? What does CoT add to
 standard few-shot prompting? What task class shows the largest CoT benefit, and
 why?
 
@@ -4190,8 +4189,8 @@ Reference](https://reference.langchain.com/python/langchain/agents/factory/creat
    * Read the entire `create_agent` API Reference section. Pay particular attention to: the role of the `tools` parameter in constructing the tool registry, how tool descriptions embedded in `BaseTool` objects are used for selection at inference time, and how `response_format` constrains the agent's output.
 
 * **Video 2 — "[Understanding ReACT with LangChain](https://www.youtube.com/watch?v=Eug2clsLtFs){target=_blank}"** - Sam Witteveen (~22 min)
-   * Watch focus: the conceptual distinction between CoT and ReAct and the observation integration step.
-   * As you watch, map what you see in the video to the structural definitions from Reading 2. If the video uses a different term for the same concept, note both.
+    * Watch focus: the conceptual distinction between CoT and ReAct and the observation integration step.
+    * As you watch, map what you see in the video to the structural definitions from Reading 2. If the video uses a different term for the same concept, note both.
 
 ### Chapter 2 Quiz
 
@@ -4766,9 +4765,9 @@ In this final lab extension, you will add a tool of your own choosing to the age
 1. Define a new tool with a clear purpose, input format, output format, and one failure condition.
 2. Add a short tool description that helps the agent decide when to use it.
 3. Connect the tool to the agent and run three prompts:
-   - one where the tool should be used
-   - one where it should not be used
-   - one where the agent must choose between the new tool and an existing tool
+    - one where the tool should be used
+    - one where it should not be used
+    - one where the agent must choose between the new tool and an existing tool
 4. Compare the agent's behavior before and after adding the tool, and note which description wording made the tool selection more reliable.
 
 This project is designed to help you transfer the lab from the sample workflow to a more realistic use case in your own area of study or work.
@@ -7154,9 +7153,9 @@ Es et al. (2024) introduced RAGAS to solve a reproducibility and scalability pro
 #### Section B — Failure Mode Diagnosis
 
 6. RAGAS metrics map to three RAG failure modes. Complete the following mapping from the chapter lesson:
-   - Low faithfulness + high context recall → failure mode: ____ → primary remediation: ____
-   - Low context recall + high faithfulness → failure mode: ____ → primary remediation: ____
-   - Low context precision + low faithfulness → failure mode: ____ → primary remediation: ____
+    - Low faithfulness + high context recall → failure mode: ____ → primary remediation: ____
+    - Low context recall + high faithfulness → failure mode: ____ → primary remediation: ____
+    - Low context precision + low faithfulness → failure mode: ____ → primary remediation: ____
 
 7. A RAG system produces the following RAGAS scores: faithfulness = 0.92, answer relevance = 0.88, context precision = 0.45, context recall = 0.87. Diagnose the system's primary failure mode and specify which pipeline stage is most likely responsible. Propose one concrete remediation and predict which metric would improve first if the remediation is effective.
 
@@ -12977,13 +12976,13 @@ They are the prerequisite sub-skills for all subsequent modules. Each is narrowe
 measurable than the general course skills; a learner who cannot demonstrate these five skills at the end of
 Module 1 is not yet ready to engage with Modules 2–5.
 
-| Skill | Description | 
+| Skill | Description |
 | :-- | :-- |
 | **1.1 Agent Architecture Comprehension** <br>**Bloom's Level:** *Remember, Understand (Levels 1–2)* | The student can accurately define an AI agent — distinguishing it precisely from a chatbot, an API call, a rule-based script, and a search engine — and diagram the four-stage agent loop (perceive → plan → act → observe) with correctly labeled components. The student can apply this mental model to classify real-world AI system descriptions as agent-based or non-agent-based. |
 | **1.2 Workflow Decomposition And Mapping** <br>**Bloom's Level:** *Understand, Apply (Levels 2–3)* | The student can systematically decompose any multi-step workplace or academic process into its canonical components using the provided workflow mapping template: trigger (what initiates the process), sequential steps, tools and resources required at each step, conditional branches (if any), and the final output or deliverable. The resulting workflow map is legible, complete, and unambiguous enough to be executed by another person. |
 | **1.3 Automation Opportunity Assessment**<br>**Bloom's Level:** *Apply (Level 3 approaching Level 4)* | The student can evaluate a candidate workflow against two independent scoring dimensions — degree of rule-based specification and consequence severity of errors — producing a two-dimensional assessment score that justifies a rank-ordering of automation potential. The student can articulate the reasoning behind each score in writing, using the vocabulary of the course (rule-based, high-stakes, reversibility, blast radius). |
 | **1.4 Automation Paradigm Classification** <br>**Bloom's Level:** *Understand Level 2 (with Level 4 Analyze in comparative reflection)* | The student can describe and distinguish the three major automation paradigms — no-code (n8n, Claude Cowork), low-code (LangChain, CrewAI), and code-first (custom Python agents, Claude Code) — by naming representative tools, describing the primary user interaction model for each, identifying the target user profile, and explaining the trade-offs between paradigms on the dimensions of accessibility, flexibility, cost, and data governance. |
-| **1.5 Metacognitive Reflection On Professional Practice** <br>**Bloom's Level:** *Understand, Apply (Levels 2–3)* | The student can apply structured self-observation strategies to their own professional or academic context, identifying repetitive, time-consuming, or rule-based tasks that are viable automation candidates. The student can estimate the time cost and risk profile of each identified task with sufficient specificity to serve as the basis for subsequent module projects. This skill operationalizes Zimmerman's self-regulated learning theory in the professional automation context. | 
+| **1.5 Metacognitive Reflection On Professional Practice** <br>**Bloom's Level:** *Understand, Apply (Levels 2–3)* | The student can apply structured self-observation strategies to their own professional or academic context, identifying repetitive, time-consuming, or rule-based tasks that are viable automation candidates. The student can estimate the time cost and risk profile of each identified task with sufficient specificity to serve as the basis for subsequent module projects. This skill operationalizes Zimmerman's self-regulated learning theory in the professional automation context. |
 
 ## Module 2 Specific Skills
 
@@ -13443,13 +13442,13 @@ The content itself marks AgentExecutor as LEGACY within LangChain. Teaching stud
 ### Areas for Improvement
 
 1. **The Overview must be rewritten to match the actual content,** OR the content must be rewritten to match the Overview. These are two different courses:
-   - **Option A (Rewrite Overview):** Rename to something like "Agent Reasoning: How AI Systems Think and Act." Remove Cowork/n8n promises. Be transparent that this module introduces Python-in-Colab as a learning tool.
-   - **Option B (Rewrite Content):** Actually deliver no-code automation with Cowork and n8n. Move reasoning paradigms to conceptual readings only. Make the lab a Cowork pipeline build. This would be a major rewrite but would honor the course's accessibility promise.
+    - **Option A (Rewrite Overview):** Rename to something like "Agent Reasoning: How AI Systems Think and Act." Remove Cowork/n8n promises. Be transparent that this module introduces Python-in-Colab as a learning tool.
+    - **Option B (Rewrite Content):** Actually deliver no-code automation with Cowork and n8n. Move reasoning paradigms to conceptual readings only. Make the lab a Cowork pipeline build. This would be a major rewrite but would honor the course's accessibility promise.
 
 2. **Programming prerequisite gap.** The course states "no prior programming experience" for Modules 1-3, but Module 2's guided lab requires students to work in Google Colab with Python/LangChain code. Even if the notebook is pre-written, students need to understand imports, function calls, and output interpretation. This needs either:
-   - Explicit acknowledgment that Module 2 introduces code-reading (not code-writing) as a skill
-   - A "Python for Non-Programmers" primer (30-min pre-lab resource)
-   - Redesign to actually be no-code
+    - Explicit acknowledgment that Module 2 introduces code-reading (not code-writing) as a skill
+    - A "Python for Non-Programmers" primer (30-min pre-lab resource)
+    - Redesign to actually be no-code
 
 3. **AgentExecutor deprecation.** Either update to current LangChain patterns (langgraph prebuilt agents) or frame the content explicitly as "historical architecture study" with a forward pointer to Module 4's LangGraph content.
 
@@ -13514,15 +13513,15 @@ MCP receives at most a passing mention in the actual lesson content. A student w
 1. **Overview must be rewritten** to reflect actual content. Suggested title adjustment: "AI Memory Systems: RAG, Vector Databases, and Evaluation." Remove MCP and Cowork promises unless corresponding activities are created.
 
 2. **Where does MCP actually get taught?** If MCP is a course-level learning objective, it needs a home. Options:
-   - Add a 45-min MCP lab to Module 3 (requires cutting something else)
-   - Move MCP to Module 4 where it could complement the multi-agent discussion
-   - Create a dedicated MCP mini-module or integrate it into Module 1's Cowork/Openwork labs
-   - Remove MCP from course objectives entirely
+    - Add a 45-min MCP lab to Module 3 (requires cutting something else)
+    - Move MCP to Module 4 where it could complement the multi-agent discussion
+    - Create a dedicated MCP mini-module or integrate it into Module 1's Cowork/Openwork labs
+    - Remove MCP from course objectives entirely
 
 3. **Writing load is heavy.** Three substantial deliverables in one module:
-   - RAGAS Interpretation Worksheet (likely 400-500 words of analysis)
-   - RAG Failure Diagnosis Report (likely 500-700 words)
-   - Memory Architecture Specification Brief (likely 600-800 words)
+    - RAGAS Interpretation Worksheet (likely 400-500 words of analysis)
+    - RAG Failure Diagnosis Report (likely 500-700 words)
+    - Memory Architecture Specification Brief (likely 600-800 words)
 
    Combined, students may write 1,500-2,000 words of technical analysis in a single module. For a course targeting 15% writing, this skews heavily toward written output at the expense of hands-on time.
 
@@ -13549,10 +13548,10 @@ MCP receives at most a passing mention in the actual lesson content. A student w
 1. **(Critical) Rewrite the Overview** to accurately describe RAG/Memory content. Remove or drastically reduce MCP promises.
 
 2. **(Critical) Reduce writing load.** Recommendation: Merge the RAGAS Interpretation Worksheet into the Case Study activity (Unit 5) as an embedded component rather than a standalone deliverable. This eliminates one grading artifact while preserving the learning. Revised weighting:
-   - RAG Failure Diagnosis Report: 30% (absorbs some RAGAS interpretation)
-   - Memory Architecture Specification Brief: 35%
-   - Lab Completion + Reflection: 20%
-   - Discussion Participation: 15%
+    - RAG Failure Diagnosis Report: 30% (absorbs some RAGAS interpretation)
+    - Memory Architecture Specification Brief: 35%
+    - Lab Completion + Reflection: 20%
+    - Discussion Participation: 15%
 
 3. **(High) Add a "Module 2 Lab Skills Check" bridge** at the start of Unit 3. A 15-minute orientation that says: "You'll need these Colab skills from Module 2. If you struggled there, review [specific resources] before proceeding."
 
@@ -13594,14 +13593,14 @@ This is the third consecutive module (2, 3, 4) where the Overview promises conte
 ### Areas for Improvement
 
 1. **Track A (Claude Code) must either be implemented or removed from the Overview.** Options:
-   - **(Recommended) Add a Track A alternative lab** (Unit 3 variant) where students use Claude Code to orchestrate a multi-agent workflow. This would require creating new lab content but would honor the dual-track promise and serve non-CS students who struggled with Colab.
-   - **Remove Track A from the Overview** and acknowledge this is a code-first module. Less work, but further erodes the course's accessibility claims.
-   - **Make Track A the primary and Track B the alternative.** This inverts the current design but better serves non-CS students.
+    - **(Recommended) Add a Track A alternative lab** (Unit 3 variant) where students use Claude Code to orchestrate a multi-agent workflow. This would require creating new lab content but would honor the dual-track promise and serve non-CS students who struggled with Colab.
+    - **Remove Track A from the Overview** and acknowledge this is a code-first module. Less work, but further erodes the course's accessibility claims.
+    - **Make Track A the primary and Track B the alternative.** This inverts the current design but better serves non-CS students.
 
 2. **Prerequisite escalation is steep.** Module 4 expects students to:
-   - Build state graphs in LangGraph (requires understanding nodes, edges, state management)
-   - Compare across frameworks (requires running both LangGraph and CrewAI/AutoGen)
-   - Diagnose coordination failures (requires understanding distributed systems concepts)
+    - Build state graphs in LangGraph (requires understanding nodes, edges, state management)
+    - Compare across frameworks (requires running both LangGraph and CrewAI/AutoGen)
+    - Diagnose coordination failures (requires understanding distributed systems concepts)
 
    A non-CS student who struggled through Modules 2-3's Colab labs will face even greater difficulty here. The jump from "run a pre-built notebook" to "build a state graph" is significant.
 
@@ -13630,10 +13629,10 @@ This is the third consecutive module (2, 3, 4) where the Overview promises conte
 2. **(Critical) Reduce scope of Unit 4.** The "learn a new framework AND benchmark it in 2.5 hours" requirement is unrealistic. Recommendation: Provide a pre-configured CrewAI notebook with a working multi-agent system. Students analyze and modify it rather than building from scratch. The benchmark becomes "compare this pre-built CrewAI system against your LangGraph lab" rather than "build two systems and compare." Time savings: ~1 hour.
 
 3. **(High) Consolidate written deliverables.** Merge the Comparative Evaluation Report and Coordination Failure Diagnosis into a single "Multi-Agent System Analysis Report" with sections for:
-   - Architecture comparison (LangGraph vs. alternative): 300 words
-   - Failure mode identification and diagnosis: 300 words  
-   - Performance benchmarking results: 200 words
-   - Architectural recommendation: 200 words
+    - Architecture comparison (LangGraph vs. alternative): 300 words
+    - Failure mode identification and diagnosis: 300 words  
+    - Performance benchmarking results: 200 words
+    - Architectural recommendation: 200 words
 
    Total: 1,000 words, one report, covering both evaluation and failure diagnosis. Weight: 45%. This frees up time currently spent on report formatting and transitions.
 
@@ -13691,9 +13690,9 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 5. **EU AI Act content will date quickly.** The Act is still being implemented with delegated acts and standards emerging through 2025-2027. Content should be framed as "the EU AI Act framework and compliance methodology" rather than specific article-level requirements that may shift.
 
 6. **Writing load peaks here.** Three major deliverables plus the capstone:
-   - 6-Dimension Evaluation Report (25%)
-   - EU AI Act Governance Analysis (20%)  
-   - Comprehensive Proposal / Capstone (30%)
+    - 6-Dimension Evaluation Report (25%)
+    - EU AI Act Governance Analysis (20%)  
+    - Comprehensive Proposal / Capstone (30%)
 
    Students are producing their most sophisticated written work while simultaneously learning the most technically complex material. This is a peak-load problem.
 
@@ -13715,17 +13714,17 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 ### Concrete Recommendations
 
 1. **(Critical) Radically reduce infrastructure scope.** Replace Chapters 2 (Production Infrastructure) with "Production Deployment Concepts for AI Practitioners" — a 45-minute reading that covers:
-   - Why containerization matters (reproducibility, isolation) — conceptual only, no Dockerfiles
-   - What orchestration does (scaling, fault tolerance) — conceptual only, no K8s YAML
-   - API gateway patterns (rate limiting, authentication) — as a consumer, not implementer
-   - The deployment spectrum: "Here's what your DevOps team handles; here's what you need to specify"
+    - Why containerization matters (reproducibility, isolation) — conceptual only, no Dockerfiles
+    - What orchestration does (scaling, fault tolerance) — conceptual only, no K8s YAML
+    - API gateway patterns (rate limiting, authentication) — as a consumer, not implementer
+    - The deployment spectrum: "Here's what your DevOps team handles; here's what you need to specify"
 
    **Time savings: ~2 hours** (eliminating hands-on infrastructure work students will never do without DevOps support).
 
 2. **(Critical) Eliminate Lab B (CI/CD pipeline) or replace with conceptual exercise.** Non-CS students will not build CI/CD pipelines. Instead, provide a pre-built pipeline and have students:
-   - Read and interpret the pipeline configuration (15 min)
-   - Identify what each stage evaluates (15 min)
-   - Propose one additional evaluation stage with justification (15 min)
+    - Read and interpret the pipeline configuration (15 min)
+    - Identify what each stage evaluates (15 min)
+    - Propose one additional evaluation stage with justification (15 min)
 
    **Time savings: ~1 hour** while preserving the learning objective ("understand how evaluation integrates into deployment").
 
@@ -13734,16 +13733,16 @@ This is a DevOps/MLOps/Compliance survey course compressed into 8 hours. Each of
 4. **(High) Focus observability on LangSmith only.** Remove OpenTelemetry and LangFuse from required content. Frame them as "additional resources for students with DevOps backgrounds." Lab A becomes purely LangSmith-focused: "Trace an agent's execution, identify a performance bottleneck, propose a fix." This is achievable for non-CS students using LangSmith's UI.
 
 5. **(High) Restructure the 6-Dimension Evaluation Report.** Provide students with:
-   - A pre-evaluated system with metrics across 6 dimensions
-   - 3 of the 6 dimensions already analyzed (as examples)
-   - Students complete the remaining 3 dimensions
+    - A pre-evaluated system with metrics across 6 dimensions
+    - 3 of the 6 dimensions already analyzed (as examples)
+    - Students complete the remaining 3 dimensions
 
    This reduces scope while maintaining analytical rigor. The scaffolding helps non-CS students understand the evaluation methodology before applying it independently.
 
 6. **(Medium) Frame EU AI Act content as methodology, not memorization.** Rather than requiring students to map specific articles, teach them the COMPLIANCE METHODOLOGY:
-   - How to determine an AI system's risk category
-   - What documentation is required at each category
-   - How to conduct a gap analysis (the process, not the specific gaps)
+    - How to determine an AI system's risk category
+    - What documentation is required at each category
+    - How to conduct a gap analysis (the process, not the specific gaps)
 
    This survives regulatory updates and teaches transferable governance skills.
 
@@ -14521,9 +14520,9 @@ Question types include:
 
 In the BDI (Belief-Desire-Intention) framework, which term specifically describes the agent's internal representation of the state of its environment, which may be incomplete or incorrect?
 
-A. Intention
-B. Belief
-C. Desire
+- **A.** Intention
+- **B.** Belief
+- **C.** Desire
 D. Obligation
 
 ??? success "Answer and rationale"
@@ -14919,13 +14918,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 1"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Wei et al. explicitly identify CoT as an emergent property absent below a scale threshold — not a fine-tuning or retrieval technique. |
-| Q2 | B | ReAct's defining contribution is the Thought/Act/Observe cycle that grounds reasoning in real-world tool feedback unavailable to CoT. |
-| Q3 | C | Chapter 1 states ToT is justified when intermediate states can be evaluated before the full solution is known and backtracking is necessary. Options A and D describe conditions favoring ReAct; B favors CoT. |
-| Q4 | B | LATS nodes represent action-observation pairs, enabling real-world grounding of deliberate search — the mechanism that distinguishes LATS from ToT. |
-| Q5 | C | CoT has no tool calls (lowest cost); ReAct adds one tool call per reasoning loop; ToT multiplies candidate branches; LATS adds real-world tool calls at every search node (highest cost). |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Wei et al. explicitly identify CoT as an emergent property absent below a scale threshold — not a fine-tuning or retrieval technique. |
+    | Q2 | B | ReAct's defining contribution is the Thought/Act/Observe cycle that grounds reasoning in real-world tool feedback unavailable to CoT. |
+    | Q3 | C | Chapter 1 states ToT is justified when intermediate states can be evaluated before the full solution is known and backtracking is necessary. Options A and D describe conditions favoring ReAct; B favors CoT. |
+    | Q4 | B | LATS nodes represent action-observation pairs, enabling real-world grounding of deliberate search — the mechanism that distinguishes LATS from ToT. |
+    | Q5 | C | CoT has no tool calls (lowest cost); ReAct adds one tool call per reasoning loop; ToT multiplies candidate branches; LATS adds real-world tool calls at every search node (highest cost). |
 
 ## Quiz 2 — Chapter 2: Tool Integration Architecture
 
@@ -14966,13 +14965,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 2"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | The `tools` parameter populates the tool registry; tool descriptions embedded in each `BaseTool` are the mechanism for inference-time selection. |
-| Q2 | C | `system_prompt` injects persistent behavioral instructions before any user turn — it is the primary behavioral control lever. |
-| Q3 | A | Vague tool descriptions cause incorrect tool selection. An underspecified REPL description allows the agent to default to web search even for computation tasks. |
-| Q4 | C | The scope boundary clause is explicitly identified in Chapter 2 as the mechanism that prevents over-invocation by excluding specific use cases. |
-| Q5 | B | Chapter 2 states that unlike `AgentExecutor`, `create_agent` delegates state management and loop control to LangGraph's execution graph, enabling native compatibility with checkpointing, streaming, and multi-agent orchestration. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | The `tools` parameter populates the tool registry; tool descriptions embedded in each `BaseTool` are the mechanism for inference-time selection. |
+    | Q2 | C | `system_prompt` injects persistent behavioral instructions before any user turn — it is the primary behavioral control lever. |
+    | Q3 | A | Vague tool descriptions cause incorrect tool selection. An underspecified REPL description allows the agent to default to web search even for computation tasks. |
+    | Q4 | C | The scope boundary clause is explicitly identified in Chapter 2 as the mechanism that prevents over-invocation by excluding specific use cases. |
+    | Q5 | B | Chapter 2 states that unlike `AgentExecutor`, `create_agent` delegates state management and loop control to LangGraph's execution graph, enabling native compatibility with checkpointing, streaming, and multi-agent orchestration. |
 
 ## Quiz 3 — Chapter 3: Reasoning Trace Interpretation and Critique
 
@@ -15013,13 +15012,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 3"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Chapter 3 defines the reasoning trace as the complete log of reasoning steps, tool calls, and observations — the primary production diagnostic artifact. |
-| Q2 | C | The agent produced a reasoning step that justified bypassing tool invocation. This is reasoning-action decoupling: the thought and the required action are misaligned. |
-| Q3 | B | The tool selected (web search) was appropriate; the failure was in the argument passed to it. Malformed arguments are tool argument specification errors. |
-| Q4 | B | The Final Answer reveals only the outcome; the trace reveals every decision point where a failure could have been introduced, making it the actionable diagnostic artifact. |
-| Q5 | C | The observation contained the correct answer; the agent's Thought incorrectly assessed it as inconclusive. This is observation misinterpretation, not an argument or tool selection error. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Chapter 3 defines the reasoning trace as the complete log of reasoning steps, tool calls, and observations — the primary production diagnostic artifact. |
+    | Q2 | C | The agent produced a reasoning step that justified bypassing tool invocation. This is reasoning-action decoupling: the thought and the required action are misaligned. |
+    | Q3 | B | The tool selected (web search) was appropriate; the failure was in the argument passed to it. Malformed arguments are tool argument specification errors. |
+    | Q4 | B | The Final Answer reveals only the outcome; the trace reveals every decision point where a failure could have been introduced, making it the actionable diagnostic artifact. |
+    | Q5 | C | The observation contained the correct answer; the agent's Thought incorrectly assessed it as inconclusive. This is observation misinterpretation, not an argument or tool selection error. |
 
 ## Quiz 4 — Chapter 4: Prompt Engineering for Agent Behavioral Control
 
@@ -15060,13 +15059,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 4"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Chapter 4 explicitly enumerates system instructions, tool descriptions, few-shot CoT scaffolds, and output format constraints as the four independently configurable dimensions. |
-| Q2 | B | Chapter 4 maps the four control components directly to agent configuration: system instructions → `system_prompt`, tool descriptions → tool definitions, few-shot demonstrations → structured example turns, and output constraints → `response_format`. |
-| Q3 | B | Chapter 4 explicitly warns against treating behavioral problems as prompting problems that are fixed by appending sentences — this accumulates fragile, unpredictably interacting constraints. |
-| Q4 | C | Chapter 4 states that plain-text examples placed in the system instruction are ignored. The demonstration must be formatted as a `Human:`/`AI:` turn pair with all six trace labels to influence output format. |
-| Q5 | B | Chapter 4 defines the professional approach as: define boundaries at design time, test systematically, and instrument in production — behavioral control as architecture, not as a post-hoc patch. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Chapter 4 explicitly enumerates system instructions, tool descriptions, few-shot CoT scaffolds, and output format constraints as the four independently configurable dimensions. |
+    | Q2 | B | Chapter 4 maps the four control components directly to agent configuration: system instructions → `system_prompt`, tool descriptions → tool definitions, few-shot demonstrations → structured example turns, and output constraints → `response_format`. |
+    | Q3 | B | Chapter 4 explicitly warns against treating behavioral problems as prompting problems that are fixed by appending sentences — this accumulates fragile, unpredictably interacting constraints. |
+    | Q4 | C | Chapter 4 states that plain-text examples placed in the system instruction are ignored. The demonstration must be formatted as a `Human:`/`AI:` turn pair with all six trace labels to influence output format. |
+    | Q5 | B | Chapter 4 defines the professional approach as: define boundaries at design time, test systematically, and instrument in production — behavioral control as architecture, not as a post-hoc patch. |
 
 ## Quiz 5 — Chapter 5: Architectural Trade-off Assessment for Production Deployment
 
@@ -15107,13 +15106,13 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ??? note "Answer key — Quiz 5"
 
-| Question | Answer | Rationale |
-| :-- | :-- | :-- |
-| Q1 | B | Article 13 requires operators to be able to understand and interpret system outputs — for agent systems this directly targets the interpretability and auditability of the reasoning trace, not latency, tool count, or context size. |
-| Q2 | B | Chapter 5 states that a LATS agent's branching trace is harder to audit than a ReAct agent's linear trace — this is the primary regulatory consideration under Article 13 for high-risk domains. |
-| Q3 | C | Chapter 5 explicitly frames architectural selection as a multi-objective optimization across six dimensions requiring documented, evidence-based justification — not a benchmark race or a pure compliance exercise. |
-| Q4 | C | A valid trade-off statement names both competing properties (inference cost vs. reasoning depth) and the contextual constraint (fixed budget in high-volume deployment) that resolves the trade-off in favor of ReAct. Options A and B are partially correct but miss the cost-depth trade-off structure. |
-| Q5 | B | LATS is justified when: the state space is large with many possible solution paths; intermediate states can be evaluated; early commitment to a wrong path is catastrophically costly; and latency is not the primary constraint. Scenario B satisfies all four conditions; the others require low latency or involve linear tasks. |
+    | Question | Answer | Rationale |
+    | :-- | :-- | :-- |
+    | Q1 | B | Article 13 requires operators to be able to understand and interpret system outputs — for agent systems this directly targets the interpretability and auditability of the reasoning trace, not latency, tool count, or context size. |
+    | Q2 | B | Chapter 5 states that a LATS agent's branching trace is harder to audit than a ReAct agent's linear trace — this is the primary regulatory consideration under Article 13 for high-risk domains. |
+    | Q3 | C | Chapter 5 explicitly frames architectural selection as a multi-objective optimization across six dimensions requiring documented, evidence-based justification — not a benchmark race or a pure compliance exercise. |
+    | Q4 | C | A valid trade-off statement names both competing properties (inference cost vs. reasoning depth) and the contextual constraint (fixed budget in high-volume deployment) that resolves the trade-off in favor of ReAct. Options A and B are partially correct but miss the cost-depth trade-off structure. |
+    | Q5 | B | LATS is justified when: the state space is large with many possible solution paths; intermediate states can be evaluated; early commitment to a wrong path is catastrophically costly; and latency is not the primary constraint. Scenario B satisfies all four conditions; the others require low latency or involve linear tasks. |
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-Addendum-%E2%80%90-OLD){target=_blank} (wiki page last changed 2026-08-06). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/archive/module-2/self-assessment-quizzes.md){target=_blank}.</p>
 

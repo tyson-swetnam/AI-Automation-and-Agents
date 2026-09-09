@@ -94,9 +94,9 @@ In this final lab extension, you will add a tool of your own choosing to the age
 1. Define a new tool with a clear purpose, input format, output format, and one failure condition.
 2. Add a short tool description that helps the agent decide when to use it.
 3. Connect the tool to the agent and run three prompts:
-   - one where the tool should be used
-   - one where it should not be used
-   - one where the agent must choose between the new tool and an existing tool
+    - one where the tool should be used
+    - one where it should not be used
+    - one where the agent must choose between the new tool and an existing tool
 4. Compare the agent's behavior before and after adding the tool, and note which description wording made the tool selection more reliable.
 
 This project is designed to help you transfer the lab from the sample workflow to a more realistic use case in your own area of study or work.
