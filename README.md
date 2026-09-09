@@ -208,9 +208,20 @@ is approved for Free Cultural Works and meets the Open Definition, so the
 course qualifies as an open educational resource; reuse and adaptation,
 including commercial reuse, need only credit the original.
 
-Source code is licensed separately under the MIT License (`LICENSE-CODE`),
-because Creative Commons licenses are not intended for software. That covers
-`scripts/`, the Jupyter notebooks, and the interactive HTML activities.
+Copyright is split, because the repository holds two bodies of work. The
+course itself - the module pages, images, lab notebooks and interactive
+activities - is copyright 2026 the Arizona Institute for Artificial
+Intelligence (AI2S) and the Office of Responsible Artificial Intelligence at
+the University of Arizona, who wrote it. The site built around it - the
+landing page, the Start here and About sections, the section indexes, the
+Open Knowledge Format structure and the design - is copyright 2026 The
+Regents of the University of New Mexico, Center for Advanced Research
+Computing. Both are CC BY 4.0.
+
+The site's own source code is licensed separately under the BSD 3-Clause
+License (`LICENSE-CODE`, UNM Regents), because Creative Commons licenses are
+not intended for software. That covers `scripts/`, the site configuration and
+the stylesheet.
 
 Third-party material quoted or linked by the course keeps its own terms, and
 the University of Arizona name and marks are not covered by either license.

@@ -1,6 +1,6 @@
 ---
 title: "License and attribution"
-description: "The course is published under Creative Commons Attribution 4.0 International, with the code under MIT: what that lets you do, how to attribute it, who wrote it, and which material is not covered."
+description: "The course is published under Creative Commons Attribution 4.0 International, with the site code under BSD 3-Clause: who holds copyright over which part, what the license lets you do, how to attribute it, and which material is not covered."
 type: Policy
 tags: [course, student-facing, license, attribution, creative-commons, open-educational-resources, ai2s]
 status: stable
@@ -16,21 +16,32 @@ sources:
   - id: repo-license
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/LICENSE"
     title: "Repository LICENSE file (CC BY 4.0)"
-    author: "UA-AI2S course team"
+    author: "UA-AI2S course team; UNM CARC"
 ---
 
 # License and attribution
 
 [![Creative Commons Attribution 4.0 International](../assets/cc-by.png){ width="100" }](https://creativecommons.org/licenses/by/4.0/){target=_blank}
 
-2026. [**Arizona Institute for Artificial Intelligence (AI2S)**](https://responsibleai.arizona.edu/ai2s){target=_blank}.
-[**Office of Responsible Artificial Intelligence**](https://responsibleai.arizona.edu/){target=_blank}.
-The University of Arizona.
-
 *AI Automation and Agents* is published under the
 [Creative Commons Attribution 4.0 International license (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}.
 That is the most permissive of the standard Creative Commons licenses: it asks
 for credit and nothing else.
+
+## Who holds copyright over what
+
+This site brings together two bodies of work with different owners. Both are
+CC BY 4.0, so the terms below apply either way; only the credit differs.
+
+| Part | Copyright |
+| :-- | :-- |
+| The course itself: the module pages, images, lab notebooks and the interactive quiz and survey | 2026 [Arizona Institute for Artificial Intelligence (AI2S)](https://responsibleai.arizona.edu/ai2s){target=_blank} and the [Office of Responsible Artificial Intelligence](https://responsibleai.arizona.edu/){target=_blank}, The University of Arizona |
+| This site: the landing page, the Start here and About sections, the instructor materials page, the section indexes, the change log, the Open Knowledge Format structure and the design | 2026 The Regents of the University of New Mexico, [Center for Advanced Research Computing](https://carc.unm.edu/){target=_blank} |
+
+The course text was written by the AI2S course team and migrated from their
+wiki; every migrated page names its source page and its authors in the
+`sources` and `authorship` keys of its frontmatter, so the provenance travels
+with the content. UNM CARC built the site around it.
 
 ## What the license lets you do
 
@@ -67,8 +78,12 @@ A suggested attribution line:
 
 > *AI Automation and Agents*, Arizona Institute for Artificial Intelligence
 > (AI2S), Office of Responsible Artificial Intelligence, The University of
-> Arizona, 2026. Licensed under CC BY 4.0.
+> Arizona, 2026. Site by the Center for Advanced Research Computing,
+> University of New Mexico. Licensed under CC BY 4.0.
 > https://tyson-swetnam.github.io/AI-Automation-and-Agents/
+
+If you are reusing a course page, credit AI2S; if you are reusing the site
+structure or its tooling, credit UNM CARC.
 
 When you reuse a single page, cite that page's URL; every page on this site
 has a stable address and a Markdown source you can link to (append
@@ -76,12 +91,15 @@ has a stable address and a Markdown source you can link to (append
 
 ## Code is licensed separately
 
-Creative Commons licenses are not designed for software, so the code in this
-repository carries the [MIT License](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/LICENSE-CODE){target=_blank}
-instead. That covers the conversion and validation scripts in `scripts/`, the
-Jupyter notebooks for the module labs, and the interactive quiz and survey
-pages. Everything else, the prose, images and downloadable documents, is
-CC BY 4.0.
+Creative Commons licenses are not designed for software, so the site's own
+code carries the [BSD 3-Clause License](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/LICENSE-CODE){target=_blank}
+instead, copyright The Regents of the University of New Mexico. That covers
+the migration and validation scripts in `scripts/`, the site configuration and
+the stylesheet.
+
+The lab notebooks and the interactive quiz and survey are course materials
+written by the AI2S team, not site tooling, so they stay under CC BY 4.0 with
+the rest of the content.
 
 ## Authors
 
@@ -100,9 +118,9 @@ Agents: Theory and Practice* (1995), vendor documentation for the frameworks
 used in the labs, published standards such as the NIST AI RMF and the OWASP
 Top 10 for LLM Applications, and the videos and articles linked from the
 resource lists. Those remain the property of their authors and are cited
-where they appear. The University of Arizona name, logo and wordmark are
-trademarks of the University and are not covered by the Creative Commons
-license.
+where they appear. The University of Arizona and University of New Mexico
+names, logos and wordmarks are trademarks of those universities and are not
+covered by the Creative Commons license.
 
 ## The site itself
 

@@ -1,21 +1,40 @@
 AI Automation and Agents - course content
-Copyright (c) 2026 The University of Arizona
-Arizona Institute for Artificial Intelligence (AI2S) and the
-Office of Responsible Artificial Intelligence.
+=========================================
 
-The course content in this repository (everything under docs/, including the
-Markdown pages, images and downloadable materials) is licensed under the
-Creative Commons Attribution 4.0 International License (CC BY 4.0), whose
-full text follows.
+This repository holds two bodies of work with different copyright holders.
+Both are licensed under the Creative Commons Attribution 4.0 International
+License (CC BY 4.0), whose full text follows.
 
-Source code in this repository - the scripts in scripts/, the Jupyter
-notebooks, and the interactive HTML activities - is licensed separately under
-the MIT License; see LICENSE-CODE.
+1. COURSE CONTENT
+   Copyright (c) 2026 The University of Arizona
+   Arizona Institute for Artificial Intelligence (AI2S) and the Office of
+   Responsible Artificial Intelligence.
+
+   The course text, images, lab notebooks and interactive activities were
+   written by the AI2S course team and migrated from
+   https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki. Each page
+   records its source wiki page and authors in its frontmatter.
+
+2. THE SITE AND ITS TOOLING
+   Copyright (c) 2026 The Regents of the University of New Mexico
+
+   Developed by: The Center for Advanced Research Computing (CARC) at The
+   University of New Mexico and individual contributors. Find out more at
+   https://carc.unm.edu/.
+
+   Covers the pages written for this site (the landing page, the Start here
+   and About sections, the instructor materials page, the section indexes and
+   the change log), the Open Knowledge Format structure, and the site design.
+
+Source code - the migration and validation scripts in scripts/, the site
+configuration and the stylesheet - is licensed separately under the BSD
+3-Clause License; see LICENSE-CODE.
 
 Third-party material quoted, summarised or linked from the course (papers,
 standards, vendor documentation, videos) keeps its own terms and is cited
-where it appears. The University of Arizona name, logo and wordmark are
-trademarks of the University and are not covered by this license.
+where it appears. The University of Arizona and University of New Mexico
+names, logos and wordmarks are trademarks of those universities and are not
+covered by this license.
 
 -----------------------------------------------------------------------
 

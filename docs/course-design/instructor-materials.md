@@ -170,8 +170,9 @@ human-reviewed pages when answers conflict (see
   of the course design, kept for reference.
 - [Contributing](../about/contributing.md) - how to edit pages, the
   frontmatter contract and the local build.
-- [License and attribution](../about/license-and-attribution.md) - the
-  CC BY 4.0 notice for the content and the MIT license for the code.
+- [License and attribution](../about/license-and-attribution.md) - CC BY 4.0
+  for the content, BSD 3-Clause for the site code, and who holds copyright
+  over which part.
 
 ## Open items for the course owners
 

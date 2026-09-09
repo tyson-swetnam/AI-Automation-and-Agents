@@ -3,7 +3,7 @@ site_name = "AI Automation and Agents"
 site_url = "https://tyson-swetnam.github.io/AI-Automation-and-Agents/"
 site_description = "AI Automation and Agents: a five-module course from the Arizona Institute for Artificial Intelligence (AI2S) at The University of Arizona on AI agents, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
 site_author = "Arizona Institute for Artificial Intelligence (AI2S), The University of Arizona"
-copyright = "&copy; 2026 <a href='https://responsibleai.arizona.edu/ai2s'>Arizona Institute for Artificial Intelligence (AI2S)</a> &amp; <a href='https://responsibleai.arizona.edu/'>Office of Responsible AI</a>, The University of Arizona &mdash; <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>"
+copyright = "Course content &copy; 2026 <a href='https://responsibleai.arizona.edu/ai2s'>AI2S</a> &amp; <a href='https://responsibleai.arizona.edu/'>Office of Responsible AI</a>, The University of Arizona. Site &copy; 2026 The Regents of the University of New Mexico (<a href='https://carc.unm.edu/'>CARC</a>). <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>"
 
 repo_url = "https://github.com/tyson-swetnam/AI-Automation-and-Agents"
 repo_name = "tyson-swetnam/AI-Automation-and-Agents"
