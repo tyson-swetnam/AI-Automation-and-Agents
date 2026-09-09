@@ -23,6 +23,7 @@ uv pip install --python .venv/bin/python -r requirements-dev.txt   # requirement
 .venv/bin/python scripts/migrate_wiki.py [--check|--only <page>|--notebooks]
 .venv/bin/python scripts/render_notebooks.py
 .venv/bin/python scripts/optimize_images.py [--report]
+.venv/bin/python scripts/build_syllabus_pdf.py [--check]           # syllabus.md -> the syllabus PDF (CI checks drift)
 ```
 
 Before committing content: `okf_validate.py`, `site_lint.py`, `gen_llms_txt.py`, a strict build, and a dated entry in `docs/log.md`.

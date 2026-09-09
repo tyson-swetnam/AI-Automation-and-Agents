@@ -49,12 +49,19 @@ Before committing content changes:
 .venv/bin/python scripts/gen_llms_txt.py                  # regenerate llms.txt indexes (CI fails on drift)
 ```
 
+If you edited `docs/start-here/syllabus.md`, re-render the downloadable PDF as
+well; CI fails if the two disagree:
+
+```bash
+.venv/bin/python scripts/build_syllabus_pdf.py
+```
+
 ## Repository layout
 
 ```
-├── zensical.toml                 # Site configuration: nav, UA theme, Markdown extensions
+├── zensical.toml                 # Site configuration: nav, UNM theme, Markdown extensions
 ├── requirements.txt              # zensical + pyyaml (build / CI)
-├── requirements-dev.txt          # + nbconvert, markdownify, beautifulsoup4, pillow (migration only)
+├── requirements-dev.txt          # + nbconvert, markdownify, beautifulsoup4, pillow, reportlab, pypdf
 ├── AGENTS.md                     # Contributor contract for people and coding agents
 ├── CLAUDE.md                     # Claude Code entry point (points at AGENTS.md)
 ├── templates/page.md             # Frontmatter template for hand-written pages
@@ -63,6 +70,7 @@ Before committing content changes:
 │   ├── migrate_wiki.py             # Reproducible wiki -> docs/ pipeline (PAGES, PATCHES, ALT_TEXT, ...)
 │   ├── render_notebooks.py         # .ipynb -> lab pages with Open-in-Colab badge
 │   ├── optimize_images.py          # images/ originals -> docs/assets/images/ (referenced only, <=1600 px)
+│   ├── build_syllabus_pdf.py       # start-here/syllabus.md -> docs/assets/files/...-Syllabus-UNM.pdf
 │   ├── okf_validate.py             # OKF v0.2 conformance checker
 │   ├── site_lint.py                # Course rules on top of OKF (links, answer keys, nav, stale_after)
 │   ├── gen_llms_txt.py             # Builds docs/llms.txt + docs/llms-full.txt

@@ -246,24 +246,31 @@ sources:
 # Course syllabus
 
 *AI Automation & Agents - Build Workflows. Deploy Agents. Work Smarter.*
-Course 2 of the AI Education Series, University of New Mexico. Non-credit
-professional development, 40 hours. Syllabus version 2.0, revised April 2026.
+Non-credit professional development from the Center for Advanced Research
+Computing at the University of New Mexico. Five modules, 40 hours, self-paced.
 
-[:material-file-pdf-box: Download the syllabus (PDF)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){ .md-button .md-button--primary target=_blank }
+[:material-file-pdf-box: Download the syllabus (PDF)](../assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){ .md-button .md-button--primary target=_blank }
 [:material-map-marker-path: How this course works](how-this-course-works.md){ .md-button }
+
+## Instructor of record
+
+**Tyson Swetnam**
+Center for Advanced Research Computing (CARC), University of New Mexico
+<tswetnam@unm.edu>
 
 ## Course information
 
 | Parameter | Details |
 | :-- | :-- |
-| Format | 5 modules, self-paced online with optional instructor-led cohort sessions |
+| Format | 5 modules, self-paced online, rolling enrollment, with optional instructor-led cohort sessions |
 | Total hours | 40 hours (8 hours per module) |
-| Level | Intermediate; requires completion of Course 1 (Introduction to Generative AI) |
+| Level | Intermediate |
 | Audience | Workforce professionals and graduate students seeking applied AI skills |
 | Time commitment | About 8 hours per module |
 | Tools used | Claude Desktop (Cowork + Code), n8n, LangChain, LangGraph, CrewAI, Ollama, Google Colab |
 | Assessment | Concept quizzes, guided lab exercises, one hands-on project per module, case study analyses, peer reviews, and a capstone deployment policy |
 | Prerequisites | Basic Python knowledge |
+| Credit | Non-credit professional development; a digital certificate of completion is awarded |
 | Free-tier path | A no-cost alternative track is available using Ollama, n8n Community Edition, and Google Colab |
 
 ## Course description
@@ -319,29 +326,25 @@ Upon successful completion of this course, learners will be able to:
 | 4 | [**Multi-Agent Systems**](../modules/module-4/overview.md) | Coordination architectures; LangGraph multi-agent implementation; three-role pipeline design; CrewAI vs. LangGraph comparison; coordination failure diagnosis | 8 |
 | 5 | [**Responsible Agentic AI:** Production Deployment, Evaluation, and Responsible AI](../modules/module-5/overview.md) | Technical debt and production infrastructure; multi-dimensional evaluation and CI/CD; observability with LangSmith; OWASP Top 10; EU AI Act, NIST AI RMF, human-in-the-loop | 8 |
 
-??? note "How the PDF differs from the current module pages"
+??? note "Where this syllabus came from"
 
-    The syllabus PDF (v2.0, April 2026) predates the current course content.
-    Its titles for Modules 2-4 describe an earlier design centred on Claude
-    Cowork, n8n, MCP and Claude Code (*No-Code Automation: Claude Cowork, n8n
-    & Connected Apps*; *AI with Memory & Integrations: MCP, LangChain Tools &
-    Agent Memory*; *Building AI Agents: Claude Code, LangChain, LangGraph &
-    CrewAI*), and Module 5 as *Responsible Agentic AI: Trust, Control & Safe
-    Deployment*. The module pages on this site are the current course. Where
-    the two disagree, the module pages and your LMS take precedence; the PDF
-    remains the reference for the course information table, the free-tier
-    path and the certificate rules. The PDF itself notes that it "is subject
-    to change as AI tools evolve".
+    This syllabus is generated from the page you are reading by
+    `scripts/build_syllabus_pdf.py`, so the PDF and the site cannot drift
+    apart. It supersedes the original
+    [University of Arizona syllabus (v2.0, April 2026)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){target=_blank},
+    which is kept in this repository as the source document. That earlier PDF
+    describes Modules 2-5 under their original titles, centred on Claude
+    Cowork, n8n, MCP and Claude Code; the module pages on this site are the
+    current course. Where the two disagree, the module pages and your LMS take
+    precedence.
 
 ## Completion and certification
 
-From the syllabus:
+This course is **non-credit professional development**. It does not carry
+university credit, and completing it does not enrol you in a degree program.
 
 - Complete all five module projects and pass all five concept quizzes (70% or
   above) to earn a digital certificate of completion.
-- Learners who complete both Course 1 (Introduction to Generative AI) and
-  Course 2 (AI Automation & Agents) receive the University AI Education Series
-  professional badge.
 - A free-tier completion path is supported: learners who complete all
   activities using Ollama, n8n, and Google Colab in lieu of paid Claude tools
   are eligible for the same certificate.
@@ -354,10 +357,10 @@ Grade weights for each module are stated in that module's overview; see
 
 ## Read the syllabus online
 
-<iframe class="course-pdf" src="../assets/files/AI_Automation_Agents_Syllabus_v2.pdf" title="AI Automation and Agents course syllabus (PDF)" loading="lazy"></iframe>
+<iframe class="course-pdf" src="../assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf" title="AI Automation and Agents course syllabus (PDF)" loading="lazy"></iframe>
 
 If your browser cannot display the PDF above,
-[download the syllabus (PDF, 19 pages)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){target=_blank} instead.
+[download the syllabus (PDF)](../assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){target=_blank} instead.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/
 
@@ -15168,6 +15171,9 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ## 2026-09-09
 
+* **Update**: Rebranded the site to the University of New Mexico. The header logo is the CARC starburst and the favicon is the UNM mark; the palette moves from Arizona Blue and Red to UNM Cherry `#BA0C2F` and Turquoise `#007A86` with CARC's cherry-to-turquoise header gradient. Institutional identity now reads University of New Mexico across the site description, the [syllabus](start-here/syllabus.md), [How this course works](start-here/how-this-course-works.md), the landing page, `llms.txt`, `robots.txt`, the README and the contributor contract. **Provenance is deliberately unchanged**: every page's `sources` entries, wiki URLs, provenance footers, the [wiki crosswalk](about/wiki-crosswalk.md), the entries below and the origin section of the [license page](about/license-and-attribution.md) still record that the course was written by the AI2S team at the University of Arizona. Branding says who publishes the site today; provenance says who wrote the material, and rewriting it would be false.
+* **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here.
+* **Creation**: The downloadable syllabus PDF is now generated from [the syllabus page](start-here/syllabus.md) by `scripts/build_syllabus_pdf.py`, so the two cannot drift; CI fails when the committed PDF no longer matches the page. It replaces the University of Arizona syllabus v2.0 as the linked download. That earlier PDF stays in the repository as the source document and is still linked from the syllabus page.
 * **Update**: Resolved the licensing conflict recorded below. The course content is now published under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}, replacing both the wiki footer's CC BY-NC-SA notice and the repository's CC0 `LICENSE` file. CC BY is approved for Free Cultural Works and meets the Open Definition, so the course qualifies as an open educational resource under the strict reading; a NonCommercial clause would have blocked the workforce and paid-certificate reuse the course is written for. Copyright is **The Regents of the University of New Mexico, Center for Advanced Research Computing**. The course was developed at the Arizona Institute for Artificial Intelligence and the Office of Responsible AI at the University of Arizona and released there under the [CC0 1.0 public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/){target=_blank}, which is what allows this site to be licensed CC BY; that original stays public domain and available upstream. CC0 imposes no conditions, so the credit to Carlos Lizárraga-Celaya, Michelle Yung, Michele Cosi and Tyson Swetnam recorded on the license page is scholarly practice rather than a license requirement. The site's own source code (the `scripts/` pipeline, the site configuration and the stylesheet) is licensed separately under the **BSD 3-Clause License** in `LICENSE-CODE`, copyright UNM Regents, matching the notice CARC uses on its documentation; Creative Commons licenses are not intended for software. Updated the `LICENSE` file, the site footer, the landing page badge, the [license and attribution](about/license-and-attribution.md) page, the [instructor materials](course-design/instructor-materials.md) page, and the README. Third-party material and both universities' marks remain outside these licenses.
 * **Update**: The course owners confirmed that quiz answer keys stay **public but collapsed**: the quizzes are written to be self-evaluating. The [instructor materials](course-design/instructor-materials.md) page now records this as a decision rather than an open question, and notes that the keys are consequently visible in `llms-full.txt` and in each page's Markdown mirror.
 

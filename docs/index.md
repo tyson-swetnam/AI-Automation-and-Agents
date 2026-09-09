@@ -19,7 +19,7 @@ Move beyond individual prompts into the world of AI agents and automated workflo
 
 <div class="course-actions" markdown>
 [:material-rocket-launch: Start Module 1](modules/module-1/overview.md){ .md-button .md-button--primary }
-[:material-file-pdf-box: Syllabus (PDF)](assets/files/AI_Automation_Agents_Syllabus_v2.pdf){ .md-button target=_blank }
+[:material-file-pdf-box: Syllabus (PDF)](assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){ .md-button target=_blank }
 [:material-source-branch: Set up your portfolio](start-here/github-portfolio-setup.md){ .md-button }
 [:material-github: Source on GitHub](https://github.com/tyson-swetnam/AI-Automation-and-Agents){ .md-button target=_blank }
 </div>

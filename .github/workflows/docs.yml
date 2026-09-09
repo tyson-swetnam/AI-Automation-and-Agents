@@ -43,6 +43,14 @@ jobs:
         run: |
           python scripts/gen_llms_txt.py
           git diff --exit-code docs/llms.txt docs/llms-full.txt
+      # The downloadable syllabus is rendered from docs/start-here/syllabus.md,
+      # so an edit to that page without a rerun would leave the PDF stale.
+      # Only the two rendering libraries are installed here; the rest of
+      # requirements-dev.txt is migration tooling this job does not need.
+      - name: Syllabus PDF drift
+        run: |
+          pip install "reportlab>=5.0" "pypdf>=6.0"
+          python scripts/build_syllabus_pdf.py --check
 
   # Full static build on PRs and on main. The llms indexes are regenerated
   # first so the deployed site is always current even if the drift check

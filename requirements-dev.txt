@@ -5,3 +5,7 @@ ipykernel
 markdownify>=0.13
 beautifulsoup4>=4.12
 pillow>=10
+# Syllabus PDF rendering and the --check comparison (scripts/build_syllabus_pdf.py).
+# CI installs just these two rather than the whole file.
+reportlab>=5.0
+pypdf>=6.0

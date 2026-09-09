@@ -62,6 +62,7 @@ uv pip install --python .venv/bin/python -r requirements-dev.txt   # requirement
 .venv/bin/python scripts/migrate_wiki.py --notebooks               # also render the learner notebooks
 .venv/bin/python scripts/render_notebooks.py                       # .ipynb -> lab pages with Colab badge
 .venv/bin/python scripts/optimize_images.py [--report]             # images/ -> docs/assets/images/ (referenced only)
+.venv/bin/python scripts/build_syllabus_pdf.py [--check]           # syllabus.md -> the downloadable syllabus PDF (CI checks drift)
 ```
 
 `.sources/` (gitignored) holds the clones the pipeline reads: `wiki-v2` (the
