@@ -864,10 +864,10 @@ first; it holds the *Platform setup* and *What to submit* boxes.
 
 | Module | Lab page and notebook | What you build | Frameworks | Time |
 | :-- | :-- | :-- | :-- | :-- |
-| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain ReAct agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain (`create_react_agent`, `AgentExecutor`) | ~2 hours |
-| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare | LangChain 1.3.14 (pinned), Chroma, pypdf | ~60 minutes |
+| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | ~2 hours |
+| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare | LangChain 1.4.0 (pinned), Chroma, pypdf | ~60 minutes |
 | 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | 100-130 minutes |
-| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyses ten runs; Lab B builds an automated evaluation suite that detects a regression | LangChain 1.3.15, LangGraph 1.2.11, LangSmith 0.11.1, LiteLLM | ~120 minutes |
+| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyses ten runs; Lab B builds an automated evaluation suite that detects a regression | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | ~120 minutes |
 
 ### Model providers each notebook supports
 
@@ -876,7 +876,7 @@ where you choose.
 
 | Module | Paid or hosted options | Free options |
 | :-- | :-- | :-- |
-| 2 | OpenAI (`gpt-4o-mini`), key `OPENAI_API_KEY` | Ollama running locally (`llama3`) via `langchain-ollama` |
+| 2 | OpenAI (`gpt-4o-mini`), key `OPENAI_API_KEY` | Ollama running locally (`llama3.1`, which supports tool calling) via `langchain-ollama` |
 | 3 | OpenAI embeddings (`text-embedding-3-small`) and chat (`gpt-4o-mini`) | Local `sentence-transformers/all-MiniLM-L6-v2` embeddings (first run downloads about 90 MB) with a small local generator (`Qwen/Qwen2.5-0.5B-Instruct`) or Ollama (`llama3.1`); a `"none"` setting runs retrieval only |
 | 4 | Hugging Face Inference Providers (default; token `HF_TOKEN`), Groq (`GROQ_API_KEY`), OpenAI (`gpt-4.1-mini`, `OPENAI_API_KEY`) | Ollama locally (`qwen3:8b`), no key; Hugging Face's free credits and quotas can change |
 | 5 | NVIDIA API (default; `NVIDIA_API_KEY`), Hugging Face (`HF_TOKEN`), Groq, OpenAI - plus a **LangSmith API key** (free account at [smith.langchain.com](https://smith.langchain.com){target=_blank}) for tracing | Ollama locally (`qwen3:8b`) for the model; LangSmith itself has a free tier |
@@ -4140,7 +4140,7 @@ LangChain's `create_agent` is the current production API for constructing multi-
 
 The agent returned by `create_agent` runs a LangGraph-backed ReAct loop internally: on each invocation, it iterates through Thought → tool call → Observation cycles until a terminal condition is reached, then produces a Final Answer in the specified response format. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration.
 
-![LangChain AgentExecutor architecture](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+![The LangChain agent runtime: an LLM backbone reading a tool registry, an executor running the selected tool, and observations feeding back into the loop (drawn for the LangChain 0.x AgentExecutor, whose structure create_agent keeps)](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
 
 **Tool Description Design - The Specification Discipline**
 
@@ -4844,8 +4844,8 @@ inference cost is a primary constraint.'
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/lab-notebook/
 
 ---
-title: "Module 2 Lab: Building a Multi-Tool ReAct Agent"
-description: "Read-only rendering of the Module 2 lab notebook, Building a Multi-Tool ReAct Agent, with links to open it in Google Colab or download the .ipynb file."
+title: "Module 2 Lab: Building a Multi-Tool Agent"
+description: "Read-only rendering of the Module 2 lab notebook, Building a Multi-Tool Agent, with links to open it in Google Colab or download the .ipynb file."
 type: Lab
 tags:
   - module-2
@@ -4853,6 +4853,7 @@ tags:
   - lab
   - colab
   - langchain
+  - langgraph
   - ollama
 module: 2
 time_estimate: "~2 hours"
@@ -4866,9 +4867,10 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb"
     title: "Module-2-Guided-Lab-Notebook.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
-# Module 2 Lab: Building a Multi-Tool ReAct Agent
+# Module 2 Lab: Building a Multi-Tool Agent
 
 [![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){ target=_blank }
 
@@ -4888,8 +4890,8 @@ sources:
     run the cells, open it in Google Colab with the badge above or download the
     `.ipynb` and run it in Jupyter.
 
-**Estimated time:** ~2 hours  
-**What you'll build:** A LangChain ReAct agent that can search the web and run Python code — then harden it with error handling and prompt engineering.
+**Estimated time:** ~2 hours
+**What you'll build:** A LangChain agent that can search the web and run Python code — then harden it with error handling and prompt engineering.
 
 ---
 
@@ -4903,6 +4905,8 @@ There are four steps. Each step has:
 
 > **Rule:** Only modify code inside extension zones. The scaffolding is designed so each step teaches one concept in isolation — changing code outside these zones makes it harder to diagnose what went wrong.
 
+> **Which API this lab uses:** agents are built with `create_agent` from `langchain.agents`, the current LangChain agent constructor. If you find older tutorials using `AgentExecutor` or `initialize_agent`, they target LangChain 0.x and will not import on the version pinned here. You may also find `create_react_agent` in the LangGraph documentation; that is a different, lower-level function, and this course uses `create_agent`.
+
 ---
 
 ### Agent Instruction Log
@@ -4915,16 +4919,32 @@ The log is a portfolio artifact. It is submitted alongside your `.ipynb` file.
 ## Step 1 — Set Up Your Environment and Run a Basic Agent
 **Time:** ~30 minutes
 
-By the end of Step 1 you will have a working ReAct agent that can search the web.
+By the end of Step 1 you will have a working agent that can search the web.
 
 #### What is ReAct?
-ReAct (Yao et al., 2022) is the default reasoning architecture for production agents. It runs a three-phase loop:
+ReAct (Yao et al., 2022) is the reasoning pattern behind most production agents. It runs a three-phase loop:
 
-1. **Thought** — the model reasons about what to do next
-2. **Action** — the model calls a tool with specific input
-3. **Observation** — the tool returns a result, which feeds into the next Thought
+1. **Reason** — the model works out what to do next
+2. **Act** — the model calls a tool with specific arguments
+3. **Observe** — the tool returns a result, which feeds into the next round of reasoning
 
-This loop repeats until the model produces a **Final Answer**. You will see these exact labels in the output when you run the agent below.
+The loop repeats until the model answers instead of calling a tool.
+
+#### How you will see that loop
+
+Early LangChain ran this loop by asking the model to *write* the words `Thought:`, `Action:` and `Observation:` as plain text, then parsing them back out. Current models call tools natively: the model returns a structured tool call, not a sentence describing one, so there are no text labels to read.
+
+The information is all still there, and it is now easier to inspect. `create_agent` returns a LangGraph graph, and streaming that graph reports each step as data:
+
+| Old text label | Where the same information lives now |
+|---|---|
+| `Thought:` | the assistant message's `content`, when the model chooses to explain itself |
+| `Action:` | `tool_call["name"]` |
+| `Action Input:` | `tool_call["args"]` |
+| `Observation:` | the tool message's `content` |
+| `Final Answer:` | the last assistant message, the one with no tool calls |
+
+The `show_trace` helper below prints exactly those fields, so you can still watch the loop turn by turn.
 
 #### Platform requirements
 - Google account (for Colab — free tier is sufficient)
@@ -4933,7 +4953,11 @@ This loop repeats until the model produces a **Final Answer**. You will see thes
 ```python
 # Install required packages. Run this cell once and wait for it to finish.
 # You should see a list of installed packages with no red error text.
-!pip install -q langchain langchain-openai langchain-community duckduckgo-search
+#
+# Versions are pinned so this lab behaves the same for everyone. LangChain 1.x removed
+# the older AgentExecutor API, so an unpinned install would silently change what runs.
+%pip install -q "langchain==1.4.0" "langchain-openai>=1.6.2,<2" "ddgs>=9.16,<10"
+
 ```
 
 #### Section 1A — OpenAI API Key Setup
@@ -4963,13 +4987,19 @@ print("API key set:", os.environ.get("OPENAI_API_KEY", "").startswith("sk-"))
 #
 # Steps:
 #   1. Install Ollama from https://ollama.com
-#   2. Run `ollama pull llama3` in your terminal
+#   2. Run `ollama pull llama3.1` in your terminal
 #   3. Uncomment the lines below and run this cell
+#
+# Use ChatOllama, not OllamaLLM: an agent needs a model that can call tools, and only
+# the chat class supports that. The model must be tool-capable too — llama3.1 is,
+# plain llama3 is not, and a model that cannot call tools will simply answer from
+# memory and never touch your tools.
 
-# !pip install -q langchain-ollama
-# from langchain_ollama import OllamaLLM
-# llm = OllamaLLM(model="llama3")
-# print("Ollama LLM ready:", llm.invoke("Say hello in one word."))
+# %pip install -q "langchain-ollama>=1.1,<2"
+# from langchain_ollama import ChatOllama
+# llm = ChatOllama(model="llama3.1", temperature=0)
+# print("Ollama model ready:", llm.invoke("Say hello in one word.").content)
+
 ```
 
 ```python
@@ -4986,93 +5016,115 @@ print(llm.invoke("Reply with exactly three words: model is ready.").content)
 # Build a single-tool web-search agent.
 # Pre-written — read every comment before running.
 
-from langchain.agents import AgentExecutor, create_react_agent
-from langchain.tools import Tool
-from langchain_community.tools import DuckDuckGoSearchRun
-from langchain.prompts import PromptTemplate
+from langchain.agents import create_agent
+from langchain_core.tools import tool
+from ddgs import DDGS
 
 # --- Tool definition ---
-# The description is the only signal the LLM uses to decide when to call this tool.
-# It must be precise: what the tool does, what input it expects, what it returns.
-search = DuckDuckGoSearchRun()
-search_tool = Tool(
-    name="duckduckgo_search",
-    func=search.run,
-    description=(
-        "Use this tool to search the web for current information, recent events, "
-        "or factual data that may not be in the model's training data. "
-        "Input: a plain English search query of 5–10 words. "
-        "Output: a text snippet from web search results. "
-        "Do not use this tool for mathematical calculations."
+# The docstring IS the tool description, and the description is the only signal the
+# model uses to decide when to call this tool. It must be precise: what the tool does,
+# what input it expects, what it returns.
+@tool
+def web_search(query: str) -> str:
+    """Search the web for current information, recent events, or factual data that may
+    not be in the model's training data.
+
+    Args:
+        query: a plain English search query of 5-10 words.
+
+    Returns:
+        Text snippets from web search results. Do not use this tool for mathematical
+        calculations.
+    """
+    results = DDGS().text(query, max_results=5)
+    if not results:
+        return "No results found."
+    return "\n\n".join(
+        f"{r.get('title', '')}\n{r.get('body', '')}" for r in results
     )
-)
-tools = [search_tool]
+
+tools = [web_search]
 
 # --- System prompt ---
-# This controls the agent's overall behavior.
-# The {tools}, {tool_names}, {input}, and {agent_scratchpad} placeholders are
-# required by LangChain's ReAct template — do not remove them.
-SYSTEM_PROMPT = PromptTemplate.from_template("""
-You are a helpful research assistant. Use the available tools to answer the user's
-question accurately. Always search for current information before making factual claims.
-
-You have access to the following tools:
-{tools}
-
-Use this format:
-Thought: what you need to do and why
-Action: the tool name (must be one of [{tool_names}])
-Action Input: the exact input to pass to the tool
-Observation: the result returned by the tool
-... (repeat Thought/Action/Observation as needed)
-Thought: I now have enough information to answer
-Final Answer: your complete answer to the user's question
-
-Begin!
-Question: {input}
-{agent_scratchpad}
-""")
-
-# --- Agent assembly ---
-agent = create_react_agent(llm=llm, tools=tools, prompt=SYSTEM_PROMPT)
-agent_executor = AgentExecutor(
-    agent=agent,
-    tools=tools,
-    verbose=True,       # prints the full Thought/Action/Observation trace
-    max_iterations=5,   # safety limit: stops after 5 reasoning steps
-    handle_parsing_errors=True
+# This controls the agent's overall behaviour. It is a plain string: there are no
+# {tools}, {tool_names} or {agent_scratchpad} placeholders to fill in, because the
+# agent passes the tool schemas to the model itself.
+SYSTEM_PROMPT = (
+    "You are a helpful research assistant. Use the available tools to answer the "
+    "user's question accurately. Always search for current information before making "
+    "factual claims."
 )
 
-print("Agent ready.")
+agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
+print("Agent built with tools:", [t.name for t in tools])
+
+
+# --- Trace helper ---
+# create_agent returns a compiled graph rather than the old AgentExecutor, so there is
+# no verbose=True text trace. Streaming the graph gives you the same loop as data.
+def show_trace(agent, question, recursion_limit=12):
+    """Run the agent and print each step of its reasoning loop. Returns the final answer."""
+    final = ""
+    step = 0
+    stream = agent.stream(
+        {"messages": [{"role": "user", "content": question}]},
+        {"recursion_limit": recursion_limit},
+        stream_mode="updates",
+    )
+    for chunk in stream:
+        for node, update in chunk.items():
+            for msg in update.get("messages", []):
+                if node == "model" and getattr(msg, "tool_calls", None):
+                    if msg.content:
+                        print(f"[{step + 1}] REASONING:  {msg.content}")
+                    for call in msg.tool_calls:
+                        step += 1
+                        print(f"[{step}] TOOL CALL:  {call['name']}")
+                        print(f"[{step}] ARGUMENTS:  {call['args']}")
+                elif node == "model":
+                    final = msg.content
+                    print(f"[final] ANSWER:  {final}")
+                elif node == "tools":
+                    body = str(msg.content).replace("\n", " ")[:400]
+                    print(f"[{step}] OBSERVATION: {body}")
+    return final
+
 ```
 
 ```python
 # Run the agent on the test prompt.
-# With verbose=True you will see the full ReAct trace in the output.
-result = agent_executor.invoke({
-    "input": "What were the three most significant AI research papers published in the last 30 days?"
-})
+# show_trace prints every step of the loop, then returns the final answer.
+answer = show_trace(
+    agent,
+    "What were the three most significant AI research papers published in the last 30 days?",
+)
 
 print("\n--- FINAL ANSWER ---")
-print(result["output"])
+print(answer)
+
 ```
 
 #### ✅ Step 1 Self-Check
 
-Scroll through the output above. You should see **all five of these labels** in the trace:
+Scroll through the output above. You should see **all four of these lines** in the trace:
 
-| Label | What it means |
+| Line | What it means |
 |---|---|
-| `Thought:` | The model's reasoning about what to do |
-| `Action:` | Should say `duckduckgo_search` |
-| `Action Input:` | The search query the model chose |
-| `Observation:` | The raw text returned by the search tool |
-| `Final Answer:` | The model's response to the original question |
+| `TOOL CALL:` | Should say `web_search` |
+| `ARGUMENTS:` | The search query the model chose |
+| `OBSERVATION:` | The raw text returned by the search tool |
+| `ANSWER:` | The model's response to the original question |
 
-**If any label is missing:** The agent is not running the ReAct pattern correctly. Common causes:
+A `REASONING:` line may or may not appear. Models that call tools natively often skip
+straight to the call without narrating first, and that is normal — it is not a sign the
+agent is misbehaving.
+
+**If `TOOL CALL` never appears:** the agent answered from memory instead of searching.
+Common causes:
 
 - Missing or invalid API key → re-check the key in Section 1A
-- `Final Answer` appears immediately without searching → the system prompt text `'Always search for current information before making factual claims'` must be present — verify it above
+- The system prompt text `'Always search for current information before making factual claims'` is missing — verify it above
+- On the Ollama path, the model is not tool-capable → use `llama3.1`, not `llama3`
 - DuckDuckGo returns an error → wait 30 seconds and re-run (free tier has rate limits)
 
 ---
@@ -5083,52 +5135,59 @@ Scroll through the output above. You should see **all five of these labels** in 
 
 Answer these four questions:
 
-1. **Thought (first step):** Copy the exact text of the first `Thought:` in the trace
+1. **First tool call:** Copy the exact `TOOL CALL` and `ARGUMENTS` lines from the trace
 2. **Tool invoked:** Which tool was called?
 3. **Observation summary:** What did the search return? (1–2 sentences)
-4. **Loop count:** Did the agent reach `Final Answer` in one iteration, or did it loop? How many `Thought/Action/Observation` cycles ran?
+4. **Loop count:** Did the agent answer after one tool call, or did it loop? How many `TOOL CALL` / `OBSERVATION` pairs ran?
 
 ---
-## Step 2 — Multi-Tool Extension: Adding a Python REPL
+## Step 2 — Multi-Tool Extension: Adding a Python Tool
 **Time:** ~40 minutes
 
-A search-only agent cannot compute. In this step you add a **Python REPL tool** — a tool that lets the agent write and execute Python code inside Colab and observe the result. This makes the agent capable of combining retrieval (search) with computation (REPL).
+A search-only agent cannot compute. In this step you add a **Python execution tool** — a tool that lets the agent write and run Python code inside Colab and observe the result. This makes the agent capable of combining retrieval (search) with computation.
 
 #### Why tool descriptions matter
-The LLM has no inherent knowledge of when to use search vs. REPL. It infers the right tool entirely from the **description text**. A vague description leads to wrong tool selection. You will see this directly in Action 8 below.
+The model has no inherent knowledge of when to use search vs. Python. It infers the right tool entirely from the **description text**, which for a `@tool` function is its docstring. A vague description leads to wrong tool selection. You will see this directly in Action 8 below.
 
 ```python
 # STUDENT EXTENSION POINT — Step 2
-# Task: Uncomment the REPL tool definition below, then add `repl_tool` to the tools list.
+# Task: Uncomment the run_python tool below, then add it to the tools list.
 # The tool code is pre-written — you only need to (1) uncomment it and (2) update tools=[...].
+#
+# Note there is no try/except here. That is deliberate: Step 3 depends on this tool
+# failing loudly so you can see what an unhandled tool error does to an agent.
 
-from langchain_experimental.tools.python.tool import PythonREPLTool
+import contextlib
+import io
 
 # --- Uncomment these lines ---
-# repl = PythonREPLTool()
-# repl_tool = Tool(
-#     name="python_repl",
-#     func=repl.run,
-#     description=(
-#         "Use this tool for numerical calculations, data manipulation, and Python code execution. "
-#         "Input: valid Python code as a string. "
-#         "Output: the printed output or result of the code. "
-#         "Do not use this tool to look up current facts or search the web."
-#     )
-# )
+# @tool
+# def run_python(code: str) -> str:
+#     """Run Python code for numerical calculations, data manipulation, and general
+#     computation.
+#
+#     Args:
+#         code: valid Python source. Use print() to return a value.
+#
+#     Returns:
+#         Whatever the code printed. Do not use this tool to look up current facts or
+#         search the web.
+#     """
+#     buffer = io.StringIO()
+#     with contextlib.redirect_stdout(buffer):
+#         exec(code, {})
+#     return buffer.getvalue().strip() or "(the code produced no output; use print())"
 
 # Update the tools list to include both tools.
 # Change this line:
-tools = [search_tool]
-# To this (after uncommenting the REPL tool above):
-# tools = [search_tool, repl_tool]
+tools = [web_search]
+# To this (after uncommenting the tool above):
+# tools = [web_search, run_python]
 
 # Rebuild the agent with the updated tools list.
-agent = create_react_agent(llm=llm, tools=tools, prompt=SYSTEM_PROMPT)
-agent_executor = AgentExecutor(
-    agent=agent, tools=tools, verbose=True, max_iterations=6, handle_parsing_errors=True
-)
+agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
 print("Agent rebuilt with tools:", [t.name for t in tools])
+
 ```
 
 ```python
@@ -5146,8 +5205,9 @@ for label, prompt in prompts.items():
     print(f"\n{'='*60}")
     print(f"PROMPT {label}: {prompt}")
     print('='*60)
-    results[label] = agent_executor.invoke({"input": prompt})
-    print(f"\nFINAL ANSWER ({label}):", results[label]["output"])
+    results[label] = show_trace(agent, prompt)
+    print(f"\nFINAL ANSWER ({label}):", results[label])
+
 ```
 
 #### Action 8 — Deliberately Break Tool Selection
@@ -5158,29 +5218,34 @@ In the cell below, change the REPL tool description to something vague, then re-
 
 ```python
 # STUDENT EXTENSION POINT — Step 2, Action 8
-# Redefine repl_tool with a deliberately vague description.
+# Redefine the Python tool with a deliberately vague description.
 # Then rebuild the agent and re-run Prompt A.
+#
+# The @tool decorator takes an explicit description that overrides the docstring, which
+# is how you change the description without touching the code the tool runs.
 
-# repl_tool_vague = Tool(
-#     name="python_repl",
-#     func=repl.run,
-#     description="Use for advanced tasks."  # <-- intentionally vague
-# )
-# tools_vague = [search_tool, repl_tool_vague]
-# agent_vague = create_react_agent(llm=llm, tools=tools_vague, prompt=SYSTEM_PROMPT)
-# executor_vague = AgentExecutor(agent=agent_vague, tools=tools_vague, verbose=True, max_iterations=6, handle_parsing_errors=True)
+# @tool("run_python", description="Use for advanced tasks.")  # <-- intentionally vague
+# def run_python_vague(code: str) -> str:
+#     buffer = io.StringIO()
+#     with contextlib.redirect_stdout(buffer):
+#         exec(code, {})
+#     return buffer.getvalue().strip() or "(the code produced no output; use print())"
 
-# result_vague = executor_vague.invoke({"input": prompts["A"]})
-# print("\nFINAL ANSWER (vague description):", result_vague["output"])
+# tools_vague = [web_search, run_python_vague]
+# agent_vague = create_agent(model=llm, tools=tools_vague, system_prompt=SYSTEM_PROMPT)
+
+# answer_vague = show_trace(agent_vague, prompts["A"])
+# print("\nFINAL ANSWER (vague description):", answer_vague)
+
 ```
 
 #### ✅ Step 2 Self-Check
 
 Before moving on, confirm:
 
-- **Prompt A** invokes `duckduckgo_search` first (for population), then `python_repl` (for the 3.7% calculation)
-- **Prompt B** invokes **only** `python_repl` — no web search. If the agent searches for a compound interest formula before computing, the REPL description is not explicit enough that math is in scope. Add `"Use this for any mathematical computation — no web lookup is needed"` to the description and re-run.
-- **Prompt C** invokes search first (for the exchange rate), then REPL (for the multiplication)
+- **Prompt A** calls `web_search` first (for population), then `run_python` (for the 3.7% calculation)
+- **Prompt B** calls **only** `run_python` — no web search. If the agent searches for a compound interest formula before computing, the `run_python` description is not explicit enough that math is in scope. Add `"Use this for any mathematical computation — no web lookup is needed"` to the docstring and re-run.
+- **Prompt C** calls `web_search` first (for the exchange rate), then `run_python` (for the multiplication)
 
 ---
 
@@ -5190,7 +5255,7 @@ Before moving on, confirm:
 
 Create a table with the following structure (one row per prompt):
 
-| Prompt | Tools Invoked (in order) | Why the agent chose those tools | Did it match your prediction? |
+| Prompt | Tools Called (in order) | Why the agent chose those tools | Did it match your prediction? |
 |---|---|---|---|
 | A | ... | ... | Yes / No |
 | B | ... | ... | Yes / No |
@@ -5198,7 +5263,7 @@ Create a table with the following structure (one row per prompt):
 
 Then add one more entry:
 
-- **Action 8 result:** Did changing the REPL description to `'Use for advanced tasks'` change which tool was selected for Prompt A? Why or why not?
+- **Action 8 result:** Did changing the description to `'Use for advanced tasks'` change which tool was selected for Prompt A? Why or why not?
 
 ---
 ## Step 3 — Error Handling: Deliberate Failure and Recovery
@@ -5207,86 +5272,110 @@ Then add one more entry:
 Production agents must fail gracefully. In this step you will:
 
 1. Trigger a real tool failure and observe the raw (unhandled) behavior
-2. Implement an error handling wrapper that returns a structured error message instead of a Python traceback
-3. Confirm the agent now responds usefully instead of crashing or hallucinating
+2. Rewrite the tool so it returns a structured error message instead of raising
+3. Confirm the agent now responds usefully instead of crashing
 
 #### Why this matters
-An unhandled exception in a tool produces a raw Python traceback in the agent's `Observation`. Most LLMs will either loop indefinitely trying to fix the code, or produce a hallucinated Final Answer that ignores the failure. A structured error message gives the model actionable information to recover from.
+A tool that raises an exception takes the whole agent run down with it: the exception
+propagates out of the graph and your program stops, so the user gets a stack trace and
+no answer. A tool that catches its own errors and returns a description of what went
+wrong keeps the loop alive and hands the model something it can act on — retrying with
+different arguments, trying another tool, or telling the user plainly that it could not
+complete the task.
+
+This is the single most common difference between a demo agent and one that survives
+contact with real users.
 
 ```python
 # Action 9 — Trigger a deliberate tool failure.
 # Run this cell and observe what happens. Record the agent's behavior.
 # Do NOT modify this prompt.
+#
+# Expect this cell to raise. The traceback is the point: an unhandled tool error ends
+# the run. Read the last line of the traceback before moving on.
 
 trigger_prompt = "Run the following code: import nonexistent_module; nonexistent_module.do_something()"
 
-result_unhandled = agent_executor.invoke({"input": trigger_prompt})
-print("\n--- AGENT RESPONSE (unhandled failure) ---")
-print(result_unhandled["output"])
+try:
+    answer_unhandled = show_trace(agent, trigger_prompt)
+    print("\n--- AGENT RESPONSE (unhandled failure) ---")
+    print(answer_unhandled)
+except Exception as exc:
+    print(f"\n--- RUN ENDED: {type(exc).__name__}: {exc}")
+    print("The tool raised, the exception escaped the agent loop, and the user got no answer.")
+
 ```
 
 ```python
-# Action 10 — Error Handling Wrapper
+# Action 10 — Error Handling
 # STUDENT EXTENSION POINT — Step 3
 #
-# Replace the raw REPL tool with a wrapped version that catches exceptions
-# and returns a structured error dict instead of a raw traceback.
+# Replace the raw Python tool with a version that catches exceptions and returns a
+# structured error string instead of raising.
 #
 # Instructions:
-#   1. Read the wrapper function below — do not modify it.
-#   2. Uncomment the wrapped_repl_tool definition.
-#   3. Rebuild the agent using tools = [search_tool, wrapped_repl_tool].
-#      (NOT tools=[search_tool, repl_tool] — the wrapped version must replace the original.)
+#   1. Read the tool below — do not change what it does, only note the try/except.
+#   2. Uncomment the safe_run_python definition.
+#   3. Rebuild the agent using tools = [web_search, safe_run_python].
+#      (NOT tools=[web_search, run_python] — the safe version must replace the original.)
 
-import traceback
+# @tool("run_python")
+# def safe_run_python(code: str) -> str:
+#     """Run Python code for numerical calculations, data manipulation, and general
+#     computation.
+#
+#     Args:
+#         code: valid Python source. Use print() to return a value.
+#
+#     Returns:
+#         Whatever the code printed, or a structured error message if the code failed.
+#         Do not use this tool to look up current facts or search the web.
+#     """
+#     buffer = io.StringIO()
+#     try:
+#         with contextlib.redirect_stdout(buffer):
+#             exec(code, {})
+#     except Exception as exc:
+#         return str({
+#             "status": "error",
+#             "error_type": type(exc).__name__,
+#             "message": str(exc),
+#             "recommendation": "Try a different approach or reformulate the request.",
+#         })
+#     return buffer.getvalue().strip() or "(the code produced no output; use print())"
 
-def safe_repl_run(code: str) -> str:
-    """Wraps the REPL tool to return structured errors instead of raw tracebacks."""
-    try:
-        return repl.run(code)
-    except Exception as e:
-        return str({
-            "status": "error",
-            "message": str(e),
-            "recommendation": "Try a different approach or reformulate the query."
-        })
+# Rebuild with the safe version:
+# tools = [web_search, safe_run_python]
+# agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
+# print("Agent rebuilt with tools:", [t.name for t in tools])
 
-# Uncomment these lines:
-# wrapped_repl_tool = Tool(
-#     name="python_repl",
-#     func=safe_repl_run,
-#     description=(
-#         "Use this tool for numerical calculations, data manipulation, and Python code execution. "
-#         "Input: valid Python code as a string. "
-#         "Output: the printed output, or a structured error message if the code fails. "
-#         "Do not use this tool to look up current facts or search the web."
-#     )
-# )
-
-# Rebuild with the wrapped version:
-# tools = [search_tool, wrapped_repl_tool]
-# agent = create_react_agent(llm=llm, tools=tools, prompt=SYSTEM_PROMPT)
-# agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, max_iterations=6, handle_parsing_errors=True)
-# print("Agent rebuilt with wrapped REPL:", [t.name for t in tools])
 ```
 
 ```python
-# Action 11 — Re-run the trigger prompt with the wrapped tool.
-# The agent should now receive a structured error in its Observation
-# and respond with either an alternative approach or an informative Final Answer.
+# Action 11 — Re-run the trigger prompt with the safe tool.
+# The agent should now receive a structured error as its OBSERVATION and respond with
+# either an alternative approach or an informative answer — and this cell should not raise.
 
-result_handled = agent_executor.invoke({"input": trigger_prompt})
-print("\n--- AGENT RESPONSE (with error wrapper) ---")
-print(result_handled["output"])
+answer_handled = show_trace(agent, trigger_prompt)
+print("\n--- AGENT RESPONSE (with error handling) ---")
+print(answer_handled)
+
 ```
 
 #### ✅ Step 3 Self-Check
 
-After implementing the wrapper, the agent's Final Answer **must not** contain a raw Python traceback (lines starting with `Traceback (most recent call last):`). 
+After adding the error handling, two things must both be true:
 
-If a traceback still appears: the wrapper is not being applied. Check that `tools = [search_tool, wrapped_repl_tool]` uses the wrapped version, not the original `repl_tool`.
+- The cell **runs to completion** — no traceback, no `ModuleNotFoundError` ending the run
+- The `OBSERVATION` line shows your structured error dict (`'status': 'error'`), not a raw exception
 
-> **Common mistake:** Defining `safe_repl_run` but then passing `repl_tool` (the original) to the `tools` list. The function must be used in `wrapped_repl_tool`, which must be in `tools`.
+If the cell still raises: the safe tool is not being used. Check that
+`tools = [web_search, safe_run_python]` and that you rebuilt the agent afterwards —
+`create_agent` captures the tool list at build time, so editing `tools` without
+rebuilding changes nothing.
+
+> **Common mistake:** Defining `safe_run_python` but rebuilding the agent with the
+> original `run_python`. The tool list passed to `create_agent` is what counts.
 
 ---
 
@@ -5296,8 +5385,8 @@ If a traceback still appears: the wrapper is not being applied. Check that `tool
 
 Record the following:
 
-- **(a) Before the wrapper:** What did the agent do when the tool failed? (Looped? Hallucinated? Produced a traceback in Final Answer?)
-- **(b) After the wrapper:** How did the agent's behavior change? What appeared in the `Observation`?
+- **(a) Before the error handling:** What happened when the tool failed? Quote the exception type and the last line of the traceback.
+- **(b) After:** How did the agent's behavior change? What appeared in the `OBSERVATION` line?
 - **(c) User utility assessment:** Was the graceful degradation response useful to a hypothetical end user? Why or why not? (2–3 sentences)
 
 ---
@@ -5307,10 +5396,19 @@ Record the following:
 System instructions and few-shot examples are the primary controls for agent behavior. In this step you will:
 
 1. Add an **output format constraint** to the system instruction and observe the change
-2. Add a **few-shot demonstration** to the prompt and assess whether the agent mimics it
+2. Add a **few-shot demonstration** to the conversation and assess whether the agent mimics it
 
 #### What is a few-shot demonstration?
-A few-shot demonstration is a complete example of the reasoning trace you want the agent to follow, placed inside the prompt. It must be a full `Thought → Action → Action Input → Observation → Thought → Final Answer` sequence — not a plain text description. LangChain requires it to be formatted as a Human/AI turn pair (see the template below). A syntactically malformed demonstration is silently ignored.
+A few-shot demonstration is a worked example of the behaviour you want, placed where the
+model will read it before answering.
+
+With native tool calling there is no text template to paste an example into. Instead you
+show the model a short exchange that already happened: a user turn, the assistant's tool
+call, the tool's result, and the answer that followed. Those turns go into `messages`
+ahead of the real question, and the model treats them as precedent.
+
+A demonstration that describes the behaviour in prose ("first search, then calculate")
+is a much weaker signal than one that shows the turns themselves.
 
 ```python
 # Action 13 — Read the default system instruction.
@@ -5331,7 +5429,7 @@ print(DEFAULT_INSTRUCTION)
 #
 # Replace YOUR_FORMAT_CONSTRAINT_HERE with a specific output structure requirement.
 # Example (copy this or write your own):
-#   "Always structure your Final Answer with: "
+#   "Always structure your final answer with: "
 #   "(1) a direct answer in the first sentence, "
 #   "(2) supporting evidence cited from your search results, "
 #   "(3) a confidence assessment: Low, Medium, or High."
@@ -5340,101 +5438,86 @@ FORMAT_CONSTRAINT = "YOUR_FORMAT_CONSTRAINT_HERE"
 
 UPDATED_INSTRUCTION = DEFAULT_INSTRUCTION.strip() + "\n\n" + FORMAT_CONSTRAINT
 
-UPDATED_PROMPT = PromptTemplate.from_template(
-    UPDATED_INSTRUCTION + """
-
-You have access to the following tools:
-{tools}
-
-Use this format:
-Thought: what you need to do and why
-Action: the tool name (must be one of [{tool_names}])
-Action Input: the exact input to pass to the tool
-Observation: the result returned by the tool
-... (repeat as needed)
-Thought: I now have enough information to answer
-Final Answer: your complete answer
-
-Begin!
-Question: {input}
-{agent_scratchpad}
-"""
+# The system prompt is just a string. Rebuild the agent to apply it.
+agent_formatted = create_agent(
+    model=llm, tools=tools, system_prompt=UPDATED_INSTRUCTION
 )
 
-agent = create_react_agent(llm=llm, tools=tools, prompt=UPDATED_PROMPT)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, max_iterations=6, handle_parsing_errors=True)
-
 # Re-run Prompt A with the updated system instruction
-result_formatted = agent_executor.invoke({"input": prompts["A"]})
+answer_formatted = show_trace(agent_formatted, prompts["A"])
 print("\n--- FINAL ANSWER (with format constraint) ---")
-print(result_formatted["output"])
+print(answer_formatted)
+
 ```
 
 ```python
 # Action 15 — Add a few-shot demonstration.
 # STUDENT EXTENSION POINT — Step 4
 #
-# Write a complete Thought → Action → Action Input → Observation → Thought → Final Answer
-# sequence below. Use a DIFFERENT task than Prompts A, B, or C.
+# Write a complete worked exchange below. Use a DIFFERENT task than Prompts A, B or C.
 #
-# The example MUST be formatted as a Human/AI turn pair (shown below).
-# A plain-text example placed in the system prompt will be ignored.
+# The demonstration is a list of message turns, not a block of text. Each tool call the
+# assistant makes needs a matching tool result with the same id, or the model provider
+# will reject the conversation as malformed.
 
-from langchain.prompts import FewShotPromptTemplate, ChatPromptTemplate
-from langchain_core.messages import HumanMessage, AIMessage
+FEW_SHOT_MESSAGES = [
+    {"role": "user", "content": "What is the GDP of France, and what is 2% of that number?"},
+    {
+        "role": "assistant",
+        "content": "I need France's current GDP first, then I can compute 2% of it.",
+        "tool_calls": [
+            {
+                "id": "demo_1",
+                "name": "web_search",
+                "args": {"query": "current GDP of France"},
+                "type": "tool_call",
+            }
+        ],
+    },
+    {"role": "tool", "tool_call_id": "demo_1", "content": "France GDP is approximately $3.1 trillion USD."},
+    {
+        "role": "assistant",
+        "content": "Now I can calculate 2% of that.",
+        "tool_calls": [
+            {
+                "id": "demo_2",
+                "name": "run_python",
+                "args": {"code": "print(3.1e12 * 0.02)"},
+                "type": "tool_call",
+            }
+        ],
+    },
+    {"role": "tool", "tool_call_id": "demo_2", "content": "62000000000.0"},
+    {
+        "role": "assistant",
+        "content": (
+            "France's GDP is approximately $3.1 trillion. 2% of that is $62 billion. "
+            "Confidence: Medium (GDP figures vary by source and year)."
+        ),
+    },
+]
 
-# Section 4B — Few-Shot Template
-# Fill in YOUR_FEW_SHOT_EXAMPLE with your own complete trace.
-# The example below is a placeholder — replace it with a task from your domain.
-FEW_SHOT_EXAMPLE = """Human: What is the GDP of France, and what is 2% of that number?
-AI:
-Thought: I need the current GDP of France, then I can compute 2% of it.
-Action: duckduckgo_search
-Action Input: current GDP of France 2024
-Observation: France GDP 2024 is approximately $3.1 trillion USD.
-Thought: I have the GDP. Now I can calculate 2% using the REPL.
-Action: python_repl
-Action Input: print(3.1e12 * 0.02)
-Observation: 62000000000.0
-Thought: I have both pieces of information.
-Final Answer: France's GDP is approximately $3.1 trillion. 2% of that is $62 billion. Confidence: Medium (GDP figures vary by source and year)."""
+# STUDENT EXTENSION POINT: replace FEW_SHOT_MESSAGES above with your own worked example,
+# then run the agent with the demonstration in front of your real question.
+your_question = "REPLACE THIS WITH YOUR OWN TWO-STEP QUESTION"
 
-# Append the few-shot example to the prompt
-FEW_SHOT_PROMPT = PromptTemplate.from_template(
-    UPDATED_INSTRUCTION + "\n\nHere is an example of the reasoning format:\n\n" + FEW_SHOT_EXAMPLE + """
-
-You have access to the following tools:
-{tools}
-
-Use this format:
-Thought: what you need to do and why
-Action: the tool name (must be one of [{tool_names}])
-Action Input: the exact input to pass to the tool
-Observation: the result returned by the tool
-... (repeat as needed)
-Thought: I now have enough information to answer
-Final Answer: your complete answer
-
-Begin!
-Question: {input}
-{agent_scratchpad}
-"""
+result = agent_formatted.invoke(
+    {"messages": FEW_SHOT_MESSAGES + [{"role": "user", "content": your_question}]},
+    {"recursion_limit": 12},
 )
 
-agent = create_react_agent(llm=llm, tools=tools, prompt=FEW_SHOT_PROMPT)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, max_iterations=6, handle_parsing_errors=True)
+for message in result["messages"][len(FEW_SHOT_MESSAGES):]:
+    kind = type(message).__name__
+    calls = getattr(message, "tool_calls", None)
+    print(f"{kind}: {str(message.content)[:300]}" + (f"  tool_calls={calls}" if calls else ""))
 
-# Run Prompt C with the few-shot prompt
-result_fewshot = agent_executor.invoke({"input": prompts["C"]})
-print("\n--- FINAL ANSWER (with few-shot) ---")
-print(result_fewshot["output"])
 ```
 
 #### ✅ Step 4 Self-Check
 
-**Format constraint:** Compare the Final Answer from Action 14 to the one from Step 2 (same Prompt A). Does the new answer follow the structure you specified?
+**Format constraint:** Compare the final answer from Action 14 to the one from Step 2 (same Prompt A). Does the new answer follow the structure you specified?
 
-**Few-shot demonstration:** Look at the reasoning trace from Action 15. Does the agent's `Thought →...→ Final Answer` structure resemble your example? If not, check that your few-shot example is syntactically complete (all six labels present) and that it is formatted as a `Human:`/`AI:` turn pair.
+**Few-shot demonstration:** Look at the messages printed by Action 15. Did the agent follow the same shape as your example — the same order of tool calls, the same style of final answer? If nothing changed, check that your demonstration is well formed: every assistant `tool_calls` entry needs a matching `{"role": "tool", "tool_call_id": ...}` turn, and the tool names must be tools the agent actually has.
 
 ---
 
@@ -5445,8 +5528,8 @@ print(result_fewshot["output"])
 Record the following:
 
 - **(a) Format constraint text:** Copy the exact text of your output format constraint
-- **(b) Before/after comparison:** Quote the Final Answer from Step 2 (Prompt A, no constraint) and the Final Answer from Action 14 (Prompt A, with constraint). How did the structure change?
-- **(c) Few-shot influence:** Did the agent's reasoning trace in Action 15 mimic your demonstration's format? Cite specific evidence from the trace.
+- **(b) Before/after comparison:** Quote the final answer from Step 2 (Prompt A, no constraint) and from Action 14 (Prompt A, with constraint). How did the structure change?
+- **(c) Few-shot influence:** Did the agent follow your demonstration's shape? Cite specific evidence from the printed messages.
 
 ---
 ## Lab Complete — Submission Instructions
@@ -5455,8 +5538,8 @@ Before submitting, confirm all four checks:
 
 - [ ] All cells have been executed (no empty output cells)
 - [ ] Your Agent Instruction Log contains entries for all four steps
-- [ ] Step 3's Final Answer contains no raw Python tracebacks
-- [ ] Step 4 shows a before/after comparison of Final Answer format
+- [ ] Step 3's final cell runs without raising
+- [ ] Step 4 shows a before/after comparison of the final answer format
 
 **Submit to GitHub:**
 
@@ -6196,7 +6279,7 @@ D. No — LATS deployments in high-risk domains are exempt from Article 13 if th
 
 ---
 title: 'Module 2: Additional Suggested Resources'
-description: Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's AgentExecutor runs the ReAct loop.
+description: Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's create_agent runtime runs the ReAct loop.
 type: Resource List
 tags:
 - module-2
@@ -6257,7 +6340,7 @@ The ReAct (Reason + Act) pattern operates through a continuous, multi-step cycle
 *   **Observation:** The tool executes and returns a result, which is then appended back into the agent's context window.
 *   **Termination:** The model evaluates whether this new observation provides enough information to satisfy the user's original query. If it does, the loop ends and the agent generates a final answer. If not, the loop repeats with a new thought.
 
-We previously looked at a code example of how LangChain's `AgentExecutor` runs this loop. 
+We previously looked at a code example of how LangChain's agent runtime runs this loop. 
 
 **Differences between ReAct and Tree of Thoughts**
 
@@ -6280,43 +6363,40 @@ Here is how the three parts break down, especially in the context of modern AI:
 
 ## ReAct loop in LangChain
 
-In LangChain, the ReAct loop is practically managed by a runtime component called the `AgentExecutor`. 
+In LangChain, the ReAct loop is managed for you by the agent that `create_agent` builds. Older tutorials call this runtime the `AgentExecutor`; that class was removed in LangChain 1.0 and `create_agent` replaced it. 
 
 Here is how it physically orchestrates the ReAct loop:
 
 *   **Thought & Action:** The LLM analyzes the user's prompt and decides it needs external information. It outputs a reasoning trace (the "thought") and requests a specific tool call (the "action").
-*   **Execution:** The `AgentExecutor` steps in, physically runs the requested tool (like a web search API or custom Python function), and captures the result.
+*   **Execution:** The agent runtime steps in, physically runs the requested tool (like a web search API or custom Python function), and captures the result.
 *   **Observation:** The executor feeds this result (the "observation") back into the LLM's context window so the model can read it.
 *   **Iteration:** The LLM evaluates the new observation and decides if the goal is met. If not, it triggers another thought and action. This loop repeats until the model determines it has enough information to formulate a final answer.
 
-Here is a practical code example showing how to set up and run an `AgentExecutor` in LangChain. 
+Here is a practical code example showing how to set up and run an agent in LangChain. 
 
 ```python
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langchain.agents import create_tool_calling_agent, AgentExecutor
-from langchain_core.prompts import PromptTemplate
 
 # 1. Initialize the LLM and define your tools (assuming tools are already defined)
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 tools = [task_status_tool, docs_search_tool]
 
-# 2. Create the prompt template, including the required scratchpad for reasoning traces
-prompt = PromptTemplate.from_template("""
-You are a project assistant. Respond based on the user's input using the appropriate tools.
-User's input: {input}
-{agent_scratchpad}
-""")
+# 2. The system prompt is a plain string. There is no {agent_scratchpad} placeholder:
+#    the agent keeps the reasoning history in its own message state.
+SYSTEM_PROMPT = "You are a project assistant. Answer the user using the appropriate tools."
 
-# 3. Create the agent and bind it to the AgentExecutor
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+# 3. Build the agent
+agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
 
-# 4. Invoke the executor to trigger the ReAct loop
-response = agent_executor.invoke({"input": "What's the status of task1?"})
-print(response['output'])
+# 4. Invoke it to trigger the reasoning loop
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's the status of task1?"}]}
+)
+print(response["messages"][-1].content)
 ```
 
-In this setup, the `create_tool_calling_agent` function defines how the LLM interacts with the prompt and tools. The `AgentExecutor` then acts as the runtime environment that continuously cycles through selecting actions, executing the tools, and processing the outputs until the agent formulates a final conclusion. Setting `verbose=True` lets you watch the "Thought-Action-Observation" steps happen live in your console.
+In this setup, `create_agent` combines the model, the tool registry and the system prompt into a runnable agent that cycles through selecting actions, executing tools and processing the outputs until it formulates a final conclusion. To watch those steps as they happen, stream the agent instead of invoking it: `agent.stream(..., stream_mode="updates")` reports each tool call and each tool result as structured data, which is what replaced the old `verbose=True` text trace.
 
 ## Functional Components of a Tool-Calling Agent Architecture
 
@@ -6335,35 +6415,31 @@ During a single task episode, the information flows in this sequence:
 4.  This result is appended to the **Memory Module** and fed back into the LLM's context window.
 5.  The LLM evaluates this new information to determine if the task goal is met. If it is, the LLM generates the final response for the user; if not, it triggers another tool call to continue gathering information.
 
-Here is how you combine those components into a working `AgentExecutor` in LangChain:
+Here is how you combine those components into a working agent in LangChain:
 
 ```python
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.agents import create_tool_calling_agent, AgentExecutor
 
 # 1. Define your LLM and tools
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 tools = [task_status_tool, docs_search_tool]
 
-# 2. Create the prompt (must include agent_scratchpad for reasoning memory)
-prompt_template = """
-You are a project assistant. Respond based on the user's input using the appropriate tools.
-User's input: {input}
-{agent_scratchpad}
-"""
-prompt = PromptTemplate.from_template(prompt_template)
+# 2. Give the agent its instructions. The tool registry is passed separately, so the
+#    prompt does not need to list the tools or reserve a slot for reasoning memory.
+SYSTEM_PROMPT = "You are a project assistant. Answer the user using the appropriate tools."
 
-# 3. Create the agent and bind it to the executor
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+# 3. Build the agent
+agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
 
 # 4. Run the task episode
-response = agent_executor.invoke({"input": "What's the status of task1?"})
-print(response['output'])
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's the status of task1?"}]}
+)
+print(response["messages"][-1].content)
 ```
 
-The `create_tool_calling_agent` function directly combines your LLM, tool registry, and prompt. The `AgentExecutor` then steps in as the action executor, taking the user's input and continuously managing the ReAct loop until it reaches a final answer. Setting `verbose=True` allows you to watch the "Thought-Action-Observation" steps print live in your console.
+The `create_agent` function directly combines your LLM, tool registry and system prompt, and the agent it returns acts as the action executor, taking the user's input and managing the reasoning loop until it reaches a final answer. Stream the agent with `stream_mode="updates"` to watch each tool call and tool result as it happens.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Additional-Suggested--Resources){target=_blank} (wiki page last changed 2026-06-25). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-2/resources.md){target=_blank}.</p>
 
@@ -7342,6 +7418,7 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb"
     title: "Module-3-Lab.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 3 Lab: Building a RAG Pipeline with LangChain + Chroma
@@ -7379,11 +7456,11 @@ Run the cells in order — each step depends on variables defined by the one bef
 
 Markdown cells marked *Lab Notebook — record your answer* are where you type your findings. Fill them in as you go rather than saving them for the end. Several steps ask you to read printed output and make a judgement call; those judgements are the graded part of this lab, not the code.
 
-This notebook runs on **LangChain 1.3.14**. The install cell pins that version and the check cell that follows confirms it before you go any further.
+This notebook runs on **LangChain 1.4.0**. The install cell pins that version and the check cell that follows confirms it before you go any further.
 
 ### Setup
 
-Run the next cell once. It pins `langchain==1.3.14` and installs the integration packages this lab needs. On Colab this takes 2–4 minutes.
+Run the next cell once. It pins `langchain==1.4.0` and installs the integration packages this lab needs. On Colab this takes 2–4 minutes.
 
 Pick your path before running:
 
@@ -7395,7 +7472,7 @@ The install cell covers both; you choose which one is active in the Configuratio
 ```python
 # Installs the pinned LangChain stack. Safe to re-run.
 %pip install -q \
-    "langchain==1.3.14" \
+    "langchain==1.4.0" \
     "langchain-community" \
     "langchain-text-splitters" \
     "langchain-chroma" \
@@ -7413,7 +7490,7 @@ print("Install step finished.")
 
 ```python
 # Verify the installed versions before going further.
-# If langchain is not 1.3.14, stop and fix it here before running anything else.
+# If langchain is not 1.4.0, stop and fix it here before running anything else.
 from importlib.metadata import version, PackageNotFoundError
 
 for pkg in [
@@ -7426,14 +7503,14 @@ for pkg in [
     except PackageNotFoundError:
         print(f"{pkg:<28} (not installed)")
 
-assert version("langchain").startswith("1."), "This lab requires LangChain 1.3.14. Re-run the install cell."
+assert version("langchain").startswith("1."), "This lab requires LangChain 1.4.0. Re-run the install cell."
 ```
 
 **Troubleshooting.** If an import below fails with a version or dependency conflict, uncomment and run the cell that follows, then restart the runtime (`Runtime > Restart session` in Colab) and re-run from the top. Do not skip the restart — Python keeps the already-imported module in memory.
 
 ```python
 # TROUBLESHOOTING ONLY - uncomment and run if you hit a package conflict, then restart the runtime.
-# %pip install -q --force-reinstall "langchain==1.3.14" "langchain-core" "langchain-community" "langchain-chroma"
+# %pip install -q --force-reinstall "langchain==1.4.0" "langchain-core" "langchain-community" "langchain-chroma"
 ```
 
 ### Configuration
@@ -9597,6 +9674,7 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb"
     title: "Module4_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 4 Lab: Three-Role Pipeline in LangGraph and CrewAI
@@ -11575,6 +11653,7 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb"
     title: "Module5_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline
@@ -11627,8 +11706,8 @@ By the end, you'll have hands-on experience with production observability and au
 
 ```python
 # Install required packages (1-2 minutes in Colab)
-%pip install -q "langchain==1.3.15" "langgraph==1.2.11" "langsmith==0.11.1" \
-    "langchain-openai>=1.5.2" "litellm>=1.97,<2"
+%pip install -q "langchain==1.4.0" "langgraph==1.2.11" "langsmith==0.12.4" \
+    "langchain-openai>=1.6.2,<2" "litellm>=1.97,<2"
 ```
 
 ```python
@@ -11819,20 +11898,31 @@ print("Agent created with tools:", [t.name for t in tools])
 
 LangSmith is an observability platform that records every step your agent takes — like a flight recorder for AI. When these environment variables are set **before** your first agent invocation, tracing happens automatically. No decorators or special code needed.
 
-> **Why `LANGCHAIN_TRACING_V2` instead of `LANGSMITH_*`?** LangSmith grew out of the LangChain project, so some variable names still use the legacy `LANGCHAIN_` prefix. The API key can use either `LANGSMITH_API_KEY` or `LANGCHAIN_API_KEY` — we use `LANGSMITH_API_KEY` here to avoid conflicts with the LLM provider auth.
+> **Two ways to switch tracing off by accident.** LangSmith grew out of the LangChain project, so every setting has an older `LANGCHAIN_` name as well as the documented `LANGSMITH_` one. Both still work, and the older name *wins* when the two disagree, so a stale `LANGCHAIN_TRACING_V2=false` left over from another notebook silently overrides `LANGSMITH_TRACING=true`. The cell below deletes the old name rather than trusting it to be absent.
+>
+> The value is also compared as the literal lowercase string `"true"`. Setting `True`, `TRUE` or `1` disables tracing without any error — you simply get an empty project.
 
 Get your free API key at [smith.langchain.com](https://smith.langchain.com) → Settings → API Keys.
 
 ```python
 # LangSmith tracing config.
-# IMPORTANT: LANGCHAIN_TRACING_V2 must be set before the first agent call.
-# We use LANGSMITH_API_KEY (not LANGCHAIN_API_KEY) to avoid conflicts with the LLM provider.
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
+# IMPORTANT: these must be set before the first agent call.
+#
+# The older LANGCHAIN_* names still work and take precedence over the LANGSMITH_* ones,
+# so drop them first: a leftover LANGCHAIN_TRACING_V2=false would silently win.
+for legacy in ("LANGCHAIN_TRACING_V2", "LANGCHAIN_TRACING", "LANGCHAIN_PROJECT"):
+    os.environ.pop(legacy, None)
+
+# The value is compared to the literal string "true" — "True" and "1" disable tracing.
+os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = require_secret("LANGSMITH_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = "module5-observability-lab"
+os.environ["LANGSMITH_PROJECT"] = "module5-observability-lab"
+
+from langsmith.utils import tracing_is_enabled
+assert tracing_is_enabled(), "Tracing is off. Check the value is exactly \"true\"."
 
 print("LangSmith tracing enabled.")
-print(f"Project: {os.environ["LANGCHAIN_PROJECT"]}")
+print(f"Project: {os.environ['LANGSMITH_PROJECT']}")
 print("Traces will appear at: https://smith.langchain.com")
 ```
 
@@ -11846,21 +11936,27 @@ Skip this cell to keep using the simulated search (recommended for first run-thr
 # OPTIONAL: Uncomment and run to switch to live DuckDuckGo search.
 # This replaces the simulated search tool with real web results.
 # Note: Results will vary between runs, and rate limiting may occur.
+#
+# This calls the ddgs package directly rather than going through
+# langchain-community's DuckDuckGoSearchRun. langchain-community was sunset in
+# May 2026, and the search project renamed itself from duckduckgo-search to ddgs,
+# so the older two-package route now fails at the first search rather than at import.
 
-# %pip install -q "duckduckgo-search>=7.0,<8"
+# %pip install -q "ddgs>=9.16,<10"
 
-# from langchain_community.tools import DuckDuckGoSearchRun
+# from ddgs import DDGS
 # from langchain_core.tools import tool
-
-# ddg = DuckDuckGoSearchRun()
 
 # @tool
 # def search(query: str) -> str:
 #     """Search the web for current information using DuckDuckGo."""
 #     try:
-#         return ddg.invoke(query)
+#         results = DDGS().text(query, max_results=5)
 #     except Exception as e:
 #         return f"Search error: {e}. Try again or use a simpler query."
+#     if not results:
+#         return "No results found."
+#     return "\n\n".join(f"{r.get('title', '')}\n{r.get('body', '')}" for r in results)
 
 # # Rebuild tools list and agent with live search
 # tools = [search, calculator]
@@ -11876,7 +11972,7 @@ Before running all 10, let's confirm tracing works. After running this cell:
 2. Open the `module5-observability-lab` project
 3. Verify you see one trace
 
-If no trace appears, double-check that `LANGCHAIN_TRACING_V2` was set *before* the agent was created (restart runtime if needed).
+If no trace appears, double-check that `LANGSMITH_TRACING` was set *before* the agent was created (restart runtime if needed).
 
 ```python
 # Single test run to verify LangSmith tracing
@@ -12239,7 +12335,7 @@ TODO
 
 #### Troubleshooting
 
-- **LangSmith traces don't appear**: Check that `LANGCHAIN_TRACING_V2` is set *before* the first agent invocation. Restart the runtime and re-run from the top.
+- **LangSmith traces don't appear**: Check that `LANGSMITH_TRACING` is set to the lowercase string `"true"` *before* the first agent invocation, and that no `LANGCHAIN_TRACING_V2` is left set — the older name overrides the newer one. Restart the runtime and re-run from the top.
 - **401 / auth error**: Re-run the provider cell and re-enter your key.
 - **Rate limit**: Wait for the provider window to reset, increase DELAY_BETWEEN_RUNS, or switch to a different provider.
 - **Agent doesn't use tools**: Check that the tools list is passed to `create_agent`.
@@ -12248,7 +12344,7 @@ TODO
 
 #### Documentation
 
-[LangSmith Docs](https://docs.smith.langchain.com/) · [LangGraph Agents](https://langchain-ai.github.io/langgraph/) · [LiteLLM Providers](https://docs.litellm.ai/)
+[LangSmith Docs](https://docs.langchain.com/langsmith/home) · [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents) · [LiteLLM Providers](https://docs.litellm.ai/)
 
 <p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module5_Learner_Starter.ipynb](../../materials/module5/Module5_Learner_Starter.ipynb) (`docs/materials/module5/Module5_Learner_Starter.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
 
@@ -13333,6 +13429,49 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 3. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
+
+## Assessment items that test removed LangChain APIs
+
+The lab notebooks and the code samples on this site were moved onto LangChain
+1.4 in September 2026, because LangChain 1.0 removed `AgentExecutor`,
+`create_react_agent`, `RetrievalQA`, `langchain.chains`, `langchain.memory` and
+`langchain.prompts` outright. Graded assessment items were deliberately left
+alone: rewriting a quiz question changes what learners are marked on, which is
+an author's call rather than a maintenance one.
+
+The following items now test APIs that no longer exist. Each needs a decision:
+revise the question, or keep it and frame it explicitly as LangChain 0.x history.
+
+1. **Module 2 chapter quizzes** — questions and answer keys turn on
+   `AgentExecutor` internals: its "five structural components", which component
+   generates the `Action:` versus the `Observation:`, and how tool descriptions
+   reach the model. The mechanism they describe is still broadly how an agent
+   runtime works, but the class named in them was removed. See
+   [Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md).
+2. **Module 2 reading guides** — Reading 5 assigns "the complete AgentExecutor
+   Conceptual Guide" and Part A asks learners to name the five components of an
+   architecture that no longer ships. The LangChain page it points at is gone;
+   the current equivalent is the
+   [agents guide](https://docs.langchain.com/oss/python/langchain/agents){target=_blank}.
+   See [Module 2 reading guides](../modules/module-2/reading-guides.md).
+3. **Module 3 reading guides and activities** — both call `RetrievalQA` "the
+   primary interface for Stage 6 in the lab", and a chapter-quiz question tests
+   `RetrievalQA.from_chain_type(...)`. The Module 3 notebook has not used
+   `RetrievalQA` for some time; it composes the same pipeline with LangChain
+   Expression Language, which the reading guides also teach a few pages later.
+   See [Module 3 reading guides](../modules/module-3/reading-guides.md),
+   [activities](../modules/module-3/activities.md) and
+   [chapter quizzes](../modules/module-3/chapter-quizzes.md).
+4. **The Module 2 architecture diagram.** `AgentExecutor-Architecture.png` sits
+   in the section of
+   [Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
+   that describes `create_agent`. The structure it draws is still accurate, and
+   its alt text now says which version it was drawn for, but a redrawn diagram
+   would remove the mixed message.
+
+These pages are produced by `scripts/migrate_wiki.py`, so any revision belongs
+in that script's `PATCHES` table rather than in the Markdown, or the next
+pipeline run will revert it.
 
 ## Content inconsistencies inherited from the source
 
@@ -15168,6 +15307,11 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ## 2026-09-09
 
+* **Update**: Moved the course onto current LangChain. LangChain 1.0 removed `AgentExecutor`, `create_react_agent`, `create_tool_calling_agent`, `initialize_agent`, `langchain.chains`, `langchain.memory`, `langchain.prompts` and `langchain.tools.Tool` from the `langchain` package with no deprecation shim, so those imports now fail with `AttributeError` or `ModuleNotFoundError` rather than a warning. The [Module 2 lab](modules/module-2/lab-notebook.md) was built entirely on `AgentExecutor` and installed LangChain unpinned, so it raised `ImportError` on its agent-building cell for every learner; it is rewritten on `create_agent`, which is what the module's own [foundational concepts](modules/module-2/foundational-concepts.md) page already documented. The [Module 2 resources](modules/module-2/resources.md) page carried two LangChain 0.x code samples with the same problem; both are rewritten. Its conceptual model of an agent runtime is framework-agnostic and is unchanged.
+* **Update**: The lab's four-step shape, its student extension points, its self-checks and its log entries are preserved. What changed is how the reasoning loop is observed: `create_agent` returns a LangGraph graph rather than an `AgentExecutor`, so there is no `verbose=True` text trace printing `Thought:`, `Action:` and `Observation:`. A `show_trace` helper streams the graph instead and prints the same loop as structured data, and Step 1 now explains why the old labels are gone. Two sunset dependencies were dropped: `langchain-experimental`, which the lab imported but never installed, and `langchain-community`, whose DuckDuckGo wrapper now needs the renamed `ddgs` package. Both tools are defined in the notebook instead.
+* **Update**: Pinned every notebook to the same current stack: LangChain 1.4.0, LangGraph 1.2.11 and LangSmith 0.12.4. Modules 3 and 5 had drifted to different LangChain patch versions, and Module 2 had no pin at all. Module 5's optional live-search cell installed the renamed `duckduckgo-search` package and never installed the library it imported, so it failed twice if a learner uncommented it. Its LangSmith setup now uses the documented `LANGSMITH_*` variables and clears the older `LANGCHAIN_*` ones first, because the older names take precedence and the value is matched against the literal lowercase string `true`; either trap turns tracing off silently and leaves an empty project with no error.
+* **Update**: The four lab pages regained the `last_modified` date in their `sources` entry. `scripts/render_notebooks.py` was still looking for the notebook clone under `.cache/`, which `zensical build --clean` deletes because it is Zensical's own build cache; it now reads `.sources/` like the migration pipeline does, so it can read the notebooks' git history again.
+* **Known gap**: Module 2's [reading guides](modules/module-2/reading-guides.md) and [chapter quizzes](modules/module-2/chapter-quizzes.md), and Module 3's [reading guides](modules/module-3/reading-guides.md), [activities](modules/module-3/activities.md) and [chapter quizzes](modules/module-3/chapter-quizzes.md), still set questions about `AgentExecutor` internals and `RetrievalQA` as current APIs. Those are graded assessment items rather than code, so they are recorded on the [instructor materials](course-design/instructor-materials.md) page for the course owners to revise rather than being rewritten here.
 * **Update**: Rebranded the site to the University of New Mexico. The header logo is the CARC starburst and the favicon is the UNM mark; the palette moves from Arizona Blue and Red to UNM Cherry `#BA0C2F` and Turquoise `#007A86` with CARC's cherry-to-turquoise header gradient. Institutional identity now reads University of New Mexico across the site description, the [syllabus](start-here/syllabus.md), [How this course works](start-here/how-this-course-works.md), the landing page, `llms.txt`, `robots.txt`, the README and the contributor contract. **Provenance is deliberately unchanged**: every page's `sources` entries, wiki URLs, provenance footers, the [wiki crosswalk](about/wiki-crosswalk.md), the entries below and the origin section of the [license page](about/license-and-attribution.md) still record that the course was written by the AI2S team at the University of Arizona. Branding says who publishes the site today; provenance says who wrote the material, and rewriting it would be false.
 * **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here. Dropped the AI Education Series professional badge and the "Course 2 of the series" framing from the syllabus, [How this course works](start-here/how-this-course-works.md) and the [instructor materials](course-design/instructor-materials.md): the series is a University of Arizona program, and rebranding those sentences to UNM would have described a Course 1 and a badge that do not exist here.
 * **Creation**: The downloadable syllabus PDF is now generated from [the syllabus page](start-here/syllabus.md) by `scripts/build_syllabus_pdf.py`, so the two cannot drift; CI fails when the committed PDF no longer matches the page, and separately when the renderer drops a section of it. Output is deterministic, so rebuilding an unchanged syllabus produces an identical file rather than a spurious diff. It replaces the University of Arizona syllabus v2.0 as the linked download. That earlier PDF stays in the repository as the source document and is still linked from the syllabus page.

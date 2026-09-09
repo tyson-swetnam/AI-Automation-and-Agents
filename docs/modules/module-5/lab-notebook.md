@@ -23,6 +23,7 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb"
     title: "Module5_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline
@@ -75,8 +76,8 @@ By the end, you'll have hands-on experience with production observability and au
 
 ```python
 # Install required packages (1-2 minutes in Colab)
-%pip install -q "langchain==1.3.15" "langgraph==1.2.11" "langsmith==0.11.1" \
-    "langchain-openai>=1.5.2" "litellm>=1.97,<2"
+%pip install -q "langchain==1.4.0" "langgraph==1.2.11" "langsmith==0.12.4" \
+    "langchain-openai>=1.6.2,<2" "litellm>=1.97,<2"
 ```
 
 ```python
@@ -267,20 +268,31 @@ print("Agent created with tools:", [t.name for t in tools])
 
 LangSmith is an observability platform that records every step your agent takes — like a flight recorder for AI. When these environment variables are set **before** your first agent invocation, tracing happens automatically. No decorators or special code needed.
 
-> **Why `LANGCHAIN_TRACING_V2` instead of `LANGSMITH_*`?** LangSmith grew out of the LangChain project, so some variable names still use the legacy `LANGCHAIN_` prefix. The API key can use either `LANGSMITH_API_KEY` or `LANGCHAIN_API_KEY` — we use `LANGSMITH_API_KEY` here to avoid conflicts with the LLM provider auth.
+> **Two ways to switch tracing off by accident.** LangSmith grew out of the LangChain project, so every setting has an older `LANGCHAIN_` name as well as the documented `LANGSMITH_` one. Both still work, and the older name *wins* when the two disagree, so a stale `LANGCHAIN_TRACING_V2=false` left over from another notebook silently overrides `LANGSMITH_TRACING=true`. The cell below deletes the old name rather than trusting it to be absent.
+>
+> The value is also compared as the literal lowercase string `"true"`. Setting `True`, `TRUE` or `1` disables tracing without any error — you simply get an empty project.
 
 Get your free API key at [smith.langchain.com](https://smith.langchain.com) → Settings → API Keys.
 
 ```python
 # LangSmith tracing config.
-# IMPORTANT: LANGCHAIN_TRACING_V2 must be set before the first agent call.
-# We use LANGSMITH_API_KEY (not LANGCHAIN_API_KEY) to avoid conflicts with the LLM provider.
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
+# IMPORTANT: these must be set before the first agent call.
+#
+# The older LANGCHAIN_* names still work and take precedence over the LANGSMITH_* ones,
+# so drop them first: a leftover LANGCHAIN_TRACING_V2=false would silently win.
+for legacy in ("LANGCHAIN_TRACING_V2", "LANGCHAIN_TRACING", "LANGCHAIN_PROJECT"):
+    os.environ.pop(legacy, None)
+
+# The value is compared to the literal string "true" — "True" and "1" disable tracing.
+os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = require_secret("LANGSMITH_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = "module5-observability-lab"
+os.environ["LANGSMITH_PROJECT"] = "module5-observability-lab"
+
+from langsmith.utils import tracing_is_enabled
+assert tracing_is_enabled(), "Tracing is off. Check the value is exactly \"true\"."
 
 print("LangSmith tracing enabled.")
-print(f"Project: {os.environ["LANGCHAIN_PROJECT"]}")
+print(f"Project: {os.environ['LANGSMITH_PROJECT']}")
 print("Traces will appear at: https://smith.langchain.com")
 ```
 
@@ -294,21 +306,27 @@ Skip this cell to keep using the simulated search (recommended for first run-thr
 # OPTIONAL: Uncomment and run to switch to live DuckDuckGo search.
 # This replaces the simulated search tool with real web results.
 # Note: Results will vary between runs, and rate limiting may occur.
+#
+# This calls the ddgs package directly rather than going through
+# langchain-community's DuckDuckGoSearchRun. langchain-community was sunset in
+# May 2026, and the search project renamed itself from duckduckgo-search to ddgs,
+# so the older two-package route now fails at the first search rather than at import.
 
-# %pip install -q "duckduckgo-search>=7.0,<8"
+# %pip install -q "ddgs>=9.16,<10"
 
-# from langchain_community.tools import DuckDuckGoSearchRun
+# from ddgs import DDGS
 # from langchain_core.tools import tool
-
-# ddg = DuckDuckGoSearchRun()
 
 # @tool
 # def search(query: str) -> str:
 #     """Search the web for current information using DuckDuckGo."""
 #     try:
-#         return ddg.invoke(query)
+#         results = DDGS().text(query, max_results=5)
 #     except Exception as e:
 #         return f"Search error: {e}. Try again or use a simpler query."
+#     if not results:
+#         return "No results found."
+#     return "\n\n".join(f"{r.get('title', '')}\n{r.get('body', '')}" for r in results)
 
 # # Rebuild tools list and agent with live search
 # tools = [search, calculator]
@@ -324,7 +342,7 @@ Before running all 10, let's confirm tracing works. After running this cell:
 2. Open the `module5-observability-lab` project
 3. Verify you see one trace
 
-If no trace appears, double-check that `LANGCHAIN_TRACING_V2` was set *before* the agent was created (restart runtime if needed).
+If no trace appears, double-check that `LANGSMITH_TRACING` was set *before* the agent was created (restart runtime if needed).
 
 ```python
 # Single test run to verify LangSmith tracing
@@ -687,7 +705,7 @@ TODO
 
 #### Troubleshooting
 
-- **LangSmith traces don't appear**: Check that `LANGCHAIN_TRACING_V2` is set *before* the first agent invocation. Restart the runtime and re-run from the top.
+- **LangSmith traces don't appear**: Check that `LANGSMITH_TRACING` is set to the lowercase string `"true"` *before* the first agent invocation, and that no `LANGCHAIN_TRACING_V2` is left set — the older name overrides the newer one. Restart the runtime and re-run from the top.
 - **401 / auth error**: Re-run the provider cell and re-enter your key.
 - **Rate limit**: Wait for the provider window to reset, increase DELAY_BETWEEN_RUNS, or switch to a different provider.
 - **Agent doesn't use tools**: Check that the tools list is passed to `create_agent`.
@@ -696,6 +714,6 @@ TODO
 
 #### Documentation
 
-[LangSmith Docs](https://docs.smith.langchain.com/) · [LangGraph Agents](https://langchain-ai.github.io/langgraph/) · [LiteLLM Providers](https://docs.litellm.ai/)
+[LangSmith Docs](https://docs.langchain.com/langsmith/home) · [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents) · [LiteLLM Providers](https://docs.litellm.ai/)
 
 <p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module5_Learner_Starter.ipynb](../../materials/module5/Module5_Learner_Starter.ipynb) (`docs/materials/module5/Module5_Learner_Starter.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>

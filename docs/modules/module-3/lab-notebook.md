@@ -22,6 +22,7 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb"
     title: "Module-3-Lab.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 3 Lab: Building a RAG Pipeline with LangChain + Chroma
@@ -59,11 +60,11 @@ Run the cells in order — each step depends on variables defined by the one bef
 
 Markdown cells marked *Lab Notebook — record your answer* are where you type your findings. Fill them in as you go rather than saving them for the end. Several steps ask you to read printed output and make a judgement call; those judgements are the graded part of this lab, not the code.
 
-This notebook runs on **LangChain 1.3.14**. The install cell pins that version and the check cell that follows confirms it before you go any further.
+This notebook runs on **LangChain 1.4.0**. The install cell pins that version and the check cell that follows confirms it before you go any further.
 
 ### Setup
 
-Run the next cell once. It pins `langchain==1.3.14` and installs the integration packages this lab needs. On Colab this takes 2–4 minutes.
+Run the next cell once. It pins `langchain==1.4.0` and installs the integration packages this lab needs. On Colab this takes 2–4 minutes.
 
 Pick your path before running:
 
@@ -75,7 +76,7 @@ The install cell covers both; you choose which one is active in the Configuratio
 ```python
 # Installs the pinned LangChain stack. Safe to re-run.
 %pip install -q \
-    "langchain==1.3.14" \
+    "langchain==1.4.0" \
     "langchain-community" \
     "langchain-text-splitters" \
     "langchain-chroma" \
@@ -93,7 +94,7 @@ print("Install step finished.")
 
 ```python
 # Verify the installed versions before going further.
-# If langchain is not 1.3.14, stop and fix it here before running anything else.
+# If langchain is not 1.4.0, stop and fix it here before running anything else.
 from importlib.metadata import version, PackageNotFoundError
 
 for pkg in [
@@ -106,14 +107,14 @@ for pkg in [
     except PackageNotFoundError:
         print(f"{pkg:<28} (not installed)")
 
-assert version("langchain").startswith("1."), "This lab requires LangChain 1.3.14. Re-run the install cell."
+assert version("langchain").startswith("1."), "This lab requires LangChain 1.4.0. Re-run the install cell."
 ```
 
 **Troubleshooting.** If an import below fails with a version or dependency conflict, uncomment and run the cell that follows, then restart the runtime (`Runtime > Restart session` in Colab) and re-run from the top. Do not skip the restart — Python keeps the already-imported module in memory.
 
 ```python
 # TROUBLESHOOTING ONLY - uncomment and run if you hit a package conflict, then restart the runtime.
-# %pip install -q --force-reinstall "langchain==1.3.14" "langchain-core" "langchain-community" "langchain-chroma"
+# %pip install -q --force-reinstall "langchain==1.4.0" "langchain-core" "langchain-community" "langchain-chroma"
 ```
 
 ### Configuration

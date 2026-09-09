@@ -23,6 +23,7 @@ sources:
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb"
     title: "Module4_Learner_Starter.ipynb"
     author: "team:ua-ai2s"
+    last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
 # Module 4 Lab: Three-Role Pipeline in LangGraph and CrewAI

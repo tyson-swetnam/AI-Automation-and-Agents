@@ -48,7 +48,9 @@ DOCS = ROOT / "docs"
 # Clone of the v2 course repo (UA-AI2S/AI-Automation-and-Agents-v2) used only
 # for each notebook's last commit date. Override with $COURSE_ASSETS_REPO or
 # --assets-repo; when absent, `last_modified` is simply omitted.
-ASSETS_REPO = Path(os.environ.get("COURSE_ASSETS_REPO", ROOT / ".cache" / "repo-v2"))
+# .sources/, not .cache/: `zensical build --clean` wipes .cache/, which is Zensical's own
+# build cache. migrate_wiki.py reads the same clones from .sources/.
+ASSETS_REPO = Path(os.environ.get("COURSE_ASSETS_REPO", ROOT / ".sources" / "repo-v2"))
 
 REPO_SLUG = "tyson-swetnam/AI-Automation-and-Agents"
 BRANCH = "main"

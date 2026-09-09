@@ -56,10 +56,10 @@ first; it holds the *Platform setup* and *What to submit* boxes.
 
 | Module | Lab page and notebook | What you build | Frameworks | Time |
 | :-- | :-- | :-- | :-- | :-- |
-| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain ReAct agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain (`create_react_agent`, `AgentExecutor`) | ~2 hours |
-| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare | LangChain 1.3.14 (pinned), Chroma, pypdf | ~60 minutes |
+| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | ~2 hours |
+| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare | LangChain 1.4.0 (pinned), Chroma, pypdf | ~60 minutes |
 | 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | 100-130 minutes |
-| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyses ten runs; Lab B builds an automated evaluation suite that detects a regression | LangChain 1.3.15, LangGraph 1.2.11, LangSmith 0.11.1, LiteLLM | ~120 minutes |
+| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyses ten runs; Lab B builds an automated evaluation suite that detects a regression | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | ~120 minutes |
 
 ### Model providers each notebook supports
 
@@ -68,7 +68,7 @@ where you choose.
 
 | Module | Paid or hosted options | Free options |
 | :-- | :-- | :-- |
-| 2 | OpenAI (`gpt-4o-mini`), key `OPENAI_API_KEY` | Ollama running locally (`llama3`) via `langchain-ollama` |
+| 2 | OpenAI (`gpt-4o-mini`), key `OPENAI_API_KEY` | Ollama running locally (`llama3.1`, which supports tool calling) via `langchain-ollama` |
 | 3 | OpenAI embeddings (`text-embedding-3-small`) and chat (`gpt-4o-mini`) | Local `sentence-transformers/all-MiniLM-L6-v2` embeddings (first run downloads about 90 MB) with a small local generator (`Qwen/Qwen2.5-0.5B-Instruct`) or Ollama (`llama3.1`); a `"none"` setting runs retrieval only |
 | 4 | Hugging Face Inference Providers (default; token `HF_TOKEN`), Groq (`GROQ_API_KEY`), OpenAI (`gpt-4.1-mini`, `OPENAI_API_KEY`) | Ollama locally (`qwen3:8b`), no key; Hugging Face's free credits and quotas can change |
 | 5 | NVIDIA API (default; `NVIDIA_API_KEY`), Hugging Face (`HF_TOKEN`), Groq, OpenAI - plus a **LangSmith API key** (free account at [smith.langchain.com](https://smith.langchain.com){target=_blank}) for tracing | Ollama locally (`qwen3:8b`) for the model; LangSmith itself has a free tier |

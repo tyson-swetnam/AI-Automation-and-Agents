@@ -153,7 +153,7 @@ ACT_DESC = {
 }
 RES_DESC = {
     1: "Curated supplementary notes for Module 1 covering generative AI foundations, agent types, development tooling, what distinguishes an agent from chatbots, APIs and scripts, the ReAct loop, and automation paradigms with low-code examples.",
-    2: "Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's AgentExecutor runs the ReAct loop.",
+    2: "Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's create_agent runtime runs the ReAct loop.",
     3: "Supplementary notes for Module 3 explaining parametric vs. non-parametric agent memory, the six-stage RAG pipeline with its design decisions and consequences, the RAGAS faithfulness metric, and text-splitting strategies.",
 }
 TOPIC_TAGS = {
@@ -299,6 +299,16 @@ DROPPED: dict[str, str] = {
 }
 
 # Exact-literal patches keyed by dest; each (old, new) must match at least once in the source text.
+# Module 2's resources page shipped two LangChain 0.x samples. Kept as named
+# constants because they are long enough to drown the PATCHES table inline.
+M2_RESOURCES_CODE_1_OLD = '```python\nfrom langchain_openai import ChatOpenAI\nfrom langchain.agents import create_tool_calling_agent, AgentExecutor\nfrom langchain_core.prompts import PromptTemplate\n\n# 1. Initialize the LLM and define your tools (assuming tools are already defined)\nllm = ChatOpenAI(model="gpt-4o-mini", temperature=0)\ntools = [task_status_tool, docs_search_tool]\n\n# 2. Create the prompt template, including the required scratchpad for reasoning traces\nprompt = PromptTemplate.from_template("""\nYou are a project assistant. Respond based on the user\'s input using the appropriate tools.\nUser\'s input: {input}\n{agent_scratchpad}\n""")\n\n# 3. Create the agent and bind it to the AgentExecutor\nagent = create_tool_calling_agent(llm, tools, prompt)\nagent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)\n\n# 4. Invoke the executor to trigger the ReAct loop\nresponse = agent_executor.invoke({"input": "What\'s the status of task1?"})\nprint(response[\'output\'])\n```'
+
+M2_RESOURCES_CODE_1_NEW = '```python\nfrom langchain.agents import create_agent\nfrom langchain_openai import ChatOpenAI\n\n# 1. Initialize the LLM and define your tools (assuming tools are already defined)\nllm = ChatOpenAI(model="gpt-4o-mini", temperature=0)\ntools = [task_status_tool, docs_search_tool]\n\n# 2. The system prompt is a plain string. There is no {agent_scratchpad} placeholder:\n#    the agent keeps the reasoning history in its own message state.\nSYSTEM_PROMPT = "You are a project assistant. Answer the user using the appropriate tools."\n\n# 3. Build the agent\nagent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)\n\n# 4. Invoke it to trigger the reasoning loop\nresponse = agent.invoke(\n    {"messages": [{"role": "user", "content": "What\'s the status of task1?"}]}\n)\nprint(response["messages"][-1].content)\n```'
+
+M2_RESOURCES_CODE_2_OLD = '```python\nfrom langchain_openai import ChatOpenAI\nfrom langchain.prompts import PromptTemplate\nfrom langchain.agents import create_tool_calling_agent, AgentExecutor\n\n# 1. Define your LLM and tools\nllm = ChatOpenAI(model="gpt-4o-mini", temperature=0)\ntools = [task_status_tool, docs_search_tool]\n\n# 2. Create the prompt (must include agent_scratchpad for reasoning memory)\nprompt_template = """\nYou are a project assistant. Respond based on the user\'s input using the appropriate tools.\nUser\'s input: {input}\n{agent_scratchpad}\n"""\nprompt = PromptTemplate.from_template(prompt_template)\n\n# 3. Create the agent and bind it to the executor\nagent = create_tool_calling_agent(llm, tools, prompt)\nagent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)\n\n# 4. Run the task episode\nresponse = agent_executor.invoke({"input": "What\'s the status of task1?"})\nprint(response[\'output\'])\n```'
+
+M2_RESOURCES_CODE_2_NEW = '```python\nfrom langchain.agents import create_agent\nfrom langchain_openai import ChatOpenAI\n\n# 1. Define your LLM and tools\nllm = ChatOpenAI(model="gpt-4o-mini", temperature=0)\ntools = [task_status_tool, docs_search_tool]\n\n# 2. Give the agent its instructions. The tool registry is passed separately, so the\n#    prompt does not need to list the tools or reserve a slot for reasoning memory.\nSYSTEM_PROMPT = "You are a project assistant. Answer the user using the appropriate tools."\n\n# 3. Build the agent\nagent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)\n\n# 4. Run the task episode\nresponse = agent.invoke(\n    {"messages": [{"role": "user", "content": "What\'s the status of task1?"}]}\n)\nprint(response["messages"][-1].content)\n```'
+
 PATCHES: dict[str, list[tuple[str, str]]] = {
     "modules/module-1/foundational-concepts.md": [
         ("* Merrill, M. D. (2002). [First principles of instruction](https://link.springer.com/content/pdf/10.1007/bf02505024.pdf). Educational technology research and development, 50(3), 43-59 (**👁️‍🗨️ 👁️‍🗨️ 👁️‍🗨️ Remove this source - not related to course**)\n", ""),
@@ -315,6 +325,38 @@ PATCHES: dict[str, list[tuple[str, str]]] = {
     "modules/module-2/chapter-quizzes.md": [
         ("> **Correct Answer: B or C depending on interpretation; B is the strongest answer.**",
          "> **Correct Answer: B** (an instructor review is pending: C is defensible under another interpretation)"),
+    ],
+    "modules/module-2/resources.md": [
+        # The page was written against LangChain 0.x. AgentExecutor, create_tool_calling_agent
+        # and langchain.prompts were all removed in LangChain 1.x, so both code samples raised
+        # ImportError for anyone who copied them. The conceptual model on this page (LLM
+        # backbone, tool registry, action executor, memory) is framework-agnostic and correct,
+        # so only the API names and the two samples are rewritten onto create_agent.
+        ("We previously looked at a code example of how LangChain's `AgentExecutor` runs this loop. ",
+         "We previously looked at a code example of how LangChain's agent runtime runs this loop. "),
+        ("In LangChain, the ReAct loop is practically managed by a runtime component called the `AgentExecutor`. ",
+         "In LangChain, the ReAct loop is managed for you by the agent that `create_agent` builds. "
+         "Older tutorials call this runtime the `AgentExecutor`; that class was removed in LangChain 1.0 "
+         "and `create_agent` replaced it. "),
+        ("*   **Execution:** The `AgentExecutor` steps in, physically runs the requested tool",
+         "*   **Execution:** The agent runtime steps in, physically runs the requested tool"),
+        ("Here is a practical code example showing how to set up and run an `AgentExecutor` in LangChain. ",
+         "Here is a practical code example showing how to set up and run an agent in LangChain. "),
+        (M2_RESOURCES_CODE_1_OLD, M2_RESOURCES_CODE_1_NEW),
+        ("In this setup, the `create_tool_calling_agent` function defines how the LLM interacts with the prompt and tools. The `AgentExecutor` then acts as the runtime environment that continuously cycles through selecting actions, executing the tools, and processing the outputs until the agent formulates a final conclusion. Setting `verbose=True` lets you watch the \"Thought-Action-Observation\" steps happen live in your console.",
+         "In this setup, `create_agent` combines the model, the tool registry and the system prompt into a "
+         "runnable agent that cycles through selecting actions, executing tools and processing the outputs "
+         "until it formulates a final conclusion. To watch those steps as they happen, stream the agent "
+         "instead of invoking it: `agent.stream(..., stream_mode=\"updates\")` reports each tool call and "
+         "each tool result as structured data, which is what replaced the old `verbose=True` text trace."),
+        ("Here is how you combine those components into a working `AgentExecutor` in LangChain:",
+         "Here is how you combine those components into a working agent in LangChain:"),
+        (M2_RESOURCES_CODE_2_OLD, M2_RESOURCES_CODE_2_NEW),
+        ("The `create_tool_calling_agent` function directly combines your LLM, tool registry, and prompt. The `AgentExecutor` then steps in as the action executor, taking the user's input and continuously managing the ReAct loop until it reaches a final answer. Setting `verbose=True` allows you to watch the \"Thought-Action-Observation\" steps print live in your console.",
+         "The `create_agent` function directly combines your LLM, tool registry and system prompt, and the "
+         "agent it returns acts as the action executor, taking the user's input and managing the reasoning "
+         "loop until it reaches a final answer. Stream the agent with "
+         "`stream_mode=\"updates\"` to watch each tool call and tool result as it happens."),
     ],
     "modules/module-3/activities.md": [
         ("### Notebook Flow Summary", "### Guided lab notebook flow"),
@@ -371,7 +413,8 @@ REGEX_PATCHES: dict[str, list[tuple[str, str]]] = {
 ALT_TEXT = {
     "2D-Automation-AssessmentMatrix.png": "Two-dimensional automation assessment matrix",
     "Agent-Prompt-Architecture.png": "Agent prompt architecture",
-    "AgentExecutor-Architecture.png": "LangChain AgentExecutor architecture",
+    "AgentExecutor-Architecture.png": "The LangChain agent runtime: an LLM backbone reading a tool registry, an executor running the selected tool, and observations feeding back into the loop "
+                                      "(drawn for the LangChain 0.x AgentExecutor, whose structure create_agent keeps)",
     "AI_Agent_Memory_Integration.png": "AI agent memory integration",
     "AI_Automation_Agents.png": "AI Automation and Agents course banner",
     "AI_Automation_Ecosystem.png": "The AI automation ecosystem",

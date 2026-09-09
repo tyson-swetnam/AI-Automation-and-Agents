@@ -183,6 +183,49 @@ human-reviewed pages when answers conflict (see
 3. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
 
+## Assessment items that test removed LangChain APIs
+
+The lab notebooks and the code samples on this site were moved onto LangChain
+1.4 in September 2026, because LangChain 1.0 removed `AgentExecutor`,
+`create_react_agent`, `RetrievalQA`, `langchain.chains`, `langchain.memory` and
+`langchain.prompts` outright. Graded assessment items were deliberately left
+alone: rewriting a quiz question changes what learners are marked on, which is
+an author's call rather than a maintenance one.
+
+The following items now test APIs that no longer exist. Each needs a decision:
+revise the question, or keep it and frame it explicitly as LangChain 0.x history.
+
+1. **Module 2 chapter quizzes** — questions and answer keys turn on
+   `AgentExecutor` internals: its "five structural components", which component
+   generates the `Action:` versus the `Observation:`, and how tool descriptions
+   reach the model. The mechanism they describe is still broadly how an agent
+   runtime works, but the class named in them was removed. See
+   [Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md).
+2. **Module 2 reading guides** — Reading 5 assigns "the complete AgentExecutor
+   Conceptual Guide" and Part A asks learners to name the five components of an
+   architecture that no longer ships. The LangChain page it points at is gone;
+   the current equivalent is the
+   [agents guide](https://docs.langchain.com/oss/python/langchain/agents){target=_blank}.
+   See [Module 2 reading guides](../modules/module-2/reading-guides.md).
+3. **Module 3 reading guides and activities** — both call `RetrievalQA` "the
+   primary interface for Stage 6 in the lab", and a chapter-quiz question tests
+   `RetrievalQA.from_chain_type(...)`. The Module 3 notebook has not used
+   `RetrievalQA` for some time; it composes the same pipeline with LangChain
+   Expression Language, which the reading guides also teach a few pages later.
+   See [Module 3 reading guides](../modules/module-3/reading-guides.md),
+   [activities](../modules/module-3/activities.md) and
+   [chapter quizzes](../modules/module-3/chapter-quizzes.md).
+4. **The Module 2 architecture diagram.** `AgentExecutor-Architecture.png` sits
+   in the section of
+   [Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
+   that describes `create_agent`. The structure it draws is still accurate, and
+   its alt text now says which version it was drawn for, but a redrawn diagram
+   would remove the mixed message.
+
+These pages are produced by `scripts/migrate_wiki.py`, so any revision belongs
+in that script's `PATCHES` table rather than in the Markdown, or the next
+pipeline run will revert it.
+
 ## Content inconsistencies inherited from the source
 
 A page-by-page review of the migration surfaced the following disagreements

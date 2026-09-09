@@ -1,6 +1,6 @@
 ---
 title: 'Module 2: Additional Suggested Resources'
-description: Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's AgentExecutor runs the ReAct loop.
+description: Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's create_agent runtime runs the ReAct loop.
 type: Resource List
 tags:
 - module-2
@@ -61,7 +61,7 @@ The ReAct (Reason + Act) pattern operates through a continuous, multi-step cycle
 *   **Observation:** The tool executes and returns a result, which is then appended back into the agent's context window.
 *   **Termination:** The model evaluates whether this new observation provides enough information to satisfy the user's original query. If it does, the loop ends and the agent generates a final answer. If not, the loop repeats with a new thought.
 
-We previously looked at a code example of how LangChain's `AgentExecutor` runs this loop. 
+We previously looked at a code example of how LangChain's agent runtime runs this loop. 
 
 **Differences between ReAct and Tree of Thoughts**
 
@@ -84,43 +84,40 @@ Here is how the three parts break down, especially in the context of modern AI:
 
 ## ReAct loop in LangChain
 
-In LangChain, the ReAct loop is practically managed by a runtime component called the `AgentExecutor`. 
+In LangChain, the ReAct loop is managed for you by the agent that `create_agent` builds. Older tutorials call this runtime the `AgentExecutor`; that class was removed in LangChain 1.0 and `create_agent` replaced it. 
 
 Here is how it physically orchestrates the ReAct loop:
 
 *   **Thought & Action:** The LLM analyzes the user's prompt and decides it needs external information. It outputs a reasoning trace (the "thought") and requests a specific tool call (the "action").
-*   **Execution:** The `AgentExecutor` steps in, physically runs the requested tool (like a web search API or custom Python function), and captures the result.
+*   **Execution:** The agent runtime steps in, physically runs the requested tool (like a web search API or custom Python function), and captures the result.
 *   **Observation:** The executor feeds this result (the "observation") back into the LLM's context window so the model can read it.
 *   **Iteration:** The LLM evaluates the new observation and decides if the goal is met. If not, it triggers another thought and action. This loop repeats until the model determines it has enough information to formulate a final answer.
 
-Here is a practical code example showing how to set up and run an `AgentExecutor` in LangChain. 
+Here is a practical code example showing how to set up and run an agent in LangChain. 
 
 ```python
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langchain.agents import create_tool_calling_agent, AgentExecutor
-from langchain_core.prompts import PromptTemplate
 
 # 1. Initialize the LLM and define your tools (assuming tools are already defined)
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 tools = [task_status_tool, docs_search_tool]
 
-# 2. Create the prompt template, including the required scratchpad for reasoning traces
-prompt = PromptTemplate.from_template("""
-You are a project assistant. Respond based on the user's input using the appropriate tools.
-User's input: {input}
-{agent_scratchpad}
-""")
+# 2. The system prompt is a plain string. There is no {agent_scratchpad} placeholder:
+#    the agent keeps the reasoning history in its own message state.
+SYSTEM_PROMPT = "You are a project assistant. Answer the user using the appropriate tools."
 
-# 3. Create the agent and bind it to the AgentExecutor
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+# 3. Build the agent
+agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
 
-# 4. Invoke the executor to trigger the ReAct loop
-response = agent_executor.invoke({"input": "What's the status of task1?"})
-print(response['output'])
+# 4. Invoke it to trigger the reasoning loop
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's the status of task1?"}]}
+)
+print(response["messages"][-1].content)
 ```
 
-In this setup, the `create_tool_calling_agent` function defines how the LLM interacts with the prompt and tools. The `AgentExecutor` then acts as the runtime environment that continuously cycles through selecting actions, executing the tools, and processing the outputs until the agent formulates a final conclusion. Setting `verbose=True` lets you watch the "Thought-Action-Observation" steps happen live in your console.
+In this setup, `create_agent` combines the model, the tool registry and the system prompt into a runnable agent that cycles through selecting actions, executing tools and processing the outputs until it formulates a final conclusion. To watch those steps as they happen, stream the agent instead of invoking it: `agent.stream(..., stream_mode="updates")` reports each tool call and each tool result as structured data, which is what replaced the old `verbose=True` text trace.
 
 ## Functional Components of a Tool-Calling Agent Architecture
 
@@ -139,34 +136,30 @@ During a single task episode, the information flows in this sequence:
 4.  This result is appended to the **Memory Module** and fed back into the LLM's context window.
 5.  The LLM evaluates this new information to determine if the task goal is met. If it is, the LLM generates the final response for the user; if not, it triggers another tool call to continue gathering information.
 
-Here is how you combine those components into a working `AgentExecutor` in LangChain:
+Here is how you combine those components into a working agent in LangChain:
 
 ```python
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.agents import create_tool_calling_agent, AgentExecutor
 
 # 1. Define your LLM and tools
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 tools = [task_status_tool, docs_search_tool]
 
-# 2. Create the prompt (must include agent_scratchpad for reasoning memory)
-prompt_template = """
-You are a project assistant. Respond based on the user's input using the appropriate tools.
-User's input: {input}
-{agent_scratchpad}
-"""
-prompt = PromptTemplate.from_template(prompt_template)
+# 2. Give the agent its instructions. The tool registry is passed separately, so the
+#    prompt does not need to list the tools or reserve a slot for reasoning memory.
+SYSTEM_PROMPT = "You are a project assistant. Answer the user using the appropriate tools."
 
-# 3. Create the agent and bind it to the executor
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+# 3. Build the agent
+agent = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
 
 # 4. Run the task episode
-response = agent_executor.invoke({"input": "What's the status of task1?"})
-print(response['output'])
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's the status of task1?"}]}
+)
+print(response["messages"][-1].content)
 ```
 
-The `create_tool_calling_agent` function directly combines your LLM, tool registry, and prompt. The `AgentExecutor` then steps in as the action executor, taking the user's input and continuously managing the ReAct loop until it reaches a final answer. Setting `verbose=True` allows you to watch the "Thought-Action-Observation" steps print live in your console.
+The `create_agent` function directly combines your LLM, tool registry and system prompt, and the agent it returns acts as the action executor, taking the user's input and managing the reasoning loop until it reaches a final answer. Stream the agent with `stream_mode="updates"` to watch each tool call and tool result as it happens.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Additional-Suggested--Resources){target=_blank} (wiki page last changed 2026-06-25). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-2/resources.md){target=_blank}.</p>

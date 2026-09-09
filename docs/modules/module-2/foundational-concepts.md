@@ -176,7 +176,7 @@ LangChain's `create_agent` is the current production API for constructing multi-
 
 The agent returned by `create_agent` runs a LangGraph-backed ReAct loop internally: on each invocation, it iterates through Thought → tool call → Observation cycles until a terminal condition is reached, then produces a Final Answer in the specified response format. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration.
 
-![LangChain AgentExecutor architecture](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+![The LangChain agent runtime: an LLM backbone reading a tool registry, an executor running the selected tool, and observations feeding back into the loop (drawn for the LangChain 0.x AgentExecutor, whose structure create_agent keeps)](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
 
 **Tool Description Design - The Specification Discipline**
 
