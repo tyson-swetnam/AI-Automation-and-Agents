@@ -13328,6 +13328,36 @@ human-reviewed pages when answers conflict (see
 3. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
 
+## Content inconsistencies inherited from the source
+
+A page-by-page review of the migration surfaced the following disagreements
+*between* course materials. They exist in the wiki and the notebooks
+themselves, so the migration reproduced them rather than silently deciding
+which side is right. Each needs an author's call:
+
+1. **Lab submission filenames.** The Module 2, 4 and 5 notebooks tell learners
+   to rename their file using a different convention from the one required on
+   the matching Activities page.
+2. **Module 5 lab title.** The notebook's own heading calls it
+   "LangSmith Observability & CI/CD Evaluation Pipeline", but its Lab B is the
+   Comparative Observability Study; there is no CI/CD pipeline in the notebook.
+   The page title follows the notebook.
+3. **Learning-outcome labels.** The Module 4 lab cites "LO 4.5 and LO 4.6"
+   while the Module 4 overview defines five outcomes and maps the lab to
+   different numbers.
+4. **Lab time budgets.** The Module 3 notebook says ~60 minutes where the
+   Activities page budgets ~2 hours; Module 4 says 100-130 minutes against
+   ~4 hours on its Activities page.
+5. **Module 3 project instructions.** The Activities page says the hands-on
+   project continues "in the same notebook" with instructions embedded there;
+   the notebook does not contain them.
+6. **Default lab provider.** The Module 5 notebook defaults to the NVIDIA API,
+   while the prose in [Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)
+   describes Hugging Face Inference Providers as the Module 4-5 default.
+7. **Module 2 chapter 5, question 1.** The wiki's answer key reads "B or C
+   depending on interpretation"; the site publishes B and flags the question
+   for review.
+
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/
 
 ---
