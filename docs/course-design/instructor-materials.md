@@ -124,9 +124,8 @@ module. Configure the LMS to match:
 
 Formative items (labs, concept quiz, survey) are required for the portfolio
 or the certificate but do not enter the numeric grade. The syllabus adds the
-certificate rule: complete the module projects and pass the concept quizzes
-at 70% or above; completing Course 1 and Course 2 earns the AI Education
-Series badge.
+certificate rule: complete all five module projects and pass all five concept
+quizzes at 70% or above.
 
 ## Marking a page verified
 

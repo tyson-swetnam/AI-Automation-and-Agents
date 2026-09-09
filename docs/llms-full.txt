@@ -42,10 +42,10 @@ sources:
 
 # How this course works
 
-*AI Automation and Agents* is Course 2 of the University of New Mexico AI Education
-Series: five self-paced modules of about eight hours each (40 hours in total),
-offered as non-credit professional development with optional instructor-led
-cohort sessions. Every module has the same shape, so once you have worked
+*AI Automation and Agents* is five self-paced modules of about eight hours each
+(40 hours in total), offered by the Center for Advanced Research Computing as
+non-credit professional development with optional instructor-led cohort
+sessions. Every module has the same shape, so once you have worked
 through Module 1 you know how the other four will go. This page explains that
 shape, how your time is budgeted, what is graded, and which tools you will need.
 
@@ -145,12 +145,10 @@ summary*; this table summarises the pattern.
 !!! info "Your LMS is authoritative"
 
     Weights, attempt limits and due dates are configured in the learning
-    management system for your cohort. The syllabus (v2.0) states that a
-    digital certificate of completion requires completing the module projects
-    and passing the concept quizzes at 70% or above, and that learners who
-    complete both Course 1 and Course 2 receive the AI Education Series
-    professional badge. When this site and your LMS disagree, follow the LMS
-    and tell your instructor.
+    management system for your cohort. The [syllabus](syllabus.md) states that a
+    digital certificate of completion requires completing all five module
+    projects and passing all five concept quizzes at 70% or above. When this
+    site and your LMS disagree, follow the LMS and tell your instructor.
 
 ## The Workflow Audit: your anchor artifact
 
@@ -224,13 +222,13 @@ how).
 
 ---
 title: "Course syllabus"
-description: "Course information, description, learning outcomes and the five-module overview for AI Automation and Agents, with the official syllabus PDF (v2.0) to read online or download."
+description: "Course information, description, learning outcomes and the five-module overview for AI Automation and Agents, with the instructor of record and the downloadable syllabus PDF to read online or save."
 type: Reference
 tags: [course, student-facing, syllabus, learning-outcomes, certificate]
 status: stable
 generated:
   by: "claude/fable-5-1"
-  at: "2026-09-08T00:00:00Z"
+  at: "2026-09-09T00:00:00Z"
 sources:
   - id: syllabus-v2
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/assets/files/AI_Automation_Agents_Syllabus_v2.pdf"
@@ -13277,9 +13275,8 @@ module. Configure the LMS to match:
 
 Formative items (labs, concept quiz, survey) are required for the portfolio
 or the certificate but do not enter the numeric grade. The syllabus adds the
-certificate rule: complete the module projects and pass the concept quizzes
-at 70% or above; completing Course 1 and Course 2 earns the AI Education
-Series badge.
+certificate rule: complete all five module projects and pass all five concept
+quizzes at 70% or above.
 
 ## Marking a page verified
 
@@ -15172,7 +15169,7 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 ## 2026-09-09
 
 * **Update**: Rebranded the site to the University of New Mexico. The header logo is the CARC starburst and the favicon is the UNM mark; the palette moves from Arizona Blue and Red to UNM Cherry `#BA0C2F` and Turquoise `#007A86` with CARC's cherry-to-turquoise header gradient. Institutional identity now reads University of New Mexico across the site description, the [syllabus](start-here/syllabus.md), [How this course works](start-here/how-this-course-works.md), the landing page, `llms.txt`, `robots.txt`, the README and the contributor contract. **Provenance is deliberately unchanged**: every page's `sources` entries, wiki URLs, provenance footers, the [wiki crosswalk](about/wiki-crosswalk.md), the entries below and the origin section of the [license page](about/license-and-attribution.md) still record that the course was written by the AI2S team at the University of Arizona. Branding says who publishes the site today; provenance says who wrote the material, and rewriting it would be false.
-* **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here.
+* **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here. Dropped the AI Education Series professional badge and the "Course 2 of the series" framing from the syllabus, [How this course works](start-here/how-this-course-works.md) and the [instructor materials](course-design/instructor-materials.md): the series is a University of Arizona program, and rebranding those sentences to UNM would have described a Course 1 and a badge that do not exist here.
 * **Creation**: The downloadable syllabus PDF is now generated from [the syllabus page](start-here/syllabus.md) by `scripts/build_syllabus_pdf.py`, so the two cannot drift; CI fails when the committed PDF no longer matches the page. It replaces the University of Arizona syllabus v2.0 as the linked download. That earlier PDF stays in the repository as the source document and is still linked from the syllabus page.
 * **Update**: Resolved the licensing conflict recorded below. The course content is now published under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}, replacing both the wiki footer's CC BY-NC-SA notice and the repository's CC0 `LICENSE` file. CC BY is approved for Free Cultural Works and meets the Open Definition, so the course qualifies as an open educational resource under the strict reading; a NonCommercial clause would have blocked the workforce and paid-certificate reuse the course is written for. Copyright is **The Regents of the University of New Mexico, Center for Advanced Research Computing**. The course was developed at the Arizona Institute for Artificial Intelligence and the Office of Responsible AI at the University of Arizona and released there under the [CC0 1.0 public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/){target=_blank}, which is what allows this site to be licensed CC BY; that original stays public domain and available upstream. CC0 imposes no conditions, so the credit to Carlos Lizárraga-Celaya, Michelle Yung, Michele Cosi and Tyson Swetnam recorded on the license page is scholarly practice rather than a license requirement. The site's own source code (the `scripts/` pipeline, the site configuration and the stylesheet) is licensed separately under the **BSD 3-Clause License** in `LICENSE-CODE`, copyright UNM Regents, matching the notice CARC uses on its documentation; Creative Commons licenses are not intended for software. Updated the `LICENSE` file, the site footer, the landing page badge, the [license and attribution](about/license-and-attribution.md) page, the [instructor materials](course-design/instructor-materials.md) page, and the README. Third-party material and both universities' marks remain outside these licenses.
 * **Update**: The course owners confirmed that quiz answer keys stay **public but collapsed**: the quizzes are written to be self-evaluating. The [instructor materials](course-design/instructor-materials.md) page now records this as a decision rather than an open question, and notes that the keys are consequently visible in `llms-full.txt` and in each page's Markdown mirror.

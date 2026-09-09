@@ -1,12 +1,12 @@
 ---
 title: "Course syllabus"
-description: "Course information, description, learning outcomes and the five-module overview for AI Automation and Agents, with the official syllabus PDF (v2.0) to read online or download."
+description: "Course information, description, learning outcomes and the five-module overview for AI Automation and Agents, with the instructor of record and the downloadable syllabus PDF to read online or save."
 type: Reference
 tags: [course, student-facing, syllabus, learning-outcomes, certificate]
 status: stable
 generated:
   by: "claude/fable-5-1"
-  at: "2026-09-08T00:00:00Z"
+  at: "2026-09-09T00:00:00Z"
 sources:
   - id: syllabus-v2
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/assets/files/AI_Automation_Agents_Syllabus_v2.pdf"

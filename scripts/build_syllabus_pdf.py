@@ -239,6 +239,81 @@ def table(data, col_widths, st, header=True, zebra=True):
     return t
 
 
+# Sections of the page the PDF deliberately leaves out: the collapsible note about
+# where the syllabus came from, and the section that embeds the PDF in the page.
+SKIP_SECTIONS = {"Read the syllabus online"}
+
+
+def coverage_gaps(pdf: Path) -> list[str]:
+    """Page fragments that never made it into the PDF.
+
+    --check only proves the committed PDF matches a fresh render, so a parser that
+    silently drops a section would pass it forever. This reads the page instead and
+    asserts every substantive line survived, which is the failure this script is
+    meant to prevent in the first place.
+    """
+    text = pdf_text(pdf)
+    if text is None:
+        return []
+    body = re.sub(r"^---\n.*?\n---\n", "", SOURCE.read_text(encoding="utf-8"), count=1, flags=re.S)
+    # The cover banner prints the course name and tagline, so the page's italic
+    # restatement of them is dropped on purpose; see parse_lead.
+    expected_absent = {f"{COURSE_TITLE} - {COURSE_TAGLINE}"}
+
+    gaps, skip = [], False
+    for line in body.split("\n"):
+        st = line.strip()
+        if st.startswith("## "):
+            skip = st[3:].strip() in SKIP_SECTIONS
+        elif st.startswith("??? "):
+            skip = True
+        if skip or not st or st.startswith(("#", "[", "<", "---")):
+            continue
+        frag = INLINE_LINK.sub(r"\1", st)
+        frag = re.sub(r"<([^<>]+)>", r"\1", frag)
+        frag = frag.replace("**", "").replace("*", "").replace("`", "")
+        for cell in (frag.split("|") if "|" in frag else [frag]):
+            cell = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", cell.strip()).strip(": ")
+            cell = " ".join(cell.split())
+            if len(cell) < 25 or cell in expected_absent:
+                continue
+            if cell[:60] not in text:
+                gaps.append(cell[:70])
+    return gaps
+
+
+def parse_lead(body: str) -> str:
+    """The paragraph directly under the page's H1, joined into one line.
+
+    Read as a paragraph rather than a single line: the lead runs to three wrapped
+    source lines, and taking only the first silently dropped the sentence that says
+    this is non-credit professional development from CARC.
+    """
+    lines = body.split("\n")
+    for i, line in enumerate(lines):
+        if line.startswith("# "):
+            para = []
+            for nxt in lines[i + 1:]:
+                if not nxt.strip():
+                    if para:
+                        break
+                    continue
+                if nxt.startswith(("#", "[", "<", "|", "!!!", "???")):
+                    break
+                para.append(nxt.strip())
+            if para:
+                text = " ".join(para)
+                # The cover banner already prints the course name and tagline, so
+                # drop the page's italic restatement of them and keep the rest.
+                dup = f"*{COURSE_TITLE} - {COURSE_TAGLINE}*"
+                if text.startswith(dup):
+                    text = text[len(dup):].lstrip()
+                return text
+            break
+    sys.exit(f"error: no lead paragraph under the H1 in {SOURCE.relative_to(ROOT)}; "
+             "the page structure changed, update this script")
+
+
 # ---------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------
@@ -246,11 +321,7 @@ def table(data, col_widths, st, header=True, zebra=True):
 def build(path: Path) -> None:
     raw = SOURCE.read_text(encoding="utf-8")
     body = re.sub(r"^---\n.*?\n---\n", "", raw, count=1, flags=re.S)
-    lead = ""
-    for line in body.split("\n"):
-        if line.startswith("*AI Automation"):
-            lead = line
-            break
+    lead = parse_lead(body)
     sec = split_sections(body)
     st = styles()
 
@@ -377,6 +448,13 @@ def main() -> int:
                 return 1
             if a != b:
                 print(f"ERROR {OUTPUT.relative_to(ROOT)} is stale; rerun scripts/build_syllabus_pdf.py")
+                return 1
+            gaps = coverage_gaps(OUTPUT)
+            if gaps:
+                print("ERROR the PDF is missing content from "
+                      f"{SOURCE.relative_to(ROOT)}; the parser dropped:")
+                for g in gaps:
+                    print(f"  - {g}")
                 return 1
         print("syllabus PDF is up to date with docs/start-here/syllabus.md")
         return 0

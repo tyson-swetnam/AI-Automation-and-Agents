@@ -36,10 +36,10 @@ sources:
 
 # How this course works
 
-*AI Automation and Agents* is Course 2 of the University of New Mexico AI Education
-Series: five self-paced modules of about eight hours each (40 hours in total),
-offered as non-credit professional development with optional instructor-led
-cohort sessions. Every module has the same shape, so once you have worked
+*AI Automation and Agents* is five self-paced modules of about eight hours each
+(40 hours in total), offered by the Center for Advanced Research Computing as
+non-credit professional development with optional instructor-led cohort
+sessions. Every module has the same shape, so once you have worked
 through Module 1 you know how the other four will go. This page explains that
 shape, how your time is budgeted, what is graded, and which tools you will need.
 
@@ -139,12 +139,10 @@ summary*; this table summarises the pattern.
 !!! info "Your LMS is authoritative"
 
     Weights, attempt limits and due dates are configured in the learning
-    management system for your cohort. The syllabus (v2.0) states that a
-    digital certificate of completion requires completing the module projects
-    and passing the concept quizzes at 70% or above, and that learners who
-    complete both Course 1 and Course 2 receive the AI Education Series
-    professional badge. When this site and your LMS disagree, follow the LMS
-    and tell your instructor.
+    management system for your cohort. The [syllabus](syllabus.md) states that a
+    digital certificate of completion requires completing all five module
+    projects and passing all five concept quizzes at 70% or above. When this
+    site and your LMS disagree, follow the LMS and tell your instructor.
 
 ## The Workflow Audit: your anchor artifact
 
