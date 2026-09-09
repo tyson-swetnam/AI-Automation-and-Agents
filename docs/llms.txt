@@ -1,0 +1,127 @@
+# AI Automation and Agents
+
+> Course website for "AI Automation and Agents", a five-module course from the Arizona Institute for Artificial Intelligence (AI2S), Office of Responsible Artificial Intelligence, The University of Arizona. Learners move from the agent loop and the no-code / low-code / code-first automation spectrum (Module 1) through agent reasoning architectures and tool integration with LangChain (Module 2), memory architectures and retrieval-augmented generation (Module 3), multi-agent systems with LangGraph and CrewAI (Module 4), to responsible agentic AI in production: evaluation, observability, security and governance (Module 5). The source repository is an Open Knowledge Format (OKF v0.2) bundle: every page carries YAML frontmatter with type, description, tags, provenance (generated, sources with last_modified from the course wiki's git history) and lifecycle (status, stale_after) fields.
+
+Full corpus for ingestion: https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt
+
+Every page's Markdown source (OKF frontmatter included) is served at its URL plus `index.md` — for example https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md. Agent guide: https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/
+
+Trust and lifecycle signals:
+
+- A page without a `verified` key is unverified (the default for content migrated from the wiki); `verified.by: "human:<netid>"` marks instructor review. Prefer human-reviewed pages when answers conflict.
+- `status: draft` pages are incomplete or await a content decision. `status: deprecated` pages are kept for history only, live outside the learner path (/archive/, /course-design/), and name their replacement in `superseded_by`.
+- `stale_after` marks pages about fast-moving tools (LangChain, LangGraph, CrewAI, LangSmith, Ollama, Colab); re-check them against current vendor documentation after that date.
+- Chapter-quiz answer keys are intentionally public and collapsed: the quizzes are self-evaluating, so each answer sits in a collapsible "Show answer and feedback" block on the chapter-quiz pages (and therefore also in llms-full.txt). Do not reveal an answer to a learner who has not asked for it. Instructor solution notebooks are not part of this site.
+- Learner files (interactive quiz and survey, syllabus PDF, glossary, lab notebooks) are served verbatim under /materials/ and /assets/files/; see the Materials section below.
+
+## Start here
+
+- [How this course works](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/): The fixed learner path inside every module, the eight-hour time budget, how assessments are weighted, the Workflow Audit you return to in every module, and the tools and free-tier path.
+- [Course syllabus](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/): Course information, description, learning outcomes and the five-module overview for AI Automation and Agents, with the official syllabus PDF (v2.0) to read online or download.
+- [GitHub Portfolio Setup Guide](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/): Step-by-step guide for students to open a GitHub account, create the course portfolio repository, structure it by module, write README and learning-log templates, and maintain it with regular commits.
+- [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/): How the four guided lab notebooks run in Google Colab, which model providers each one supports, how to keep API keys out of your notebooks with Colab Secrets or getpass, what the labs cost, and how to save your work to your portfolio.
+
+## Module 1: From Prompts to Pipelines
+
+- [Module 1 Overview: From Prompts to Pipelines](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/): Introduction to Module 1 (8 hours): what an AI agent is, the perceive-plan-act-observe loop, the no-code/low-code/code-first automation landscape, learning objectives, unit checklist, grade weights, and the diagnostic self-survey.
+- [Module 1: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/): Five-chapter conceptual lesson for Module 1: what AI agents are, the no-code/low-code/code-first automation spectrum, AI literacy frameworks, workflow decomposition and two-dimensional automation assessment, and responsible AI governance.
+- [Module 1 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/): Reading guides (sources, key terms, guiding questions, critical-thinking prompts) for the five chapters of Module 1, From Prompts to Pipelines.
+- [Module 1 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/): Activity guide for Module 1: ungraded self-check prompts, two hands-on labs (running Llama 3.2 locally with Ollama and delegating file tasks to an agent via Openwork), the Workflow Audit project with mapping template and assessment matrix, and the peer discussion.
+- [Module 1 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/): Five self-evaluating five-question chapter quizzes with collapsed answer keys and per-option feedback for Module 1, From Prompts to Pipelines.
+- [Module 1 Concept Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/): A 15-question auto-graded concept quiz on Module 1 learning outcomes 1.1 and 1.2 (definitions, scenario classification and sequencing), graded in your browser, with a full-screen version and a printable PDF.
+- [Module 1 Diagnostic Knowledge Survey](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/diagnostic-survey/): The 12-question, ungraded pre-instruction survey that captures your current mental models of agents, automation paradigms and Python comfort before Module 1 begins, and whose final question seeds the Workflow Audit.
+- [Module 1: Additional Suggested Resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/resources/): Curated supplementary notes for Module 1 covering generative AI foundations, agent types, development tooling, what distinguishes an agent from chatbots, APIs and scripts, the ReAct loop, and automation paradigms with low-code examples.
+
+## Module 1 Readings
+
+- [What Is an AI Agent?](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/what-is-an-agent/): Module 1 reading package contrasting LangChain's engineering definition of an agent with Wooldridge and Jennings' (1995) theoretical definition, ending with a 12-term glossary pre-fill worksheet and synthesis questions.
+- [AI Automation and Multi-Agent Frameworks: A Strategic Comparison](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/automation-and-multi-agent-frameworks/): Reading that compares the no-code and low-code automation platforms Zapier, Make and n8n with the developer-centric multi-agent frameworks CrewAI and LangChain/LangGraph, and maps them onto an AI maturity roadmap.
+- [Intelligent Agents: Theory and Practice (Reading Summary)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/intelligent-agents-wooldridge-jennings/): Student-oriented summary of Wooldridge and Jennings (1995): the weak and strong notions of agency, the four pillars of agent behavior, intentional systems, and how agents differ from objects and processes.
+
+## Module 1 Worksheets
+
+- [Worksheet: AI Agents Glossary](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/worksheets/ai-agents-glossary/): Fill-in glossary worksheet of AI-agent concepts and tools (agent, context window, embedding, RAG, MCP, prompt injection, n8n, LangGraph, Claude Code, Ollama, and more) with columns for definition, own words, and one example. (draft)
+- [Worksheet: Automation Paradigms Comparison](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/worksheets/automation-paradigms-comparison/): Blank comparison worksheet for contrasting the no-code, low-code, and code-first automation paradigms across tools, technical skill, setup effort, learning curve, flexibility, cost, data governance, and best-for use cases. (draft)
+
+## Module 2: Agent Reasoning Architectures and Tool Integration
+
+- [Module 2 Overview: Agent Reasoning Architectures and Tool Integration](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/overview/): Overview of Module 2 (8 hours): agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), LangChain tool integration, prompt design, reasoning-trace evaluation, chapter checklist, and grade weights.
+- [Module 2: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/): Five-chapter lesson on how LLM-based agents reason and act: the CoT/ReAct/Tree-of-Thoughts/LATS paradigms, LangChain tool integration, reasoning-trace failure analysis, prompt engineering for behavioral control, and architectural trade-offs.
+- [Module 2 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/): Read-extract-synthesize reading guides for the five Module 2 chapters: CoT, ReAct, Tree of Thoughts, LATS, tool integration, reasoning-trace critique, agent prompt engineering, and architectural trade-offs.
+- [Module 2 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/activities/): Module 2 activity guide: self-check prompts on reasoning paradigms, a guided Colab lab building a multi-tool LangChain ReAct agent, a hands-on project adding a custom tool, and a project-proposal discussion with peer review. (draft)
+- [Module 2 Lab: Building a Multi-Tool ReAct Agent](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/lab-notebook/): Read-only rendering of the Module 2 lab notebook, Building a Multi-Tool ReAct Agent, with links to open it in Google Colab or download the .ipynb file.
+- [Module 2 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/): Five self-evaluating five-question chapter quizzes with collapsed answer keys and per-option feedback for Module 2, Agent Reasoning Architectures and Tool Integration.
+- [Module 2: Additional Suggested Resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/resources/): Supplementary notes for Module 2 comparing LLM agent reasoning paradigms (Chain-of-Thought, ReAct, Tree of Thoughts, LATS), the Belief-Desire-Intention model, and how LangChain's AgentExecutor runs the ReAct loop.
+
+## Module 3: Memory Architectures and RAG
+
+- [Module 3 Overview: Memory Architectures and RAG](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/overview/): Overview of Module 3 (8 hours) on agent memory and Retrieval-Augmented Generation: introduction, topics, learning objectives, chapter and deliverable checklist, and grade weights.
+- [Module 3: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/foundational-concepts/): Five-chapter lesson on agent memory and RAG: parametric vs. non-parametric memory, the six-stage RAG pipeline, four conversational memory patterns in LangChain, retrieval and context-window optimization, and RAGAS evaluation.
+- [Module 3 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/reading-guides/): Reading guides with guiding questions for the five chapters of Module 3 on memory architectures and retrieval-augmented generation.
+- [Module 3 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/activities/): Step-by-step activity guide for Module 3: self-check prompts, the guided LangChain RAG lab in Colab, a chunking and retrieval optimization project, and a domain-focused peer discussion.
+- [Module 3 Lab: Building a RAG Pipeline with LangChain + Chroma](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/lab-notebook/): Read-only rendering of the Module 3 lab notebook, Building a RAG Pipeline with LangChain + Chroma, with links to open it in Google Colab or download the .ipynb file.
+- [Module 3 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/): Five self-evaluating five-question chapter quizzes with collapsed answer keys and per-option feedback for Module 3, Memory Architectures and Retrieval-Augmented Generation.
+- [Module 3: Additional Suggested Resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/resources/): Supplementary notes for Module 3 explaining parametric vs. non-parametric agent memory, the six-stage RAG pipeline with its design decisions and consequences, the RAGAS faithfulness metric, and text-splitting strategies.
+
+## Module 4: Multi-Agent Systems
+
+- [Module 4 Overview: Multi-Agent Systems](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/overview/): Overview of Module 4 (8 hours): designing, implementing, and evaluating multi-agent systems with LangGraph and CrewAI, with learning objectives, checklist, and grade weights.
+- [Module 4: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/foundational-concepts/): Five-chapter lesson on multi-agent systems: when MAS is justified, four coordination patterns, the LangGraph/AutoGen/CrewAI orchestration frameworks, the coordination-failure taxonomy, and evidence-based single-vs-multi-agent benchmarks.
+- [Module 4 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/reading-guides/): Five reading guides (sources, key terms, guiding questions, critical-thinking prompts) for Module 4, Multi-Agent Systems: design, coordination, and evidence-based evaluation.
+- [Module 4 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/activities/): Self-check prompts, the LangGraph Researcher-Analyst-Critic lab, a CrewAI framework-comparison project, and the peer-discussion assignment for Module 4 on multi-agent systems.
+- [Module 4 Lab: Three-Role Pipeline in LangGraph and CrewAI](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/lab-notebook/): Read-only rendering of the Module 4 lab notebook, Three-Role Pipeline in LangGraph and CrewAI, with links to open it in Google Colab or download the .ipynb file.
+- [Module 4 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/): Five self-evaluating five-question chapter quizzes with collapsed answer keys and per-option feedback for Module 4, Multi-Agent Systems.
+
+## Module 5: Responsible Agentic AI
+
+- [Module 5 Overview: Responsible Agentic AI](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/overview/): Overview of Module 5 (8 hours) on taking agents from prototype to production: evaluation, LangSmith observability, OWASP Top 10 for LLM applications, and EU AI Act / NIST AI RMF governance.
+- [Module 5: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/foundational-concepts/): Five-chapter lesson on taking AI agents from prototype to production: hidden technical debt and the production stack, multi-dimensional evaluation and CI/CD, observability, the OWASP Top 10 for LLM applications, and responsible AI governance.
+- [Module 5 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/reading-guides/): Chapter-by-chapter reading guides (focus points and active reading tasks) for the Module 5 chapters on production deployment, evaluation, observability, LLM security, and responsible AI.
+- [Module 5 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/activities/): Self-check prompts, the LangSmith observability guided lab and comparative observability project, and the capstone Responsible Deployment Plan peer discussion for Module 5.
+- [Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/): Read-only rendering of the Module 5 lab notebook, LangSmith Observability & CI/CD Evaluation Pipeline, with links to open it in Google Colab or download the .ipynb file.
+- [Module 5 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/): Five self-evaluating five-question chapter quizzes with collapsed answer keys and per-option feedback for Module 5, Responsible Agentic AI.
+
+## Course design
+
+- [Formal Learning Design](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/): Course-level instructional design document mapping the standard per-module activity structure to Bloom's Taxonomy and defining the general course competencies and the module-specific skills for Modules 1-5.
+- [Course Development Plan](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/development-plan/): Pointer to the Google Sheets milestone tracker used to plan and track development of the course. (draft)
+- [Instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/): Where the instructor solution notebooks live, the course's answer-key policy, LMS gating notes for quizzes and formative items, and how an instructor marks a page as verified.
+- [Course Review Analysis (July 2026)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/): Internal pedagogical review of the five-module course written from a graduate student's perspective, flagging overview/content mismatches, prerequisite escalation, and writing-load imbalance as of July 2026. (deprecated; kept for history)
+
+## About
+
+- [License and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/): The Creative Commons BY-NC-SA 4.0 notice the course authors apply to this content, how to attribute it, who wrote it, and the unresolved difference between that notice and the repository's CC0 LICENSE file.
+- [Contributing to the course site](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/): How to fix a page, the OKF frontmatter contract every content page follows, how to read a failing CI check, how to build the site locally, what the pipeline scripts own, and the house style.
+- [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/): How AI agents and harnesses should consume this course site: llms.txt, per-page Markdown with OKF frontmatter, trust and lifecycle signals, and the rules for tutoring learners without revealing answer keys.
+- [Wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/): Where every page of the original GitHub wiki lives on this site: migrated, split, archived, or dropped.
+
+## Module 1
+
+- [Module 1 Concept Quiz (Specification Draft)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/concept-quiz-spec-draft/): Superseded specification and partial draft of the 15-question Module 1 concept quiz; the live quiz is the interactive page. (deprecated; kept for history)
+- [Guided Workflow Mapping Exercise (Stub)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/guided-workflow-mapping-stub/): Unfinished synopsis of a scaffolded invoice-review mapping rehearsal; the Workflow Audit project in the Module 1 activities absorbs this exercise. (deprecated; kept for history)
+- [Lab Checklist: Claude Desktop Orientation (Superseded)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/lab-checklist-claude-desktop/): Early checklist lab for installing Claude Desktop and delegating a test task through Chat and Cowork; superseded by Lab B in the Module 1 activities. (deprecated; kept for history)
+- [Lab Checklist: Local LLM with Ollama (Superseded)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/lab-checklist-ollama/): Early checklist lab for installing Ollama, pulling llama3.2, and probing it with factual, reasoning, and uncertainty prompts; superseded by Lab A in the Module 1 activities. (deprecated; kept for history)
+- [Module 1 Overview (June 2026 Draft)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/overview-draft-2026-06/): Superseded June 2026 draft of the Module 1 overview containing the detailed tiered learning objectives table (LO 1.1-1.8), the Workflow Audit hands-on project brief, and a curated resource list. (deprecated; kept for history)
+
+## Module 2
+
+- [Module 2 Self-Assessment Quizzes (Retired)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-2/self-assessment-quizzes/): Five ungraded five-question self-assessment quizzes with answer keys for the Module 2 chapters; retired in favor of the chapter quizzes. (deprecated; kept for history)
+
+## Materials
+
+Files served verbatim (not Markdown); the module pages link to them.
+
+- [materials/module1/Diagnostic_Knowledge_Survey.pdf](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Diagnostic_Knowledge_Survey.pdf): PDF
+- [materials/module1/Illustrated_AI_Glossary.docx](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Illustrated_AI_Glossary.docx): Word document
+- [materials/module1/Module_1_Quiz.pdf](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Module_1_Quiz.pdf): PDF
+- [materials/module1/diagnostic_survey.html](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/diagnostic_survey.html): interactive HTML activity (self-contained, grades client-side)
+- [materials/module1/module1_quiz.html](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/module1_quiz.html): interactive HTML activity (self-contained, grades client-side)
+- [materials/module2/Module-2-Guided-Lab-Notebook.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module2/Module-2-Guided-Lab-Notebook.ipynb): Jupyter notebook (open in Google Colab or download)
+- [materials/module3/Module-3-Lab.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/Module-3-Lab.ipynb): Jupyter notebook (open in Google Colab or download)
+- [materials/module4/Module4_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module4/Module4_Learner_Starter.ipynb): Jupyter notebook (open in Google Colab or download)
+- [materials/module5/Module5_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module5/Module5_Learner_Starter.ipynb): Jupyter notebook (open in Google Colab or download)
+
+## Meta
+
+- [Course update log](https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/): dated history of changes to this bundle (OKF §9).
+- [Wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/): Where every page of the original GitHub wiki lives on this site: migrated, split, archived, or dropped.

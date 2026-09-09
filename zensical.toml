@@ -1,0 +1,207 @@
+[project]
+site_name = "AI Automation and Agents"
+site_url = "https://tyson-swetnam.github.io/AI-Automation-and-Agents/"
+site_description = "AI Automation and Agents: a five-module course from the Arizona Institute for Artificial Intelligence (AI2S) at The University of Arizona on AI agents, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
+site_author = "Arizona Institute for Artificial Intelligence (AI2S), The University of Arizona"
+copyright = "&copy; 2026 <a href='https://responsibleai.arizona.edu/ai2s'>Arizona Institute for Artificial Intelligence (AI2S)</a> &amp; <a href='https://responsibleai.arizona.edu/'>Office of Responsible AI</a>, The University of Arizona &mdash; <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>CC BY-NC-SA 4.0</a>"
+
+repo_url = "https://github.com/tyson-swetnam/AI-Automation-and-Agents"
+repo_name = "tyson-swetnam/AI-Automation-and-Agents"
+edit_uri = "edit/main/docs/"
+
+extra_css = ["stylesheets/extra.css"]
+
+# Navigation. Leaf entries are plain paths (Zensical uses the page title);
+# every section opens with its index.md labelled "Contents" (navigation.indexes).
+# Archive pages are built and listed in archive/index.md but never in nav.
+nav = [
+  { "Home" = "index.md" },
+  { "Start here" = [
+    { "Contents" = "start-here/index.md" },
+    "start-here/how-this-course-works.md",
+    "start-here/syllabus.md",
+    "start-here/github-portfolio-setup.md",
+    "start-here/labs-and-notebooks.md",
+  ] },
+  { "Modules" = [
+    { "Contents" = "modules/index.md" },
+    { "Module 1: From Prompts to Pipelines" = [
+      { "Contents" = "modules/module-1/index.md" },
+      "modules/module-1/overview.md",
+      "modules/module-1/foundational-concepts.md",
+      "modules/module-1/reading-guides.md",
+      "modules/module-1/activities.md",
+      "modules/module-1/chapter-quizzes.md",
+      "modules/module-1/concept-quiz.md",
+      "modules/module-1/diagnostic-survey.md",
+      "modules/module-1/resources.md",
+      { "Readings" = [
+        { "Contents" = "modules/module-1/readings/index.md" },
+        "modules/module-1/readings/what-is-an-agent.md",
+        "modules/module-1/readings/automation-and-multi-agent-frameworks.md",
+        "modules/module-1/readings/intelligent-agents-wooldridge-jennings.md",
+      ] },
+      { "Worksheets" = [
+        { "Contents" = "modules/module-1/worksheets/index.md" },
+        "modules/module-1/worksheets/ai-agents-glossary.md",
+        "modules/module-1/worksheets/automation-paradigms-comparison.md",
+      ] },
+    ] },
+    { "Module 2: Agent Reasoning Architectures" = [
+      { "Contents" = "modules/module-2/index.md" },
+      "modules/module-2/overview.md",
+      "modules/module-2/foundational-concepts.md",
+      "modules/module-2/reading-guides.md",
+      "modules/module-2/activities.md",
+      "modules/module-2/lab-notebook.md",
+      "modules/module-2/chapter-quizzes.md",
+      "modules/module-2/resources.md",
+    ] },
+    { "Module 3: Memory and RAG" = [
+      { "Contents" = "modules/module-3/index.md" },
+      "modules/module-3/overview.md",
+      "modules/module-3/foundational-concepts.md",
+      "modules/module-3/reading-guides.md",
+      "modules/module-3/activities.md",
+      "modules/module-3/lab-notebook.md",
+      "modules/module-3/chapter-quizzes.md",
+      "modules/module-3/resources.md",
+    ] },
+    { "Module 4: Multi-Agent Systems" = [
+      { "Contents" = "modules/module-4/index.md" },
+      "modules/module-4/overview.md",
+      "modules/module-4/foundational-concepts.md",
+      "modules/module-4/reading-guides.md",
+      "modules/module-4/activities.md",
+      "modules/module-4/lab-notebook.md",
+      "modules/module-4/chapter-quizzes.md",
+    ] },
+    { "Module 5: Responsible Agentic AI" = [
+      { "Contents" = "modules/module-5/index.md" },
+      "modules/module-5/overview.md",
+      "modules/module-5/foundational-concepts.md",
+      "modules/module-5/reading-guides.md",
+      "modules/module-5/activities.md",
+      "modules/module-5/lab-notebook.md",
+      "modules/module-5/chapter-quizzes.md",
+    ] },
+  ] },
+  { "Course design" = [
+    { "Contents" = "course-design/index.md" },
+    "course-design/learning-design.md",
+    "course-design/development-plan.md",
+    "course-design/instructor-materials.md",
+    "course-design/course-review-2026-07.md",
+  ] },
+  { "About" = [
+    { "Contents" = "about/index.md" },
+    "about/license-and-attribution.md",
+    "about/contributing.md",
+    "about/ai-agents.md",
+    "about/wiki-crosswalk.md",
+    { "Archive" = "archive/index.md" },
+    { "Update log" = "log.md" },
+  ] },
+]
+
+[project.theme]
+variant = "modern"
+language = "en"
+logo = "assets/ua.png"
+favicon = "assets/ua.ico"
+# No toc.integrate: it conflicts with navigation.indexes section landing pages.
+features = [
+  "announce.dismiss",
+  "content.action.edit",
+  "content.action.view",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.instant.progress",
+  "navigation.path",
+  "navigation.tabs",
+  "navigation.tabs.sticky",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "search.suggest",
+  "toc.follow",
+]
+
+[project.theme.font]
+text = "Montserrat"
+code = "Roboto Mono"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+# University of Arizona palette: the "custom" primary/accent colors are
+# defined in docs/stylesheets/extra.css (Arizona Blue #0c234b, Arizona Red #ab0520).
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/UA-AI2S"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/globe"
+link = "https://responsibleai.arizona.edu/ai2s"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+tables = {}
+toc.permalink = true
+toc.toc_depth = 3
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}
+
+# No analytics: add a [project.extra.analytics] block only if AI2S supplies a property.

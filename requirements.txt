@@ -1,0 +1,3 @@
+# Build/CI dependencies
+zensical==0.0.60
+pyyaml>=6.0

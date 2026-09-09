@@ -1,0 +1,7 @@
+site/
+.cache/
+.sources/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

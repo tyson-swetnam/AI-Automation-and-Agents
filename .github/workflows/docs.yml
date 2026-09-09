@@ -1,0 +1,87 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+  # Validation (OKF conformance, course lint, llms.txt drift) and a trial
+  # build on every PR, so problems surface before merge rather than after.
+  pull_request:
+  workflow_dispatch:
+  # Monthly run: okf_validate.py warns when a page's stale_after horizon has
+  # passed, so tool-tagged pages (LangChain, LangGraph, CrewAI, Ollama, ...)
+  # resurface for review even in months when nobody pushes.
+  schedule:
+    - cron: "17 6 1 * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # Every docs/ page must conform to the Open Knowledge Format (OKF v0.2) and
+  # to the course-specific lint rules; the generated llms.txt indexes must
+  # match the committed ones.
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: OKF v0.2 conformance
+        run: python scripts/okf_validate.py docs
+      - name: Course lint (frontmatter contract, links, answer keys, nav)
+        run: python scripts/site_lint.py docs zensical.toml
+      - name: llms.txt drift
+        run: |
+          python scripts/gen_llms_txt.py
+          git diff --exit-code docs/llms.txt docs/llms-full.txt
+
+  # Full static build on PRs and on main. The llms indexes are regenerated
+  # first so the deployed site is always current even if the drift check
+  # above is ever relaxed.
+  build:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python scripts/gen_llms_txt.py
+      - run: zensical build --clean --strict
+      # Agent surface: per-page Markdown mirror, okf:* meta tags, robots.txt
+      - run: python scripts/postbuild_agent_surface.py site
+      # Post-build assertions: llms/robots/sitemap present, mirror complete,
+      # materials copied byte-identical, no wiki blob URLs left in HTML
+      - run: python scripts/check_site.py site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  # Deploy only from pushes to main (never from PRs or the monthly schedule).
+  # configure-pages with `enablement: true` creates the Pages site on the
+  # fork the first time it runs. If that first run fails on permissions,
+  # set Settings > Pages > Source = "GitHub Actions" once in the repository
+  # settings and re-run the workflow; no other configuration is needed.
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/configure-pages@v6
+        with:
+          enablement: true
+      - uses: actions/deploy-pages@v5
+        id: deployment

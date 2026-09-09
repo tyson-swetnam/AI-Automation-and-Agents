@@ -1,0 +1,7 @@
+# Migration/development dependencies (not needed to build the site)
+-r requirements.txt
+nbconvert>=7
+ipykernel
+markdownify>=0.13
+beautifulsoup4>=4.12
+pillow>=10
