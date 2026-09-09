@@ -2,7 +2,7 @@
 okf_version: "0.2"
 title: "AI Automation and Agents"
 description: "A five-module University of Arizona AI2S course that takes learners from AI prompts to AI agents and automated workflows: agent theory, reasoning architectures, memory and RAG, multi-agent systems, and responsible agentic AI."
-license: "CC-BY-NC-SA-4.0"
+license: "CC-BY-4.0"
 hide:
   - navigation
   - toc
@@ -176,6 +176,6 @@ Upon successful completion of this course, learners will be able to:
 * [Update log](log.md) - Dated record of every change to the course site.
 
 <div class="course-attribution" markdown>
-[![CC BY-NC-SA 4.0](assets/cc-by-nc-sa.png){ width="100" }](https://creativecommons.org/licenses/by-nc-sa/4.0/){ target=_blank }
+[![CC BY 4.0](assets/cc-by.png){ width="100" }](https://creativecommons.org/licenses/by/4.0/){ target=_blank }
 2026. [Arizona Institute for Artificial Intelligence (AI2S)](https://responsibleai.arizona.edu/ai2s){ target=_blank } and the [Office of Responsible Artificial Intelligence](https://responsibleai.arizona.edu/){ target=_blank }, The University of Arizona.
 </div>

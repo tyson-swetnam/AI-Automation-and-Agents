@@ -201,9 +201,17 @@ Actions" once and re-run.
 
 ## License
 
-The course authors' wiki footer licenses the content
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), and
-the site footer and `docs/about/license-and-attribution.md` carry that
-notice. The repository's `LICENSE` file (inherited from upstream) is CC0 1.0.
-The two disagree; `LICENSE` is left untouched and the conflict is recorded in
-`docs/log.md` until the course owners reconcile it.
+The course content - everything under `docs/`, including the pages, images
+and downloadable materials - is licensed
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (`LICENSE`). CC BY
+is approved for Free Cultural Works and meets the Open Definition, so the
+course qualifies as an open educational resource; reuse and adaptation,
+including commercial reuse, need only credit the original.
+
+Source code is licensed separately under the MIT License (`LICENSE-CODE`),
+because Creative Commons licenses are not intended for software. That covers
+`scripts/`, the Jupyter notebooks, and the interactive HTML activities.
+
+Third-party material quoted or linked by the course keeps its own terms, and
+the University of Arizona name and marks are not covered by either license.
+See `docs/about/license-and-attribution.md`.

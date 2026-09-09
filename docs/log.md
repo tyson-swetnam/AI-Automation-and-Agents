@@ -1,5 +1,10 @@
 # Documentation update log
 
+## 2026-09-09
+
+* **Update**: Resolved the licensing conflict recorded below. The course content is now published under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}, replacing both the wiki footer's CC BY-NC-SA notice and the repository's CC0 `LICENSE` file. CC BY is approved for Free Cultural Works and meets the Open Definition, so the course qualifies as an open educational resource under the strict reading; a NonCommercial clause would have blocked the workforce and paid-certificate reuse the course is written for. Source code (the `scripts/` pipeline, the lab notebooks, and the interactive HTML activities) is licensed separately under the MIT License in `LICENSE-CODE`, because Creative Commons licenses are not intended for software. Updated the `LICENSE` file, the site footer, the landing page badge, the [license and attribution](about/license-and-attribution.md) page, the [instructor materials](course-design/instructor-materials.md) page, and the README. Third-party material and the University of Arizona marks remain outside both licenses.
+* **Update**: The course owners confirmed that quiz answer keys stay **public but collapsed**: the quizzes are written to be self-evaluating. The [instructor materials](course-design/instructor-materials.md) page now records this as a decision rather than an open question, and notes that the keys are consequently visible in `llms-full.txt` and in each page's Markdown mirror.
+
 ## 2026-09-08
 
 * **Initialization**: Created this site as an [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md){target=_blank} knowledge bundle built with [Zensical](https://zensical.org){target=_blank}, following the pattern of the [UNM CARC documentation](https://carc.unm.edu/docs/){target=_blank}. Every content page carries frontmatter with `type`, provenance (`generated`, `sources`, `authorship`) and lifecycle (`status`, `stale_after`); section `index.md` files are directory listings; this file is the dated change log.

@@ -43,9 +43,9 @@ sign off on a page you have reviewed.
     Everything in the course repository - including the instructor solution
     notebooks under `instructor/` - is publicly readable on GitHub, and this
     site is publicly indexed. Students who look will find the solutions and
-    the answer keys. The course owners have an open decision on whether to
-    keep it this way (the wiki calls the quizzes "self-evaluating") or to move
-    solutions and keys into the LMS or a private repository. Until then,
+    the answer keys. Publishing the keys is deliberate: the quizzes are
+    self-evaluating and the owners confirmed that policy on 2026-09-09.
+    Whether the *solution notebooks* stay public is still open. Either way,
     grade what the LMS records, not what the site could reveal.
 
 ## Instructor solution notebooks
@@ -171,7 +171,7 @@ human-reviewed pages when answers conflict (see
 - [Contributing](../about/contributing.md) - how to edit pages, the
   frontmatter contract and the local build.
 - [License and attribution](../about/license-and-attribution.md) - the
-  CC BY-NC-SA notice and the open license question.
+  CC BY 4.0 notice for the content and the MIT license for the code.
 
 ## Open items for the course owners
 
