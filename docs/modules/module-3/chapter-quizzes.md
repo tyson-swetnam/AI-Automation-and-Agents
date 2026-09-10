@@ -239,7 +239,7 @@ D. Chunk overlap allows the retriever to return overlapping chunks as a single m
 
 ### Question 4
 
-A LangChain RAG chain is configured with `RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True)`. A practitioner runs a test query and observes that the generated answer contains a specific factual claim that does not appear in any of the returned `source_documents`. What failure mode does this observation most precisely identify?
+A LangChain RAG chain composes the retriever and the generator with LCEL, so that a single invocation returns both the generated `result` and the `source_documents` the retriever supplied for that query. A practitioner runs a test query and observes that the generated answer contains a specific factual claim that does not appear in any of the returned `source_documents`. What failure mode does this observation most precisely identify?
 
 A. A retrieval failure — the relevant source documents were not retrieved, so the model had no basis for the claim.
 
@@ -253,7 +253,7 @@ D. A document ingestion failure — the document containing the relevant informa
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** The `return_source_documents=True` parameter enables direct inspection of the retrieval stage output. When the practitioner confirms that the factual claim in the generated answer is absent from all returned source documents, they have identified a faithfulness violation: the LLM generated a claim that is not supported by the retrieved context. This is precisely what the RAGAS faithfulness metric measures. The LLM "filled the gap" using parametric memory — a dangerous behavior in any application where answers must be attributable to verified sources. The diagnostic value of `return_source_documents=True` is exactly this: it makes faithfulness violations visible without requiring RAGAS instrumentation.
+    ✅ **B is correct.** Because the chain carries `source_documents` alongside `result`, the output of the retrieval stage can be inspected for the very query that produced the answer. When the practitioner confirms that the factual claim in the generated answer is absent from all returned source documents, they have identified a faithfulness violation: the LLM generated a claim that is not supported by the retrieved context. This is precisely what the RAGAS faithfulness metric measures. The LLM "filled the gap" using parametric memory — a dangerous behavior in any application where answers must be attributable to verified sources. The diagnostic value of keeping the retrieved chunks in the chain's own output is exactly this: it makes faithfulness violations visible without requiring RAGAS instrumentation.
 
     ❌ **A is incorrect.** A retrieval failure would manifest differently: the source documents returned would be topically unrelated to the query, or no documents would be returned. In this scenario, some documents were retrieved (the practitioner can inspect them), but the generated claim is not in those documents. The retrieval component may have functioned correctly; the generation component is the failure point.
 

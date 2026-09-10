@@ -4045,8 +4045,7 @@ information retrieved during the task.
 
 ![Phases of the ReAct loop](../../assets/images/ReAct-Phase.png){ width="800" }
 
-The ReAct loop is the default reasoning architecture for production agents today. The ability to read and diagnose a ReAct trace - identifying which Thought step was faulty, which Act was incorrectly specified, or which Observe was
-misinterpreted - is the core diagnostic skill of Module 2.
+The ReAct loop is the default reasoning architecture for production agents today. The ability to read and diagnose a ReAct trace - identifying which piece of reasoning was faulty, which tool call was incorrectly specified, or which observation was misinterpreted - is the core diagnostic skill of Module 2. Thought, Act and Observe are the paper's names for the three phases, not labels a current agent prints: the Module 2 lab prints the same three steps as `REASONING:`, `TOOL CALL:` / `ARGUMENTS:` and `OBSERVATION:` lines.
 
 **Paradigm 3: Tree of Thoughts (Yao et al., 2023)**
 
@@ -4130,17 +4129,28 @@ reasoning failures and require different diagnostic approaches.
 
 **The `create_agent` Factory (LangChain)**
 
-LangChain's `create_agent` is the current production API for constructing multi-tool ReAct agents. It replaces the legacy `AgentExecutor` class with a cleaner factory function that integrates directly with LangGraph's stateful execution graph. `create_agent` accepts five primary parameters and returns a compiled, runnable agent:
+LangChain's `create_agent` is the current production API for constructing multi-tool ReAct agents. It replaces the legacy `AgentExecutor` class with a cleaner factory function that integrates directly with LangGraph's stateful execution graph. `create_agent` accepts five primary parameters — constructor arguments, not the agent's structural components — and returns a compiled, runnable agent:
 
 * **`model`** — a chat model instance (e.g., `ChatOpenAI`, `ChatAnthropic`) or a model identifier string. This is the LLM backbone that drives all reasoning steps.
 * **`tools`** — a sequence of `BaseTool` objects, callables, or tool-specification dicts. The agent's tool registry is constructed from this sequence; tool descriptions embedded in each `BaseTool` are used for selection at inference time.
 * **`system_prompt`** — an optional string or `SystemMessage` that injects persistent behavioral instructions before any user turn. This is the primary mechanism for role definition, output format constraints, and ethical boundaries.
 * **`middleware`** — an optional sequence of `AgentMiddleware` objects for observability, tracing, and logging. Middleware intercepts each reasoning step without modifying agent logic, enabling production monitoring without altering behavior.
-* **`response_format`** — an optional structured output specification (Pydantic model, type, or schema dict) that constrains the agent's final response to a defined schema. When set, the agent's output parser enforces this format rather than returning raw text.
+* **`response_format`** — an optional structured output specification (Pydantic model, type, or schema dict) that constrains the agent's final response to a defined schema. When set, that schema is imposed on the model's own output rather than recovered afterwards from text by an output parser. That is the general pattern in a tool-calling agent: an action comes back as a structured call — each entry in the message's `tool_calls` carries a `name` and an `args` dictionary — so there is nothing left for a parsing component to convert.
 
-The agent returned by `create_agent` runs a LangGraph-backed ReAct loop internally: on each invocation, it iterates through Thought → tool call → Observation cycles until a terminal condition is reached, then produces a Final Answer in the specified response format. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration.
+The agent returned by `create_agent` is a compiled graph that runs the ReAct loop internally: invoke it with `{"messages": [...]}` and it repeats a reasoning → tool call → observation cycle until the model returns a message that requests no tools. That message ends the run and carries the final answer, which you read from `result["messages"][-1].content`; the step cap is the `recursion_limit` config key. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration. *Thought*, *Action* and *Observation* are the ReAct paper's names for the phases of that cycle, not labels the agent emits — the model's message carries structured `tool_calls`, and it is the Module 2 lab's `show_trace` helper that gives the steps printable names (`REASONING:` — only when the model narrates before calling — then `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and `[final] ANSWER:`).
 
-![The LangChain agent runtime: an LLM backbone reading a tool registry, an executor running the selected tool, and observations feeding back into the loop (drawn for the LangChain 0.x AgentExecutor, whose structure create_agent keeps)](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+The figure below is the original LangChain 0.x `AgentExecutor` design table, kept here because its right-hand column explains what each part of an agent runtime is *for*. Read it as a historical figure: it has five rows, it uses its own names for them, and its body text still refers to the `AgentExecutor` class, to a "Final Answer" token and to a maximum iteration limit — all three of which the current API has left behind.
+
+![A five-row table titled Component, Role and Design Considerations, describing Agent (the LLM), Tool Descriptions, Tool Executor, Memory / State and Stopping Criteria for the LangChain 0.x AgentExecutor](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+
+**Reading the figure in this course's vocabulary.** Four of its five rows are the four structural components of the agent runtime, under older names:
+
+* *Agent (the LLM)* is the **LLM Backbone**.
+* *Tool Descriptions* are the descriptions carried by the **Tool Registry** — the text the model reads when it chooses a tool.
+* *Tool Executor* is the **Action Executor**.
+* *Memory / State* is the **Memory Module**.
+
+The fifth row, *Stopping Criteria*, is not a component at all: it is the rule that ends the loop, and it is the part that genuinely changed. A run now ends when the model returns a message with no tool calls, and the step cap is set by the `recursion_limit` config key rather than by a maximum-iteration argument. There is no parsing-error threshold either, because there is no text to parse — the model returns the call itself, as a `name` and an `args` dictionary. Note also what the figure has no row for: an output parser. Older component lists counted one between the model and the executor; this one does not, and neither does the current architecture, for the reason given in the `response_format` note above.
 
 **Tool Description Design - The Specification Discipline**
 
@@ -4220,7 +4230,7 @@ classes, each with a different root cause and a different fix:
 ### Learning Materials
 
 * Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2022). [ReAct: Synergizing reasoning and acting in language models](https://arxiv.org/pdf/2210.03629){target=_blank}. arXiv preprint arXiv:2210.03629.
-* LangChain [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent){target=_blank} verbose trace output.
+* LangChain [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent){target=_blank} — the streamed step trace from `agent.stream(..., stream_mode="updates")`, which the Module 2 lab wraps in its `show_trace` helper. There is no `verbose=True` switch to turn on.
 * Zhou, A., Yan, K., Shlapentokh-Rothman, M., Wang, H., & Wang, Y. X. (2023). [Language agent tree search unifies reasoning acting and planning in language models](https://arxiv.org/pdf/2310.04406){target=_blank}. arXiv preprint arXiv:2310.04406.
 
 ### Chapter 3 Quiz
@@ -4386,7 +4396,7 @@ Write two sentences in your notes: (1) What CoT adds to standard few-shot prompt
 - **Thought phase:** Generated by the LLM — a natural language statement of what the agent knows, what it needs, and what it intends to do next.
 - **Action phase:** Generated by the LLM — a structured specification of a tool call (tool name + arguments).
 - **Observation phase:** Generated by the external tool — the raw output returned after executing the Action. The LLM does not generate this; it reads it.
-- **Loop termination:** The loop terminates when the LLM generates a `Final Answer:` token (agent-side), or when a maximum step count is reached (framework-side hard stop).
+- **Loop termination:** The loop terminates when the LLM produces an answer instead of another action (agent-side), or when a step limit is reached (framework-side hard stop). In the paper's prompt format the agent signals completion with a finish action written as text; a modern tool-calling model signals it structurally, by returning a message that requests no tools, and the step limit is set by the `recursion_limit` config key rather than a `max_iterations` argument.
 
 **Synthesis Task**
 
@@ -4421,33 +4431,33 @@ Construct a four-row reference table in your notes with columns: **Paradigm | Ex
 
 **Assigned Reading:**
 
-- Reading 5: LangChain Documentation — *AgentExecutor Conceptual Guide and Tool Creation Reference.* Read the complete AgentExecutor Conceptual Guide. Focus: tool registry role, tool description use for tool selection, output parser conversion of LLM text to structured tool calls.
-- Video 2: Sam Witteveen — *"Understanding ReACT with LangChain"* (~22 min). Watch focus: conceptual distinction between CoT and ReAct; the observation integration step.
+- Reading 5: LangChain Documentation — *[Agents](https://docs.langchain.com/oss/python/langchain/agents){target=_blank} and [Tools](https://docs.langchain.com/oss/python/langchain/tools){target=_blank}.* Read the complete Agents guide; use the Tools reference for Part B. Focus: tool registry role, tool description use for tool selection, and how a tool-calling model returns a structured call — a `name` and an `args` dictionary — instead of text that an output parser has to convert.
+- Video 2: Sam Witteveen — *"Understanding ReACT with LangChain"* (~22 min). Watch focus: conceptual distinction between CoT and ReAct; the observation integration step. The video was recorded against LangChain 0.x, whose `AgentExecutor` class was removed in LangChain 1.0 — take the reasoning-loop explanation from the video and the API from Reading 5.
 
 *(Reference: Brown, T., et al. (2020). Language models are few-shot learners. NeurIPS 2020. — cited in lesson context; no full reading assigned.)*
 
-### Part A: The AgentExecutor Architecture
+### Part A: The Agent Runtime Architecture
 
-**Scope:** AgentExecutor Conceptual Guide — complete.
+**Scope:** LangChain Agents guide — complete.
 
 **Reading Focus Questions**
 
-1. The AgentExecutor has five structural components. Name all five and describe the specific function of each in one sentence. Pay particular attention to the **tool registry**: what does it store, and how does the agent access it during a reasoning loop?
+1. The agent runtime has four structural components. Name all four and describe the specific function of each in one sentence. Pay particular attention to the **tool registry**: what does it store, where does each tool's description come from, and how does the model use it during a reasoning loop?
 
-2. The documentation describes how the **output parser** converts the LLM's raw text output into a structured tool call. What would happen if the output parser received a malformed LLM response — for example, a response that names a tool that does not exist in the registry?
+2. Older agent runtimes asked the model to *write* its action as text and then ran an **output parser** over that text; a tool-calling model instead returns the call as structured data (a `name` and an `args` dictionary) that the runtime executes directly. Which class of failure does that design remove? Then work through a failure it does not remove: the correct tool is called but raises an exception while it runs. What happens to the rest of the run, and what must the tool's author do instead?
 
-3. The chapter lesson emphasizes that tool use is "what separates an AI agent from an LLM." Using the AgentExecutor architecture as a reference, explain exactly what structural capability the executor adds that a standalone LLM call does not have.
+3. The chapter lesson emphasizes that tool use is "what separates an AI agent from an LLM." Using the agent runtime as a reference, explain exactly what structural capability the agent adds that a standalone LLM call does not have.
 
 **Key Concepts to Extract**
 
-- **Five AgentExecutor structural components:**
-    1. *LLM backbone* — generates Thought and Action steps; the core reasoning engine.
-    2. *Tool registry* — a dictionary of registered tools with names, descriptions, and callable functions; the agent accesses it to know what actions are available.
-    3. *Output parser* — converts the LLM's raw text Action into a structured object (tool name + arguments) that can be executed.
-    4. *Action executor* — invokes the selected tool with the parsed arguments and returns the result.
-    5. *Memory module* — stores prior Thought/Action/Observation turns to provide the agent with conversational context across reasoning steps.
-- **Tool registry function:** Maps tool names (as strings) to tool objects (description + callable); the LLM reads tool descriptions from the registry to select the appropriate tool.
-- **Malformed output handling:** If the output parser receives an unrecognized tool name, the executor raises a parsing error or invokes an error-handling fallback — the tool call does not execute silently.
+- **Four structural components of the agent runtime:**
+    1. *LLM backbone* — the central reasoning engine; it reads the conversation so far and decides which action to take next, or that the question can now be answered.
+    2. *Tool registry* — the registered tools with their descriptions and input schemas; it is the whole set of actions the model may choose from, and the agent reads it to know what capabilities are available.
+    3. *Action executor* — the runtime that actually runs the chosen tool with the arguments the model supplied, and returns the result as the observation.
+    4. *Memory module* — carries conversation history, tool outputs and observations forward, so each turn of the loop sees what the previous turns produced.
+- **The fifth component that no longer exists:** older LangChain listed a fifth, an *output parser*, whose job was to convert the model's raw text Action into a structured tool call. A tool-calling model emits that structure directly — each entry in the message's `tool_calls` carries a `name` and an `args` dictionary — so there is no text left to parse and the component has no work to do. Four is the current count; if an older component list hands you five, the extra one is the parser. A figure that shows stopping criteria as a fifth row is counting something else again — the rule that ends the loop, not a part of the runtime.
+- **Tool registry function:** Maps tool names (as strings) to tool objects (description + callable); the model reads those descriptions — for a `@tool` function the description is its docstring, unless an explicit `description=` overrides it — and selects a tool by naming it in a tool call.
+- **Tool failure handling:** Structured tool calls remove the text-parsing failure mode, but not tool failure. A tool that raises lets the exception propagate out of the agent and end the run, so the user gets a traceback and no answer. A production tool catches its own errors and returns a description of the failure, which reaches the model as an ordinary observation it can reason about — retrying with different arguments, switching tools, or reporting the limitation.
 
 ### Part B: Tool Description Design
 
@@ -4479,7 +4489,7 @@ Write a complete tool description for a hypothetical "company database lookup" t
 **Sources (no new numbered reading assigned — draws on previously assigned readings and lesson content):**
 
 - Yao, S., et al. (2022). ReAct. Sections 1–2 (already read in Guide 1B).
-- LangChain AgentExecutor verbose output (from Lab Exercise Step 1).
+- The streamed agent trace printed by the `show_trace` helper in Lab Exercise Step 1 (`REASONING`, `TOOL CALL`, `ARGUMENTS`, `OBSERVATION`, `ANSWER` lines).
 - Zhou, A., et al. (2023). LATS. Section 1 (accessible from Chapter 1 lesson).
 - Chapter 3 lesson content: Five Classes of Reasoning Trace Failure (reference the lesson table directly).
 
@@ -4487,17 +4497,17 @@ Write a complete tool description for a hypothetical "company database lookup" t
 
 **Reading Focus Questions**
 
-1. The chapter lesson defines a reasoning trace as "the complete log of an agent's internal reasoning steps, tool calls, and tool observations during the execution of a task." In a verbose AgentExecutor output, which specific labeled elements constitute the reasoning trace? List them in order.
+1. The chapter lesson defines a reasoning trace as "the complete log of an agent's internal reasoning steps, tool calls, and tool observations during the execution of a task." In the streamed trace the lab's `show_trace` helper prints, which specific labeled lines constitute the reasoning trace? List them in order, and say which one may legitimately be missing from a correct run that did call a tool.
 
 2. The lesson states that in production systems "the reasoning trace is the primary diagnostic artifact when an agent fails to produce correct output." What does this mean for system design — specifically, what must be true about logging configuration for a production deployment to be diagnosable?
 
-3. Re-read the ReAct paper's description of the Thought-Action-Observation cycle (already read in Guide 1B). How does the trace structure map to this cycle — that is, where in a real verbose AgentExecutor output would you locate each of the three phases?
+3. Re-read the ReAct paper's description of the Thought-Action-Observation cycle (already read in Guide 1B). How does the trace structure map to this cycle — that is, where in a real streamed trace would you locate each of the three phases, given that a model calling tools natively never writes the words "Thought:", "Action:" or "Observation:"?
 
 **Key Concepts to Extract**
 
-- **Reasoning trace elements (in order):** `Thought:` → `Action:` → `Action Input:` → `Observation:` (repeated per loop iteration) → `Final Answer:`.
-- **Production diagnostic requirement:** Verbose mode or structured logging must be enabled in deployment; a production agent without trace logging cannot be diagnosed post-failure.
-- **Trace-to-cycle mapping:** `Thought:` = Thought phase; `Action:` + `Action Input:` = Action phase (tool name + arguments); `Observation:` = Observation phase (tool output).
+- **Reasoning trace elements (in order):** `REASONING:` (the model's own text, printed only when it chooses to narrate — frequently absent, and its absence is not a fault) → `TOOL CALL:` (the tool name) → `ARGUMENTS:` (the argument dictionary) → `OBSERVATION:` (the content the tool returned), repeated per loop iteration → `ANSWER:` (the last model message, the one that requests no tools).
+- **Production diagnostic requirement:** There is no `verbose=True` switch to turn on any more. The agent must be streamed (`agent.stream(..., stream_mode="updates")`) or otherwise instrumented so that every tool call, its arguments and the content the tool returned are recorded; a deployment that logs only the final answer cannot be diagnosed post-failure.
+- **Trace-to-cycle mapping:** Thought phase = the model message's own `content` (the `REASONING:` line), which the model may omit entirely; Action phase = `tool_call["name"]` plus `tool_call["args"]` (the `TOOL CALL:` and `ARGUMENTS:` lines); Observation phase = the tool message's `content` (the `OBSERVATION:` line).
 
 ### Part B: The Five Classes of Reasoning Trace Failure
 
@@ -4512,39 +4522,37 @@ Write a complete tool description for a hypothetical "company database lookup" t
 **Key Concepts to Extract**
 
 - **Five failure classes (derived from Chapter 3 lesson):**
-    1. *Incorrect tool selection* — Trace shows Action naming the wrong tool for the sub-task. Root cause: tool description ambiguity or missing scope boundary. Fix: revise tool description.
-    2. *Malformed tool call* — Action phase names the correct tool but provides incorrect or malformed arguments. Root cause: ambiguous argument specification. Fix: clarify argument format and constraints in tool description.
-    3. *Observation misinterpretation* — Correct tool is called with correct arguments; Observation is returned correctly; but the subsequent Thought misreads the Observation and draws an incorrect inference. Root cause: output format not described or agent not instructed on how to parse it. Fix: add output format description and parsing instructions.
-    4. *Premature termination* — Agent generates `Final Answer:` before the reasoning task is complete (e.g., after first tool call, regardless of whether sufficient information has been retrieved). Root cause: stopping condition is triggered too early; few-shot examples do not demonstrate multi-step loops. Fix: add few-shot demonstrations of multi-loop reasoning; adjust max_iterations.
-    5. *Hallucination in Thought* — Agent generates a Thought that asserts a false fact as if it were retrieved from a tool Observation, when no such Observation occurred. Root cause: parametric memory override — the LLM inserts training knowledge as if it were a retrieved fact. Fix: strengthen tool use instructions; require grounding of all factual claims in an Observation.
-- **Distinguishing incorrect tool selection vs. malformed tool call:** Incorrect tool selection is visible in the `Action:` line (wrong tool name); malformed tool call shows the correct tool name in `Action:` but incorrect content in `Action Input:`.
-- **Trace-complete failure class:** Hallucination in Thought — the trace shows all phases correctly, but the Thought contains an asserted fact that was never returned by any tool Observation.
+    1. *Incorrect tool selection* — The `TOOL CALL` line names the wrong tool for the sub-task. Root cause: tool description ambiguity or missing scope boundary. Fix: revise tool description.
+    2. *Malformed tool call* — `TOOL CALL` names the correct tool but `ARGUMENTS` carries incorrect or malformed values. Root cause: ambiguous argument specification. Fix: clarify argument format and constraints in tool description.
+    3. *Observation misinterpretation* — Correct tool is called with correct arguments and the `OBSERVATION` line shows a correct result, but the model's next message misreads it and draws an incorrect inference. Root cause: output format not described or agent not instructed on how to parse it. Fix: add output format description and parsing instructions.
+    4. *Premature termination* — Agent returns an answer message with no tool calls before the reasoning task is complete (e.g., after the first tool call, regardless of whether sufficient information has been retrieved). Root cause: stopping condition is triggered too early; the demonstrations do not show multi-step loops. Fix: add demonstrations of multi-loop reasoning. Separately, check whether the run was cut short by the `recursion_limit` config key, which replaced the old `max_iterations` argument.
+    5. *Hallucination in Thought* — The agent asserts a false fact in its own text — the `REASONING:` line, or the answer itself — as though a tool had returned it, when no `OBSERVATION` line contains it. Root cause: parametric memory override — the LLM inserts training knowledge as if it were a retrieved fact. Fix: strengthen tool use instructions; require grounding of all factual claims in an Observation.
+- **Distinguishing incorrect tool selection vs. malformed tool call:** Incorrect tool selection is visible on the `TOOL CALL` line (wrong tool name); a malformed tool call shows the correct name on `TOOL CALL` but wrong content on `ARGUMENTS`.
+- **Trace-complete failure class:** Hallucination in Thought — every step of the trace is well formed and no error is logged, but the model's text contains an asserted fact that no `OBSERVATION` line ever returned.
 
 **Synthesis Task**
 
 Given the following abbreviated trace, classify the failure, identify its root cause, and prescribe a structural fix:
 
 ```text
-Thought: I need to find the current GDP of Brazil.
-Action: web_search
-Action Input: "Brazil GDP"
-Observation: [Search returned: "Brazil GDP 2023: $2.08 trillion (World Bank)"]
-Thought: The search confirmed Brazil's GDP is $2.08 trillion. 
-         I also know from context that Brazil's inflation rate in 2023 was 4.6%.
-Final Answer: Brazil's GDP is $2.08 trillion and its inflation rate is 4.6%.
+[1] REASONING:  I need to find the current GDP of Brazil.
+[1] TOOL CALL:  web_search
+[1] ARGUMENTS:  {'query': 'Brazil GDP'}
+[1] OBSERVATION: Brazil GDP 2023: $2.08 trillion (World Bank)
+[final] ANSWER:  Brazil's GDP is $2.08 trillion. From what I know, its inflation rate in 2023 was 4.6%.
 ```
 
 ??? success "Answer"
 
-    Hallucination in Thought — the inflation rate 4.6% was never returned by any Observation; it was inserted from parametric memory. Fix: add a system instruction requiring that all numerical claims be grounded in a tool Observation.
+    Hallucination in Thought — the only `OBSERVATION` in the trace returned a GDP figure and nothing else, so the 4.6% inflation rate came from the model's parametric memory, which the answer all but admits with "From what I know". It is not premature termination: the agent did not stop short, it answered in full and sourced part of that answer from memory instead of a tool — premature termination means stopping before enough was gathered, hallucination means asserting what was never gathered. The trace is otherwise well formed: one tool call, one observation, one answer, no error. Fix: add a system instruction requiring that every numerical claim be grounded in a tool result, and read traces by checking each figure in the answer against the observations above it.
 
 ## Reading Guide 4 — Chapter 4: Prompt Engineering for Agent Behavioral Control { #reading-guide-4 }
 
 **Assigned Reading:**
 
-- Reading 7: Liu, P., et al. (2023). *Pre-train, prompt, and predict: A systematic survey of prompting methods in NLP.* ACM Computing Surveys, 55(9). Read: Section 3 (A Formal Description of Prompting) + Section 4 (Prompt Engineering). Focus: four-component prompt architecture and cross-mapping to AgentExecutor components.
+- Reading 7: Liu, P., et al. (2023). *Pre-train, prompt, and predict: A systematic survey of prompting methods in NLP.* ACM Computing Surveys, 55(9). Read: Section 3 (A Formal Description of Prompting) + Section 4 (Prompt Engineering). Focus: four-component prompt architecture and cross-mapping to the four agent prompt engineering dimensions of Part B (system instructions, tool descriptions, few-shot CoT scaffolds, output format constraints).
 
-*(Reference readings: Brown et al. 2020, Wei et al. 2022 — revisit as needed for few-shot context; LangChain AgentExecutor system prompt design.)*
+*(Reference readings: Brown et al. 2020, Wei et al. 2022 — revisit as needed for few-shot context; the LangChain [Agents guide](https://docs.langchain.com/oss/python/langchain/agents){target=_blank} on the `system_prompt` argument to `create_agent`.)*
 
 ### Part A: Liu et al.'s Four-Component Prompt Taxonomy
 
@@ -4570,7 +4578,7 @@ Final Answer: Brazil's GDP is $2.08 trillion and its inflation rate is 4.6%.
     - *Instruction → System instructions:* The agent's role, behavioral constraints, and task scope.
     - *Context → Tool descriptions + few-shot CoT scaffolds:* Tool descriptions provide the agent's operational context; few-shot examples provide reasoning-pattern context.
     - *Input indicator → User query / task input:* The specific task the agent must solve in this invocation.
-    - *Output indicator → Output format constraints:* The required structure of the agent's Final Answer (section headers, citation format, word count, confidence levels).
+    - *Output indicator → Output format constraints:* The required structure of the agent's final answer message (section headers, citation format, word count, confidence levels).
 
 ### Part B: Four Dimensions of Agent Prompt Engineering
 
@@ -4587,8 +4595,8 @@ Final Answer: Brazil's GDP is $2.08 trillion and its inflation rate is 4.6%.
 - **Four agent prompt engineering dimensions:**
     1. *System instructions:* Role identity, professional framing, behavioral constraints, ethical boundaries — what the agent knows about itself and its limits.
     2. *Tool descriptions:* Operational specification of each available tool — the agent's action vocabulary.
-    3. *Few-shot CoT scaffolds:* Demonstration examples showing the desired Thought-Action-Observation-Final Answer pattern — the agent's reasoning template.
-    4. *Output format constraints:* Required structure, length, citation format, or confidence framing for the Final Answer.
+    3. *Few-shot CoT scaffolds:* Worked exchanges placed in the message list ahead of the real question — a user turn, the assistant's tool call, the tool's result, and the answer that followed — which the model reads as precedent for its own loop.
+    4. *Output format constraints:* Required structure, length, citation format, or confidence framing for the final answer.
 - **Fragility of accumulated constraints:** LLMs do not apply prompt constraints with equal weight across all tokens; constraints added later in a long system prompt may be overshadowed by earlier instructions or by strong in-context patterns. Accumulated constraints interact unpredictably — a new prohibition may inadvertently suppress a behavior that was previously working correctly.
 - **Behavioral control as architecture:** Behavioral boundaries defined at design time, tested systematically, and instrumented in production are more reliable than reactive prompt patches.
 
@@ -4599,9 +4607,9 @@ Write the complete cross-mapping table in your notes:
 | Liu et al. Component | Agent Prompt Dimension | Example in Agent Context |
 |---|---|---|
 | Instruction | System instructions | "You are a senior legal analyst. Do not provide legal advice." |
-| Context | Tool descriptions + few-shot scaffolds | Web search tool description + Thought→Action→Obs demonstration |
+| Context | Tool descriptions + few-shot scaffolds | Web search tool docstring + a worked tool call → tool result → answer exchange |
 | Input indicator | User query | "Review this contract for non-compete clauses." |
-| Output indicator | Output format constraints | "Final Answer must contain: Summary (≤100 words), Risk Level (High/Med/Low), Citations." |
+| Output indicator | Output format constraints | "Your final answer must contain: Summary (≤100 words), Risk Level (High/Med/Low), Citations." |
 
 Verify that every cell is filled from Liu et al.'s text and the lesson content — not from your prior knowledge.
 
@@ -5667,7 +5675,7 @@ A. The student is correct — in some ReAct implementations, the LLM generates a
 
 B. The Observation is not generated by the LLM — it is the raw output returned by the external tool after the Action is executed. The LLM reads the Observation as input to its next Thought step but does not produce it. Confusing the Observation's source fundamentally mischaracterizes the grounding mechanism that distinguishes ReAct from CoT.
 
-C. The student is partially correct — in LangChain's AgentExecutor implementation, the LLM generates both the Action and the Observation, while the tool executor only validates that the Action is syntactically correct.
+C. The student is partially correct — in LangChain's `create_agent` runtime, the model generates both the Action and the Observation, and the runtime only checks that the tool name the model asked for exists in the tool registry.
 
 D. The claim is correct for some tool types: when the tool is a Python REPL, the LLM generates the code (Observation) that the REPL then executes; for web search tools, the search engine generates the Observation.
 
@@ -5679,9 +5687,9 @@ D. The claim is correct for some tool types: when the tool is a Python REPL, the
 
     ❌ **A is incorrect.** While some agent architectures do implement predicted observations as a fallback, this is not the ReAct architecture as described by Yao et al. — and more importantly, a predicted observation generated by the LLM would be a Thought, not an Observation in the ReAct sense. The Observation in the ReAct loop is definitionally the tool's actual output, not the LLM's prediction.
 
-    ❌ **C is incorrect.** In LangChain's AgentExecutor, the LLM generates the `Action:` and `Action Input:` (the tool name and arguments), and the tool executor invokes the actual tool and returns its output as the `Observation:`. The LLM does not generate the Observation content. The output parser converts the LLM's text to a structured tool call — it does not validate the Action alone and leave Observation generation to the LLM.
+    ❌ **C is incorrect.** In an agent built with `create_agent`, the model's message carries the Action as a structured tool call — `tool_call["name"]` is the tool and `tool_call["args"]` are its arguments — and the agent's action executor then invokes that tool and returns its output as a `ToolMessage`. The content of that `ToolMessage` is the Observation, and the model does not generate it. The runtime also does more than check the name: it executes the call and feeds the result back into the loop as the model's next input.
 
-    ❌ **D is incorrect.** When the tool is a Python REPL, the LLM generates the *code to execute* (the `Action Input:`) — not the Observation. The Observation is the output produced by the Python interpreter when it runs the LLM-generated code. The tool (the REPL) generates the Observation; the LLM generates the code that produces it. This distinction is not tool-type-specific — across all tool types, the Observation is the tool's output, not the LLM's.
+    ❌ **D is incorrect.** When the tool is a Python REPL, the LLM generates the *code to execute* (the `args` of its tool call) — not the Observation. The Observation is the output produced by the Python interpreter when it runs the LLM-generated code, handed back to the model as a `ToolMessage`. The tool (the REPL) generates the Observation; the LLM generates the code that produces it. This distinction is not tool-type-specific — across all tool types, the Observation is the tool's output, not the LLM's.
 
 ### Question 3
 
@@ -5751,37 +5759,46 @@ D. Chain-of-Thought — because shipping status lookup is a simple, structured t
 
     ❌ **A is incorrect.** Shipping status lookup does not involve a large state space of candidate interpretations — the task has a well-defined structure (query the API, return the result), not a branching deliberation problem. ToT is appropriate when multiple candidate reasoning paths must be explored and evaluated; a structured API lookup does not have this property. Applying ToT here would add computational cost and latency for no quality benefit.
 
-    ❌ **B is incorrect.** ReAct is fully capable of production API integration — the AgentExecutor architecture with a tool registry is exactly the mechanism designed for this. LATS's action-observation-at-node structure adds deliberate search capability that this task does not require. The claim that "ReAct is insufficient for production API integration" is factually incorrect; ReAct is the standard production architecture for tool-calling agents and is used at scale in exactly this type of deployment.
+    ❌ **B is incorrect.** ReAct is fully capable of production API integration — an agent runtime such as the one `create_agent` builds, backed by a tool registry, is exactly the mechanism designed for this. LATS's action-observation-at-node structure adds deliberate search capability that this task does not require. The claim that "ReAct is insufficient for production API integration" is factually incorrect; ReAct is the standard production architecture for tool-calling agents and is used at scale in exactly this type of deployment.
 
     ❌ **D is incorrect.** CoT cannot access live external information — it operates exclusively within the LLM's parametric knowledge. A shipping status lookup requires querying a live order tracking API that CoT has no mechanism to invoke. Including the "expected answer format" in a few-shot demonstration does not provide the live data; it only templates the response format. CoT is definitively ruled out by the external information need dimension.
 
 ## Chapter 2 Quiz — Tool Integration Architecture { #chapter-2-quiz }
 
-*Based on Reading Guide 2: LangChain AgentExecutor Documentation, Tool Creation Reference, Chapter 2 Lesson*
+*Based on Reading Guide 2: LangChain Agents Documentation (`create_agent`) and Tools reference, the agent trace printed by the lab's `show_trace` helper, Chapter 2 Lesson*
 
 ### Question 1
 
-The AgentExecutor architecture has five structural components. During a single reasoning loop, an agent generates the Action: `web_search` with Action Input: `"current Bitcoin price"`. The tool registry is queried and the tool is invoked. Which component is responsible for converting the LLM's raw text output (which reads: `"Action: web_search\nAction Input: current Bitcoin price"`) into the structured Python object that can actually call the web search function?
+An agent built with `create_agent` has four structural components. Asked for the current Bitcoin price, the agent is run with the lab's `show_trace` helper, which prints:
 
-A. The memory module — it stores the previous Thought step and converts subsequent Action text into executable format by referencing the prior conversation turn.
+```text
+[1] TOOL CALL:  web_search
+[1] ARGUMENTS:  {'query': 'current Bitcoin price'}
+[1] OBSERVATION: BTC/USD 64,812.40 as of 14:02 UTC
+[final] ANSWER:  Bitcoin is trading at $64,812.40 as of 14:02 UTC.
+```
 
-B. The output parser — it parses the LLM's raw text Action specification into a structured object (tool name as a string matching a registry entry + arguments in the expected format) that the action executor can then invoke against the tool registry.
+The `TOOL CALL:` and `ARGUMENTS:` lines are the model's *request*; the `OBSERVATION:` line shows that the registered `web_search` function actually ran. Which of the four components turns that request into that execution?
 
-C. The tool registry — it receives the raw LLM text, looks up "web_search" in its directory, and automatically extracts the action input by pattern matching against the tool's argument schema.
+A. The memory module — it holds the earlier steps of the run and converts the pending tool request into an executable call by referencing the prior conversation turn.
 
-D. The LLM backbone — it generates both the raw Action text and its structured equivalent simultaneously; the AgentExecutor uses the structured version and discards the text representation.
+B. The action executor — it reads the tool call's `name`, resolves it against the tool registry the agent was built with, invokes the underlying Python function with the `args` the model supplied, and returns what comes back as the tool result shown on the `OBSERVATION:` line.
+
+C. The tool registry — it receives the model's message directly, matches `web_search` against its entries, and runs the matching function as part of the lookup.
+
+D. The LLM backbone — a tool-calling model's message carries both the call and the tool's result, so no separate runtime step has to run anything; the `OBSERVATION:` line is the trace re-printing output the model already supplied.
 
 ??? success "Show answer and feedback"
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** The output parser is the structural component whose specific function is converting the LLM's natural language text output into a typed, executable format. The LLM generates the Action as natural language text — a string that looks like a tool call but is not yet a function call. The output parser performs this text-to-structure conversion: it extracts the tool name (matching it against the registry's known names), extracts the action input arguments, and produces a structured object that the action executor can pass to the actual tool function. Without the output parser, the gap between "the LLM's text response" and "an executable function call" cannot be bridged. The Reading Guide identifies this as one of the five named structural components with this specific function.
+    ✅ **B is correct.** The action executor is the component that turns a request into an execution. The LLM backbone's work ends when it emits a message carrying a tool call: a `name` and an `args` dictionary. That is a request — nothing has run yet. The action executor takes `tool_call["name"]`, resolves it against the tool registry the agent was built with, invokes the underlying Python function with `tool_call["args"]`, and hands the result back into the loop, where it prints as the `OBSERVATION:` line and becomes the model's input for its next step. The other three components do adjacent jobs and not this one: the backbone decides, the registry supplies the callable and the description the model reads when choosing, and the memory module carries the accumulated history forward. Note what is no longer in this division of labour: the component an older text-based agent needed between the model and the executor — an output parser that turned the model's `Action:` text into a call — has no work left to do, because a tool-calling model emits the structured `name`/`args` pair directly.
 
-    ❌ **A is incorrect.** The memory module stores prior Thought/Action/Observation turns to provide context for subsequent reasoning steps — it does not perform text-to-structure conversion of Action specifications. The memory module's function is context management across turns, not parsing of individual action outputs.
+    ❌ **A is incorrect.** The memory module carries the conversation history, tool calls and tool results forward so that each model step sees what came before — it is context, not execution. It never converts a pending tool request into a function call, and an agent that persists no history at all still executes tools normally. Assigning this work to the memory module confuses what the loop remembers with what the loop does.
 
-    ❌ **C is incorrect.** The tool registry is a directory that maps tool names to tool objects (descriptions + callable functions) — it does not receive raw LLM text or perform pattern matching against it. The registry is passive: it is queried by the action executor after the output parser has already produced a structured tool call specifying which tool to invoke. The registry does not parse; it stores and retrieves.
+    ❌ **C is incorrect.** The tool registry is the set of tools the agent was built with: it maps a tool name to a callable and to the description the model reads when choosing. It is passive — it does not receive the model's message and it does not run anything. It is consulted *by* the action executor, which performs the lookup and then the invocation. The registry stores and resolves; it does not execute.
 
-    ❌ **D is incorrect.** The LLM backbone generates natural language text — it produces one representation (the text), not two simultaneous representations. LLMs do not natively output typed Python objects; the conversion from text to structured format is performed by a separate component (the output parser) external to the LLM itself. This separation is architecturally significant: it means the output parser can be swapped or upgraded independently of the LLM.
+    ❌ **D is incorrect.** A tool-calling model emits one thing, the request: its message carries `tool_calls` entries and no tool output. The result arrives afterwards, from a different component, which is why the `OBSERVATION:` line is a separate step in the trace rather than part of the model's message. The model has no access to the process that runs the tool. This separation is architecturally significant: tool execution can be logged, sandboxed, rate-limited or refused independently of the model that asked for it.
 
 ### Question 2
 
@@ -5829,7 +5846,7 @@ D. Yes — but only if the practitioner also adds a meta-description to the syst
 
     ❌ **C is incorrect.** The Reading Guide does not prescribe a supervisor agent as the solution to multi-tool selection — that is a multi-agent system pattern covered in Module 4. In Module 2's single-agent architecture, correct multi-tool selection is achieved through well-designed tool descriptions with explicit scope boundaries. A supervisor agent would add unnecessary complexity to a task that disciplined tool description can handle.
 
-    ❌ **D is incorrect.** In the AgentExecutor architecture, tool descriptions are provided to the LLM during tool selection — the LLM reads the descriptions from the tool registry to determine which tool is appropriate. A meta-description in the system instruction is a complementary practice (listing available tools at a high level) but it does not replace individual tool descriptions; both are used. The claim that "individual tool descriptions alone are not read by the LLM during tool selection" is factually incorrect.
+    ❌ **D is incorrect.** Tool descriptions are sent to the model with every request — each `@tool` function's docstring (or the explicit `description=` it was given) becomes the text the model reads when deciding which tool is appropriate. A meta-description in the system instruction is a complementary practice (listing available tools at a high level) but it does not replace individual tool descriptions; both are used. The claim that "individual tool descriptions alone are not read by the LLM during tool selection" is factually incorrect.
 
 ### Question 4
 
@@ -5857,43 +5874,42 @@ D. The practitioner is incorrect — the failure is a missing error state docume
 
 ### Question 5
 
-The chapter lesson states that "undocumented errors produce agents that silently misinterpret failure states as data." A web search tool returns the error message `{"error": "RATE_LIMIT_EXCEEDED", "retry_after": 30}` — a rate limiting error the tool description does not mention. The ReAct agent reads this as an Observation and generates the Thought: "The search results show that RATE_LIMIT_EXCEEDED is the current status of the query. The retry delay of 30 seconds suggests the topic has limited available sources." The agent then generates a Final Answer based on this misinterpretation. Which failure mechanism does this scenario most precisely instantiate?
+The chapter lesson states that "undocumented errors produce agents that silently misinterpret failure states as data." A web search tool returns the error message `{"error": "RATE_LIMIT_EXCEEDED", "retry_after": 30}` — a rate limiting error the tool description does not mention. The agent receives this string as the content of the `ToolMessage`, and its next message carries no tool call, so it ends the run: it reasons "The search results show that RATE_LIMIT_EXCEEDED is the current status of the query. The retry delay of 30 seconds suggests the topic has limited available sources," and on that basis gives its final answer. Which failure mechanism does this scenario most precisely instantiate?
 
 A. Incorrect tool selection — the agent selected the web search tool for a task that should have used a different tool, causing the rate limit error.
 
-B. Observation misinterpretation caused by undocumented error state — the agent received a structured error response (not data), but without documentation specifying that `RATE_LIMIT_EXCEEDED` is an error state requiring a wait-and-retry action (not information to reason about), the agent treated the error JSON as semantic content and generated a factually incorrect Final Answer.
+B. Observation misinterpretation caused by undocumented error state — the agent received a structured error response (not data), but without documentation specifying that `RATE_LIMIT_EXCEEDED` is an error state requiring a wait-and-retry action (not information to reason about), the agent treated the error JSON as semantic content and produced a factually incorrect final answer.
 
-C. Hallucination in Thought — the agent invented the interpretation "limited available sources" from parametric memory rather than from the Observation, demonstrating that the model inserted training knowledge to fill an information gap.
+C. Hallucination in Thought — the agent invented the interpretation "limited available sources" from parametric memory rather than from the tool result, demonstrating that the model inserted training knowledge to fill an information gap.
 
-D. Premature termination — the agent generated a Final Answer after a single tool call that returned incomplete information, rather than retrying the search after the rate limit expired.
+D. Premature termination — the agent returned a final answer after a single tool call that came back with incomplete information, rather than retrying the search after the rate limit expired.
 
 ??? success "Show answer and feedback"
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** This scenario precisely instantiates the "undocumented error produces silent misinterpretation" failure described in the chapter lesson and Reading Guide 2. The error state `RATE_LIMIT_EXCEEDED` is a control signal — it tells the system to wait and retry, not to reason about the content. But because the tool description does not document this error state (what it means, and what the agent should do when it receives it), the agent has no basis for distinguishing it from a valid data Observation. The agent treats the JSON error response as semantic content and extracts meaning from its fields (`RATE_LIMIT_EXCEEDED` → "limited available sources"; `retry_after: 30` → "30 seconds suggests limited sources"). The final answer is factually wrong, but the trace appears complete — no parsing errors, no missing Observations, all labels present. This is the silent misinterpretation failure: the trace looks correct, but the agent built its answer on an error message. The fix is to document the error state in the tool description and specify the required agent response (wait retry_after seconds, then re-invoke the tool).
+    ✅ **B is correct.** This scenario precisely instantiates the "undocumented error produces silent misinterpretation" failure described in the chapter lesson and Reading Guide 2. The error state `RATE_LIMIT_EXCEEDED` is a control signal — it tells the system to wait and retry, not to reason about the content. But because the tool description does not document this error state (what it means, and what the agent should do when it receives it), the agent has no basis for distinguishing it from a valid data result: both arrive as the content of a `ToolMessage`, and both are just text to the model. The agent treats the JSON error response as semantic content and extracts meaning from its fields (`RATE_LIMIT_EXCEEDED` → "limited available sources"; `retry_after: 30` → "30 seconds suggests limited sources"). The final answer is factually wrong, but the run itself looks healthy — no exception was raised, no step is missing, the tool was called and answered. This is the silent misinterpretation failure: the trace looks correct, but the agent built its answer on an error message. The fix is to document the error state in the tool description and specify the required agent response (wait retry_after seconds, then re-invoke the tool).
 
     ❌ **A is incorrect.** The rate limit error is not caused by selecting the wrong tool — web search is the appropriate tool for a search task. Rate limiting is a tool availability failure, not a tool selection failure. The failure class is not about which tool was chosen; it is about what the agent does with the error response the tool returns.
 
-    ❌ **C is incorrect.** The agent's interpretation ("limited available sources") is derived from the Observation content — it reads the field values from the JSON error and constructs a semantically plausible (but wrong) interpretation of them. This is not parametric memory insertion in the hallucination sense; the agent is actively reasoning about what it received. The failure is that what it received was an error, not data — a distinction it cannot make without error state documentation.
+    ❌ **C is incorrect.** The agent's interpretation ("limited available sources") is derived from the tool result's content — it reads the field values from the JSON error and constructs a semantically plausible (but wrong) interpretation of them. This is not parametric memory insertion in the hallucination sense; the agent is actively reasoning about what it received. The failure is that what it received was an error, not data — a distinction it cannot make without error state documentation.
 
-    ❌ **D is incorrect.** Premature termination is a distinct failure class where the agent generates a Final Answer before sufficient information has been gathered. In this scenario, the agent does generate a Final Answer — but the reason is not that it stopped too early; it is that it misinterpreted the error response as data and believed it had sufficient information. The agent completed its reasoning loop with a malformed input; premature termination implies the loop ended correctly but with an insufficient number of iterations.
+    ❌ **D is incorrect.** Premature termination is a distinct failure class where the agent returns a final answer before sufficient information has been gathered. In this scenario, the agent does return a final answer — but the reason is not that it stopped too early; it is that it misinterpreted the error response as data and believed it had sufficient information. The run ending here is not the tell for this class: a run that finishes normally always ends with a model message carrying no tool call, because a message with no tool calls is what terminates the loop. Premature termination means stopping before enough had been gathered; here the agent did gather a tool result and misread it. The fixes differ accordingly: premature termination is answered by demonstrating multi-step loops, this failure by documenting the error state in the tool description.
 
 ## Chapter 3 Quiz — Reasoning Trace Interpretation and Critique { #chapter-3-quiz }
 
-*Based on Reading Guide 3: Yao et al. (2022) ReAct, AgentExecutor verbose output, Chapter 3 lesson (Five Failure Classes)*
+*Based on Reading Guide 3: Yao et al. (2022) ReAct, the agent trace printed by the lab's `show_trace` helper, Chapter 3 lesson (Five Failure Classes)*
 
 ### Question 1
 
-A verbose AgentExecutor log contains the following sequence:
+An agent is run with the lab's `show_trace` helper, which prints each step of the loop as it happens. The trace reads:
 
 ```text
-Thought: I need to find the population of Tokyo.
-Action: calculator
-Action Input: Tokyo population
-Observation: Error: invalid expression — 'Tokyo population' is not a mathematical expression.
-Thought: The calculator returned an error. The population of Tokyo is approximately 13.96 million based on my knowledge.
-Final Answer: Tokyo's population is approximately 13.96 million.
+[1] REASONING:  I need to find the population of Tokyo.
+[1] TOOL CALL:  calculator
+[1] ARGUMENTS:  {'expression': 'Tokyo population'}
+[1] OBSERVATION: Error: invalid expression — 'Tokyo population' is not a mathematical expression.
+[final] ANSWER:  The calculator could not evaluate that. Tokyo's population is approximately 13.96 million based on my knowledge.
 ```
 
 Which failure class from the Chapter 3 taxonomy does this trace most precisely represent, and what is the structural fix?
@@ -5902,7 +5918,7 @@ A. Observation misinterpretation — the agent correctly read the error message 
 
 B. Incorrect tool selection — the agent invoked the calculator tool for a factual retrieval task (population lookup) that requires a web search tool; the fix is to revise the calculator tool's scope boundary to explicitly state "Do not use for factual lookups, geographic data, or non-mathematical queries."
 
-C. Hallucination in Thought — after the calculator error, the agent inserted a population figure from parametric memory (not from any Observation) as if it were retrieved information; the combined failure involves both incorrect tool selection (root cause) and hallucination in Thought (secondary consequence).
+C. Hallucination in Thought — after the calculator error, the agent inserted a population figure from parametric memory (not from any tool result) as if it were retrieved information; the combined failure involves both incorrect tool selection (root cause) and hallucination in Thought (secondary consequence).
 
 D. Premature termination — the agent should have retried with the correct tool (web search) after the calculator error; instead it terminated after a single failed tool call.
 
@@ -5910,45 +5926,45 @@ D. Premature termination — the agent should have retried with the correct tool
 
     **Correct Answer: B**
 
-    ✅ **B is correct** as the primary failure class (with C describing the secondary consequence). The root failure is incorrect tool selection: the agent invoked the calculator tool for a factual population lookup — a task for which web search is the appropriate tool. The calculator's scope boundary ("Use for mathematical calculations") is apparently either missing or insufficiently explicit, because the agent attempted to use it as a general-purpose information retrieval tool. The structural fix is to add an explicit "Do not use for..." clause to the calculator tool description: "Do not use this tool for factual lookups, demographic data, geographic information, or any query that is not a mathematical expression." This prevents the initial incorrect selection. The hallucination in the second Thought is a secondary consequence — once the agent's only invoked tool failed, it fell back on parametric memory. Fixing the tool selection failure (by providing a web search tool with a clear scope) removes the scenario that led to the hallucination.
+    ✅ **B is correct** as the primary failure class (with C describing the secondary consequence). The root failure is incorrect tool selection: the agent invoked the calculator tool for a factual population lookup — a task for which web search is the appropriate tool. The calculator's scope boundary ("Use for mathematical calculations") is apparently either missing or insufficiently explicit, because the agent attempted to use it as a general-purpose information retrieval tool. The structural fix is to add an explicit "Do not use for..." clause to the calculator tool description: "Do not use this tool for factual lookups, demographic data, geographic information, or any query that is not a mathematical expression." This prevents the initial incorrect selection. The hallucinated figure in the final message is a secondary consequence — once the agent's only invoked tool failed, it fell back on parametric memory. Fixing the tool selection failure (by providing a web search tool with a clear scope) removes the scenario that led to the hallucination.
 
-    ❌ **A is incorrect.** The agent does correctly read the error message — it acknowledges "the calculator returned an error." The failure is not in misinterpreting the error; it is in: (1) selecting the wrong tool initially, and (2) falling back on parametric memory rather than retrying with a correct tool. Observation misinterpretation applies when a valid tool output is misread, not when an error is correctly acknowledged.
+    ❌ **A is incorrect.** The agent does correctly read the error message — its final message opens by acknowledging that "the calculator could not evaluate that." The failure is not in misinterpreting the error; it is in: (1) selecting the wrong tool initially, and (2) falling back on parametric memory rather than retrying with a correct tool. Observation misinterpretation applies when a valid tool result is misread, not when an error is correctly acknowledged.
 
-    ❌ **C is partially correct** but incomplete as a primary classification. The hallucination in Thought is real — the agent inserts a specific figure (13.96 million) not grounded in any Observation. However, Reading Guide 3 structures the five failure classes by root cause, and the root cause here is incorrect tool selection, not hallucination. Identifying the root cause is what enables the structural fix — and fixing tool selection (providing a web search option with clear scope) resolves both failures simultaneously.
+    ❌ **C is partially correct** but incomplete as a primary classification. The hallucination is real — the agent asserts a specific figure (13.96 million) that no tool result contained. However, Reading Guide 3 structures the five failure classes by root cause, and the root cause here is incorrect tool selection, not hallucination. Identifying the root cause is what enables the structural fix — and fixing tool selection (providing a web search option with clear scope) resolves both failures simultaneously.
 
-    ❌ **D is incorrect.** Premature termination applies when the agent generates a Final Answer without having gathered sufficient information — but in this trace, the agent believes it has sufficient information (from its parametric memory) and generates a semantically complete Final Answer. The failure is not that the loop ended too soon; it is that the agent substituted hallucinated content for retrieved content after the tool failure. These are distinct failure mechanisms with different fixes.
+    ❌ **D is incorrect.** Premature termination means the loop stopped while the task still needed another tool call, and the test for it is whether letting the loop run longer would fix the answer. Here it would not: raising the `recursion_limit`, or adding demonstrations of multi-step reasoning, gives the agent more steps, not a better tool choice — and the calculator would still reject `Tokyo population`. The stopping condition is not where this failure lives — the tool choice upstream of it is. Nor is the shape of the ending a tell: a run that finishes normally always ends with a model message that carries no tool call, so answering after a single tool call is not by itself premature termination. The agent here believes it has sufficient information (from its parametric memory) and returns a semantically complete answer; what it actually did was substitute hallucinated content for retrieved content after the tool failed. These are distinct failure mechanisms with different fixes.
 
 ### Question 2
 
-Reading Guide 3's synthesis task presents an abbreviated trace in which the agent reports Brazil's 2023 inflation rate (4.6%) in the Final Answer, despite that figure never appearing in any Observation. A student's analysis states: "This is a hallucination in Thought. The agent inserted a numerical value from parametric memory and attributed it to the search results without verifying it." Which assessment of this analysis is most precise?
+Reading Guide 3's synthesis task presents an abbreviated trace in which the agent reports Brazil's 2023 inflation rate (4.6%) in its final answer, despite that figure never appearing in any tool result. A student's analysis states: "This is a hallucination in Thought. The agent inserted a numerical value from parametric memory and stated it in the same answer as the retrieved GDP figure, though no tool returned it." Which assessment of this analysis is most precise?
 
-A. The analysis is incorrect — because the web search Observation is present in the trace, any additional factual claim the agent makes in its Thought must be derived from that Observation; the agent cannot insert parametric knowledge when an Observation is already present.
+A. The analysis is incorrect — because the web search result is present in the trace, any additional factual claim the agent makes must be derived from it; the agent cannot insert parametric knowledge once a tool has returned something.
 
-B. The analysis is correct and complete: it correctly identifies the failure class (hallucination in Thought), the mechanism (parametric memory insertion into a Thought step as if it were retrieved), and the evidence (the inflation rate appears in the Final Answer but not in any Observation). The prescribed fix — a system instruction requiring all numerical claims to be grounded in a tool Observation — directly addresses the root cause.
+B. The analysis is correct and complete: it correctly identifies the failure class (hallucination in Thought), the mechanism (parametric memory presented alongside retrieved data in the same answer, without a tool having supplied it), and the evidence (the inflation rate appears in the final answer but in no tool result). The prescribed fix — a system instruction requiring all numerical claims to be grounded in a tool result — directly addresses the root cause.
 
-C. The analysis correctly identifies the failure class but prescribes the wrong fix: the correct fix is to add an Observation that explicitly states "No inflation rate data was found" so the agent cannot claim retrieval of the figure.
+C. The analysis correctly identifies the failure class but prescribes the wrong fix: the correct fix is to have the search tool return "No inflation rate data was found" so the agent cannot claim retrieval of the figure.
 
-D. The analysis is partially correct: the failure is hallucination in Thought, but the cause is premature termination — the agent terminated before retrieving the inflation rate, forcing it to hallucinate. The fix is to increase max_iterations so the agent makes a second search call.
+D. The analysis is partially correct: the failure is hallucination in Thought, but the cause is premature termination — the agent terminated before retrieving the inflation rate, forcing it to hallucinate. The fix is to raise the run's `recursion_limit` so the agent makes a second search call.
 
 ??? success "Show answer and feedback"
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** The Reading Guide provides this trace as the synthesis task's target analysis, including the answer key: the failure is hallucination in Thought (the inflation rate 4.6% was never returned by any Observation, but the agent states it in a Thought step as established context), and the fix is a system instruction requiring numerical claims to be grounded in an Observation. The student's analysis correctly identifies all three elements: the failure class, the mechanism, and the evidence. The fix is also correct: requiring explicit Observation grounding prevents the agent from asserting parametric facts as if they were retrieved — it must cite an Observation or invoke a tool to retrieve the missing data.
+    ✅ **B is correct.** The Reading Guide provides this trace as the synthesis task's target analysis, including the answer key: the failure is hallucination in Thought (the inflation rate 4.6% was never returned by any tool, but the agent states it in the same answer as the retrieved GDP figure), and the fix is a system instruction requiring numerical claims to be grounded in a tool result. The student's analysis correctly identifies all three elements: the failure class, the mechanism, and the evidence. The agent's own hedge — "From what I know" — does not rescue the answer: the figure is still asserted next to retrieved data with no tool result behind it, and a reader who is not holding the trace cannot tell the two apart. The fix is also correct: requiring explicit grounding stops the agent from mixing parametric facts into an answer built from tool results — it must point to a tool result or invoke a tool to retrieve the missing data.
 
-    ❌ **A is incorrect.** The presence of an Observation in the trace does not prevent the agent from inserting additional claims from parametric memory. LLMs do not automatically switch off their parametric knowledge when an Observation is present — they combine retrieved information and stored knowledge in their generation, sometimes without distinguishing between sources. This is precisely why the hallucination in Thought failure class exists: the trace contains a valid Observation, but the agent goes beyond it to assert additional facts not grounded in any retrieval.
+    ❌ **A is incorrect.** The presence of a tool result in the trace does not prevent the agent from inserting additional claims from parametric memory. LLMs do not automatically switch off their parametric knowledge when a `ToolMessage` is in the context — they combine retrieved information and stored knowledge in their generation, sometimes without distinguishing between sources. This is precisely why the hallucination in Thought failure class exists: the trace contains a valid tool result, but the agent goes beyond it to assert additional facts grounded in nothing.
 
-    ❌ **C is incorrect.** Adding an Observation that says "No inflation rate data was found" would require the agent to have made a tool call specifically for inflation rate data — which the trace shows it did not do. The fix prescribed in the Reading Guide (a system instruction) prevents the agent from asserting unretrieved facts in the first place; it does not depend on modifying the tool's output. The suggested fix in C is also circular: it requires the agent to know it should search for inflation rate data, which is the behavior the system instruction would produce.
+    ❌ **C is incorrect.** Having the tool return "No inflation rate data was found" would require the agent to have called it for inflation rate data — which the trace shows it did not do. The fix prescribed in the Reading Guide (a system instruction) prevents the agent from asserting unretrieved facts in the first place; it does not depend on modifying the tool's output. The suggested fix in C is also circular: it requires the agent to know it should search for inflation rate data, which is the behavior the system instruction would produce.
 
-    ❌ **D is incorrect.** The agent did not terminate prematurely — it generated a Final Answer after completing its reasoning loop with the information it had. Premature termination implies stopping before sufficient information is gathered; this trace shows the agent generating a complete-appearing Final Answer by supplementing retrieved data with hallucinated data. Increasing max_iterations would only cause the agent to make additional searches; it would not prevent the agent from hallucinating in the Thoughts that already occurred.
+    ❌ **D is incorrect.** The agent did not terminate prematurely — it returned a final answer after completing its reasoning loop with the information it had. Premature termination implies stopping before sufficient information is gathered; this trace shows the agent producing a complete-appearing answer by supplementing retrieved data with hallucinated data. Raising the `recursion_limit` would only allow the agent to make additional searches; it would not prevent the agent from hallucinating in the reasoning that already occurred.
 
 ### Question 3
 
-The Chapter 3 lesson states: "The ability to read a reasoning trace analytically — identifying where reasoning deviated, why a tool call was incorrect, and what change to the agent design would fix the failure — is a high-value professional competency." A practitioner is investigating a production failure where the agent's final answer contains incorrect pricing data. The practitioner has access to the verbose trace. What is the minimum diagnostic information a complete trace analysis must provide, according to the Reading Guide?
+The Chapter 3 lesson states: "The ability to read a reasoning trace analytically — identifying where reasoning deviated, why a tool call was incorrect, and what change to the agent design would fix the failure — is a high-value professional competency." A practitioner is investigating a production failure where the agent's final answer contains incorrect pricing data. The practitioner has the streamed trace of the run. What is the minimum diagnostic information a complete trace analysis must provide, according to the Reading Guide?
 
 A. The failure's impact on the end user — which business decision was made incorrectly because of the wrong pricing data, and the estimated financial cost of the error.
 
-B. Three elements: (1) the specific trace location where the failure manifested (which Thought, Action, or Observation step), (2) the root cause class from the five-failure taxonomy (which structural failure produced the error), and (3) the corrective structural intervention (which agent design element — tool description, system instruction, few-shot example, or output format — must be changed, and how).
+B. Three elements: (1) the specific trace location where the failure manifested (which model message, which tool call, or which tool result), (2) the root cause class from the five-failure taxonomy (which structural failure produced the error), and (3) the corrective structural intervention (which agent design element — tool description, system instruction, few-shot example, or output format — must be changed, and how).
 
 C. A statistical analysis of the failure frequency — how often this type of failure appears across the last 1,000 trace logs — to determine whether the failure is systematic or a one-time anomaly.
 
@@ -5958,7 +5974,7 @@ D. The LLM's internal reasoning about why it made the incorrect tool call — ex
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** Reading Guide 3's diagnostic protocol maps directly to the three-element structure in B. The guide's synthesis task and the Chapter 3 lesson both specify that a complete trace analysis identifies: (1) where in the trace the failure manifested — which specific step (which Thought's inference, which Action's tool selection, which Observation's misinterpretation); (2) what failure class from the five-category taxonomy applies — this determines the structural category of the root cause; and (3) what structural fix addresses the root cause — not what behavioral change to hope for, but what specific design element to modify. This three-element structure ensures that the analysis is both diagnostic (locates the failure) and prescriptive (produces an actionable fix) — the two outputs that make trace analysis professionally valuable.
+    ✅ **B is correct.** Reading Guide 3's diagnostic protocol maps directly to the three-element structure in B. The guide's synthesis task and the Chapter 3 lesson both specify that a complete trace analysis identifies: (1) where in the trace the failure manifested — which specific step (which model message's inference, which tool call's tool selection, which tool result's misinterpretation); (2) what failure class from the five-category taxonomy applies — this determines the structural category of the root cause; and (3) what structural fix addresses the root cause — not what behavioral change to hope for, but what specific design element to modify. This three-element structure ensures that the analysis is both diagnostic (locates the failure) and prescriptive (produces an actionable fix) — the two outputs that make trace analysis professionally valuable.
 
     ❌ **A is incorrect.** Business impact assessment — financial cost, affected decisions — is a valid concern for production incident response, but it is not part of the trace analysis protocol. Trace analysis is a technical diagnostic activity focused on the agent's reasoning process, not on downstream business consequences. Business impact may inform prioritization of fixes but does not enter the trace analysis itself.
 
@@ -5968,24 +5984,23 @@ D. The LLM's internal reasoning about why it made the incorrect tool call — ex
 
 ### Question 4
 
-A practitioner observes the following abbreviated trace:
+A practitioner runs an agent with the lab's `show_trace` helper and observes the following abbreviated trace:
 
 ```text
-Thought: The user wants a compound interest calculation for $10,000 at 5% for 3 years.
-Action: web_search
-Action Input: "compound interest $10000 5% 3 years"
-Observation: [Search returned several articles about compound interest formulas]
-Thought: Based on the search results, I'll calculate this now.
-Final Answer: $10,000 compounded at 5% for 3 years is approximately $11,576.25.
+[1] REASONING:  The user wants a compound interest calculation for $10,000 at 5% for 3 years.
+[1] TOOL CALL:  web_search
+[1] ARGUMENTS:  {'query': 'compound interest $10000 5% 3 years'}
+[1] OBSERVATION: [Search returned several articles about compound interest formulas]
+[final] ANSWER:  Based on the search results, I'll calculate this now. $10,000 compounded at 5% for 3 years is approximately $11,576.25.
 ```
 
 The agent has access to both a web search tool and a Python REPL tool. The Python REPL description states: "Executes Python code and returns the output. Use for mathematical calculations, data processing, and code execution tasks." Which failure class does this trace represent, and what evidence in the trace confirms the classification?
 
-A. Observation misinterpretation — the agent misread the search results articles and produced an incorrect calculation; the Final Answer value is wrong because the agent misinterpreted the retrieved formula.
+A. Observation misinterpretation — the agent misread the search results articles and produced an incorrect calculation; the final answer is wrong because the agent misinterpreted the retrieved formula.
 
-B. Incorrect tool selection — the trace shows `Action: web_search` for a mathematical calculation task for which the Python REPL is explicitly the correct tool per its description. The evidence is the Action line: the agent searched the web for compound interest articles rather than executing `A = 10000 * (1 + 0.05)**3` in the REPL. The fix is to add a scope boundary to the web search tool: "Do not use for mathematical calculations — use the Python REPL instead."
+B. Incorrect tool selection — the trace shows the model requesting `web_search` for a mathematical calculation task for which the Python REPL is explicitly the correct tool per its description. The evidence is the `TOOL CALL:` line: the agent searched the web for compound interest articles rather than executing `A = 10000 * (1 + 0.05)**3` in the REPL. The fix is to add a scope boundary to the web search tool: "Do not use for mathematical calculations — use the Python REPL instead."
 
-C. Hallucination in Thought — the second Thought says "Based on the search results, I'll calculate this now," but the Final Answer is actually computed from parametric memory (the formula), not from code execution. This is hallucination because the agent claims to use search results but does not.
+C. Hallucination in Thought — the final message says "Based on the search results, I'll calculate this now," but the number is actually produced from parametric memory (the formula), not from code execution. This is hallucination because the agent claims to use search results but does not.
 
 D. Malformed tool call — the web search query "compound interest $10000 5% 3 years" is a poorly formatted search query that would not return a direct numerical answer; the fix is to improve the agent's query formulation.
 
@@ -5993,51 +6008,51 @@ D. Malformed tool call — the web search query "compound interest $10000 5% 3 y
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** The trace's `Action: web_search` line provides the direct evidence: the agent selected the web search tool for a task — compound interest calculation — that the Python REPL tool's description explicitly covers ("Use for mathematical calculations"). This is an incorrect tool selection failure: the right tool was available, its description specified the correct use case, but the web search tool was selected instead. The most likely cause is that the web search tool's description does not include a scope boundary prohibiting mathematical calculations, creating ambiguity about which tool to use for math-related queries. The structural fix is to add to the web search tool's description: "Do not use for mathematical calculations or data processing tasks — use the Python REPL for these." Reading Guide 3 identifies the `Action:` line as the trace location where incorrect tool selection failures manifest.
+    ✅ **B is correct.** The `TOOL CALL:  web_search` line provides the direct evidence: the agent selected the web search tool for a task — compound interest calculation — that the Python REPL tool's description explicitly covers ("Use for mathematical calculations"). This is an incorrect tool selection failure: the right tool was available, its description specified the correct use case, but the web search tool was selected instead. The most likely cause is that the web search tool's description does not include a scope boundary prohibiting mathematical calculations, creating ambiguity about which tool to use for math-related queries. The structural fix is to add to the web search tool's description: "Do not use for mathematical calculations or data processing tasks — use the Python REPL for these." The name the model puts in its tool call — the `TOOL CALL:` line of the trace — is the location where incorrect tool selection failures manifest.
 
-    ❌ **A is incorrect.** The Final Answer value ($11,576.25) is arithmetically correct — $10,000 × (1.05)³ = $11,576.25. The agent did not misread a formula; it computed or recalled the correct value. The failure is in which tool was used to arrive at the answer (web search instead of REPL), not in the accuracy of the final computation. Observation misinterpretation produces a wrong answer from a correctly executed tool call; this trace produces a correct answer from an incorrectly selected tool.
+    ❌ **A is incorrect.** The final value ($11,576.25) is arithmetically correct — $10,000 × (1.05)³ = $11,576.25. The agent did not misread a formula; it computed or recalled the correct value. The failure is in which tool was used to arrive at the answer (web search instead of REPL), not in the accuracy of the final computation. Observation misinterpretation produces a wrong answer from a correctly executed tool call; this trace produces a correct answer from an incorrectly selected tool.
 
-    ❌ **C is incorrect.** The agent's Thought "Based on the search results, I'll calculate this now" is a loose description of its reasoning process — it acknowledges the search results and then produces a calculation. Whether the actual arithmetic was performed parametrically or from a formula in the search results is not determinable from the trace alone, and the Final Answer is correct either way. The failure is not hallucination in Thought (asserting a false fact as retrieved); it is using the wrong tool for the task from the start.
+    ❌ **C is incorrect.** The agent's narration — "Based on the search results, I'll calculate this now" — is a loose description of its own reasoning: it acknowledges the search results and then produces a calculation. Whether the arithmetic was performed parametrically or read out of a formula in the search results is not determinable from the trace alone, and the answer is correct either way. The failure is not hallucination in Thought (asserting a false fact as retrieved); it is using the wrong tool for the task from the start.
 
     ❌ **D is incorrect.** The web search query is a reasonable natural language query for compound interest information — it would likely return relevant articles. Query formulation quality is not the source of this failure. The failure is tool selection, not query quality. Even a perfectly formulated web search query cannot replace a Python REPL for executing deterministic mathematical computations — the tool type is wrong regardless of query quality.
 
 ### Question 5
 
-The Chapter 3 lesson states that reasoning trace analysis is the "primary diagnostic skill of Module 2." A student argues: "If I just look at whether the Final Answer is correct, I don't need to read the trace — a correct Final Answer means the agent succeeded, and an incorrect one means it failed. Trace reading is extra work." What is the most precise refutation of this argument, based on Reading Guide 3?
+The Chapter 3 lesson states that reasoning trace analysis is the "primary diagnostic skill of Module 2." A student argues: "If I just look at whether the final answer is correct, I don't need to read the trace — a correct final answer means the agent succeeded, and an incorrect one means it failed. Trace reading is extra work." What is the most precise refutation of this argument, based on Reading Guide 3?
 
-A. The student is correct in practice — trace reading is necessary only when the Final Answer is incorrect. For correct Final Answers, confirming the result is sufficient; reading the trace provides no additional diagnostic value.
+A. The student is correct in practice — trace reading is necessary only when the final answer is incorrect. For correct final answers, confirming the result is sufficient; reading the trace provides no additional diagnostic value.
 
-B. The student is incorrect on both counts: a correct Final Answer can coexist with a trace-visible failure (e.g., the agent hallucinated a correct fact from parametric memory rather than retrieving it — the answer is right but the architecture is unreliable for novel queries), and reading the trace after an incorrect answer tells the practitioner which failure class applies, which determines what structural fix is required. Without trace reading, incorrect and correct failures cannot be distinguished by type.
+B. The student is incorrect on both counts: a correct final answer can coexist with a trace-visible failure (e.g., the agent hallucinated a correct fact from parametric memory rather than retrieving it — the answer is right but the architecture is unreliable for novel queries), and reading the trace after an incorrect answer tells the practitioner which failure class applies, which determines what structural fix is required. Without trace reading, incorrect and correct failures cannot be distinguished by type.
 
 C. The student is incorrect because regulatory compliance (EU AI Act Article 13) requires trace logging and periodic trace review regardless of output correctness; skipping trace reading creates a compliance gap.
 
-D. The student is partially correct — trace reading is unnecessary for simple single-tool tasks with deterministic outputs, but is required for complex multi-tool tasks with probabilistic outputs where the Final Answer alone does not indicate which tool produced each component.
+D. The student is partially correct — trace reading is unnecessary for simple single-tool tasks with deterministic outputs, but is required for complex multi-tool tasks with probabilistic outputs where the final answer alone does not indicate which tool produced each component.
 
 ??? success "Show answer and feedback"
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** Reading Guide 3 establishes two distinct reasons why Final Answer inspection is insufficient. First, a correct Final Answer can mask a trace failure: the hallucination in Thought failure class specifically produces a trace where the Final Answer may be factually correct (the agent happened to recall the right fact parametrically), but the reasoning was unreliable — on a novel query where the agent's parametric memory contains the wrong answer, the same flawed architecture would produce an incorrect result. A practitioner who only inspects Final Answers would not detect this latent reliability problem. Second, when the Final Answer is incorrect, reading the trace identifies which failure class applies — incorrect tool selection, malformed tool call, observation misinterpretation, premature termination, or hallucination in Thought — each requiring a different structural fix. Without trace reading, the practitioner cannot determine the correct fix and may apply the wrong intervention.
+    ✅ **B is correct.** Reading Guide 3 establishes two distinct reasons why inspecting the final answer alone is insufficient. First, a correct final answer — the text the lab's trace prints on its `[final] ANSWER:` line — can mask a trace failure: the hallucination in Thought failure class specifically produces a trace where the final answer may be factually correct (the agent happened to recall the right fact parametrically), but the reasoning was unreliable — on a novel query where the agent's parametric memory contains the wrong answer, the same flawed architecture would produce an incorrect result. A practitioner who only inspects final answers would not detect this latent reliability problem. Second, when the final answer is incorrect, reading the trace identifies which failure class applies — incorrect tool selection, malformed tool call, observation misinterpretation, premature termination, or hallucination in Thought — each requiring a different structural fix. Without trace reading, the practitioner cannot determine the correct fix and may apply the wrong intervention.
 
-    ❌ **A is incorrect.** Reading Guide 3 explicitly addresses this argument: a correct Final Answer does not guarantee a reliable reasoning architecture. The hallucination in Thought failure class demonstrates that a trace can produce a correct answer by accident (parametric memory happens to contain the right value) while the underlying architecture is unreliable. Skipping trace reading for correct answers misses this reliability signal.
+    ❌ **A is incorrect.** Reading Guide 3 explicitly addresses this argument: a correct final answer does not guarantee a reliable reasoning architecture. The hallucination in Thought failure class demonstrates that a trace can produce a correct answer by accident (parametric memory happens to contain the right value) while the underlying architecture is unreliable. Skipping trace reading for correct answers misses this reliability signal.
 
     ❌ **C is incorrect** as the primary refutation. While EU AI Act Article 13 compliance may impose trace review requirements in high-risk deployments, this is a regulatory argument, not a diagnostic argument. Reading Guide 3's rationale for trace reading is analytical — it enables correct failure classification and structural intervention — not regulatory. Regulatory compliance is a valid supplementary reason, but it is not the core argument the Reading Guide makes.
 
-    ❌ **D is incorrect.** Reading Guide 3 does not establish a task-complexity threshold for trace reading. The hallucination in Thought failure class can occur in single-tool tasks with simple outputs — the trace in the synthesis task involves only one tool (web search) and one Observation. Complexity and tool count do not determine whether trace reading is diagnostically necessary; the potential for silent trace failures does.
+    ❌ **D is incorrect.** Reading Guide 3 does not establish a task-complexity threshold for trace reading. The hallucination in Thought failure class can occur in single-tool tasks with simple outputs — the trace in the synthesis task involves only one tool (web search) and one tool result. Complexity and tool count do not determine whether trace reading is diagnostically necessary; the potential for silent trace failures does.
 
 ## Chapter 4 Quiz — Prompt Engineering for Agent Behavioral Control { #chapter-4-quiz }
 
-*Based on Reading Guide 4: Liu et al. (2023) ACM Computing Surveys, Brown et al. (2020), Wei et al. (2022), LangChain AgentExecutor*
+*Based on Reading Guide 4: Liu et al. (2023) ACM Computing Surveys, Brown et al. (2020), Wei et al. (2022), LangChain agent prompt design (`create_agent`)*
 
 ### Question 1
 
-Liu et al. (2023) describe a four-component prompt taxonomy: instruction, context, input indicator, and output indicator. A practitioner designing a legal document review agent writes the following prompt component: "Final Answer format: (1) Executive Summary — ≤50 words; (2) Key Clauses Identified — bulleted list with clause name and page number; (3) Risk Assessment — High/Medium/Low with one-sentence justification; (4) Recommended Actions — numbered list." Which Liu et al. component does this text instantiate, and what function does it serve in the agent's generation process?
+Liu et al. (2023) describe a four-component prompt taxonomy: instruction, context, input indicator, and output indicator. A practitioner designing a legal document review agent writes the following prompt component: "Final answer format: (1) Executive Summary — ≤50 words; (2) Key Clauses Identified — bulleted list with clause name and page number; (3) Risk Assessment — High/Medium/Low with one-sentence justification; (4) Recommended Actions — numbered list." Which Liu et al. component does this text instantiate, and what function does it serve in the agent's generation process?
 
 A. Instruction — it instructs the agent what type of legal analysis to perform and which document sections to prioritize.
 
 B. Context — it provides background information about the legal domain that grounds the agent's document review in professional standards.
 
-C. Output indicator — it specifies the required structure and format of the agent's Final Answer, shaping the model's generation to conform to a defined output schema rather than producing free-form text.
+C. Output indicator — it specifies the required structure and format of the agent's final answer, shaping the model's generation to conform to a defined output schema rather than producing free-form text.
 
 D. Input indicator — it marks where the user's legal document input begins in the prompt, separating it from the agent's prior instructions.
 
@@ -6045,13 +6060,13 @@ D. Input indicator — it marks where the user's legal document input begins in 
 
     **Correct Answer: C**
 
-    ✅ **C is correct.** Liu et al.'s output indicator is the prompt component that specifies the desired output format, structure, or type. The text in the question does not specify what to do (instruction), does not provide background knowledge (context), and does not mark the input location (input indicator) — it specifies exactly how the Final Answer must be structured: four numbered sections with specific format requirements for each. This is the output indicator component. In the agent context, the output indicator corresponds to the output format constraints dimension of agent prompt engineering (Reading Guide 4's cross-mapping table). The output indicator functions to constrain the model's generation space: instead of producing free-form text, the model conditions its generation on the defined schema, producing consistently structured outputs that downstream systems or human reviewers can process reliably.
+    ✅ **C is correct.** Liu et al.'s output indicator is the prompt component that specifies the desired output format, structure, or type. The text in the question does not specify what to do (instruction), does not provide background knowledge (context), and does not mark the input location (input indicator) — it specifies exactly how the final answer must be structured: four numbered sections with specific format requirements for each. This is the output indicator component. In the agent context, the output indicator corresponds to the output format constraints dimension of agent prompt engineering (Reading Guide 4's cross-mapping table). The output indicator functions to constrain the model's generation space: instead of producing free-form text, the model conditions its generation on the defined schema, producing consistently structured outputs that downstream systems or human reviewers can process reliably.
 
     ❌ **A is incorrect.** The instruction component specifies what the agent should *do* — the task directive (e.g., "Review this contract for non-compete clause enforceability"). The text in the question specifies how to *format* the output, not what task to perform. These are distinct prompt components in Liu et al.'s taxonomy and serve different functions in directing model behavior.
 
     ❌ **B is incorrect.** The context component provides background information that grounds the model's response — retrieved documents, domain knowledge, prior conversation turns. A formatting specification does not provide factual context; it specifies output structure. The legal domain background would be context if it said "Employment law in California generally treats non-compete clauses as unenforceable" — that is background knowledge, not a format requirement.
 
-    ❌ **D is incorrect.** The input indicator marks the boundary between the prompt's framing components (instructions, context) and the specific input instance to be processed in this call (e.g., "CONTRACT TEXT: [document content]"). A formatting specification for the Final Answer does not mark the input location; it appears at the end of the prompt to shape the output, not at the input boundary.
+    ❌ **D is incorrect.** The input indicator marks the boundary between the prompt's framing components (instructions, context) and the specific input instance to be processed in this call (e.g., "CONTRACT TEXT: [document content]"). A formatting specification for the final answer does not mark the input location; it appears at the end of the prompt to shape the output, not at the input boundary.
 
 ### Question 2
 
@@ -6075,7 +6090,7 @@ D. The mapping is incorrect — tool descriptions map to the output indicator co
 
     ❌ **C is incorrect.** The input indicator in Liu et al.'s taxonomy marks where the specific input instance begins in the prompt (e.g., "User Query: ..."). Tool descriptions do not mark input boundaries; they are positioned in the prompt to provide context before the input is specified. Input indicator and tool description serve categorically different prompt functions.
 
-    ❌ **D is incorrect.** The output indicator specifies the required format of the model's output — section headers, citation format, confidence levels. Tool descriptions specify input argument schemas (what the tool requires), not the format of the model's Final Answer output. The output format constraints dimension (corresponding to output indicator) governs how the agent structures its Final Answer, not how it calls tools.
+    ❌ **D is incorrect.** The output indicator specifies the required format of the model's output — section headers, citation format, confidence levels. Tool descriptions specify input argument schemas (what the tool requires), not the format of the model's final answer. The output format constraints dimension (corresponding to output indicator) governs how the agent structures its final answer, not how it calls tools.
 
 ### Question 3
 
@@ -6396,9 +6411,9 @@ response = agent.invoke(
 print(response["messages"][-1].content)
 ```
 
-In this setup, `create_agent` combines the model, the tool registry and the system prompt into a runnable agent that cycles through selecting actions, executing tools and processing the outputs until it formulates a final conclusion. To watch those steps as they happen, stream the agent instead of invoking it: `agent.stream(..., stream_mode="updates")` reports each tool call and each tool result as structured data, which is what replaced the old `verbose=True` text trace.
+In this setup, `create_agent` builds a runnable agent from three arguments — the model, its tools and its instructions. The agent cycles through selecting actions, executing tools and processing the outputs until it formulates a final conclusion. To watch those steps as they happen, stream the agent instead of invoking it: `agent.stream(..., stream_mode="updates")` reports each tool call and each tool result as structured data, which is what replaced the old `verbose=True` text trace.
 
-## Functional Components of a Tool-Calling Agent Architecture
+## Structural Components of a Tool-Calling Agent Architecture
 
 Here is a breakdown of the functional components in a tool-calling agent:
 
@@ -6439,7 +6454,7 @@ response = agent.invoke(
 print(response["messages"][-1].content)
 ```
 
-The `create_agent` function directly combines your LLM, tool registry and system prompt, and the agent it returns acts as the action executor, taking the user's input and managing the reasoning loop until it reaches a final answer. Stream the agent with `stream_mode="updates"` to watch each tool call and tool result as it happens.
+The `create_agent` function takes your model, your tools and your instructions and returns a runnable agent whose action executor takes the user's input and manages the reasoning loop until it reaches a final answer. Stream the agent with `stream_mode="updates"` to watch each tool call and tool result as it happens.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Additional-Suggested--Resources){target=_blank} (wiki page last changed 2026-06-25). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-2/resources.md){target=_blank}.</p>
 
@@ -6648,7 +6663,7 @@ foundation for diagnosing failures in any RAG system.
 ### Learning Resources
 * Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... & Kiela, D. (2020). [Retrieval-augmented generation for knowledge-intensive nlp tasks](https://proceedings.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf){target=_blank}. Advances in neural information processing systems, 33, 9459-9474.
 * Gao, Y., Xiong, Y., Gao, X., Jia, K., Pan, J., Bi, Y., ... & Wang, H. (2023). [Retrieval-augmented generation for large language models: A survey](https://arxiv.org/pdf/2312.10997){target=_blank}. arXiv preprint arXiv:2312.10997, 2(1), 32.
-* LangChain Documentation — [Retrieval Guide](https://docs.langchain.com/oss/python/deepagents/retrieval){target=_blank}, [Document Loaders](https://docs.langchain.com/oss/python/integrations/document_loaders){target=_blank}, [Text Splitters](https://docs.langchain.com/oss/python/integrations/splitters){target=_blank}, [Vector Stores](https://docs.langchain.com/oss/python/integrations/vectorstores){target=_blank}, [RetrievalQA](https://docs.langchain.com/oss/python/integrations/retrievers){target=_blank}
+* LangChain Documentation — [Retrieval Guide](https://docs.langchain.com/oss/python/deepagents/retrieval){target=_blank}, [Document Loaders](https://docs.langchain.com/oss/python/integrations/document_loaders){target=_blank}, [Text Splitters](https://docs.langchain.com/oss/python/integrations/splitters){target=_blank}, [Vector Stores](https://docs.langchain.com/oss/python/integrations/vectorstores){target=_blank}, [Retrievers](https://docs.langchain.com/oss/python/integrations/retrievers){target=_blank}
 
 **Video 2: "[RAG Explained For Beginners](https://www.youtube.com/watch?v=_HQ2H_0Ayy0){target=_blank}"** - KodeKloud (~10 min)
    * Watch focus: The full RAG pipeline - document ingestion, text splitting, embedding generation,
@@ -6934,7 +6949,7 @@ This distinction — parametric vs. non-parametric memory — is the conceptual 
 
 - Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *NeurIPS 2020*. *(Re-read: focus on the two-component architecture)*
 - Gao, Y., et al. (2023). Retrieval-augmented generation for large language models: A survey. *arXiv:2312.10997*. *(Sections 1–3)*
-- LangChain Documentation: Document Loaders, Text Splitters, Vector Stores, RetrievalQA
+- LangChain Documentation: Document Loaders, Text Splitters, Vector Stores, and the LangChain Expression Language (LCEL) runnables that compose them
 - Video 2: "RAG Explained For Beginners" — KodeKloud (~10 min)
 
 **Estimated study time:** ~15 minutes (Gao et al. Sections 1–3) + ~15 minutes (LangChain docs) + ~10 minutes (video)
@@ -6982,7 +6997,7 @@ Gao et al. (2023) identify three evolutionary RAG paradigms — Naive RAG, Advan
 
 7. RecursiveCharacterTextSplitter uses a priority list of separators (paragraph breaks, sentence breaks, word breaks) to find split points. What problem does this recursive strategy solve compared to a simple fixed-character-length splitter? What type of document content benefits most from recursive splitting?
 
-8. LangChain's RetrievalQA chain is the primary interface for Stage 6 in the lab. What does the `return_source_documents=True` parameter expose, and why is this output critical for diagnosing faithfulness failures (i.e., identifying when the LLM generates an answer that contradicts or goes beyond the retrieved context)?
+8. The lab composes Stage 6 explicitly rather than calling a prebuilt question-answering chain: `RunnableParallel(question=RunnablePassthrough(), source_documents=retriever)` fans the query out to the retriever, and a second step adds the generated `result`. What does the chain's `source_documents` key give you that the answer string alone does not, and why is this output critical for diagnosing faithfulness failures (i.e., identifying when the LLM generates an answer that contradicts or goes beyond the retrieved context)?
 
 9. The vector store's `as_retriever(search_kwargs={'k': 4})` call configures Stage 5 retrieval. What is the effect of increasing k from 4 to 8 on (a) context recall, (b) context precision, and (c) total input tokens to the generation stage?
 
@@ -7171,7 +7186,7 @@ A Naive RAG pipeline makes two implicit assumptions that often fail in practice:
 
 #### Section B — LCEL Documentation: Implementation Patterns
 
-6. LangChain Expression Language (LCEL) uses a pipe operator (`|`) to compose retrieval and generation components into a chain. What does this composition pattern enable that the older sequential chain API (RetrievalQA) does not? What specific optimization does LCEL's composability simplify?
+6. LangChain Expression Language (LCEL) uses a pipe operator (`|`) to compose retrieval and generation components into a chain. What does this composition pattern enable that the older prebuilt chain classes — `RetrievalQA` and its siblings, which packaged retrieve-then-generate into a single preconfigured call and were removed from `langchain` in 1.0 — did not? What specific optimization does LCEL's composability simplify?
 
 7. The LCEL documentation describes `RunnablePassthrough` and `RunnableParallel` as composition primitives. What do these primitives allow a practitioner to do with the retrieved context before it is passed to the generation step? Give one concrete optimization use case for each.
 
@@ -7324,7 +7339,7 @@ The notebook walks you through a complete RAG pipeline build sequence in four ph
 
 1. Environment setup and document loading using PyPDFLoader.
 2. Text splitting with RecursiveCharacterTextSplitter and embedding generation into a Chroma vector store.
-3. RetrievalQA chain configuration with k=4 retrieval and testing across five evaluation queries.
+3. Retrieval and generation composed with LangChain Expression Language — a `k=4` retriever whose chunks are formatted into a prompt for a chat model, returning the answer and its source chunks together — then tested across five evaluation queries.
 4. Multi-document extension by adding a second corpus and observing retrieval precision tradeoffs.
 
 All detailed instructions, checks, and logging prompts are embedded directly in the notebook.
@@ -8304,7 +8319,7 @@ D. Chunk overlap allows the retriever to return overlapping chunks as a single m
 
 ### Question 4
 
-A LangChain RAG chain is configured with `RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True)`. A practitioner runs a test query and observes that the generated answer contains a specific factual claim that does not appear in any of the returned `source_documents`. What failure mode does this observation most precisely identify?
+A LangChain RAG chain composes the retriever and the generator with LCEL, so that a single invocation returns both the generated `result` and the `source_documents` the retriever supplied for that query. A practitioner runs a test query and observes that the generated answer contains a specific factual claim that does not appear in any of the returned `source_documents`. What failure mode does this observation most precisely identify?
 
 A. A retrieval failure — the relevant source documents were not retrieved, so the model had no basis for the claim.
 
@@ -8318,7 +8333,7 @@ D. A document ingestion failure — the document containing the relevant informa
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** The `return_source_documents=True` parameter enables direct inspection of the retrieval stage output. When the practitioner confirms that the factual claim in the generated answer is absent from all returned source documents, they have identified a faithfulness violation: the LLM generated a claim that is not supported by the retrieved context. This is precisely what the RAGAS faithfulness metric measures. The LLM "filled the gap" using parametric memory — a dangerous behavior in any application where answers must be attributable to verified sources. The diagnostic value of `return_source_documents=True` is exactly this: it makes faithfulness violations visible without requiring RAGAS instrumentation.
+    ✅ **B is correct.** Because the chain carries `source_documents` alongside `result`, the output of the retrieval stage can be inspected for the very query that produced the answer. When the practitioner confirms that the factual claim in the generated answer is absent from all returned source documents, they have identified a faithfulness violation: the LLM generated a claim that is not supported by the retrieved context. This is precisely what the RAGAS faithfulness metric measures. The LLM "filled the gap" using parametric memory — a dangerous behavior in any application where answers must be attributable to verified sources. The diagnostic value of keeping the retrieved chunks in the chain's own output is exactly this: it makes faithfulness violations visible without requiring RAGAS instrumentation.
 
     ❌ **A is incorrect.** A retrieval failure would manifest differently: the source documents returned would be topically unrelated to the query, or no documents would be returned. In this scenario, some documents were retrieved (the practitioner can inspect them), but the generated claim is not in those documents. The retrieval component may have functioned correctly; the generation component is the failure point.
 
@@ -13430,48 +13445,57 @@ human-reviewed pages when answers conflict (see
 3. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
 
-## Assessment items that test removed LangChain APIs
+## Assessment revised for LangChain 1.4
 
-The lab notebooks and the code samples on this site were moved onto LangChain
-1.4 in September 2026, because LangChain 1.0 removed `AgentExecutor`,
-`create_react_agent`, `RetrievalQA`, `langchain.chains`, `langchain.memory` and
-`langchain.prompts` outright. Graded assessment items were deliberately left
-alone: rewriting a quiz question changes what learners are marked on, which is
-an author's call rather than a maintenance one.
+The lab notebooks and code samples moved onto LangChain 1.4 in September 2026,
+because LangChain 1.0 removed `AgentExecutor`, `create_react_agent`,
+`RetrievalQA`, `langchain.chains`, `langchain.memory` and `langchain.prompts`
+outright. The assessment content that examined those APIs has now been revised
+to match, across the
+[Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md) and
+[reading guides](../modules/module-2/reading-guides.md), the
+[Module 3 chapter quizzes](../modules/module-3/chapter-quizzes.md),
+[reading guides](../modules/module-3/reading-guides.md) and
+[activities](../modules/module-3/activities.md), and the
+[Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
+lesson the quizzes cite. This is the change the
+[July 2026 course review](course-review-2026-07.md) asked for when it flagged
+the `AgentExecutor` dependency.
 
-The following items now test APIs that no longer exist. Each needs a decision:
-revise the question, or keep it and frame it explicitly as LangChain 0.x history.
+**What was preserved.** Both quiz pages still hold 25 questions with 25 answer
+keys. No correct answer moved to a different letter, no question was added or
+dropped, and every item keeps its cognitive level: questions that asked a
+learner to reason about a mechanism still do, rather than becoming vocabulary
+recall. Distractors were rewritten to stay plausible against the current API
+rather than being made obviously wrong.
 
-1. **Module 2 chapter quizzes** — questions and answer keys turn on
-   `AgentExecutor` internals: its "five structural components", which component
-   generates the `Action:` versus the `Observation:`, and how tool descriptions
-   reach the model. The mechanism they describe is still broadly how an agent
-   runtime works, but the class named in them was removed. See
-   [Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md).
-2. **Module 2 reading guides** — Reading 5 assigns "the complete AgentExecutor
-   Conceptual Guide" and Part A asks learners to name the five components of an
-   architecture that no longer ships. The LangChain page it points at is gone;
-   the current equivalent is the
-   [agents guide](https://docs.langchain.com/oss/python/langchain/agents){target=_blank}.
-   See [Module 2 reading guides](../modules/module-2/reading-guides.md).
-3. **Module 3 reading guides and activities** — both call `RetrievalQA` "the
-   primary interface for Stage 6 in the lab", and a chapter-quiz question tests
-   `RetrievalQA.from_chain_type(...)`. The Module 3 notebook has not used
-   `RetrievalQA` for some time; it composes the same pipeline with LangChain
-   Expression Language, which the reading guides also teach a few pages later.
-   See [Module 3 reading guides](../modules/module-3/reading-guides.md),
-   [activities](../modules/module-3/activities.md) and
-   [chapter quizzes](../modules/module-3/chapter-quizzes.md).
-4. **The Module 2 architecture diagram.** `AgentExecutor-Architecture.png` sits
-   in the section of
-   [Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
-   that describes `create_agent`. The structure it draws is still accurate, and
-   its alt text now says which version it was drawn for, but a redrawn diagram
-   would remove the mixed message.
+**Two conventions now hold across every page.** First, one component vocabulary:
+**LLM Backbone**, **Tool Registry**, **Action Executor** and **Memory Module**,
+the four already used on the
+[Module 2 resources](../modules/module-2/resources.md) page. The old five-item
+list's fifth member, the output parser, is genuinely gone, because a
+tool-calling model returns a structured call rather than text that has to be
+parsed. That disappearance is taught rather than papered over. Second, one trace
+format: every trace shown to a learner is what the lab's `show_trace` helper
+actually prints, so `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and
+`[final] ANSWER:` rather than the `Thought:` / `Action:` labels a current agent
+never emits.
 
-These pages are produced by `scripts/migrate_wiki.py`, so any revision belongs
-in that script's `PATCHES` table rather than in the Markdown, or the next
-pipeline run will revert it.
+**Where the pipeline owns the text.** All of these pages are generated by
+`scripts/migrate_wiki.py`, so the revisions live in that script's `PATCHES`
+table. Editing the Markdown under `docs/` directly will be reverted on the next
+run. `python scripts/migrate_wiki.py --check` proves the two are in step.
+
+!!! warning "The architecture figure still shows the old design"
+
+    `AgentExecutor-Architecture.png` on the Module 2 foundational concepts page
+    is a five-row table using its own names: Agent (the LLM), Tool Descriptions,
+    Tool Executor, Memory / State, Stopping Criteria. Its right-hand column still
+    explains each part usefully, so it is kept and captioned as the LangChain 0.x
+    figure it is, with a row-by-row crosswalk onto the four component names and a
+    correction to its stopping-criteria row. Replacing it with a redrawn
+    four-component figure would remove the last place a learner meets two
+    vocabularies at once. That redraw is an owner task.
 
 ## Content inconsistencies inherited from the source
 
@@ -13494,8 +13518,21 @@ which side is right. Each needs an author's call:
    Activities page budgets ~2 hours; Module 4 says 100-130 minutes against
    ~4 hours on its Activities page.
 5. **Module 3 project instructions.** The Activities page says the hands-on
-   project continues "in the same notebook" with instructions embedded there;
-   the notebook does not contain them.
+   project continues "in the same notebook" with instructions embedded there,
+   and describes a four-run parameter experiment: chunk size 256, then 512,
+   then MMR retrieval at `lambda_mult=0.5`, then metadata-filtered retrieval,
+   closing with a plain-language reading of four RAGAS metric scores. Confirmed
+   against the notebook in September 2026: none of that scaffolding exists. The
+   notebook holds a single chunk-size setting, its headings run Setup,
+   Configuration, Steps A1 to A4 and an optional metadata-filtering extension,
+   its only mention of RAGAS is a forward reference to Module 5, and its
+   submission checklist covers A1 to A4 only. Since the hands-on project is the
+   primary module grade, a learner cannot currently complete the graded work as
+   the page describes it. The open question is whether a second notebook was
+   intended and never landed, or whether the project is meant to be authored by
+   the learner in the same file; the answer decides whether the notebook gains
+   cells or the page loses a promise, so it needs an author rather than a
+   maintainer.
 6. **Default lab provider.** The Module 5 notebook defaults to the NVIDIA API,
    while the prose in [Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)
    describes Hugging Face Inference Providers as the Module 4-5 default.
@@ -15311,7 +15348,9 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 * **Update**: The lab's four-step shape, its student extension points, its self-checks and its log entries are preserved. What changed is how the reasoning loop is observed: `create_agent` returns a LangGraph graph rather than an `AgentExecutor`, so there is no `verbose=True` text trace printing `Thought:`, `Action:` and `Observation:`. A `show_trace` helper streams the graph instead and prints the same loop as structured data, and Step 1 now explains why the old labels are gone. Two sunset dependencies were dropped: `langchain-experimental`, which the lab imported but never installed, and `langchain-community`, whose DuckDuckGo wrapper now needs the renamed `ddgs` package. Both tools are defined in the notebook instead.
 * **Update**: Pinned every notebook to the same current stack: LangChain 1.4.0, LangGraph 1.2.11 and LangSmith 0.12.4. Modules 3 and 5 had drifted to different LangChain patch versions, and Module 2 had no pin at all. Module 5's optional live-search cell installed the renamed `duckduckgo-search` package and never installed the library it imported, so it failed twice if a learner uncommented it. Its LangSmith setup now uses the documented `LANGSMITH_*` variables and clears the older `LANGCHAIN_*` ones first, because the older names take precedence and the value is matched against the literal lowercase string `true`; either trap turns tracing off silently and leaves an empty project with no error.
 * **Update**: The four lab pages regained the `last_modified` date in their `sources` entry. `scripts/render_notebooks.py` was still looking for the notebook clone under `.cache/`, which `zensical build --clean` deletes because it is Zensical's own build cache; it now reads `.sources/` like the migration pipeline does, so it can read the notebooks' git history again.
-* **Known gap**: Module 2's [reading guides](modules/module-2/reading-guides.md) and [chapter quizzes](modules/module-2/chapter-quizzes.md), and Module 3's [reading guides](modules/module-3/reading-guides.md), [activities](modules/module-3/activities.md) and [chapter quizzes](modules/module-3/chapter-quizzes.md), still set questions about `AgentExecutor` internals and `RetrievalQA` as current APIs. Those are graded assessment items rather than code, so they are recorded on the [instructor materials](course-design/instructor-materials.md) page for the course owners to revise rather than being rewritten here.
+* **Update**: Revised the assessment content that examined the removed LangChain APIs, closing the gap recorded below. 99 changes across the [Module 2 chapter quizzes](modules/module-2/chapter-quizzes.md) and [reading guides](modules/module-2/reading-guides.md), the [Module 3 chapter quizzes](modules/module-3/chapter-quizzes.md), [reading guides](modules/module-3/reading-guides.md) and [activities](modules/module-3/activities.md), and the [Module 2 foundational concepts](modules/module-2/foundational-concepts.md) lesson the quizzes cite by name. Both quiz pages still hold 25 questions and 25 answer keys, no correct answer moved to a different letter, and no question was added or dropped. Questions that asked a learner to reason about a mechanism still do rather than becoming vocabulary recall, and distractors were rewritten to stay plausible against the current API. This is what the [July 2026 course review](course-design/course-review-2026-07.md) asked for when it flagged the `AgentExecutor` dependency.
+* **Update**: Two conventions now hold across those pages. One component vocabulary, the four names already used on the [Module 2 resources](modules/module-2/resources.md) page: LLM Backbone, Tool Registry, Action Executor and Memory Module. The old list's fifth member, the output parser, is genuinely gone because a tool-calling model returns a structured call rather than text to parse, and that disappearance is now taught rather than papered over. And one trace format: every trace a learner is shown is what the lab's `show_trace` helper prints, so `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and `[final] ANSWER:` rather than the `Thought:` and `Action:` labels a current agent never emits. The `AgentExecutor` architecture figure is kept and captioned as the LangChain 0.x table it is, with a row-by-row crosswalk onto the four names; its alt text, which wrongly described a loop diagram, now describes the table that is actually there.
+* **Known gap**: The Module 3 hands-on project remains blocked on an author's decision. The [activities page](modules/module-3/activities.md) describes a four-run parameter experiment with a RAGAS write-up and says the instructions are embedded in the lab notebook; the notebook has no such cells. Because that project is the primary module grade, a learner cannot complete the graded work as described. Whether the notebook gains cells or the page loses a promise is a curriculum decision, so it is recorded on the [instructor materials](course-design/instructor-materials.md) page rather than guessed at here.
 * **Update**: Rebranded the site to the University of New Mexico. The header logo is the CARC starburst and the favicon is the UNM mark; the palette moves from Arizona Blue and Red to UNM Cherry `#BA0C2F` and Turquoise `#007A86` with CARC's cherry-to-turquoise header gradient. Institutional identity now reads University of New Mexico across the site description, the [syllabus](start-here/syllabus.md), [How this course works](start-here/how-this-course-works.md), the landing page, `llms.txt`, `robots.txt`, the README and the contributor contract. **Provenance is deliberately unchanged**: every page's `sources` entries, wiki URLs, provenance footers, the [wiki crosswalk](about/wiki-crosswalk.md), the entries below and the origin section of the [license page](about/license-and-attribution.md) still record that the course was written by the AI2S team at the University of Arizona. Branding says who publishes the site today; provenance says who wrote the material, and rewriting it would be false.
 * **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here. Dropped the AI Education Series professional badge and the "Course 2 of the series" framing from the syllabus, [How this course works](start-here/how-this-course-works.md) and the [instructor materials](course-design/instructor-materials.md): the series is a University of Arizona program, and rebranding those sentences to UNM would have described a Course 1 and a badge that do not exist here.
 * **Creation**: The downloadable syllabus PDF is now generated from [the syllabus page](start-here/syllabus.md) by `scripts/build_syllabus_pdf.py`, so the two cannot drift; CI fails when the committed PDF no longer matches the page, and separately when the renderer drops a section of it. Output is deterministic, so rebuilding an unchanged syllabus produces an identical file rather than a spurious diff. It replaces the University of Arizona syllabus v2.0 as the linked download. That earlier PDF stays in the repository as the source document and is still linked from the syllabus page.

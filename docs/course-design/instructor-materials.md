@@ -183,48 +183,57 @@ human-reviewed pages when answers conflict (see
 3. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
 
-## Assessment items that test removed LangChain APIs
+## Assessment revised for LangChain 1.4
 
-The lab notebooks and the code samples on this site were moved onto LangChain
-1.4 in September 2026, because LangChain 1.0 removed `AgentExecutor`,
-`create_react_agent`, `RetrievalQA`, `langchain.chains`, `langchain.memory` and
-`langchain.prompts` outright. Graded assessment items were deliberately left
-alone: rewriting a quiz question changes what learners are marked on, which is
-an author's call rather than a maintenance one.
+The lab notebooks and code samples moved onto LangChain 1.4 in September 2026,
+because LangChain 1.0 removed `AgentExecutor`, `create_react_agent`,
+`RetrievalQA`, `langchain.chains`, `langchain.memory` and `langchain.prompts`
+outright. The assessment content that examined those APIs has now been revised
+to match, across the
+[Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md) and
+[reading guides](../modules/module-2/reading-guides.md), the
+[Module 3 chapter quizzes](../modules/module-3/chapter-quizzes.md),
+[reading guides](../modules/module-3/reading-guides.md) and
+[activities](../modules/module-3/activities.md), and the
+[Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
+lesson the quizzes cite. This is the change the
+[July 2026 course review](course-review-2026-07.md) asked for when it flagged
+the `AgentExecutor` dependency.
 
-The following items now test APIs that no longer exist. Each needs a decision:
-revise the question, or keep it and frame it explicitly as LangChain 0.x history.
+**What was preserved.** Both quiz pages still hold 25 questions with 25 answer
+keys. No correct answer moved to a different letter, no question was added or
+dropped, and every item keeps its cognitive level: questions that asked a
+learner to reason about a mechanism still do, rather than becoming vocabulary
+recall. Distractors were rewritten to stay plausible against the current API
+rather than being made obviously wrong.
 
-1. **Module 2 chapter quizzes** — questions and answer keys turn on
-   `AgentExecutor` internals: its "five structural components", which component
-   generates the `Action:` versus the `Observation:`, and how tool descriptions
-   reach the model. The mechanism they describe is still broadly how an agent
-   runtime works, but the class named in them was removed. See
-   [Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md).
-2. **Module 2 reading guides** — Reading 5 assigns "the complete AgentExecutor
-   Conceptual Guide" and Part A asks learners to name the five components of an
-   architecture that no longer ships. The LangChain page it points at is gone;
-   the current equivalent is the
-   [agents guide](https://docs.langchain.com/oss/python/langchain/agents){target=_blank}.
-   See [Module 2 reading guides](../modules/module-2/reading-guides.md).
-3. **Module 3 reading guides and activities** — both call `RetrievalQA` "the
-   primary interface for Stage 6 in the lab", and a chapter-quiz question tests
-   `RetrievalQA.from_chain_type(...)`. The Module 3 notebook has not used
-   `RetrievalQA` for some time; it composes the same pipeline with LangChain
-   Expression Language, which the reading guides also teach a few pages later.
-   See [Module 3 reading guides](../modules/module-3/reading-guides.md),
-   [activities](../modules/module-3/activities.md) and
-   [chapter quizzes](../modules/module-3/chapter-quizzes.md).
-4. **The Module 2 architecture diagram.** `AgentExecutor-Architecture.png` sits
-   in the section of
-   [Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
-   that describes `create_agent`. The structure it draws is still accurate, and
-   its alt text now says which version it was drawn for, but a redrawn diagram
-   would remove the mixed message.
+**Two conventions now hold across every page.** First, one component vocabulary:
+**LLM Backbone**, **Tool Registry**, **Action Executor** and **Memory Module**,
+the four already used on the
+[Module 2 resources](../modules/module-2/resources.md) page. The old five-item
+list's fifth member, the output parser, is genuinely gone, because a
+tool-calling model returns a structured call rather than text that has to be
+parsed. That disappearance is taught rather than papered over. Second, one trace
+format: every trace shown to a learner is what the lab's `show_trace` helper
+actually prints, so `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and
+`[final] ANSWER:` rather than the `Thought:` / `Action:` labels a current agent
+never emits.
 
-These pages are produced by `scripts/migrate_wiki.py`, so any revision belongs
-in that script's `PATCHES` table rather than in the Markdown, or the next
-pipeline run will revert it.
+**Where the pipeline owns the text.** All of these pages are generated by
+`scripts/migrate_wiki.py`, so the revisions live in that script's `PATCHES`
+table. Editing the Markdown under `docs/` directly will be reverted on the next
+run. `python scripts/migrate_wiki.py --check` proves the two are in step.
+
+!!! warning "The architecture figure still shows the old design"
+
+    `AgentExecutor-Architecture.png` on the Module 2 foundational concepts page
+    is a five-row table using its own names: Agent (the LLM), Tool Descriptions,
+    Tool Executor, Memory / State, Stopping Criteria. Its right-hand column still
+    explains each part usefully, so it is kept and captioned as the LangChain 0.x
+    figure it is, with a row-by-row crosswalk onto the four component names and a
+    correction to its stopping-criteria row. Replacing it with a redrawn
+    four-component figure would remove the last place a learner meets two
+    vocabularies at once. That redraw is an owner task.
 
 ## Content inconsistencies inherited from the source
 
@@ -247,8 +256,21 @@ which side is right. Each needs an author's call:
    Activities page budgets ~2 hours; Module 4 says 100-130 minutes against
    ~4 hours on its Activities page.
 5. **Module 3 project instructions.** The Activities page says the hands-on
-   project continues "in the same notebook" with instructions embedded there;
-   the notebook does not contain them.
+   project continues "in the same notebook" with instructions embedded there,
+   and describes a four-run parameter experiment: chunk size 256, then 512,
+   then MMR retrieval at `lambda_mult=0.5`, then metadata-filtered retrieval,
+   closing with a plain-language reading of four RAGAS metric scores. Confirmed
+   against the notebook in September 2026: none of that scaffolding exists. The
+   notebook holds a single chunk-size setting, its headings run Setup,
+   Configuration, Steps A1 to A4 and an optional metadata-filtering extension,
+   its only mention of RAGAS is a forward reference to Module 5, and its
+   submission checklist covers A1 to A4 only. Since the hands-on project is the
+   primary module grade, a learner cannot currently complete the graded work as
+   the page describes it. The open question is whether a second notebook was
+   intended and never landed, or whether the project is meant to be authored by
+   the learner in the same file; the answer decides whether the notebook gains
+   cells or the page loses a promise, so it needs an author rather than a
+   maintainer.
 6. **Default lab provider.** The Module 5 notebook defaults to the NVIDIA API,
    while the prose in [Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)
    describes Hugging Face Inference Providers as the Module 4-5 default.

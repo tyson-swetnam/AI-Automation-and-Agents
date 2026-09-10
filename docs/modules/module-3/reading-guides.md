@@ -108,7 +108,7 @@ This distinction — parametric vs. non-parametric memory — is the conceptual 
 
 - Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *NeurIPS 2020*. *(Re-read: focus on the two-component architecture)*
 - Gao, Y., et al. (2023). Retrieval-augmented generation for large language models: A survey. *arXiv:2312.10997*. *(Sections 1–3)*
-- LangChain Documentation: Document Loaders, Text Splitters, Vector Stores, RetrievalQA
+- LangChain Documentation: Document Loaders, Text Splitters, Vector Stores, and the LangChain Expression Language (LCEL) runnables that compose them
 - Video 2: "RAG Explained For Beginners" — KodeKloud (~10 min)
 
 **Estimated study time:** ~15 minutes (Gao et al. Sections 1–3) + ~15 minutes (LangChain docs) + ~10 minutes (video)
@@ -156,7 +156,7 @@ Gao et al. (2023) identify three evolutionary RAG paradigms — Naive RAG, Advan
 
 7. RecursiveCharacterTextSplitter uses a priority list of separators (paragraph breaks, sentence breaks, word breaks) to find split points. What problem does this recursive strategy solve compared to a simple fixed-character-length splitter? What type of document content benefits most from recursive splitting?
 
-8. LangChain's RetrievalQA chain is the primary interface for Stage 6 in the lab. What does the `return_source_documents=True` parameter expose, and why is this output critical for diagnosing faithfulness failures (i.e., identifying when the LLM generates an answer that contradicts or goes beyond the retrieved context)?
+8. The lab composes Stage 6 explicitly rather than calling a prebuilt question-answering chain: `RunnableParallel(question=RunnablePassthrough(), source_documents=retriever)` fans the query out to the retriever, and a second step adds the generated `result`. What does the chain's `source_documents` key give you that the answer string alone does not, and why is this output critical for diagnosing faithfulness failures (i.e., identifying when the LLM generates an answer that contradicts or goes beyond the retrieved context)?
 
 9. The vector store's `as_retriever(search_kwargs={'k': 4})` call configures Stage 5 retrieval. What is the effect of increasing k from 4 to 8 on (a) context recall, (b) context precision, and (c) total input tokens to the generation stage?
 
@@ -345,7 +345,7 @@ A Naive RAG pipeline makes two implicit assumptions that often fail in practice:
 
 #### Section B — LCEL Documentation: Implementation Patterns
 
-6. LangChain Expression Language (LCEL) uses a pipe operator (`|`) to compose retrieval and generation components into a chain. What does this composition pattern enable that the older sequential chain API (RetrievalQA) does not? What specific optimization does LCEL's composability simplify?
+6. LangChain Expression Language (LCEL) uses a pipe operator (`|`) to compose retrieval and generation components into a chain. What does this composition pattern enable that the older prebuilt chain classes — `RetrievalQA` and its siblings, which packaged retrieve-then-generate into a single preconfigured call and were removed from `langchain` in 1.0 — did not? What specific optimization does LCEL's composability simplify?
 
 7. The LCEL documentation describes `RunnablePassthrough` and `RunnableParallel` as composition primitives. What do these primitives allow a practitioner to do with the retrieved context before it is passed to the generation step? Give one concrete optimization use case for each.
 

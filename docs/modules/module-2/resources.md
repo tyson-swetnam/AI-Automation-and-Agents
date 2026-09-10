@@ -117,9 +117,9 @@ response = agent.invoke(
 print(response["messages"][-1].content)
 ```
 
-In this setup, `create_agent` combines the model, the tool registry and the system prompt into a runnable agent that cycles through selecting actions, executing tools and processing the outputs until it formulates a final conclusion. To watch those steps as they happen, stream the agent instead of invoking it: `agent.stream(..., stream_mode="updates")` reports each tool call and each tool result as structured data, which is what replaced the old `verbose=True` text trace.
+In this setup, `create_agent` builds a runnable agent from three arguments — the model, its tools and its instructions. The agent cycles through selecting actions, executing tools and processing the outputs until it formulates a final conclusion. To watch those steps as they happen, stream the agent instead of invoking it: `agent.stream(..., stream_mode="updates")` reports each tool call and each tool result as structured data, which is what replaced the old `verbose=True` text trace.
 
-## Functional Components of a Tool-Calling Agent Architecture
+## Structural Components of a Tool-Calling Agent Architecture
 
 Here is a breakdown of the functional components in a tool-calling agent:
 
@@ -160,6 +160,6 @@ response = agent.invoke(
 print(response["messages"][-1].content)
 ```
 
-The `create_agent` function directly combines your LLM, tool registry and system prompt, and the agent it returns acts as the action executor, taking the user's input and managing the reasoning loop until it reaches a final answer. Stream the agent with `stream_mode="updates"` to watch each tool call and tool result as it happens.
+The `create_agent` function takes your model, your tools and your instructions and returns a runnable agent whose action executor takes the user's input and manages the reasoning loop until it reaches a final answer. Stream the agent with `stream_mode="updates"` to watch each tool call and tool result as it happens.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Additional-Suggested--Resources){target=_blank} (wiki page last changed 2026-06-25). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-2/resources.md){target=_blank}.</p>

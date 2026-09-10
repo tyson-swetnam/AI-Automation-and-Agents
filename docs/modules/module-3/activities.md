@@ -72,7 +72,7 @@ The notebook walks you through a complete RAG pipeline build sequence in four ph
 
 1. Environment setup and document loading using PyPDFLoader.
 2. Text splitting with RecursiveCharacterTextSplitter and embedding generation into a Chroma vector store.
-3. RetrievalQA chain configuration with k=4 retrieval and testing across five evaluation queries.
+3. Retrieval and generation composed with LangChain Expression Language — a `k=4` retriever whose chunks are formatted into a prompt for a chat model, returning the answer and its source chunks together — then tested across five evaluation queries.
 4. Multi-document extension by adding a second corpus and observing retrieval precision tradeoffs.
 
 All detailed instructions, checks, and logging prompts are embedded directly in the notebook.

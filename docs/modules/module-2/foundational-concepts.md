@@ -81,8 +81,7 @@ information retrieved during the task.
 
 ![Phases of the ReAct loop](../../assets/images/ReAct-Phase.png){ width="800" }
 
-The ReAct loop is the default reasoning architecture for production agents today. The ability to read and diagnose a ReAct trace - identifying which Thought step was faulty, which Act was incorrectly specified, or which Observe was
-misinterpreted - is the core diagnostic skill of Module 2.
+The ReAct loop is the default reasoning architecture for production agents today. The ability to read and diagnose a ReAct trace - identifying which piece of reasoning was faulty, which tool call was incorrectly specified, or which observation was misinterpreted - is the core diagnostic skill of Module 2. Thought, Act and Observe are the paper's names for the three phases, not labels a current agent prints: the Module 2 lab prints the same three steps as `REASONING:`, `TOOL CALL:` / `ARGUMENTS:` and `OBSERVATION:` lines.
 
 **Paradigm 3: Tree of Thoughts (Yao et al., 2023)**
 
@@ -166,17 +165,28 @@ reasoning failures and require different diagnostic approaches.
 
 **The `create_agent` Factory (LangChain)**
 
-LangChain's `create_agent` is the current production API for constructing multi-tool ReAct agents. It replaces the legacy `AgentExecutor` class with a cleaner factory function that integrates directly with LangGraph's stateful execution graph. `create_agent` accepts five primary parameters and returns a compiled, runnable agent:
+LangChain's `create_agent` is the current production API for constructing multi-tool ReAct agents. It replaces the legacy `AgentExecutor` class with a cleaner factory function that integrates directly with LangGraph's stateful execution graph. `create_agent` accepts five primary parameters — constructor arguments, not the agent's structural components — and returns a compiled, runnable agent:
 
 * **`model`** — a chat model instance (e.g., `ChatOpenAI`, `ChatAnthropic`) or a model identifier string. This is the LLM backbone that drives all reasoning steps.
 * **`tools`** — a sequence of `BaseTool` objects, callables, or tool-specification dicts. The agent's tool registry is constructed from this sequence; tool descriptions embedded in each `BaseTool` are used for selection at inference time.
 * **`system_prompt`** — an optional string or `SystemMessage` that injects persistent behavioral instructions before any user turn. This is the primary mechanism for role definition, output format constraints, and ethical boundaries.
 * **`middleware`** — an optional sequence of `AgentMiddleware` objects for observability, tracing, and logging. Middleware intercepts each reasoning step without modifying agent logic, enabling production monitoring without altering behavior.
-* **`response_format`** — an optional structured output specification (Pydantic model, type, or schema dict) that constrains the agent's final response to a defined schema. When set, the agent's output parser enforces this format rather than returning raw text.
+* **`response_format`** — an optional structured output specification (Pydantic model, type, or schema dict) that constrains the agent's final response to a defined schema. When set, that schema is imposed on the model's own output rather than recovered afterwards from text by an output parser. That is the general pattern in a tool-calling agent: an action comes back as a structured call — each entry in the message's `tool_calls` carries a `name` and an `args` dictionary — so there is nothing left for a parsing component to convert.
 
-The agent returned by `create_agent` runs a LangGraph-backed ReAct loop internally: on each invocation, it iterates through Thought → tool call → Observation cycles until a terminal condition is reached, then produces a Final Answer in the specified response format. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration.
+The agent returned by `create_agent` is a compiled graph that runs the ReAct loop internally: invoke it with `{"messages": [...]}` and it repeats a reasoning → tool call → observation cycle until the model returns a message that requests no tools. That message ends the run and carries the final answer, which you read from `result["messages"][-1].content`; the step cap is the `recursion_limit` config key. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration. *Thought*, *Action* and *Observation* are the ReAct paper's names for the phases of that cycle, not labels the agent emits — the model's message carries structured `tool_calls`, and it is the Module 2 lab's `show_trace` helper that gives the steps printable names (`REASONING:` — only when the model narrates before calling — then `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and `[final] ANSWER:`).
 
-![The LangChain agent runtime: an LLM backbone reading a tool registry, an executor running the selected tool, and observations feeding back into the loop (drawn for the LangChain 0.x AgentExecutor, whose structure create_agent keeps)](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+The figure below is the original LangChain 0.x `AgentExecutor` design table, kept here because its right-hand column explains what each part of an agent runtime is *for*. Read it as a historical figure: it has five rows, it uses its own names for them, and its body text still refers to the `AgentExecutor` class, to a "Final Answer" token and to a maximum iteration limit — all three of which the current API has left behind.
+
+![A five-row table titled Component, Role and Design Considerations, describing Agent (the LLM), Tool Descriptions, Tool Executor, Memory / State and Stopping Criteria for the LangChain 0.x AgentExecutor](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+
+**Reading the figure in this course's vocabulary.** Four of its five rows are the four structural components of the agent runtime, under older names:
+
+* *Agent (the LLM)* is the **LLM Backbone**.
+* *Tool Descriptions* are the descriptions carried by the **Tool Registry** — the text the model reads when it chooses a tool.
+* *Tool Executor* is the **Action Executor**.
+* *Memory / State* is the **Memory Module**.
+
+The fifth row, *Stopping Criteria*, is not a component at all: it is the rule that ends the loop, and it is the part that genuinely changed. A run now ends when the model returns a message with no tool calls, and the step cap is set by the `recursion_limit` config key rather than by a maximum-iteration argument. There is no parsing-error threshold either, because there is no text to parse — the model returns the call itself, as a `name` and an `args` dictionary. Note also what the figure has no row for: an output parser. Older component lists counted one between the model and the executor; this one does not, and neither does the current architecture, for the reason given in the `response_format` note above.
 
 **Tool Description Design - The Specification Discipline**
 
@@ -256,7 +266,7 @@ classes, each with a different root cause and a different fix:
 ### Learning Materials
 
 * Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2022). [ReAct: Synergizing reasoning and acting in language models](https://arxiv.org/pdf/2210.03629){target=_blank}. arXiv preprint arXiv:2210.03629.
-* LangChain [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent){target=_blank} verbose trace output.
+* LangChain [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent){target=_blank} — the streamed step trace from `agent.stream(..., stream_mode="updates")`, which the Module 2 lab wraps in its `show_trace` helper. There is no `verbose=True` switch to turn on.
 * Zhou, A., Yan, K., Shlapentokh-Rothman, M., Wang, H., & Wang, Y. X. (2023). [Language agent tree search unifies reasoning acting and planning in language models](https://arxiv.org/pdf/2310.04406){target=_blank}. arXiv preprint arXiv:2310.04406.
 
 ### Chapter 3 Quiz
