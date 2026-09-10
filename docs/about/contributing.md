@@ -198,11 +198,17 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **Answer keys go in `??? success "Show answer and feedback"`** collapsibles
   (or `??? note` for key tables), never in plain text. The linter fails a
   key line outside a `???` block.
-- **Images** live in `docs/assets/images/` and are referenced relatively with
-  alt text and an `attr_list` width, for example
-  `![Four-stage agent loop](../../assets/images/Four_Stage_Agent_Loop.png){ width="900" }`.
-  Add the original to `images/` and let `optimize_images.py` produce the
-  served copy; never link to a GitHub `blob` URL.
+- **Diagrams** are written as Mermaid inside a `mermaid` fence, not committed as
+  pictures. The source stays readable in the diff, the figure cannot quietly go
+  stale the way a binary can, and anyone can edit it without image tooling.
+- **Tables** are written as Markdown tables. A table shipped as a screenshot is
+  invisible to search, to screen readers and to `llms.txt`, and it cannot reflow
+  on a phone.
+- **Images** are for photographs and screenshots of real interfaces. They live in
+  `docs/assets/images/` and are referenced relatively with alt text and an
+  `attr_list` width — `![alt text](<relative path>){ width="900" }`. Add the
+  original to `images/` and let `optimize_images.py` produce the served copy;
+  never link to a GitHub `blob` URL.
 - **Downloadable materials** (notebooks, PDFs, HTML activities, the glossary
   `.docx`) live in `docs/materials/moduleN/` and are linked relatively.
   Anything only instructors should have goes in `instructor/`, outside

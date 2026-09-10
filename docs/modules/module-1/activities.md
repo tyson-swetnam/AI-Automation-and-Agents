@@ -210,7 +210,13 @@ Guidance on choosing workflows:
 
 **Workflow Mapping Template - Required Fields (per workflow)**
 
-![Workflow mapping template](../../assets/images/WorkflowMapping-Template.png){ width="700" }
+| Field | Specification Requirement |
+| --- | --- |
+| **Trigger** | What event initiates the workflow? Must be specific and external: an email arriving with a particular subject line or sender, a calendar event at a specific recurrence, a file appearing in a designated folder, or a recurring time. 'Someone sends me a request' is not a trigger. |
+| **Sequential Steps** | Minimum four steps. Each step must specify: (a) the specific tool or system touched (email client, CRM, spreadsheet software, file system — not 'the computer'); (b) the input format and output format at that step; and (c) whether any judgment is exercised at that step or whether it is fully mechanical. |
+| **Conditional Branches** | At least one 'if X, then Y; else Z' decision point in at least two of your three workflows. The condition must be statable as a rule: 'if the invoice amount exceeds $5,000, route to VP approval; else forward to accounts payable directly.' |
+| **Output** | The final deliverable or state change that signals the workflow is complete. Must be specific: 'a PDF report emailed to three recipients' not 'a report.' |
+| **Time Estimate** | How many minutes or hours this workflow currently takes per week, and how you derived that estimate (measurement, best estimate, or calculation). This becomes the ROI baseline for the automation assessment. |
 
 ### Step 2 - Two Workflow Maps
 
@@ -236,7 +242,11 @@ For each of your three mapped workflows, complete the two-dimensional automation
 assessment using the scoring framework below. This framework operationalizes the 'blast radius'
 analysis introduced in the Automation Landscape Overview reading.
 
-![Two-dimensional automation assessment matrix](../../assets/images/2D-Automation-AssessmentMatrix.png){ width="700" }
+| Dimension | Score 5 (High) | Score 1 (Low) |
+| --- | --- | --- |
+| **Rule-Based Specification Score (1–5)** | Every step can be specified in advance as a complete rule — no human judgment is required at any decision point. The conditional branches are fully enumerable. | At least one step requires genuine human expertise, ethical judgment, or contextual knowledge that cannot be pre-specified as a rule. |
+| **Consequence Severity Score (1–5)** | An automation error would have irreversible, significant financial, legal, or reputational consequences. Error blast radius is wide and recovery is costly. | An automation error is easily detected, immediately reversible, and has no external impact. Error blast radius is narrow and recovery is trivial. |
+| **Automation Potential Score** | Calculated: Rule-Based Score ÷ (Consequence Severity + 1). This formula penalizes high-consequence workflows even when they are technically rule-based. | Lower scores indicate poorer automation candidates, either because the workflow requires judgment or because errors are high-stakes. |
 
 For each workflow, write a minimum 100-word justification explaining your rule-based and
 consequence severity scores. The justification must use at minimum four of the following course-
@@ -267,7 +277,12 @@ automation potential score. Address the following question:
 
 **Workflow Audit Project - Rubric**
 
-![Workflow Audit project rubric](../../assets/images/WorkflowAuditProject-Rubric.png){ width="700" }
+| Criterion | Weight | 4 — Distinguished | 3 — Proficient | 2 — Developing |
+| --- | --- | --- | --- | --- |
+| Completeness (all required fields present for all 3 workflows) | 25% | All 15 fields complete with required specificity; all conditional branches identified | All 15 fields present; 1–2 missing conditional branches or incomplete time estimates | 1–2 fields missing or unacceptably vague ('uses email') across all workflows |
+| Accuracy and Specificity of Workflow Mapping | 25% | Each step specifies tool/system, input format, output format, and judgment indicator; workflows are from genuine practice and non-hypothetical | Steps specify tools but omit input/output format for 2–3 steps; one workflow may be partially generic | Steps name categories rather than specific tools; workflows appear hypothetical or generic |
+| Assessment Matrix Reasoning (Task 2) | 30% | Scores justified with ≥100 words each using ≥4 course terms; scoring formula applied correctly; lowest-ranked candidate identification persuasive | Justifications present but ≤80 words or missing ≥2 course terms; formula correct | Justifications vague or circular; formula misapplied; no lowest-candidate identification |
+| Paradigm Selection Reflection (Task 3) | 20% | 200-word reflection cites ≥2 diagram criteria by name; paradigm selection follows from workflow properties; one specific tool named with justification | Reflection present; ≥150 words; 1 criterion cited; tool named without justification | Reflection &lt;100 words; no diagram criteria cited; paradigm selection unsupported |
 
 ## Peer Discussion
 

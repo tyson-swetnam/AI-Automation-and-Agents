@@ -93,7 +93,12 @@ order to meet its design objectives. The critical word is 'autonomous': an agent
 continuous human direction. The LangChain Conceptual Guide operationalizes this definition in
 contemporary practice through a four-stage agent loop:
 
-![The four-stage agent loop](../../assets/images/Four_Stage_Agent_Loop.png){ width="800" }
+| Stage | What the Agent Does | Technical Mechanism | Professional Analogy |
+| --- | --- | --- | --- |
+| **PERCEIVE** | Reads the current environment state | Processes context window: instructions, tool outputs, history | A consultant reads the brief, prior meeting notes, and available data before responding |
+| **PLAN** | Decides what action to take next | LLM reasoning step: selects the next tool or determines task completion | The consultant drafts a response strategy, selecting which of their available resources to deploy |
+| **ACT** | Executes the chosen action via a tool call | Issues a structured tool call (web search, code execution, file write, API request) | The consultant executes: sends an email, retrieves a document, runs a calculation |
+| **OBSERVE** | Reads the tool output and updates state | Parses tool response; decides whether to loop again or conclude | The consultant reads the result, determines whether the task is complete, and acts accordingly |
 
 **FOUR PROPERTIES THAT DEFINE A TRUE AGENT (Wooldridge & Jennings, 1995)**
 
@@ -109,7 +114,14 @@ taking initiative to achieve design objectives.
 * **Social ability:** The agent can interact with other agents (and humans) using defined
 communication protocols — essential for multi-agent systems introduced in Module 4.
 
-![Critical distinctions between agents and other systems](../../assets/images/Critical_Distinctions.png){ width="800" }
+**The Critical Distinctions — What Is Not an AI Agent**
+
+| System Type | Why It Is Not an AI Agent |
+| --- | --- |
+| **Chatbot** | Responds to a single prompt; has no persistent state across the conversation turn; cannot take actions in external systems; does not loop. |
+| **Rule-based script** | Executes a fixed sequence of steps; has no capacity to reason, adapt, or select actions based on context; has no LLM component. |
+| **API call** | A single request-response transaction with no reasoning, planning, or state — a tool that an agent might use, not an agent itself. |
+| **Search engine** | Retrieves information based on a query; does not plan, act, or use tools autonomously; has no goal-directed behavior. |
 
 !!! note "WHY THIS MATTERS"
 
@@ -149,7 +161,15 @@ cannot maintain.
 - Low-code
 - Code-first
 
-![Automation tools landscape](../../assets/images/Automation_Tools.png){ width="800" }
+| Dimension | No-Code | Low-Code | Code-First | Key Criterion |
+| --- | --- | --- | --- | --- |
+| **Representative tools** | Claude Cowork, n8n, Zapier, Make | LangChain, CrewAI, LangGraph | Claude Code, custom Python agents, AutoGen | What does your team know? |
+| **Primary user** | Knowledge workers, operations professionals, non-developers | Data scientists, AI practitioners, technical analysts | Software engineers, ML researchers | Who will build and maintain this? |
+| **Setup effort** | Minutes to hours; visual interface | Hours to days; configuration + scripting | Days to weeks; full development cycle | What is the time budget? |
+| **Flexibility** | Limited to platform capabilities | High within framework constraints | Unlimited — any architecture possible | How custom is the workflow? |
+| **Cost model** | Subscription; per-workflow or per-seat | API costs + developer time | Full developer cost + infrastructure | What is the total cost of ownership? |
+| **Data governance** | Data processed on vendor servers | API data transit; partial control | Full data sovereignty possible | What are the compliance requirements? |
+| **Best suited for** | Standard repetitive processes with low customization needs | Complex workflows requiring LLM reasoning and tool integration | Novel architectures, proprietary data, maximum control | What does the workflow require? |
 
 **Two Critical Observations Emerge From The Comparison.** 
 
@@ -184,7 +204,31 @@ Long and Magerko (2020) complement this with twenty-one specific AI literacy com
 organized into five families. Together, these frameworks articulate what it means to be literate in AI —
 not merely to use AI tools, but to understand, evaluate, and create with them.
 
-![The four pillars of AI literacy](../../assets/images/Four_PIllars_AI_Literacy.png){ width="800" }
+**The Four-Pillar AI Literacy Model (Ng et al., 2021)**
+
+**Pillar: KNOW AI**
+
+Understand the fundamental concepts, capabilities, and limitations of AI systems. In Module 1, this means understanding the agent loop, the properties of autonomous agents, and the boundaries of what current LLMs can and cannot do without tool access.
+
+*Module 1 focus — Units 1 and 2 (Reading, Video, Concept Quiz)*
+
+**Pillar: USE AI**
+
+Operate AI tools productively in authentic contexts. In Module 1, this means operating Claude Desktop or n8n, running Ollama, and completing structured tasks with an AI agent — not just reading about it.
+
+*Module 1 focus — Unit 3 (Guided Labs: Claude Desktop, Ollama)*
+
+**Pillar: EVALUATE AI**
+
+Critically assess AI outputs, assess automation potential, compare frameworks, and identify failure modes. In Module 1, this means applying the two-dimensional assessment matrix to your own workflows with written justifications.
+
+*Module 1 focus — Units 4 and 5 (Workflow Audit, Paradigm Comparison)*
+
+**Pillar: CREATE WITH AI**
+
+Design original AI-enabled solutions for real-world problems. Module 1 plants the seed: the Workflow Audit produces the specification that Modules 2–5 will attempt to automate. Create competency is the terminal goal of the entire course.
+
+*Introduced Module 1, fully developed Modules 3–5*
 
 Long and Magerko (2020) add an important nuance: AI literacy is not merely technical proficiency with AI tools. It includes the capacity to recognize AI in deployed systems, understand the ethical and social implications of AI decisions, and communicate AI concepts accurately to non-specialist audiences. This breadth is why the course’s five general skills include both technical implementation and communication and evidence-based reasoning — professional AI literacy is a multi-domain competency, not a single technical credential.
 
@@ -209,7 +253,14 @@ Jeannette Wing's (2006) foundational essay on computational thinking argues that
 
 Every workflow capable of automation can be completely specified by six components: Trigger, Sequential Steps, Tools and Resources, Conditional Branches, Error Handling, and Output.
 
-![Workflow automation components](../../assets/images/Workflow_Automation_Components.png){ width="800" }
+| Component | Definition | Why It Matters for Automation |
+| --- | --- | --- |
+| **TRIGGER** | The specific event that initiates the workflow — a received email, a scheduled time, a form submission, a file upload | Agents must know exactly what starts them. Vague triggers produce agents that activate at the wrong time or not at all. |
+| **SEQUENTIAL STEPS** | The ordered set of actions the workflow executes — minimum four steps; each step must be atomic and non-ambiguous | Agents cannot execute ambiguous instructions. Each step must be specifiable precisely enough to be delegated. |
+| **TOOLS AND RESOURCES** | The systems, files, APIs, and data sources touched at each step — named specifically (e.g., 'Google Sheets API', not 'spreadsheet') | Tool identification directly maps to agent tool provisioning. Vague resource naming is a design error. |
+| **CONDITIONAL BRANCHES** | Decision points where the workflow splits based on evaluated conditions — the if/then logic that real processes always contain | Agents implement conditionals via routing logic. Undocumented branches produce agents that fail silently on edge cases. |
+| **ERROR HANDLING** | What happens when a step fails, returns unexpected output, or times out — the fallback logic | Production agents must handle failures gracefully. Workflows without error handling are prototype-grade, not production-grade. |
+| **OUTPUT** | The final deliverable of the workflow — specified precisely (file format, destination, recipient, content type) | Agents need a concrete termination condition. Undefined outputs produce agents that run indefinitely or terminate prematurely. |
 
 **The Two-Dimensional Automation Assessment Framework**
 

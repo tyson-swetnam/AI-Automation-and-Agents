@@ -1,10 +1,4 @@
 {
-  "2D-Automation-AssessmentMatrix.png": {
-    "source_sha256": "810a5508ed9100de39314c20d99157efc13e57566752f8b14aad470a7fce2c6b",
-    "width": 1600,
-    "height": 685,
-    "bytes": 549760
-  },
   "AI_Agent_Memory_Integration.png": {
     "source_sha256": "bf0d28cd5a1563358fcb1c3848440f16de0c00500c8ff78ac9cd4e1a2270dfbc",
     "width": 1600,
@@ -29,12 +23,6 @@
     "height": 893,
     "bytes": 2256883
   },
-  "Agent-Prompt-Architecture.png": {
-    "source_sha256": "04659a140a6532d7d000867132440cef20cea56da22f2188e8c2cb43b49ba412",
-    "width": 1340,
-    "height": 1410,
-    "bytes": 368508
-  },
   "Architects-Guide-to-Agents.png": {
     "source_sha256": "b3b1662285610fe82b95bbb1eea2fee50f2b96908998547d1746dedd45c80c24",
     "width": 1600,
@@ -47,71 +35,17 @@
     "height": 893,
     "bytes": 2053020
   },
-  "Automation_Tools.png": {
-    "source_sha256": "306700718dee7655a3dd4dc13f1e23db99b82ca365938ff3972462e2be266bd7",
-    "width": 1338,
-    "height": 1218,
-    "bytes": 286688
-  },
-  "Blooms_Spiral_Progression.png": {
-    "source_sha256": "dd3b4762591989b929d8ddfd676509184a7a728b2cdcf8441be98f87df53660a",
-    "width": 1600,
-    "height": 376,
-    "bytes": 255693
-  },
   "BuildingAIAutomationPipelines.png": {
     "source_sha256": "e5371f1c0c70b899b6d38337c54dddfcb003791446f5ecc2d3d7241346699741",
     "width": 1600,
     "height": 893,
     "bytes": 1970158
   },
-  "Chain-of-Thought.png": {
-    "source_sha256": "f7dd6f85d08b8a2439b29bab2c1a3b6ece2ebf61b9be0d6e453add447c55b36b",
-    "width": 1600,
-    "height": 921,
-    "bytes": 492614
-  },
-  "Chunking-Strategy-Selection.png": {
-    "source_sha256": "b7daa85c875246729abca8e5a00ec4935ad4612d3a2bc6b99c51ecdcae5636b5",
-    "width": 1340,
-    "height": 1150,
-    "bytes": 278693
-  },
-  "Critical_Distinctions.png": {
-    "source_sha256": "12116b95930b7102a39fc94e7c95a30bc49dd98e8de43a9b482c3755e77d14af",
-    "width": 1600,
-    "height": 710,
-    "bytes": 380498
-  },
   "Decoding_AI_Agents.png": {
     "source_sha256": "95545c968af4b99dfea8db70cbacc5d404ff8c5ad63318f66cb3dd4078c30007",
     "width": 1600,
     "height": 893,
     "bytes": 2011758
-  },
-  "Four-Paradigm-Comparative-Framework.png": {
-    "source_sha256": "116d8f7d1ab92a8ffd8da079d14b9300d4c80c33ec9f388d4868c445a1e66f83",
-    "width": 1494,
-    "height": 1394,
-    "bytes": 299691
-  },
-  "Four-RAGAS-Metrics.png": {
-    "source_sha256": "cf9d38f3b0189d0e7308dbe163e85875931ff2c4fa578847257555306872d25c",
-    "width": 954,
-    "height": 1144,
-    "bytes": 292534
-  },
-  "Four_PIllars_AI_Literacy.png": {
-    "source_sha256": "d3d6ce9711833db1dd53f2e6957efc39dc76f8572914525f0cb6d9c3d835e8e6",
-    "width": 1476,
-    "height": 1214,
-    "bytes": 236696
-  },
-  "Four_Stage_Agent_Loop.png": {
-    "source_sha256": "0dc0b2393064054a327d2e28ae3d292deae71cf339839b8c3a20caa1ed39b0db",
-    "width": 1600,
-    "height": 953,
-    "bytes": 515669
   },
   "From-Prototype-to-Production.png": {
     "source_sha256": "89acf21be5c9b44c8d7c0d407bbca2d77fa36f33ce4d93dda0438d43873e8f8a",
@@ -137,24 +71,6 @@
     "height": 893,
     "bytes": 2172455
   },
-  "Module1_Units_Plan.png": {
-    "source_sha256": "65d81df0e248fdf2da99249e5595a3051f83132f88947ea78b62eb80434bf380",
-    "width": 1304,
-    "height": 688,
-    "bytes": 108936
-  },
-  "ModuleLearningActivitiesDescription1.png": {
-    "source_sha256": "af7f0c21b430d39981c273caf4ce30dc3422e0339880c698ab11c7669bc2f9a5",
-    "width": 864,
-    "height": 1154,
-    "bytes": 343738
-  },
-  "ModuleLearningActivitiesDescription2.png": {
-    "source_sha256": "be85a52458957ebe83d446ced9d6d7d4b34d8d2b8aabbe107a533915d88f070d",
-    "width": 858,
-    "height": 716,
-    "bytes": 238034
-  },
   "Multi-Agent-Orchestration-Map.png": {
     "source_sha256": "641eef22a63cb3a67bf95f64094fe3fd20b3da914847693e971d0b6f093c0470",
     "width": 1600,
@@ -167,41 +83,11 @@
     "height": 893,
     "bytes": 1956081
   },
-  "ReAct-Phase.png": {
-    "source_sha256": "d3bc2a02eaca7bb8b20783ec6373e8d0d00ef6ad4ca8858a82fc55f02780407a",
-    "width": 1600,
-    "height": 621,
-    "bytes": 328220
-  },
-  "Reasoning-Trace-Failures.png": {
-    "source_sha256": "a4117a6d2d66731806598de61b23d716de1f630f508c3552919ceda627bbc6be",
-    "width": 1362,
-    "height": 1248,
-    "bytes": 333521
-  },
   "ResponsibleAgenticAIControl.png": {
     "source_sha256": "7c293c6051d4470545fc53d184d54be9909be63d0d25683fc82c28841d5a85cd",
     "width": 1600,
     "height": 893,
     "bytes": 2048990
-  },
-  "SIx-Functional-Stages-RAG.png": {
-    "source_sha256": "5f2e2343e673f49bbf82cc108cea0aa8003776a5a52c86715ddfa4508e36dce6",
-    "width": 612,
-    "height": 1202,
-    "bytes": 287876
-  },
-  "Six-Dimensions-Trade-Off_Assessment.png": {
-    "source_sha256": "93658825091f6d336a7bba36657570a4b9fbd914543f5dc7b1853c27f8d19441",
-    "width": 1020,
-    "height": 1068,
-    "bytes": 282721
-  },
-  "StandardActivityStructurePerModule.png": {
-    "source_sha256": "c547f2a1fe38b6e9a22c5f60ac867f25360b991b8fa1c12c790c505cb12dc04f",
-    "width": 1040,
-    "height": 1102,
-    "bytes": 194454
   },
   "The_New_Frontier.png": {
     "source_sha256": "d2cba5cb510381fd8e5d1eb34d46bb8dab1b070d2465a562eb903f108434dee6",
@@ -209,46 +95,10 @@
     "height": 893,
     "bytes": 1964998
   },
-  "Three-Orchestration-Frameworks.png": {
-    "source_sha256": "6d00422267acfa199f147fb8590a0f01792dc58c0ae1580f63118c68a3b480c4",
-    "width": 1486,
-    "height": 1258,
-    "bytes": 313806
-  },
-  "Three-RAG-Failure-Modes.png": {
-    "source_sha256": "860beb01f220bc5aae76bbb69abd2ef9672988c32be6c17733b0cd16f2f807d8",
-    "width": 1438,
-    "height": 1044,
-    "bytes": 256274
-  },
-  "Three-RAG-Paradigms2.png": {
-    "source_sha256": "cb6d3dd97fac28e3872d59d937a2b92f9fb0f4b2ba3ed5ace2eceba2856db2b6",
-    "width": 1384,
-    "height": 1046,
-    "bytes": 274580
-  },
   "Visual_vs_Programmatic.png": {
     "source_sha256": "d59df916e096070ffbbbb7f6df361b758f82918ef860af1c9c54fe2c9e4c7772",
     "width": 1600,
     "height": 893,
     "bytes": 1643169
-  },
-  "WorkflowAuditProject-Rubric.png": {
-    "source_sha256": "ba539f5b8b87da01a9cf5ef4c4ca2b5d2bc626d6fc1e740bbcacfe531e5ba7d1",
-    "width": 1600,
-    "height": 773,
-    "bytes": 663742
-  },
-  "WorkflowMapping-Template.png": {
-    "source_sha256": "72f110d1d8aa2417b7e6ee733776dc724ca4ba36ad3601a3a12f41455970b575",
-    "width": 1600,
-    "height": 779,
-    "bytes": 635533
-  },
-  "Workflow_Automation_Components.png": {
-    "source_sha256": "836b5d2a1988a46a2ccfa487cbcdac81b24816baadac45a20581110d9decf57c",
-    "width": 1334,
-    "height": 1180,
-    "bytes": 293597
   }
 }

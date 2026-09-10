@@ -97,7 +97,15 @@ dimensions.
 
 *Estimated time: ~2 min*
 
-![Module 1 units plan](../../assets/images/Module1_Units_Plan.png){ width="700" }
+| Unit | Activity Type | Est. Time | Learning Objectives | Graded |
+| --- | --- | --- | --- | --- |
+| 1 | Reading + Video Content | 1.5 hours | LO 1, LO 2 | No |
+| 2 | Concept Quiz / Retrieval Check | 0.5 hours | LO 1, LO 2 | No |
+| 3 | Guided Lab Exercise | 2.0 hours | LO 3, LO 4 | No* |
+| 4 | Hands-On Project — Workflow Audit | 2.5 hours | LO 5, LO 6 | **YES** |
+| 5 | Case Study / Comparative Analysis | 1.0 hour | LO 7 | No* |
+| 6 | Peer Discussion + Reflection | 0.5 hours | LO 8 | Completion |
+| — | TOTAL | 8.0 hours | LO 1–8 | |
 
 ## Grade Weight Summary
 

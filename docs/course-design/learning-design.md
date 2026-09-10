@@ -33,13 +33,45 @@ Each module is structured to develop cognitive competencies across Bloom's Taxon
 foundational recall to analytical reasoning. The following activity types are present in every module, yielding
 approximately 8 hours of instructional engagement per module.
 
-![Standard activity structure per module](../assets/images/StandardActivityStructurePerModule.png){ width="600" }
+| Self-Paced Structure | Bloom's Level | Primary Activities Translated |
+| --- | --- | --- |
+| Unit 1: Reading and Video 1.5 hours | L1 — Remember | A0 → structured reading with annotation protocol; instructor video introduction |
+| Unit 2: Concept Quiz 0.5 hours | L1–L2 | A1, A2 → formative quiz with explanatory feedback; concept map self-check |
+| Unit 3: Guided Labs 2.0 hours | L2–L3 | A3 → annotated reference notebook/video; A7 → scaffolded reference implementation; A8 → lab with verification checkpoints |
+| Unit 4: Hands-On Project 2.5 hours | L3–L4 | A9, A10 → open-specification project with experiment log; A12 → self-rubric analysis |
+| Unit 5: Case Study 1.0 hour | L4 — Analyze | A12, A14 → ill-structured diagnostic case with failure mode taxonomy |
+| Unit 6: Peer Discussion + Capstone 0.5h + Capstone | L4–L6 | A11, A13 → structured peer review rubric; A16 → required synthesis reflection in capstone | <br>
 
-![Module learning activities (part 1)](../assets/images/ModuleLearningActivitiesDescription1.png){ width="800" }
+| ID | Activity Name | Bloom's | Strategy |
+| --- | --- | --- | --- |
+| **A0** | Guided Pre-Reading with Structured Annotation | L1 | Annotation template (5–8 key terms, one-sentence summaries, clarifying questions) made explicit in Unit 1 guidance rather than assumed as student initiative. |
+| **A1** | Prior Knowledge Activation Recall | L1 | Explanatory feedback on every incorrect response replicates the correction function. Advisory note targets the three most consequential misconceptions for the module's content domain proactively. |
+| **A2** | Concept Mapping from Memory | L1 | Reference concept map provided in Unit 2 quiz feedback serves the same correction function as the instructor's displayed map. Partial credit: described in advisory, not graded. |
+| **A3** | Instructor-Led Conceptual Walkthrough with Live Narration | L2 | Video narration is the closest equivalent to live instructor voice. Annotated notebook preserves decision rationale in text form. Prediction prompts must be explicitly embedded — they do not arise naturally in self-paced reading. |
+| **A4** | Comparative Analysis Matrix | L2 | Model matrix comparison replicates the correction function of the class debrief. Students instructed to compare entries before proceeding to Unit 3 lab. |
+| **A5** | Think-Pair-Share Conceptual Discussion | L2 | Forum prompt design is critical: must require evidence-based explanation ('explain why X rather than Y, citing a specific assigned reading'), not reflection ('what did you find interesting?'). Partially compensated — social presence is delayed, not immediate. |
+| **A6** | Peer Teaching — Concept Explanation | L2 | Peer review rubric must require substantive design justification questions, not generic feedback. The 'explain to your partner' mechanism is partially reproduced through the reviewer's required justification questions. |
+| **A7** | Worked Example Code Walkthrough | L3 | Decision narration in comments must match the granularity of live narration. A reference implementation that shows what without explaining why a solution template is, not a worked example — it trains copying rather than schema formation. |
+| **A8** | Guided Implementation Lab (Scaffolded) | L3 | Troubleshooting guide replaces instructor just-in-time support. Must be proactively designed from documented common errors. Verification checkpoint specificity (exact expected output) is the most important design element. |
+| **A9** | Independent / Pair Implementation Lab | L3 | 3-sentence design rationale is a mandatory submission element, not optional — under time pressure students omit optional elements, defeating the purpose of articulating tacit design decisions. |
+| **A10** | Parameter Variation and Controlled Experiment | L3 | Parameter specification in submission checklist prevents under-compliance. Students instructed to form a conclusion before consulting benchmark reference values — conclusion first, then comparison. | <br>
 
-![Module learning activities (part 2)](../assets/images/ModuleLearningActivitiesDescription2.png){ width="800" }
+| ID | Activity Name | Bloom's | Strategy |
+| --- | --- | --- | --- |
+| **A11** | Structured Peer Demonstration and Critique | L3 | Specificity requirement ('reference the specific design decision in Section X') prevents generic feedback. Asynchronous peer review produces equivalent analytical depth but lacks the real-time dialogue that live demo enables. |
+| **A12** | Diagnostic Analysis Using a Structured Rubric | L4 | Model diagnosis for one deficiency provided in Unit 5 feedback after submission — replicates the instructor-led debriefs misconception-correction function with a time delay. Students must not access this before submitting their own analysis. |
+| **A13** | Comparative Evaluation and Evidence Synthesis | L4 | Benchmark comparison is a partial substitute for peer data pooling — it provides comparison values without collaborative synthesis. Forum data-sharing approximates A13's small-group function over a longer time window. This is the most significant functional loss in the self-paced adaptation. |
+| **A14** | Failure Mode Diagnosis and Remediation Design | L4 | Word count per diagnostic step prevents superficial responses. The prediction requirement ('expected behavior after the fix') is the most important element — it forces forward-chaining reasoning rather than retrospective labeling. |
+| **A15** | Session Debrief and Misconception Correction | L1–L4 Cross-cutting | Advisory misconceptions must be anticipatory, not responsive — drawn from documented common errors in the content domain, not from observing the current cohort. This is a real limitation: live instructors detect misconceptions from student behavior that no asynchronous artifact reveals until after submission. |
+| **A16** | Synthesis Reflection and Self-Assessment | L1–L4 Cross-cutting | Making A16 a graded required section (not optional) is the critical design decision. Research on self-regulated learning predicts that time-pressured students will omit non-graded reflection tasks precisely when they are most needed — at the end of the most demanding unit. |
 
-![Bloom's spiral progression across the course](../assets/images/Blooms_Spiral_Progression.png){ width="800" }
+**Bloom's Spiral Progression Across the Course**
+
+**Modules 1–2:** Weighted toward L1–L2 (Remember, Understand) — building vocabulary and mental models for automation design.
+
+**Modules 3–4:** Weighted toward L2–L3 (Understand, Apply) — integrating tools and building functional agent systems.
+
+**Module 5:** Weighted toward L3–L4 (Apply, Analyze) — auditing, policy-writing, and analytical evaluation of complete systems.
 
 ## General Skills of the Course
 

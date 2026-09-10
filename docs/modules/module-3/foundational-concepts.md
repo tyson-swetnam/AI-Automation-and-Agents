@@ -91,9 +91,30 @@ increasing sophistication in pipeline design. However, all three paradigms share
 functional stages. Understanding these stages and the design decisions made at each is the
 foundation for diagnosing failures in any RAG system.
 
-![The six functional stages of RAG](../../assets/images/SIx-Functional-Stages-RAG.png){ width="800" }
+**The Six Functional Stages of Every RAG Pipeline**
 
-![Three RAG paradigms](../../assets/images/Three-RAG-Paradigms2.png){ width="800" }
+| # | Stage | What Happens | Critical Design Decision and Downstream Consequence |
+| --- | --- | --- | --- |
+| 1 | **Document Ingestion** | Raw source documents (PDFs, web pages, databases, code files) are loaded into the pipeline using document loaders. Each loader parses the source format and extracts text content. | Document scope and quality directly determine what the system can know. Documents with poor formatting, ambiguous structure, or low information density degrade all subsequent stages. Garbage in, garbage out — at pipeline scale. |
+| 2 | **Text Splitting** | The extracted text is divided into smaller chunks using a text splitter. The chunk size and overlap parameters are configured at this stage. | Chunk size determines information granularity. Chunks too large: retrieval returns chunks with mostly irrelevant content alongside the target information (context noise). Chunks too small: a single complete idea is fragmented across multiple chunks, none of which is individually informative enough for generation. Overlap prevents sentence-boundary information loss. |
+| 3 | **Embedding Generation** | Each text chunk is converted into a dense vector representation — an embedding — by a pre-trained embedding model. Semantically similar chunks have embeddings that are geometrically close in the vector space. | The embedding model determines the semantic space in which retrieval operates. Models trained on general corpora (OpenAI Ada-002) may underperform in highly specialized domains (medical, legal, scientific) where domain-specific terminology carries high semantic load. Embedding dimensionality affects storage cost and retrieval speed. |
+| 4 | **Vector Store Indexing** | The embeddings are stored in a vector database (FAISS, Chroma, Pinecone) along with the original chunk text and metadata. The vector store builds an index that enables efficient approximate nearest-neighbor search. | The vector store choice involves trade-offs among query latency, scalability, cost, and persistence. FAISS is fast and local but not persistent across sessions. Chroma provides persistence with modest infrastructure. Pinecone provides managed cloud-scale retrieval. Metadata storage enables filtering (retrieve only documents from a specific date range, author, or category). |
+| 5 | **Similarity Retrieval** | At query time, the user's query is embedded using the same embedding model, and the vector store is searched for the k chunks with highest semantic similarity to the query embedding. MMR retrieval balances similarity with diversity to reduce redundancy. | The retrieval method (similarity vs. MMR) and the value of k determine context quality. Too few retrieved chunks: the answer may be incomplete. Too many: context window overflow and generation degradation. MMR is preferred when the corpus contains many near-duplicate or paraphrase chunks, as pure similarity retrieval would return a set of nearly identical chunks. |
+| 6 | **Augmented Generation** | The retrieved chunks are injected into the LLM's prompt as context, alongside the user's query. The LLM generates an answer grounded in the retrieved context. | The prompt template for context injection is a design artifact with significant impact on generation quality. The template must instruct the LLM to use only the provided context, to cite its source, and to acknowledge when the context does not contain sufficient information to answer the query — the 'I don't know' instruction that prevents hallucination when retrieval fails. |
+
+**The Three RAG Paradigms (Gao et al., 2023)**
+
+**Naive RAG**
+
+The straightforward implementation of the six-stage pipeline with fixed chunking, single-stage retrieval, and direct context injection. Naive RAG is appropriate for small, well-structured corpora where retrieval precision is naturally high, and context windows are not a bottleneck. Its primary failure modes are low retrieval precision (irrelevant chunks retrieved) and hallucination when retrieved context is insufficient.
+
+**Advanced RAG**
+
+Introduces pre-retrieval optimizations (query rewriting, query decomposition, HyDE — Hypothetical Document Embedding) and post-retrieval optimizations (re-ranking, context compression, contextual compression using LLMLingua). Advanced RAG is appropriate when naive retrieval quality is insufficient — typically when the corpus is large, heterogeneous, or the user query is ambiguous or multi-part. It adds engineering complexity in exchange for higher retrieval precision.
+
+**Modular RAG**
+
+Treats each RAG stage as an independently configurable, swappable module. This architecture enables specialized retrievers (sparse BM25, dense vector, hybrid), routing between multiple knowledge sources, and integration of additional components such as re-rankers and knowledge graph augmentation. Modular RAG is the state of the art for production systems that must handle diverse query types and knowledge domains. Its engineering overhead is substantial.
 
 ### Learning Resources
 * Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... & Kiela, D. (2020). [Retrieval-augmented generation for knowledge-intensive nlp tasks](https://proceedings.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf){target=_blank}. Advances in neural information processing systems, 33, 9459-9474.
@@ -185,7 +206,12 @@ Chunking is the most consequential single decision in RAG pipeline design (Gao e
 The chunk size and overlap parameters, and the splitting logic used, determine the granularity of
 information available to the retriever. Four primary chunking strategies exist:
 
-![Chunking strategy selection](../../assets/images/Chunking-Strategy-Selection.png){ width="800" }
+| Strategy | Mechanism | When to Use | Failure Mode |
+| --- | --- | --- | --- |
+| **Fixed-Size Chunking** | Split text at a fixed token or character count, with a specified overlap between adjacent chunks | Uniform text (narrative prose, documentation) with no structural hierarchy; simplest to implement | Splits semantic units mid-sentence; chunk boundaries are arbitrary relative to content structure |
+| **Recursive Character Text Splitting** | Attempt to split at natural boundaries in order: paragraph breaks → sentence breaks → word breaks → characters; falls back to finer granularity only when a chunk exceeds the size limit | Mixed-format documents with variable paragraph lengths; LangChain's default and most broadly applicable strategy | May still split mid-concept when natural boundaries are unevenly distributed |
+| **Semantic Chunking** | Embed each sentence individually; cluster sentences by embedding similarity; split at embedding-similarity discontinuities that signal topic transitions | Documents with clear topic shifts (research papers, multi-topic reports); produces thematically coherent chunks | Computationally expensive — embeds every sentence before splitting; may over-split on very dense or technical documents |
+| **Sentence-Window Chunking** | Embed individual sentences for retrieval but expand each retrieved sentence to include surrounding context sentences before injecting into the generation prompt | When the retrieval unit (sentence) needs to be finer than the generation unit (context window); produces highly targeted retrieval with rich generation context | Requires more complex retrieval pipeline; the expansion logic must be correctly configured to avoid context overflow |
 
 **Retrieval Method Selection and Context Compression**
 
@@ -244,14 +270,25 @@ computed from the retrieved context, the generated answer, and optionally a grou
 reference answer — enabling rapid, reproducible, and actionable evaluation that can be
 integrated into a CI/CD pipeline for continuous quality monitoring.
 
-![The four RAGAS metrics](../../assets/images/Four-RAGAS-Metrics.png){ width="800" }
+**The Four RAGAS Metrics — Definitions, Computation, and Diagnostic Use**
+
+| Metric | Definition | What a Low Score Means | Which Pipeline Component is Implicated |
+| --- | --- | --- | --- |
+| **Faithfulness** | The proportion of claims in the generated answer that are directly supported by the retrieved context. Computed by decomposing the answer into atomic claims and verifying each against the context. | The generator is hallucinating — producing claims not supported by the retrieved context. The answer cannot be trusted even if retrieval was successful. | Generator (Stage 6) — revise the generation prompt to strengthen the 'use only the provided context' instruction; or the retrieved context is too sparse to support the answer. |
+| **Answer Relevance** | The degree to which the generated answer addresses the user's question, independent of whether the answer is factually correct. Computed by generating questions from the answer and measuring their similarity to the original question. | The generator is producing on-topic but non-responsive output — answering a related but different question or providing a broader or narrower response than requested. | Generator (Stage 6) — revise the generation prompt to clarify the required response scope; or the query was ambiguous and should be pre-processed. |
+| **Context Precision** | The proportion of retrieved context chunks that are relevant to answering the question. Measures retrieval precision — how much of what was retrieved was needed. | The retriever is returning too many irrelevant chunks. Relevant information is buried in noise, increasing context window consumption and degrading generation quality. | Retriever (Stage 5) — reduce k, switch to MMR, add metadata filtering, or improve the embedding model's domain sensitivity. |
+| **Context Recall** | The proportion of the ground-truth answer that is supported by the retrieved context. Measures retrieval completeness — how much of what was needed was retrieved. | The retriever is missing relevant documents. The generator cannot answer correctly because the relevant information was not retrieved. | Retriever (Stage 5) and/or text splitter (Stage 2) — increase k, adjust chunking to prevent relevant content from being fragmented across chunk boundaries, or review corpus coverage. |
 
 **The Three Principal RAG Failure Modes**
 
 RAGAS metrics map systematically to three classes of RAG system failure, each with a distinct
 diagnostic signature and a distinct remediation strategy:
 
-![Three RAG failure modes](../../assets/images/Three-RAG-Failure-Modes.png){ width="800" }
+| Failure Mode | RAGAS Signature | Remediation Strategy |
+| --- | --- | --- |
+| **Hallucination** | Low Faithfulness; Answer Relevance may be moderate to high (the hallucinated answer addresses the question — it is just not supported by context) | Strengthen the 'grounded generation' instruction in the prompt template. Add explicit 'If the context does not contain sufficient information, state that you cannot answer.' Increase context coverage (higher k or improved retrieval precision). |
+| **Retrieval Failure** | Low Context Recall; Faithfulness may be high for what was retrieved but the answer is incomplete or incorrect because key information was not retrieved | Increase k. Review and revise chunking strategy to ensure relevant content is not fragmented. Check corpus coverage — the relevant documents may simply not be in the knowledge base. Consider query rewriting or decomposition to better match the query embedding to the relevant chunks. |
+| **Context Irrelevance / Overflow** | Low Context Precision; Faithfulness may be low or variable (the generator is working with noisy context); latency may be high due to large context payloads | Reduce k. Apply metadata filtering to restrict the retrieval search space. Switch from similarity search to MMR. Apply context compression (LLMLingua) to distill retrieved chunks before injection. |
 
 ### Learning Resources
 

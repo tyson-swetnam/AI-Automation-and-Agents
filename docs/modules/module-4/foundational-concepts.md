@@ -153,7 +153,11 @@ embodies specific design philosophies about state management, agent communicatio
 system observability. The choice of framework is not merely a stylistic preference — it has real
 implications for the maintainability, debuggability, and scalability of the resulting system.
 
-![Three orchestration frameworks: LangGraph, AutoGen, CrewAI](../../assets/images/Three-Orchestration-Frameworks.png){ width="700" }
+| Framework | Core Design Philosophy | Strengths | Limitations |
+| --- | --- | --- | --- |
+| **LangGraph** | Graph-based state machine: agents are nodes; state transitions are edges; shared state schema is typed and explicit. The supervisor-worker pattern is the primary multi-agent implementation. | Explicit state visibility; fine-grained control over coordination logic; full LangChain ecosystem integration; strong observability through LangSmith. | Higher implementation complexity; requires explicit state schema design; steeper learning curve than higher-level frameworks. |
+| **AutoGen (Wu et al., 2023)** | Conversation-based: agents interact through structured natural language conversations; an orchestrator agent manages the conversation flow. Peer collaboration is the primary pattern. | Flexible conversational coordination; easy to prototype with; supports human-in-the-loop participation through the human proxy agent pattern. | Less explicit state management than LangGraph; conversation history can grow large; harder to reason about system behavior from conversation logs. |
+| **CrewAI** | Role-and-process abstraction: agents are defined by role, goal, and backstory; tasks are assigned to specific agents; crews execute tasks in sequential or hierarchical processes. | High-level abstraction reduces implementation boilerplate; rapid prototyping of role-based pipelines; intuitive role specification for non-expert developers. | Lower-level control is limited; customization beyond built-in process types requires framework extensions; less suitable for complex conditional routing. |
 
 ### Learning Resources
 

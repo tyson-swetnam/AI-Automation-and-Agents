@@ -1090,7 +1090,15 @@ dimensions.
 
 *Estimated time: ~2 min*
 
-![Module 1 units plan](../../assets/images/Module1_Units_Plan.png){ width="700" }
+| Unit | Activity Type | Est. Time | Learning Objectives | Graded |
+| --- | --- | --- | --- | --- |
+| 1 | Reading + Video Content | 1.5 hours | LO 1, LO 2 | No |
+| 2 | Concept Quiz / Retrieval Check | 0.5 hours | LO 1, LO 2 | No |
+| 3 | Guided Lab Exercise | 2.0 hours | LO 3, LO 4 | No* |
+| 4 | Hands-On Project — Workflow Audit | 2.5 hours | LO 5, LO 6 | **YES** |
+| 5 | Case Study / Comparative Analysis | 1.0 hour | LO 7 | No* |
+| 6 | Peer Discussion + Reflection | 0.5 hours | LO 8 | Completion |
+| — | TOTAL | 8.0 hours | LO 1–8 | |
 
 ## Grade Weight Summary
 
@@ -1234,7 +1242,12 @@ order to meet its design objectives. The critical word is 'autonomous': an agent
 continuous human direction. The LangChain Conceptual Guide operationalizes this definition in
 contemporary practice through a four-stage agent loop:
 
-![The four-stage agent loop](../../assets/images/Four_Stage_Agent_Loop.png){ width="800" }
+| Stage | What the Agent Does | Technical Mechanism | Professional Analogy |
+| --- | --- | --- | --- |
+| **PERCEIVE** | Reads the current environment state | Processes context window: instructions, tool outputs, history | A consultant reads the brief, prior meeting notes, and available data before responding |
+| **PLAN** | Decides what action to take next | LLM reasoning step: selects the next tool or determines task completion | The consultant drafts a response strategy, selecting which of their available resources to deploy |
+| **ACT** | Executes the chosen action via a tool call | Issues a structured tool call (web search, code execution, file write, API request) | The consultant executes: sends an email, retrieves a document, runs a calculation |
+| **OBSERVE** | Reads the tool output and updates state | Parses tool response; decides whether to loop again or conclude | The consultant reads the result, determines whether the task is complete, and acts accordingly |
 
 **FOUR PROPERTIES THAT DEFINE A TRUE AGENT (Wooldridge & Jennings, 1995)**
 
@@ -1250,7 +1263,14 @@ taking initiative to achieve design objectives.
 * **Social ability:** The agent can interact with other agents (and humans) using defined
 communication protocols — essential for multi-agent systems introduced in Module 4.
 
-![Critical distinctions between agents and other systems](../../assets/images/Critical_Distinctions.png){ width="800" }
+**The Critical Distinctions — What Is Not an AI Agent**
+
+| System Type | Why It Is Not an AI Agent |
+| --- | --- |
+| **Chatbot** | Responds to a single prompt; has no persistent state across the conversation turn; cannot take actions in external systems; does not loop. |
+| **Rule-based script** | Executes a fixed sequence of steps; has no capacity to reason, adapt, or select actions based on context; has no LLM component. |
+| **API call** | A single request-response transaction with no reasoning, planning, or state — a tool that an agent might use, not an agent itself. |
+| **Search engine** | Retrieves information based on a query; does not plan, act, or use tools autonomously; has no goal-directed behavior. |
 
 !!! note "WHY THIS MATTERS"
 
@@ -1290,7 +1310,15 @@ cannot maintain.
 - Low-code
 - Code-first
 
-![Automation tools landscape](../../assets/images/Automation_Tools.png){ width="800" }
+| Dimension | No-Code | Low-Code | Code-First | Key Criterion |
+| --- | --- | --- | --- | --- |
+| **Representative tools** | Claude Cowork, n8n, Zapier, Make | LangChain, CrewAI, LangGraph | Claude Code, custom Python agents, AutoGen | What does your team know? |
+| **Primary user** | Knowledge workers, operations professionals, non-developers | Data scientists, AI practitioners, technical analysts | Software engineers, ML researchers | Who will build and maintain this? |
+| **Setup effort** | Minutes to hours; visual interface | Hours to days; configuration + scripting | Days to weeks; full development cycle | What is the time budget? |
+| **Flexibility** | Limited to platform capabilities | High within framework constraints | Unlimited — any architecture possible | How custom is the workflow? |
+| **Cost model** | Subscription; per-workflow or per-seat | API costs + developer time | Full developer cost + infrastructure | What is the total cost of ownership? |
+| **Data governance** | Data processed on vendor servers | API data transit; partial control | Full data sovereignty possible | What are the compliance requirements? |
+| **Best suited for** | Standard repetitive processes with low customization needs | Complex workflows requiring LLM reasoning and tool integration | Novel architectures, proprietary data, maximum control | What does the workflow require? |
 
 **Two Critical Observations Emerge From The Comparison.** 
 
@@ -1325,7 +1353,31 @@ Long and Magerko (2020) complement this with twenty-one specific AI literacy com
 organized into five families. Together, these frameworks articulate what it means to be literate in AI —
 not merely to use AI tools, but to understand, evaluate, and create with them.
 
-![The four pillars of AI literacy](../../assets/images/Four_PIllars_AI_Literacy.png){ width="800" }
+**The Four-Pillar AI Literacy Model (Ng et al., 2021)**
+
+**Pillar: KNOW AI**
+
+Understand the fundamental concepts, capabilities, and limitations of AI systems. In Module 1, this means understanding the agent loop, the properties of autonomous agents, and the boundaries of what current LLMs can and cannot do without tool access.
+
+*Module 1 focus — Units 1 and 2 (Reading, Video, Concept Quiz)*
+
+**Pillar: USE AI**
+
+Operate AI tools productively in authentic contexts. In Module 1, this means operating Claude Desktop or n8n, running Ollama, and completing structured tasks with an AI agent — not just reading about it.
+
+*Module 1 focus — Unit 3 (Guided Labs: Claude Desktop, Ollama)*
+
+**Pillar: EVALUATE AI**
+
+Critically assess AI outputs, assess automation potential, compare frameworks, and identify failure modes. In Module 1, this means applying the two-dimensional assessment matrix to your own workflows with written justifications.
+
+*Module 1 focus — Units 4 and 5 (Workflow Audit, Paradigm Comparison)*
+
+**Pillar: CREATE WITH AI**
+
+Design original AI-enabled solutions for real-world problems. Module 1 plants the seed: the Workflow Audit produces the specification that Modules 2–5 will attempt to automate. Create competency is the terminal goal of the entire course.
+
+*Introduced Module 1, fully developed Modules 3–5*
 
 Long and Magerko (2020) add an important nuance: AI literacy is not merely technical proficiency with AI tools. It includes the capacity to recognize AI in deployed systems, understand the ethical and social implications of AI decisions, and communicate AI concepts accurately to non-specialist audiences. This breadth is why the course’s five general skills include both technical implementation and communication and evidence-based reasoning — professional AI literacy is a multi-domain competency, not a single technical credential.
 
@@ -1350,7 +1402,14 @@ Jeannette Wing's (2006) foundational essay on computational thinking argues that
 
 Every workflow capable of automation can be completely specified by six components: Trigger, Sequential Steps, Tools and Resources, Conditional Branches, Error Handling, and Output.
 
-![Workflow automation components](../../assets/images/Workflow_Automation_Components.png){ width="800" }
+| Component | Definition | Why It Matters for Automation |
+| --- | --- | --- |
+| **TRIGGER** | The specific event that initiates the workflow — a received email, a scheduled time, a form submission, a file upload | Agents must know exactly what starts them. Vague triggers produce agents that activate at the wrong time or not at all. |
+| **SEQUENTIAL STEPS** | The ordered set of actions the workflow executes — minimum four steps; each step must be atomic and non-ambiguous | Agents cannot execute ambiguous instructions. Each step must be specifiable precisely enough to be delegated. |
+| **TOOLS AND RESOURCES** | The systems, files, APIs, and data sources touched at each step — named specifically (e.g., 'Google Sheets API', not 'spreadsheet') | Tool identification directly maps to agent tool provisioning. Vague resource naming is a design error. |
+| **CONDITIONAL BRANCHES** | Decision points where the workflow splits based on evaluated conditions — the if/then logic that real processes always contain | Agents implement conditionals via routing logic. Undocumented branches produce agents that fail silently on edge cases. |
+| **ERROR HANDLING** | What happens when a step fails, returns unexpected output, or times out — the fallback logic | Production agents must handle failures gracefully. Workflows without error handling are prototype-grade, not production-grade. |
+| **OUTPUT** | The final deliverable of the workflow — specified precisely (file format, destination, recipient, content type) | Agents need a concrete termination condition. Undefined outputs produce agents that run indefinitely or terminate prematurely. |
 
 **The Two-Dimensional Automation Assessment Framework**
 
@@ -2000,7 +2059,13 @@ Guidance on choosing workflows:
 
 **Workflow Mapping Template - Required Fields (per workflow)**
 
-![Workflow mapping template](../../assets/images/WorkflowMapping-Template.png){ width="700" }
+| Field | Specification Requirement |
+| --- | --- |
+| **Trigger** | What event initiates the workflow? Must be specific and external: an email arriving with a particular subject line or sender, a calendar event at a specific recurrence, a file appearing in a designated folder, or a recurring time. 'Someone sends me a request' is not a trigger. |
+| **Sequential Steps** | Minimum four steps. Each step must specify: (a) the specific tool or system touched (email client, CRM, spreadsheet software, file system — not 'the computer'); (b) the input format and output format at that step; and (c) whether any judgment is exercised at that step or whether it is fully mechanical. |
+| **Conditional Branches** | At least one 'if X, then Y; else Z' decision point in at least two of your three workflows. The condition must be statable as a rule: 'if the invoice amount exceeds $5,000, route to VP approval; else forward to accounts payable directly.' |
+| **Output** | The final deliverable or state change that signals the workflow is complete. Must be specific: 'a PDF report emailed to three recipients' not 'a report.' |
+| **Time Estimate** | How many minutes or hours this workflow currently takes per week, and how you derived that estimate (measurement, best estimate, or calculation). This becomes the ROI baseline for the automation assessment. |
 
 ### Step 2 - Two Workflow Maps
 
@@ -2026,7 +2091,11 @@ For each of your three mapped workflows, complete the two-dimensional automation
 assessment using the scoring framework below. This framework operationalizes the 'blast radius'
 analysis introduced in the Automation Landscape Overview reading.
 
-![Two-dimensional automation assessment matrix](../../assets/images/2D-Automation-AssessmentMatrix.png){ width="700" }
+| Dimension | Score 5 (High) | Score 1 (Low) |
+| --- | --- | --- |
+| **Rule-Based Specification Score (1–5)** | Every step can be specified in advance as a complete rule — no human judgment is required at any decision point. The conditional branches are fully enumerable. | At least one step requires genuine human expertise, ethical judgment, or contextual knowledge that cannot be pre-specified as a rule. |
+| **Consequence Severity Score (1–5)** | An automation error would have irreversible, significant financial, legal, or reputational consequences. Error blast radius is wide and recovery is costly. | An automation error is easily detected, immediately reversible, and has no external impact. Error blast radius is narrow and recovery is trivial. |
+| **Automation Potential Score** | Calculated: Rule-Based Score ÷ (Consequence Severity + 1). This formula penalizes high-consequence workflows even when they are technically rule-based. | Lower scores indicate poorer automation candidates, either because the workflow requires judgment or because errors are high-stakes. |
 
 For each workflow, write a minimum 100-word justification explaining your rule-based and
 consequence severity scores. The justification must use at minimum four of the following course-
@@ -2057,7 +2126,12 @@ automation potential score. Address the following question:
 
 **Workflow Audit Project - Rubric**
 
-![Workflow Audit project rubric](../../assets/images/WorkflowAuditProject-Rubric.png){ width="700" }
+| Criterion | Weight | 4 — Distinguished | 3 — Proficient | 2 — Developing |
+| --- | --- | --- | --- | --- |
+| Completeness (all required fields present for all 3 workflows) | 25% | All 15 fields complete with required specificity; all conditional branches identified | All 15 fields present; 1–2 missing conditional branches or incomplete time estimates | 1–2 fields missing or unacceptably vague ('uses email') across all workflows |
+| Accuracy and Specificity of Workflow Mapping | 25% | Each step specifies tool/system, input format, output format, and judgment indicator; workflows are from genuine practice and non-hypothetical | Steps specify tools but omit input/output format for 2–3 steps; one workflow may be partially generic | Steps name categories rather than specific tools; workflows appear hypothetical or generic |
+| Assessment Matrix Reasoning (Task 2) | 30% | Scores justified with ≥100 words each using ≥4 course terms; scoring formula applied correctly; lowest-ranked candidate identification persuasive | Justifications present but ≤80 words or missing ≥2 course terms; formula correct | Justifications vague or circular; formula misapplied; no lowest-candidate identification |
+| Paradigm Selection Reflection (Task 3) | 20% | 200-word reflection cites ≥2 diagram criteria by name; paradigm selection follows from workflow properties; one specific tool named with justification | Reflection present; ≥150 words; 1 criterion cited; tool named without justification | Reflection &lt;100 words; no diagram criteria cited; paradigm selection unsupported |
 
 ## Peer Discussion
 
@@ -4033,7 +4107,13 @@ critical finding is that this capacity is emergent: it is absent in smaller mode
 above a scale threshold, suggesting that chain-of-thought reasoning reflects a qualitative
 capability transition rather than a continuous improvement curve.
 
-![Chain-of-thought prompting](../../assets/images/Chain-of-Thought.png){ width="800" }
+| Dimension | Chain-of-Thought Characteristics |
+| --- | --- |
+| **Core mechanism** | Decompose the problem into a linear sequence of intermediate reasoning steps before producing the final answer. |
+| **Prompting approach** | Few-shot examples where each example includes the reasoning chain (thought steps) followed by the answer, OR zero-shot 'Let's think step by step.' |
+| **Key strength** | Dramatically improves multi-step arithmetic, commonsense reasoning, and symbolic tasks. Low computational overhead — produces one reasoning chain per query. |
+| **Key limitation** | Linear: once a reasoning step is committed to, the model cannot backtrack. If an early step contains an error, subsequent reasoning inherits and compounds it. No mechanism for exploration of alternatives. |
+| **When to use** | Problems with a natural linear decomposition, where intermediate steps are checkable or low-stakes, and where computational cost is a primary constraint. |
 
 **Paradigm 2: ReAct - Synergizing Reasoning and Acting (Yao et al., 2022)**
 
@@ -4043,7 +4123,11 @@ during reasoning. ReAct interleaves reasoning steps (Thought) with actions (Act)
 of action outputs (Observe), creating a three-phase cycle that grounds reasoning in real-world
 information retrieved during the task.
 
-![Phases of the ReAct loop](../../assets/images/ReAct-Phase.png){ width="800" }
+| ReAct Phase | What Happens in This Phase |
+| --- | --- |
+| **THOUGHT** | The agent produces an internal reasoning step: what does it know, what does it need, what is its next action plan? This step is natural language — no tool is called. |
+| **ACT** | The agent issues a tool call — a web search, a calculator invocation, a database query, a file read. The action is specified using a structured format that the tool interface can parse. |
+| **OBSERVE** | The agent receives the tool output and incorporates it into its context. The observation becomes the input for the next Thought step, creating a closed reasoning-acting loop. |
 
 The ReAct loop is the default reasoning architecture for production agents today. The ability to read and diagnose a ReAct trace - identifying which piece of reasoning was faulty, which tool call was incorrectly specified, or which observation was misinterpreted - is the core diagnostic skill of Module 2. Thought, Act and Observe are the paper's names for the three phases, not labels a current agent prints: the Module 2 lab prints the same three steps as `REASONING:`, `TOOL CALL:` / `ARGUMENTS:` and `OBSERVATION:` lines.
 
@@ -4086,7 +4170,15 @@ LATS represents the frontier of what is possible when cost and latency constrain
 The following table enables side-by-side evaluation across the five dimensions that determine
 architectural selection in professional practice:
 
-![Four-paradigm comparative framework](../../assets/images/Four-Paradigm-Comparative-Framework.png){ width="800" }
+| Dimension | CoT | ReAct | ToT | LATS |
+| --- | --- | --- | --- | --- |
+| **Reasoning structure** | Linear chain — one path, committed at each step | Interleaved Thought-Act-Observe cycles | Branching tree — multiple paths explored and pruned | Tree search with real-world tool use at each node |
+| **Tool use** | None — operates on internal knowledge only | Yes — tool calls interleaved with reasoning | Not inherent — can be added but not the core architecture | Yes — tool use IS the tree expansion mechanism |
+| **Backtracking** | No — errors propagate forward | No — linear like CoT, just grounded | Yes — key feature: prune and backtrack | Yes — core capability |
+| **Computational cost** | Low — one reasoning pass per query | Medium — proportional to number of tool calls | High — proportional to tree breadth × depth | Very high — tree breadth × depth × tool calls |
+| **Best problem type** | Structured, decomposable, linear | Grounded fact-finding, QA with external sources, multi-step task execution | Open-ended planning, constraint satisfaction, proof construction | Complex planning requiring external information at each decision point |
+| **Hallucination risk** | High — no grounding in external facts | Low — observations ground each reasoning step | Medium — internal evaluation may be unreliable | Low — external observations ground evaluations |
+| **Interpretability** | High — trace is a natural language argument | High — trace shows exact tool calls and outcomes | Moderate — tree structure adds complexity | Low — tree plus tool use plus self-reflection is complex |
 
 ### Learning Resources
 * Wei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., ... & Zhou, D. (2022). [Chain-of-thought prompting elicits reasoning in large language models](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf){target=_blank}. Advances in neural information processing systems, 35, 24824-24837.
@@ -4238,7 +4330,13 @@ competency.
 Systematic trace analysis reveals that agent failures cluster into five distinguishable failure
 classes, each with a different root cause and a different fix:
 
-![Reasoning trace failure modes](../../assets/images/Reasoning-Trace-Failures.png){ width="800" }
+| Failure Class | Diagnostic Signature | Structural Fix |
+| --- | --- | --- |
+| **Hallucinated Tool Call** | The agent calls a tool that does not exist or calls a real tool with an argument that is not valid per the tool description. The executor returns an error or unexpected output. | Revise the tool description to make the tool's name, purpose, and argument schema unambiguous. Add negative examples if the agent confuses this tool with another. |
+| **Premature Termination** | The agent produces a Final Answer token before completing the task — typically after a successful first tool call, incorrectly treating partial information as a complete answer. | Revise the system prompt to specify the termination condition explicitly. Add a rubric for what 'task complete' means in terms of observable outputs. |
+| **Observation Misinterpretation** | The agent receives a valid tool output but misreads it — extracts the wrong field from a JSON response, misinterprets a numeric value, or confuses an error string with a data string. | Revise the tool description to specify the output format precisely. Add parsing instructions to the system prompt if the output format is complex. |
+| **Infinite Loop** | The agent repeats the same tool call with the same or similar arguments across multiple iterations, never converging to a Final Answer. The observation does not resolve the agent's reasoning state. | Add a loop-detection stopping criterion. Revise the system prompt to specify what to do when a tool call does not resolve the current uncertainty. |
+| **Logical Gap in Reasoning Chain** | The agent's Thought step contains a reasoning error — an incorrect inference, a false premise, or a misattributed observation — that propagates into subsequent tool selection or argument construction. | Add few-shot examples that demonstrate correct reasoning for this problem type. Consider switching to a more powerful base model or a more deliberate architecture (ToT or LATS) for complex reasoning problems. |
 
 ### Learning Materials
 
@@ -4263,7 +4361,23 @@ descriptions), what patterns of reasoning the agent should follow (few-shot CoT 
 what format the agent's outputs must conform to (output format constraints). Each dimension is
 independently configurable and independently contributes to agent reliability.
 
-![Agent prompt architecture](../../assets/images/Agent-Prompt-Architecture.png){ width="800" }
+**The Four-Dimension Agent Prompt Architecture**
+
+**Dimension 1: System Instructions**
+
+The system prompt defines the agent's identity, role, operational domain, and constraints. Effective system instructions specify: what the agent is for (domain scope), what it is not for (negative scope — prevents the agent from attempting tasks outside its competency), what it must always do (standing behavioral requirements), and what it must never do (hard behavioral limits). Vague system instructions produce agents with unpredictable behavioral boundaries.
+
+**Dimension 2: Tool Descriptions**
+
+As detailed in Theme 2, tool descriptions function as the agent's mental model of its available capabilities. In the prompt architecture, tool descriptions are presented to the agent as a structured list immediately after the system instructions, before any conversation context. The order in which tools are listed can affect which tool the agent selects when multiple tools are plausible candidates for a given subtask — an empirical effect documented in LangChain's design guidance.
+
+**Dimension 3: Few-Shot CoT Scaffolds**
+
+Few-shot examples demonstrate correct reasoning patterns for the agent's task domain. Brown et al. (2020) established that in-context few-shot examples can elicit capabilities in LLMs that zero-shot prompting cannot. For agents, few-shot examples in the system prompt demonstrate: what a correct Thought step looks like for this problem type, how to select the right tool given a specific context, how to interpret the tool's output, and when to conclude versus continue the loop.
+
+**Dimension 4: Output Format Constraints**
+
+Agents must produce outputs in formats that the AgentExecutor can parse. Output format constraints in the system prompt specify: the exact JSON structure for tool call specifications, the token or string that signals task completion (Final Answer), the format of intermediate Thought steps, and any constraints on output length or content. Poorly specified output format constraints produce parsing errors that terminate the agent prematurely or cause the executor to misinterpret a reasoning step as a tool call.
 
 !!! note "BEHAVIORAL CONTROL IS NOT A PATCH - IT IS AN ARCHITECTURE"
 
@@ -4298,7 +4412,16 @@ The Architectural Specification Brief produced in Module 2 must document your re
 all six dimensions - not just the technical choice, but the evidence-based justification for that
 choice given the specific problem context.
 
-![Six-dimension trade-off assessment](../../assets/images/Six-Dimensions-Trade-Off_Assessment.png){ width="800" }
+**The Six-Dimension Trade-off Assessment Framework**
+
+| Dimension | Assessment Questions | Architecture Implications |
+| --- | --- | --- |
+| **Latency** | What is the acceptable response time for this use case? Is the agent operating in a real-time, near-real-time, or batch context? | CoT and ReAct have lower latency than ToT and LATS. High-latency architectures are inappropriate for real-time user-facing applications. |
+| **Cost per Inference** | What is the per-query cost at the expected volume? Can the use case sustain the inference cost of multi-branch architectures? | CoT has lowest cost. ReAct cost scales with number of tool calls. ToT and LATS costs scale super linearly with tree depth and branching factor. |
+| **Reliability and Error Rate** | What is the acceptable error rate? Is the problem type where linear reasoning produces frequent errors that branch-and-backtrack would prevent? | For structured, well-defined tasks, ReAct reliability is typically sufficient. For open-ended or highly constrained tasks, ToT or LATS reduce error rates at higher cost. |
+| **Scalability** | What is the anticipated query volume and growth trajectory? How does the architecture scale with load? | Stateless architectures (CoT, ReAct) scale horizontally more easily. Stateful architectures (ToT, LATS) require more sophisticated state management infrastructure. |
+| **Interpretability / Explainability** | Are there regulatory, organizational, or user requirements for explainability of agent decisions? Does the EU AI Act's Article 13 apply? | CoT and ReAct traces are highly interpretable. ToT and LATS traces are significantly more complex to audit. High-risk AI system deployments may require CoT or ReAct for regulatory compliance. |
+| **Organizational Integration** | What are the data governance requirements? Who will maintain the system? What monitoring infrastructure is available? | Tool choices must align with data governance policies. The maintenance burden of ToT/LATS requires more sophisticated engineering capacity than CoT/ReAct. |
 
 The European Parliament's AI Act (2024) is directly relevant to architectural choice for high-risk
 AI systems. Article 13 of the Act requires that high-risk AI systems provide output that is
@@ -6669,9 +6792,30 @@ increasing sophistication in pipeline design. However, all three paradigms share
 functional stages. Understanding these stages and the design decisions made at each is the
 foundation for diagnosing failures in any RAG system.
 
-![The six functional stages of RAG](../../assets/images/SIx-Functional-Stages-RAG.png){ width="800" }
+**The Six Functional Stages of Every RAG Pipeline**
 
-![Three RAG paradigms](../../assets/images/Three-RAG-Paradigms2.png){ width="800" }
+| # | Stage | What Happens | Critical Design Decision and Downstream Consequence |
+| --- | --- | --- | --- |
+| 1 | **Document Ingestion** | Raw source documents (PDFs, web pages, databases, code files) are loaded into the pipeline using document loaders. Each loader parses the source format and extracts text content. | Document scope and quality directly determine what the system can know. Documents with poor formatting, ambiguous structure, or low information density degrade all subsequent stages. Garbage in, garbage out — at pipeline scale. |
+| 2 | **Text Splitting** | The extracted text is divided into smaller chunks using a text splitter. The chunk size and overlap parameters are configured at this stage. | Chunk size determines information granularity. Chunks too large: retrieval returns chunks with mostly irrelevant content alongside the target information (context noise). Chunks too small: a single complete idea is fragmented across multiple chunks, none of which is individually informative enough for generation. Overlap prevents sentence-boundary information loss. |
+| 3 | **Embedding Generation** | Each text chunk is converted into a dense vector representation — an embedding — by a pre-trained embedding model. Semantically similar chunks have embeddings that are geometrically close in the vector space. | The embedding model determines the semantic space in which retrieval operates. Models trained on general corpora (OpenAI Ada-002) may underperform in highly specialized domains (medical, legal, scientific) where domain-specific terminology carries high semantic load. Embedding dimensionality affects storage cost and retrieval speed. |
+| 4 | **Vector Store Indexing** | The embeddings are stored in a vector database (FAISS, Chroma, Pinecone) along with the original chunk text and metadata. The vector store builds an index that enables efficient approximate nearest-neighbor search. | The vector store choice involves trade-offs among query latency, scalability, cost, and persistence. FAISS is fast and local but not persistent across sessions. Chroma provides persistence with modest infrastructure. Pinecone provides managed cloud-scale retrieval. Metadata storage enables filtering (retrieve only documents from a specific date range, author, or category). |
+| 5 | **Similarity Retrieval** | At query time, the user's query is embedded using the same embedding model, and the vector store is searched for the k chunks with highest semantic similarity to the query embedding. MMR retrieval balances similarity with diversity to reduce redundancy. | The retrieval method (similarity vs. MMR) and the value of k determine context quality. Too few retrieved chunks: the answer may be incomplete. Too many: context window overflow and generation degradation. MMR is preferred when the corpus contains many near-duplicate or paraphrase chunks, as pure similarity retrieval would return a set of nearly identical chunks. |
+| 6 | **Augmented Generation** | The retrieved chunks are injected into the LLM's prompt as context, alongside the user's query. The LLM generates an answer grounded in the retrieved context. | The prompt template for context injection is a design artifact with significant impact on generation quality. The template must instruct the LLM to use only the provided context, to cite its source, and to acknowledge when the context does not contain sufficient information to answer the query — the 'I don't know' instruction that prevents hallucination when retrieval fails. |
+
+**The Three RAG Paradigms (Gao et al., 2023)**
+
+**Naive RAG**
+
+The straightforward implementation of the six-stage pipeline with fixed chunking, single-stage retrieval, and direct context injection. Naive RAG is appropriate for small, well-structured corpora where retrieval precision is naturally high, and context windows are not a bottleneck. Its primary failure modes are low retrieval precision (irrelevant chunks retrieved) and hallucination when retrieved context is insufficient.
+
+**Advanced RAG**
+
+Introduces pre-retrieval optimizations (query rewriting, query decomposition, HyDE — Hypothetical Document Embedding) and post-retrieval optimizations (re-ranking, context compression, contextual compression using LLMLingua). Advanced RAG is appropriate when naive retrieval quality is insufficient — typically when the corpus is large, heterogeneous, or the user query is ambiguous or multi-part. It adds engineering complexity in exchange for higher retrieval precision.
+
+**Modular RAG**
+
+Treats each RAG stage as an independently configurable, swappable module. This architecture enables specialized retrievers (sparse BM25, dense vector, hybrid), routing between multiple knowledge sources, and integration of additional components such as re-rankers and knowledge graph augmentation. Modular RAG is the state of the art for production systems that must handle diverse query types and knowledge domains. Its engineering overhead is substantial.
 
 ### Learning Resources
 * Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... & Kiela, D. (2020). [Retrieval-augmented generation for knowledge-intensive nlp tasks](https://proceedings.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf){target=_blank}. Advances in neural information processing systems, 33, 9459-9474.
@@ -6763,7 +6907,12 @@ Chunking is the most consequential single decision in RAG pipeline design (Gao e
 The chunk size and overlap parameters, and the splitting logic used, determine the granularity of
 information available to the retriever. Four primary chunking strategies exist:
 
-![Chunking strategy selection](../../assets/images/Chunking-Strategy-Selection.png){ width="800" }
+| Strategy | Mechanism | When to Use | Failure Mode |
+| --- | --- | --- | --- |
+| **Fixed-Size Chunking** | Split text at a fixed token or character count, with a specified overlap between adjacent chunks | Uniform text (narrative prose, documentation) with no structural hierarchy; simplest to implement | Splits semantic units mid-sentence; chunk boundaries are arbitrary relative to content structure |
+| **Recursive Character Text Splitting** | Attempt to split at natural boundaries in order: paragraph breaks → sentence breaks → word breaks → characters; falls back to finer granularity only when a chunk exceeds the size limit | Mixed-format documents with variable paragraph lengths; LangChain's default and most broadly applicable strategy | May still split mid-concept when natural boundaries are unevenly distributed |
+| **Semantic Chunking** | Embed each sentence individually; cluster sentences by embedding similarity; split at embedding-similarity discontinuities that signal topic transitions | Documents with clear topic shifts (research papers, multi-topic reports); produces thematically coherent chunks | Computationally expensive — embeds every sentence before splitting; may over-split on very dense or technical documents |
+| **Sentence-Window Chunking** | Embed individual sentences for retrieval but expand each retrieved sentence to include surrounding context sentences before injecting into the generation prompt | When the retrieval unit (sentence) needs to be finer than the generation unit (context window); produces highly targeted retrieval with rich generation context | Requires more complex retrieval pipeline; the expansion logic must be correctly configured to avoid context overflow |
 
 **Retrieval Method Selection and Context Compression**
 
@@ -6822,14 +6971,25 @@ computed from the retrieved context, the generated answer, and optionally a grou
 reference answer — enabling rapid, reproducible, and actionable evaluation that can be
 integrated into a CI/CD pipeline for continuous quality monitoring.
 
-![The four RAGAS metrics](../../assets/images/Four-RAGAS-Metrics.png){ width="800" }
+**The Four RAGAS Metrics — Definitions, Computation, and Diagnostic Use**
+
+| Metric | Definition | What a Low Score Means | Which Pipeline Component is Implicated |
+| --- | --- | --- | --- |
+| **Faithfulness** | The proportion of claims in the generated answer that are directly supported by the retrieved context. Computed by decomposing the answer into atomic claims and verifying each against the context. | The generator is hallucinating — producing claims not supported by the retrieved context. The answer cannot be trusted even if retrieval was successful. | Generator (Stage 6) — revise the generation prompt to strengthen the 'use only the provided context' instruction; or the retrieved context is too sparse to support the answer. |
+| **Answer Relevance** | The degree to which the generated answer addresses the user's question, independent of whether the answer is factually correct. Computed by generating questions from the answer and measuring their similarity to the original question. | The generator is producing on-topic but non-responsive output — answering a related but different question or providing a broader or narrower response than requested. | Generator (Stage 6) — revise the generation prompt to clarify the required response scope; or the query was ambiguous and should be pre-processed. |
+| **Context Precision** | The proportion of retrieved context chunks that are relevant to answering the question. Measures retrieval precision — how much of what was retrieved was needed. | The retriever is returning too many irrelevant chunks. Relevant information is buried in noise, increasing context window consumption and degrading generation quality. | Retriever (Stage 5) — reduce k, switch to MMR, add metadata filtering, or improve the embedding model's domain sensitivity. |
+| **Context Recall** | The proportion of the ground-truth answer that is supported by the retrieved context. Measures retrieval completeness — how much of what was needed was retrieved. | The retriever is missing relevant documents. The generator cannot answer correctly because the relevant information was not retrieved. | Retriever (Stage 5) and/or text splitter (Stage 2) — increase k, adjust chunking to prevent relevant content from being fragmented across chunk boundaries, or review corpus coverage. |
 
 **The Three Principal RAG Failure Modes**
 
 RAGAS metrics map systematically to three classes of RAG system failure, each with a distinct
 diagnostic signature and a distinct remediation strategy:
 
-![Three RAG failure modes](../../assets/images/Three-RAG-Failure-Modes.png){ width="800" }
+| Failure Mode | RAGAS Signature | Remediation Strategy |
+| --- | --- | --- |
+| **Hallucination** | Low Faithfulness; Answer Relevance may be moderate to high (the hallucinated answer addresses the question — it is just not supported by context) | Strengthen the 'grounded generation' instruction in the prompt template. Add explicit 'If the context does not contain sufficient information, state that you cannot answer.' Increase context coverage (higher k or improved retrieval precision). |
+| **Retrieval Failure** | Low Context Recall; Faithfulness may be high for what was retrieved but the answer is incomplete or incorrect because key information was not retrieved | Increase k. Review and revise chunking strategy to ensure relevant content is not fragmented. Check corpus coverage — the relevant documents may simply not be in the knowledge base. Consider query rewriting or decomposition to better match the query embedding to the relevant chunks. |
+| **Context Irrelevance / Overflow** | Low Context Precision; Faithfulness may be low or variable (the generator is working with noisy context); latency may be high due to large context payloads | Reduce k. Apply metadata filtering to restrict the retrieval search space. Switch from similarity search to MMR. Apply context compression (LLMLingua) to distill retrieved chunks before injection. |
 
 ### Learning Resources
 
@@ -9067,7 +9227,11 @@ embodies specific design philosophies about state management, agent communicatio
 system observability. The choice of framework is not merely a stylistic preference — it has real
 implications for the maintainability, debuggability, and scalability of the resulting system.
 
-![Three orchestration frameworks: LangGraph, AutoGen, CrewAI](../../assets/images/Three-Orchestration-Frameworks.png){ width="700" }
+| Framework | Core Design Philosophy | Strengths | Limitations |
+| --- | --- | --- | --- |
+| **LangGraph** | Graph-based state machine: agents are nodes; state transitions are edges; shared state schema is typed and explicit. The supervisor-worker pattern is the primary multi-agent implementation. | Explicit state visibility; fine-grained control over coordination logic; full LangChain ecosystem integration; strong observability through LangSmith. | Higher implementation complexity; requires explicit state schema design; steeper learning curve than higher-level frameworks. |
+| **AutoGen (Wu et al., 2023)** | Conversation-based: agents interact through structured natural language conversations; an orchestrator agent manages the conversation flow. Peer collaboration is the primary pattern. | Flexible conversational coordination; easy to prototype with; supports human-in-the-loop participation through the human proxy agent pattern. | Less explicit state management than LangGraph; conversation history can grow large; harder to reason about system behavior from conversation logs. |
+| **CrewAI** | Role-and-process abstraction: agents are defined by role, goal, and backstory; tasks are assigned to specific agents; crews execute tasks in sequential or hierarchical processes. | High-level abstraction reduces implementation boilerplate; rapid prototyping of role-based pipelines; intuitive role specification for non-expert developers. | Lower-level control is limited; customization beyond built-in process types requires framework extensions; less suitable for complex conditional routing. |
 
 ### Learning Resources
 
@@ -13067,13 +13231,45 @@ Each module is structured to develop cognitive competencies across Bloom's Taxon
 foundational recall to analytical reasoning. The following activity types are present in every module, yielding
 approximately 8 hours of instructional engagement per module.
 
-![Standard activity structure per module](../assets/images/StandardActivityStructurePerModule.png){ width="600" }
+| Self-Paced Structure | Bloom's Level | Primary Activities Translated |
+| --- | --- | --- |
+| Unit 1: Reading and Video 1.5 hours | L1 — Remember | A0 → structured reading with annotation protocol; instructor video introduction |
+| Unit 2: Concept Quiz 0.5 hours | L1–L2 | A1, A2 → formative quiz with explanatory feedback; concept map self-check |
+| Unit 3: Guided Labs 2.0 hours | L2–L3 | A3 → annotated reference notebook/video; A7 → scaffolded reference implementation; A8 → lab with verification checkpoints |
+| Unit 4: Hands-On Project 2.5 hours | L3–L4 | A9, A10 → open-specification project with experiment log; A12 → self-rubric analysis |
+| Unit 5: Case Study 1.0 hour | L4 — Analyze | A12, A14 → ill-structured diagnostic case with failure mode taxonomy |
+| Unit 6: Peer Discussion + Capstone 0.5h + Capstone | L4–L6 | A11, A13 → structured peer review rubric; A16 → required synthesis reflection in capstone | <br>
 
-![Module learning activities (part 1)](../assets/images/ModuleLearningActivitiesDescription1.png){ width="800" }
+| ID | Activity Name | Bloom's | Strategy |
+| --- | --- | --- | --- |
+| **A0** | Guided Pre-Reading with Structured Annotation | L1 | Annotation template (5–8 key terms, one-sentence summaries, clarifying questions) made explicit in Unit 1 guidance rather than assumed as student initiative. |
+| **A1** | Prior Knowledge Activation Recall | L1 | Explanatory feedback on every incorrect response replicates the correction function. Advisory note targets the three most consequential misconceptions for the module's content domain proactively. |
+| **A2** | Concept Mapping from Memory | L1 | Reference concept map provided in Unit 2 quiz feedback serves the same correction function as the instructor's displayed map. Partial credit: described in advisory, not graded. |
+| **A3** | Instructor-Led Conceptual Walkthrough with Live Narration | L2 | Video narration is the closest equivalent to live instructor voice. Annotated notebook preserves decision rationale in text form. Prediction prompts must be explicitly embedded — they do not arise naturally in self-paced reading. |
+| **A4** | Comparative Analysis Matrix | L2 | Model matrix comparison replicates the correction function of the class debrief. Students instructed to compare entries before proceeding to Unit 3 lab. |
+| **A5** | Think-Pair-Share Conceptual Discussion | L2 | Forum prompt design is critical: must require evidence-based explanation ('explain why X rather than Y, citing a specific assigned reading'), not reflection ('what did you find interesting?'). Partially compensated — social presence is delayed, not immediate. |
+| **A6** | Peer Teaching — Concept Explanation | L2 | Peer review rubric must require substantive design justification questions, not generic feedback. The 'explain to your partner' mechanism is partially reproduced through the reviewer's required justification questions. |
+| **A7** | Worked Example Code Walkthrough | L3 | Decision narration in comments must match the granularity of live narration. A reference implementation that shows what without explaining why a solution template is, not a worked example — it trains copying rather than schema formation. |
+| **A8** | Guided Implementation Lab (Scaffolded) | L3 | Troubleshooting guide replaces instructor just-in-time support. Must be proactively designed from documented common errors. Verification checkpoint specificity (exact expected output) is the most important design element. |
+| **A9** | Independent / Pair Implementation Lab | L3 | 3-sentence design rationale is a mandatory submission element, not optional — under time pressure students omit optional elements, defeating the purpose of articulating tacit design decisions. |
+| **A10** | Parameter Variation and Controlled Experiment | L3 | Parameter specification in submission checklist prevents under-compliance. Students instructed to form a conclusion before consulting benchmark reference values — conclusion first, then comparison. | <br>
 
-![Module learning activities (part 2)](../assets/images/ModuleLearningActivitiesDescription2.png){ width="800" }
+| ID | Activity Name | Bloom's | Strategy |
+| --- | --- | --- | --- |
+| **A11** | Structured Peer Demonstration and Critique | L3 | Specificity requirement ('reference the specific design decision in Section X') prevents generic feedback. Asynchronous peer review produces equivalent analytical depth but lacks the real-time dialogue that live demo enables. |
+| **A12** | Diagnostic Analysis Using a Structured Rubric | L4 | Model diagnosis for one deficiency provided in Unit 5 feedback after submission — replicates the instructor-led debriefs misconception-correction function with a time delay. Students must not access this before submitting their own analysis. |
+| **A13** | Comparative Evaluation and Evidence Synthesis | L4 | Benchmark comparison is a partial substitute for peer data pooling — it provides comparison values without collaborative synthesis. Forum data-sharing approximates A13's small-group function over a longer time window. This is the most significant functional loss in the self-paced adaptation. |
+| **A14** | Failure Mode Diagnosis and Remediation Design | L4 | Word count per diagnostic step prevents superficial responses. The prediction requirement ('expected behavior after the fix') is the most important element — it forces forward-chaining reasoning rather than retrospective labeling. |
+| **A15** | Session Debrief and Misconception Correction | L1–L4 Cross-cutting | Advisory misconceptions must be anticipatory, not responsive — drawn from documented common errors in the content domain, not from observing the current cohort. This is a real limitation: live instructors detect misconceptions from student behavior that no asynchronous artifact reveals until after submission. |
+| **A16** | Synthesis Reflection and Self-Assessment | L1–L4 Cross-cutting | Making A16 a graded required section (not optional) is the critical design decision. Research on self-regulated learning predicts that time-pressured students will omit non-graded reflection tasks precisely when they are most needed — at the end of the most demanding unit. |
 
-![Bloom's spiral progression across the course](../assets/images/Blooms_Spiral_Progression.png){ width="800" }
+**Bloom's Spiral Progression Across the Course**
+
+**Modules 1–2:** Weighted toward L1–L2 (Remember, Understand) — building vocabulary and mental models for automation design.
+
+**Modules 3–4:** Weighted toward L2–L3 (Understand, Apply) — integrating tools and building functional agent systems.
+
+**Module 5:** Weighted toward L3–L4 (Apply, Analyze) — auditing, policy-writing, and analytical evaluation of complete systems.
 
 ## General Skills of the Course
 
@@ -14480,11 +14676,17 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **Answer keys go in `??? success "Show answer and feedback"`** collapsibles
   (or `??? note` for key tables), never in plain text. The linter fails a
   key line outside a `???` block.
-- **Images** live in `docs/assets/images/` and are referenced relatively with
-  alt text and an `attr_list` width, for example
-  `![Four-stage agent loop](../../assets/images/Four_Stage_Agent_Loop.png){ width="900" }`.
-  Add the original to `images/` and let `optimize_images.py` produce the
-  served copy; never link to a GitHub `blob` URL.
+- **Diagrams** are written as Mermaid inside a `mermaid` fence, not committed as
+  pictures. The source stays readable in the diff, the figure cannot quietly go
+  stale the way a binary can, and anyone can edit it without image tooling.
+- **Tables** are written as Markdown tables. A table shipped as a screenshot is
+  invisible to search, to screen readers and to `llms.txt`, and it cannot reflow
+  on a phone.
+- **Images** are for photographs and screenshots of real interfaces. They live in
+  `docs/assets/images/` and are referenced relatively with alt text and an
+  `attr_list` width — `![alt text](<relative path>){ width="900" }`. Add the
+  original to `images/` and let `optimize_images.py` produce the served copy;
+  never link to a GitHub `blob` URL.
 - **Downloadable materials** (notebooks, PDFs, HTML activities, the glossary
   `.docx`) live in `docs/materials/moduleN/` and are linked relatively.
   Anything only instructors should have goes in `instructor/`, outside
@@ -15374,6 +15576,9 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ## 2026-09-10
 
+* **Update**: Replaced 25 figures that were tables shipped as PNG screenshots with real Markdown tables. A table stored as a picture is invisible to search and to `llms.txt`, unreadable by a screen reader, impossible to copy from, and it cannot reflow on a phone — the rubric a learner is graded against was a 2096-pixel-wide image. The 25 span [Module 1 activities](modules/module-1/activities.md), [foundational concepts](modules/module-1/foundational-concepts.md) and [overview](modules/module-1/overview.md), [Module 2](modules/module-2/foundational-concepts.md), [Module 3](modules/module-3/foundational-concepts.md) and [Module 4 foundational concepts](modules/module-4/foundational-concepts.md), and the [formal learning design](course-design/learning-design.md). Four of them were not grids but coloured definition blocks — the four-pillar literacy model, the four-dimension prompt architecture, the three RAG paradigms and the Bloom's progression — and are now headed prose rather than being forced into a table.
+* **Update**: Each table was transcribed from the full-resolution original in `images/`, not from the published copy, and then checked cell by cell against its image by a second reader; row and column counts were compared independently. Three were additionally verified by hand, including the graded Workflow Audit rubric. The originals stay in `images/` as the provenance record and are no longer published. `docs/assets/images/` drops from 42 files to 17, and the served image payload from 39.2 MB to 31.1 MB.
+* **Update**: [Contributing](about/contributing.md) now states the convention the site follows: diagrams are Mermaid in a fence, tables are Markdown, and images are for photographs and screenshots of real interfaces.
 * **Update**: Redrew the agent architecture figure on the [Module 2 foundational concepts](modules/module-2/foundational-concepts.md) page. The wiki shipped `AgentExecutor-Architecture.png`, a five-row LangChain 0.x design table naming its parts Agent (the LLM), Tool Descriptions, Tool Executor, Memory / State and Stopping Criteria. It is replaced by a Mermaid diagram of the loop `create_agent` actually runs and a table of the four components the rest of the course names, so the figure no longer disagrees with the pages that cite it. Being Mermaid, it is text in the repository rather than a binary that can silently go stale, and the course team can edit it without image tooling.
 * **Removal**: The retired PNG is no longer published. It stays in `images/` as the provenance record of what the wiki contained; `scripts/optimize_images.py` dropped the served copy once no page referenced it.
 * **Update**: The row-by-row crosswalk that made the old figure readable is gone with it, but the three points it carried that stand on their own are kept as prose: stopping is the rule that ends the loop rather than a fifth component; the 0.x stopping conditions — a Final Answer token, a maximum-iteration argument and a parsing-error threshold — have no equivalent in the current API; and older material names the same four components differently, which is still where a learner meets both vocabularies at once. No quiz question or reading guide referenced the figure, so no assessment item changed.

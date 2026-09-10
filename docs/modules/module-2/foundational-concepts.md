@@ -69,7 +69,13 @@ critical finding is that this capacity is emergent: it is absent in smaller mode
 above a scale threshold, suggesting that chain-of-thought reasoning reflects a qualitative
 capability transition rather than a continuous improvement curve.
 
-![Chain-of-thought prompting](../../assets/images/Chain-of-Thought.png){ width="800" }
+| Dimension | Chain-of-Thought Characteristics |
+| --- | --- |
+| **Core mechanism** | Decompose the problem into a linear sequence of intermediate reasoning steps before producing the final answer. |
+| **Prompting approach** | Few-shot examples where each example includes the reasoning chain (thought steps) followed by the answer, OR zero-shot 'Let's think step by step.' |
+| **Key strength** | Dramatically improves multi-step arithmetic, commonsense reasoning, and symbolic tasks. Low computational overhead — produces one reasoning chain per query. |
+| **Key limitation** | Linear: once a reasoning step is committed to, the model cannot backtrack. If an early step contains an error, subsequent reasoning inherits and compounds it. No mechanism for exploration of alternatives. |
+| **When to use** | Problems with a natural linear decomposition, where intermediate steps are checkable or low-stakes, and where computational cost is a primary constraint. |
 
 **Paradigm 2: ReAct - Synergizing Reasoning and Acting (Yao et al., 2022)**
 
@@ -79,7 +85,11 @@ during reasoning. ReAct interleaves reasoning steps (Thought) with actions (Act)
 of action outputs (Observe), creating a three-phase cycle that grounds reasoning in real-world
 information retrieved during the task.
 
-![Phases of the ReAct loop](../../assets/images/ReAct-Phase.png){ width="800" }
+| ReAct Phase | What Happens in This Phase |
+| --- | --- |
+| **THOUGHT** | The agent produces an internal reasoning step: what does it know, what does it need, what is its next action plan? This step is natural language — no tool is called. |
+| **ACT** | The agent issues a tool call — a web search, a calculator invocation, a database query, a file read. The action is specified using a structured format that the tool interface can parse. |
+| **OBSERVE** | The agent receives the tool output and incorporates it into its context. The observation becomes the input for the next Thought step, creating a closed reasoning-acting loop. |
 
 The ReAct loop is the default reasoning architecture for production agents today. The ability to read and diagnose a ReAct trace - identifying which piece of reasoning was faulty, which tool call was incorrectly specified, or which observation was misinterpreted - is the core diagnostic skill of Module 2. Thought, Act and Observe are the paper's names for the three phases, not labels a current agent prints: the Module 2 lab prints the same three steps as `REASONING:`, `TOOL CALL:` / `ARGUMENTS:` and `OBSERVATION:` lines.
 
@@ -122,7 +132,15 @@ LATS represents the frontier of what is possible when cost and latency constrain
 The following table enables side-by-side evaluation across the five dimensions that determine
 architectural selection in professional practice:
 
-![Four-paradigm comparative framework](../../assets/images/Four-Paradigm-Comparative-Framework.png){ width="800" }
+| Dimension | CoT | ReAct | ToT | LATS |
+| --- | --- | --- | --- | --- |
+| **Reasoning structure** | Linear chain — one path, committed at each step | Interleaved Thought-Act-Observe cycles | Branching tree — multiple paths explored and pruned | Tree search with real-world tool use at each node |
+| **Tool use** | None — operates on internal knowledge only | Yes — tool calls interleaved with reasoning | Not inherent — can be added but not the core architecture | Yes — tool use IS the tree expansion mechanism |
+| **Backtracking** | No — errors propagate forward | No — linear like CoT, just grounded | Yes — key feature: prune and backtrack | Yes — core capability |
+| **Computational cost** | Low — one reasoning pass per query | Medium — proportional to number of tool calls | High — proportional to tree breadth × depth | Very high — tree breadth × depth × tool calls |
+| **Best problem type** | Structured, decomposable, linear | Grounded fact-finding, QA with external sources, multi-step task execution | Open-ended planning, constraint satisfaction, proof construction | Complex planning requiring external information at each decision point |
+| **Hallucination risk** | High — no grounding in external facts | Low — observations ground each reasoning step | Medium — internal evaluation may be unreliable | Low — external observations ground evaluations |
+| **Interpretability** | High — trace is a natural language argument | High — trace shows exact tool calls and outcomes | Moderate — tree structure adds complexity | Low — tree plus tool use plus self-reflection is complex |
 
 ### Learning Resources
 * Wei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., ... & Zhou, D. (2022). [Chain-of-thought prompting elicits reasoning in large language models](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf){target=_blank}. Advances in neural information processing systems, 35, 24824-24837.
@@ -274,7 +292,13 @@ competency.
 Systematic trace analysis reveals that agent failures cluster into five distinguishable failure
 classes, each with a different root cause and a different fix:
 
-![Reasoning trace failure modes](../../assets/images/Reasoning-Trace-Failures.png){ width="800" }
+| Failure Class | Diagnostic Signature | Structural Fix |
+| --- | --- | --- |
+| **Hallucinated Tool Call** | The agent calls a tool that does not exist or calls a real tool with an argument that is not valid per the tool description. The executor returns an error or unexpected output. | Revise the tool description to make the tool's name, purpose, and argument schema unambiguous. Add negative examples if the agent confuses this tool with another. |
+| **Premature Termination** | The agent produces a Final Answer token before completing the task — typically after a successful first tool call, incorrectly treating partial information as a complete answer. | Revise the system prompt to specify the termination condition explicitly. Add a rubric for what 'task complete' means in terms of observable outputs. |
+| **Observation Misinterpretation** | The agent receives a valid tool output but misreads it — extracts the wrong field from a JSON response, misinterprets a numeric value, or confuses an error string with a data string. | Revise the tool description to specify the output format precisely. Add parsing instructions to the system prompt if the output format is complex. |
+| **Infinite Loop** | The agent repeats the same tool call with the same or similar arguments across multiple iterations, never converging to a Final Answer. The observation does not resolve the agent's reasoning state. | Add a loop-detection stopping criterion. Revise the system prompt to specify what to do when a tool call does not resolve the current uncertainty. |
+| **Logical Gap in Reasoning Chain** | The agent's Thought step contains a reasoning error — an incorrect inference, a false premise, or a misattributed observation — that propagates into subsequent tool selection or argument construction. | Add few-shot examples that demonstrate correct reasoning for this problem type. Consider switching to a more powerful base model or a more deliberate architecture (ToT or LATS) for complex reasoning problems. |
 
 ### Learning Materials
 
@@ -299,7 +323,23 @@ descriptions), what patterns of reasoning the agent should follow (few-shot CoT 
 what format the agent's outputs must conform to (output format constraints). Each dimension is
 independently configurable and independently contributes to agent reliability.
 
-![Agent prompt architecture](../../assets/images/Agent-Prompt-Architecture.png){ width="800" }
+**The Four-Dimension Agent Prompt Architecture**
+
+**Dimension 1: System Instructions**
+
+The system prompt defines the agent's identity, role, operational domain, and constraints. Effective system instructions specify: what the agent is for (domain scope), what it is not for (negative scope — prevents the agent from attempting tasks outside its competency), what it must always do (standing behavioral requirements), and what it must never do (hard behavioral limits). Vague system instructions produce agents with unpredictable behavioral boundaries.
+
+**Dimension 2: Tool Descriptions**
+
+As detailed in Theme 2, tool descriptions function as the agent's mental model of its available capabilities. In the prompt architecture, tool descriptions are presented to the agent as a structured list immediately after the system instructions, before any conversation context. The order in which tools are listed can affect which tool the agent selects when multiple tools are plausible candidates for a given subtask — an empirical effect documented in LangChain's design guidance.
+
+**Dimension 3: Few-Shot CoT Scaffolds**
+
+Few-shot examples demonstrate correct reasoning patterns for the agent's task domain. Brown et al. (2020) established that in-context few-shot examples can elicit capabilities in LLMs that zero-shot prompting cannot. For agents, few-shot examples in the system prompt demonstrate: what a correct Thought step looks like for this problem type, how to select the right tool given a specific context, how to interpret the tool's output, and when to conclude versus continue the loop.
+
+**Dimension 4: Output Format Constraints**
+
+Agents must produce outputs in formats that the AgentExecutor can parse. Output format constraints in the system prompt specify: the exact JSON structure for tool call specifications, the token or string that signals task completion (Final Answer), the format of intermediate Thought steps, and any constraints on output length or content. Poorly specified output format constraints produce parsing errors that terminate the agent prematurely or cause the executor to misinterpret a reasoning step as a tool call.
 
 !!! note "BEHAVIORAL CONTROL IS NOT A PATCH - IT IS AN ARCHITECTURE"
 
@@ -334,7 +374,16 @@ The Architectural Specification Brief produced in Module 2 must document your re
 all six dimensions - not just the technical choice, but the evidence-based justification for that
 choice given the specific problem context.
 
-![Six-dimension trade-off assessment](../../assets/images/Six-Dimensions-Trade-Off_Assessment.png){ width="800" }
+**The Six-Dimension Trade-off Assessment Framework**
+
+| Dimension | Assessment Questions | Architecture Implications |
+| --- | --- | --- |
+| **Latency** | What is the acceptable response time for this use case? Is the agent operating in a real-time, near-real-time, or batch context? | CoT and ReAct have lower latency than ToT and LATS. High-latency architectures are inappropriate for real-time user-facing applications. |
+| **Cost per Inference** | What is the per-query cost at the expected volume? Can the use case sustain the inference cost of multi-branch architectures? | CoT has lowest cost. ReAct cost scales with number of tool calls. ToT and LATS costs scale super linearly with tree depth and branching factor. |
+| **Reliability and Error Rate** | What is the acceptable error rate? Is the problem type where linear reasoning produces frequent errors that branch-and-backtrack would prevent? | For structured, well-defined tasks, ReAct reliability is typically sufficient. For open-ended or highly constrained tasks, ToT or LATS reduce error rates at higher cost. |
+| **Scalability** | What is the anticipated query volume and growth trajectory? How does the architecture scale with load? | Stateless architectures (CoT, ReAct) scale horizontally more easily. Stateful architectures (ToT, LATS) require more sophisticated state management infrastructure. |
+| **Interpretability / Explainability** | Are there regulatory, organizational, or user requirements for explainability of agent decisions? Does the EU AI Act's Article 13 apply? | CoT and ReAct traces are highly interpretable. ToT and LATS traces are significantly more complex to audit. High-risk AI system deployments may require CoT or ReAct for regulatory compliance. |
+| **Organizational Integration** | What are the data governance requirements? Who will maintain the system? What monitoring infrastructure is available? | Tool choices must align with data governance policies. The maintenance burden of ToT/LATS requires more sophisticated engineering capacity than CoT/ReAct. |
 
 The European Parliament's AI Act (2024) is directly relevant to architectural choice for high-risk
 AI systems. Article 13 of the Act requires that high-risk AI systems provide output that is
