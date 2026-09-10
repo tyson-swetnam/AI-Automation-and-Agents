@@ -42,7 +42,17 @@ wiki_page: Module-1-Act-3:-What-is-an-agent?
 ---
 # What Is an AI Agent?
 
-![Decoding AI agents](../../../assets/images/Decoding_AI_Agents.png){ width="900" }
+Section 1.3's ReAct loop runs Thought, Action and Observation until the model judges the observation sufficient to answer; the page maps those three phases onto deliberation, pro-activeness and perceiving the environment in classical agent theory.
+
+```mermaid
+flowchart TD
+    A["User query"] --> B["Thought"]
+    B -- selects a tool --> C["Action"]
+    C -- tool executes --> D["Observation"]
+    D -- model evaluates --> E{"Observation sufficient?"}
+    E -- no, new thought --> B
+    E -- yes --> F["Final answer"]
+```
 
 ### Contents of this package
 

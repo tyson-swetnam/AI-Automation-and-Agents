@@ -391,7 +391,19 @@ wiki_page: Github-Portfolio-Tutorial
 ---
 # GitHub Portfolio Setup Guide
 
-![AI professional portfolio guide](../assets/images/AI_Professional_Portfolio_Guide.png){ width="1000" }
+Everything from the account through the module directories is the one-time Day 1 setup checklist; once the repository URL goes to the instructor, the loop at the bottom is the ongoing routine — at least one learning-log entry and at least two commits a week.
+
+```mermaid
+flowchart TD
+  A["GitHub account"] -- enable 2FA --> B["Public course repo"]
+  B --> C["Root README.md"]
+  C --> D["LEARNING_LOG.md"]
+  D --> E["Module directories"]
+  E -- share URL with instructor --> F["Add deliverables"]
+  F -- update module README --> G["Weekly log entry"]
+  G --> H["Commit changes"]
+  H -- at least twice weekly --> F
+```
 
 ---
 
@@ -1027,8 +1039,6 @@ wiki_page: Module-1:-Overview
 
 **Time:** 8 hours
 
-![The modern AI stack](../../assets/images/Modern_AI_Stack.png){ width="900" }
-
 ## Introduction
 
 *Estimated time: ~3 min*
@@ -1180,7 +1190,17 @@ wiki_page: Module-1:-Foundational-Concepts
 ---
 # Module 1: Foundational Concepts
 
-![The new frontier of AI agents](../../assets/images/The_New_Frontier.png){ width="900" }
+The four-stage agent loop that Chapter 1 defines, and the point at which the agent exits it.
+
+```mermaid
+flowchart TD
+    A["Perceive"] -- environment state --> B["Plan"]
+    B -- chosen action --> C["Act"]
+    C -- tool output --> D["Observe"]
+    D -- updated state --> E{"Task complete?"}
+    E -- no --> A
+    E -- yes --> F["Conclude"]
+```
 
 ## Foundational Concepts for Module
 
@@ -1883,7 +1903,19 @@ wiki_page: Module-1:-Activities
 ---
 # Module 1 Activities
 
-![Thinking like an automation designer](../../assets/images/Automation-Designers-LP.png){ width="900" }
+The Workflow Audit project runs as a pipeline: each mapped workflow is scored on two dimensions, and its automation potential is the rule-based score divided by (consequence severity + 1).
+
+```mermaid
+flowchart LR
+    W["Candidate workflows"] --> M["Workflow map"]
+    M --> R["Rule-based score"]
+    M --> C["Consequence severity"]
+    R --> P["Automation potential"]
+    C --> P
+    P -- highest score --> T["Top-ranked workflow"]
+    T --> D["Paradigm choice"]
+    T --> N["Module 2 build"]
+```
 
 This Activity Guide contains the hands-on activities for Module 1. 
 
@@ -3120,7 +3152,13 @@ The three major automation paradigms progress from highly accessible visual buil
 
 **Difference between n8n (no-code) and LangChain (low-code)**
 
-![Visual versus programmatic automation](../../assets/images/Visual_vs_Programmatic.png){ width="800" }
+n8n and LangChain sit one step apart on the same spectrum, which runs from visual builders to fully programmable environments and trades accessibility away for flexibility, cost efficiency at scale, and data governance as you move right.
+
+```mermaid
+flowchart LR
+    NC["No-code: n8n"] -- more flexibility and lower cost --> LC["Low-code: LangChain, CrewAI"]
+    LC -- full control and data governance --> CF["Code-first: Claude Code"]
+```
 
 ## Transitioning from no-code prototype to low-code framework
 
@@ -3242,7 +3280,17 @@ wiki_page: Module-1-Act-3:-What-is-an-agent?
 ---
 # What Is an AI Agent?
 
-![Decoding AI agents](../../../assets/images/Decoding_AI_Agents.png){ width="900" }
+Section 1.3's ReAct loop runs Thought, Action and Observation until the model judges the observation sufficient to answer; the page maps those three phases onto deliberation, pro-activeness and perceiving the environment in classical agent theory.
+
+```mermaid
+flowchart TD
+    A["User query"] --> B["Thought"]
+    B -- selects a tool --> C["Action"]
+    C -- tool executes --> D["Observation"]
+    D -- model evaluates --> E{"Observation sufficient?"}
+    E -- no, new thought --> B
+    E -- yes --> F["Final answer"]
+```
 
 ### Contents of this package
 
@@ -3595,7 +3643,14 @@ wiki_page: Module-1-Act-5:-AI-Automation-and-Multi‐Agent-Frameworks
 ---
 # AI Automation and Multi-Agent Frameworks: A Strategic Comparison
 
-![The AI automation ecosystem](../../../assets/images/AI_Automation_Ecosystem.png){ width="900" }
+The page's roadmap runs Zapier to Make to n8n or CrewAI — Zapier's costs are the stated reason to leave it, and Stage 5+ is where data control and deep customization are mandatory.
+```mermaid
+flowchart LR
+A["Stage 3 Zapier"] -- costs prohibitive --> B["Stage 4 Make"]
+B -- need data control --> C["Stage 5+ Advanced"]
+C --> D["n8n self-hosted"]
+C --> E["CrewAI crews and flows"]
+```
 
 ## Executive Summary
 
@@ -3979,8 +4034,6 @@ wiki_page: Module-2:-Overview
 
 **Time:** 8 hours
 
-![Building AI automation pipelines](../../assets/images/BuildingAIAutomationPipelines.png){ width="900" }
-
 ## Introduction
 
 *Estimated time: ~2 min*
@@ -4071,7 +4124,14 @@ wiki_page: Module-2:-Foundational-Concepts
 ---
 # Module 2: Foundational Concepts
 
-![An architect's guide to agents](../../assets/images/Architects-Guide-to-Agents.png){ width="900" }
+Each paradigm answers a limitation of the one before it, gaining capability and cost together; ReAct remains the production default and LATS the high-cost frontier.
+
+```mermaid
+flowchart LR
+    COT["CoT"] -- no external information --> REACT["ReAct"]
+    REACT -- no backtracking --> TOT["Tree of Thoughts"]
+    TOT -- internal evaluation only --> LATS["LATS"]
+```
 
 Now that we know what agents are, we move on to the next question: how do modern LLM-based agents
 actually reason and act? 
@@ -4853,8 +4913,6 @@ wiki_page: Module-2:-Activities
 !!! note "Draft"
 
     This page is still being written; content may change.
-
-![Journey to AI agency](../../assets/images/Journey-to-AI-Agency.png){ width="900" }
 
 ## Self-Check Prompts
 
@@ -6633,8 +6691,6 @@ wiki_page: Module-3:-Overview
 
 **Time:** 8 hours
 
-![AI agent memory integration](../../assets/images/AI_Agent_Memory_Integration.png){ width="900" }
-
 ## Introduction
 
 *Estimated time: ~2 min*
@@ -6734,7 +6790,22 @@ wiki_page: Module-3:-Foundational-Concepts
 ---
 # Module 3: Foundational Concepts
 
-![The path to AI memory](../../assets/images/Path-to-AI-Memory.png){ width="900" }
+The six-stage RAG pipeline of Chapter 2, with three of Chapter 5's RAGAS metrics pointing back at the pipeline components each low score implicates.
+
+```mermaid
+flowchart TD
+    ING["Document ingestion"] --> SPL["Text splitting"]
+    SPL --> EMB["Embedding generation"]
+    EMB --> IDX["Vector store indexing"]
+    IDX --> RET["Similarity retrieval"]
+    QRY["User query"] --> RET
+    RET --> GEN["Augmented generation"]
+    GEN --> EVAL["RAGAS evaluation"]
+    EVAL -- low faithfulness --> GEN
+    EVAL -- low context precision --> RET
+    EVAL -- low context recall --> RET
+    EVAL -- low context recall --> SPL
+```
 
 ## Chapter 1: Parametric vs. Non-Parametric Memory
 
@@ -7474,7 +7545,18 @@ wiki_page: Module-3:-Activities
 ---
 # Module 3 Activities
 
-![The path to AI memory](../../assets/images/Path-to-AI-Memory.png){ width="900" }
+The four activities run in sequence — self-check prompts (~30 min), the guided RAG lab (~2 hrs), the four-run chunking experiment (~2 hrs), and the peer discussion (~60 min) — with the lab and experiment sharing one notebook and the experiment's results feeding the discussion post.
+
+```mermaid
+flowchart TD
+  A["Self-check prompts"] --> B["Guided RAG lab"]
+  B -- same notebook --> C["Four-run chunking experiment"]
+  C -- cite a run result --> D["Discussion post"]
+  D --> E["Peer reply"]
+  C -- completed notebook --> F["Submit to GitHub"]
+  D --> G["Submit to LMS"]
+  E --> G
+```
 
 ## Self-Check Prompts
 
@@ -9745,7 +9827,19 @@ wiki_page: Module-4:-Activities
 ---
 # Module 4 Activities
 
-![Multi-agent orchestration map](../../assets/images/Multi-Agent-Orchestration-Map.png){ width="900" }
+The guided lab builds this three-role pipeline in LangGraph; the hands-on project then rebuilds the same Researcher → Analyst → Critic roles in CrewAI, with the same topic, model, and quality criteria.
+
+```mermaid
+flowchart TD
+    TOPIC["Complex topic"] --> R["Researcher"]
+    R --> A["Analyst"]
+    A --> C["Critic"]
+    C --> GATE{"Quality gate"}
+    GATE -- pass --> OUT["Final output"]
+    GATE -- reject --> LIM{"Revision limit"}
+    LIM -- under cap --> A
+    LIM -- cap reached --> OUT
+```
 
 ## Self-Check Prompts
 
@@ -11035,7 +11129,19 @@ wiki_page: Module-5:-Overview
 
 **Time:** 8 hours
 
-![Responsible agentic AI control](../../assets/images/ResponsibleAgenticAIControl.png){ width="900" }
+Module 5 adds four areas to the notebook agents built earlier in the course, and the capstone folds all four into a single deployment plan.
+
+```mermaid
+flowchart TD
+  P["Notebook prototype"] --> E["Evaluation"]
+  P --> O["Observability"]
+  P --> S["Security"]
+  P --> G["Governance"]
+  E --> C["Responsible deployment plan"]
+  O --> C
+  S --> C
+  G --> C
+```
 
 ## Introduction
 
@@ -11126,8 +11232,6 @@ authorship:
 wiki_page: Module-5:-Foundational-Concepts
 ---
 # Module 5: Foundational Concepts
-
-![From prototype to production](../../assets/images/From-Prototype-to-Production.png){ width="900" }
 
 ## Chapter 1: From Prototype to Production
 
@@ -11701,7 +11805,19 @@ wiki_page: Module-5:-Activities
 ---
 # Module 5 Activities
 
-![Mastering responsible agentic AI](../../assets/images/Mastering-Responsible-AgenticAI.png){ width="900" }
+The Module 5 activities in order, and the two channels their work is submitted through — note that the guided lab and the comparative study share one notebook, submitted to GitHub under the same filename.
+
+```mermaid
+flowchart TD
+    A["Self-check prompts"] -- ungraded --> B["Guided lab"]
+    B -- same notebook --> C["Comparative study"]
+    B --> G["One .ipynb to GitHub"]
+    C --> G
+    C --> D["Capstone post"]
+    D --> E["Peer reply"]
+    D --> L["LMS discussion thread"]
+    E --> L
+```
 
 ## Self-Check Prompts
 
@@ -13766,6 +13882,33 @@ which side is right. Each needs an author's call:
    are self-evaluating: a learner who picked the unexplained option is told the
    right answer but never why theirs was wrong.
 
+## What the retired posters said
+
+Every page-top illustration was generated by NotebookLM and has been retired. Reading the 17
+of them against the pages they sat on turned up 121 claims that appear in a poster and
+nowhere in the page's text. Most are harmless framing. Four were teaching something the page
+contradicts, and are recorded here because a learner who trusted the figure was misled:
+
+1. **The Workflow Audit formula.** The Module 1 activities poster printed Automation
+   Potential as Rule-Based Specification ÷ Consequence Severity, with no `+ 1` in the
+   denominator. The page and the graded rubric both specify ÷ (Consequence Severity + 1).
+2. **LangChain's paradigm.** The Module 1 resources poster classified LangChain as
+   code-first. The page classifies it as low-code and reserves code-first for Claude Code
+   and custom Python agents. The same poster's sample code used `LLMChain` and
+   `initialize_agent`, both removed in LangChain 1.0.
+3. **The desktop client's name.** The landing-page and Module 1 activities posters labelled
+   it "Claude Cowork"; those pages say Claude Desktop, and Module 1's Lab B actually uses
+   Openwork.
+4. **The fourth memory pattern.** The Module 3 poster drew a Buffer to Summary to Vector
+   Store progression. The page's fourth pattern is Hybrid; vector-store-backed
+   conversational memory is not on the page at all.
+
+Separately, several posters carried real subject matter that exists in no page text — the
+Model Context Protocol and least-privilege permissions, the named EU AI Act risk tiers,
+token-budget profiling, LangSmith as the observability tool, and SRE error budgets. None of
+it was written into the pages, because inventing course content is an author's decision, not
+a maintenance one. If any of it should be taught, it needs adding as prose first.
+
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/
 
 ---
@@ -15190,8 +15333,6 @@ wiki_page: Module-1:-Overview2
 
     This page is kept for history. The current version is [Module 1 Overview: From Prompts to Pipelines](../../modules/module-1/overview.md).
 
-![The modern AI stack](../../assets/images/Modern_AI_Stack.png){ width="900" }
-
 ## Introduction
 
 Every powerful automation begins not with a tool, but with a question: what is actually happening in this workflow,
@@ -15576,6 +15717,9 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 ## 2026-09-10
 
+* **Removal**: Retired all 17 illustrated posters. Every page on this site opened with an AI-generated illustration produced by NotebookLM — a hand-drawn collage of robots, gears and speech bubbles, typically two megabytes, carrying its content as unsearchable pixels. Twelve pages get an engineering diagram in place of the poster: a Mermaid schematic of the thing the page actually teaches, written from that page's own text and small enough to read — the RAG pipeline with the RAGAS metric that implicates each stage, the reasoning-paradigm progression from Chain-of-Thought to LATS, the Researcher–Analyst–Critic pipeline with its quality gate and revision cap, the Workflow Audit scoring pipeline, the portfolio setup checklist and its weekly loop.
+* **Removal**: Seven pages lose the poster and gain nothing, each for a reason. The [Module 2 activities](modules/module-2/activities.md) page sets sketching that exact diagram as self-check prompt 2, so a figure at the top would print the answer key above the question. [Module 5 foundational concepts](modules/module-5/foundational-concepts.md) is a five-chapter survey whose structure its tables already carry. The Module 1, 2 and 3 overview pages would have repeated a diagram that now appears on their own foundational-concepts page. The [landing page](index.md) banner becomes a typographic title — the course name was previously hidden from sighted readers because the picture carried it — and the archived June 2026 draft keeps its record without being re-illustrated.
+* **Update**: `docs/assets/images/` is now empty: the site serves no raster images at all, down from 42 files and 39.2 MB. All 103 originals stay in `images/` as the provenance record of what the wiki contained. Reading the 17 posters against their pages found 121 claims that appear in a poster and in no page text; the four that contradicted the page — including a Workflow Audit formula missing the `+ 1` in its denominator — are recorded on the [instructor materials](course-design/instructor-materials.md) page, along with the subject matter that existed only in the pictures.
 * **Update**: Replaced 25 figures that were tables shipped as PNG screenshots with real Markdown tables. A table stored as a picture is invisible to search and to `llms.txt`, unreadable by a screen reader, impossible to copy from, and it cannot reflow on a phone — the rubric a learner is graded against was a 2096-pixel-wide image. The 25 span [Module 1 activities](modules/module-1/activities.md), [foundational concepts](modules/module-1/foundational-concepts.md) and [overview](modules/module-1/overview.md), [Module 2](modules/module-2/foundational-concepts.md), [Module 3](modules/module-3/foundational-concepts.md) and [Module 4 foundational concepts](modules/module-4/foundational-concepts.md), and the [formal learning design](course-design/learning-design.md). Four of them were not grids but coloured definition blocks — the four-pillar literacy model, the four-dimension prompt architecture, the three RAG paradigms and the Bloom's progression — and are now headed prose rather than being forced into a table.
 * **Update**: Each table was transcribed from the full-resolution original in `images/`, not from the published copy, and then checked cell by cell against its image by a second reader; row and column counts were compared independently. Three were additionally verified by hand, including the graded Workflow Audit rubric. The originals stay in `images/` as the provenance record and are no longer published. `docs/assets/images/` drops from 42 files to 17, and the served image payload from 39.2 MB to 31.1 MB.
 * **Update**: [Contributing](about/contributing.md) now states the convention the site follows: diagrams are Mermaid in a fence, tables are Markdown, and images are for photographs and screenshots of real interfaces.

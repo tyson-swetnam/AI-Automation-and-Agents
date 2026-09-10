@@ -35,8 +35,6 @@ wiki_page: Module-3:-Overview
 
 **Time:** 8 hours
 
-![AI agent memory integration](../../assets/images/AI_Agent_Memory_Integration.png){ width="900" }
-
 ## Introduction
 
 *Estimated time: ~2 min*

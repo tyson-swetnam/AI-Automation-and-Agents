@@ -34,8 +34,6 @@ wiki_page: Module-1:-Overview
 
 **Time:** 8 hours
 
-![The modern AI stack](../../assets/images/Modern_AI_Stack.png){ width="900" }
-
 ## Introduction
 
 *Estimated time: ~3 min*

@@ -33,7 +33,14 @@ wiki_page: Module-2:-Foundational-Concepts
 ---
 # Module 2: Foundational Concepts
 
-![An architect's guide to agents](../../assets/images/Architects-Guide-to-Agents.png){ width="900" }
+Each paradigm answers a limitation of the one before it, gaining capability and cost together; ReAct remains the production default and LATS the high-cost frontier.
+
+```mermaid
+flowchart LR
+    COT["CoT"] -- no external information --> REACT["ReAct"]
+    REACT -- no backtracking --> TOT["Tree of Thoughts"]
+    TOT -- internal evaluation only --> LATS["LATS"]
+```
 
 Now that we know what agents are, we move on to the next question: how do modern LLM-based agents
 actually reason and act? 

@@ -34,8 +34,6 @@ wiki_page: Module-5:-Foundational-Concepts
 ---
 # Module 5: Foundational Concepts
 
-![From prototype to production](../../assets/images/From-Prototype-to-Production.png){ width="900" }
-
 ## Chapter 1: From Prototype to Production
 
 ### Chapter 1 Lesson

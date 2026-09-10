@@ -33,7 +33,22 @@ wiki_page: Module-3:-Foundational-Concepts
 ---
 # Module 3: Foundational Concepts
 
-![The path to AI memory](../../assets/images/Path-to-AI-Memory.png){ width="900" }
+The six-stage RAG pipeline of Chapter 2, with three of Chapter 5's RAGAS metrics pointing back at the pipeline components each low score implicates.
+
+```mermaid
+flowchart TD
+    ING["Document ingestion"] --> SPL["Text splitting"]
+    SPL --> EMB["Embedding generation"]
+    EMB --> IDX["Vector store indexing"]
+    IDX --> RET["Similarity retrieval"]
+    QRY["User query"] --> RET
+    RET --> GEN["Augmented generation"]
+    GEN --> EVAL["RAGAS evaluation"]
+    EVAL -- low faithfulness --> GEN
+    EVAL -- low context precision --> RET
+    EVAL -- low context recall --> RET
+    EVAL -- low context recall --> SPL
+```
 
 ## Chapter 1: Parametric vs. Non-Parametric Memory
 

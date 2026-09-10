@@ -27,7 +27,19 @@ wiki_page: Github-Portfolio-Tutorial
 ---
 # GitHub Portfolio Setup Guide
 
-![AI professional portfolio guide](../assets/images/AI_Professional_Portfolio_Guide.png){ width="1000" }
+Everything from the account through the module directories is the one-time Day 1 setup checklist; once the repository URL goes to the instructor, the loop at the bottom is the ongoing routine — at least one learning-log entry and at least two commits a week.
+
+```mermaid
+flowchart TD
+  A["GitHub account"] -- enable 2FA --> B["Public course repo"]
+  B --> C["Root README.md"]
+  C --> D["LEARNING_LOG.md"]
+  D --> E["Module directories"]
+  E -- share URL with instructor --> F["Add deliverables"]
+  F -- update module README --> G["Weekly log entry"]
+  G --> H["Commit changes"]
+  H -- at least twice weekly --> F
+```
 
 ---
 

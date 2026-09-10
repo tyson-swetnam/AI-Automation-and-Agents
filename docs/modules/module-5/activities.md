@@ -35,7 +35,19 @@ wiki_page: Module-5:-Activities
 ---
 # Module 5 Activities
 
-![Mastering responsible agentic AI](../../assets/images/Mastering-Responsible-AgenticAI.png){ width="900" }
+The Module 5 activities in order, and the two channels their work is submitted through — note that the guided lab and the comparative study share one notebook, submitted to GitHub under the same filename.
+
+```mermaid
+flowchart TD
+    A["Self-check prompts"] -- ungraded --> B["Guided lab"]
+    B -- same notebook --> C["Comparative study"]
+    B --> G["One .ipynb to GitHub"]
+    C --> G
+    C --> D["Capstone post"]
+    D --> E["Peer reply"]
+    D --> L["LMS discussion thread"]
+    E --> L
+```
 
 ## Self-Check Prompts
 

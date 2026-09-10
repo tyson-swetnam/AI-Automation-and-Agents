@@ -31,7 +31,17 @@ wiki_page: Module-1:-Foundational-Concepts
 ---
 # Module 1: Foundational Concepts
 
-![The new frontier of AI agents](../../assets/images/The_New_Frontier.png){ width="900" }
+The four-stage agent loop that Chapter 1 defines, and the point at which the agent exits it.
+
+```mermaid
+flowchart TD
+    A["Perceive"] -- environment state --> B["Plan"]
+    B -- chosen action --> C["Act"]
+    C -- tool output --> D["Observe"]
+    D -- updated state --> E{"Task complete?"}
+    E -- no --> A
+    E -- yes --> F["Conclude"]
+```
 
 ## Foundational Concepts for Module
 

@@ -33,7 +33,19 @@ wiki_page: Module-4:-Activities
 ---
 # Module 4 Activities
 
-![Multi-agent orchestration map](../../assets/images/Multi-Agent-Orchestration-Map.png){ width="900" }
+The guided lab builds this three-role pipeline in LangGraph; the hands-on project then rebuilds the same Researcher → Analyst → Critic roles in CrewAI, with the same topic, model, and quality criteria.
+
+```mermaid
+flowchart TD
+    TOPIC["Complex topic"] --> R["Researcher"]
+    R --> A["Analyst"]
+    A --> C["Critic"]
+    C --> GATE{"Quality gate"}
+    GATE -- pass --> OUT["Final output"]
+    GATE -- reject --> LIM{"Revision limit"}
+    LIM -- under cap --> A
+    LIM -- cap reached --> OUT
+```
 
 ## Self-Check Prompts
 

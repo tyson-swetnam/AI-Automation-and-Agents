@@ -30,8 +30,6 @@ wiki_page: Module-2:-Overview
 
 **Time:** 8 hours
 
-![Building AI automation pipelines](../../assets/images/BuildingAIAutomationPipelines.png){ width="900" }
-
 ## Introduction
 
 *Estimated time: ~2 min*

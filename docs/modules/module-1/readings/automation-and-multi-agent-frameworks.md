@@ -36,7 +36,14 @@ wiki_page: Module-1-Act-5:-AI-Automation-and-Multi‐Agent-Frameworks
 ---
 # AI Automation and Multi-Agent Frameworks: A Strategic Comparison
 
-![The AI automation ecosystem](../../../assets/images/AI_Automation_Ecosystem.png){ width="900" }
+The page's roadmap runs Zapier to Make to n8n or CrewAI — Zapier's costs are the stated reason to leave it, and Stage 5+ is where data control and deep customization are mandatory.
+```mermaid
+flowchart LR
+A["Stage 3 Zapier"] -- costs prohibitive --> B["Stage 4 Make"]
+B -- need data control --> C["Stage 5+ Advanced"]
+C --> D["n8n self-hosted"]
+C --> E["CrewAI crews and flows"]
+```
 
 ## Executive Summary
 

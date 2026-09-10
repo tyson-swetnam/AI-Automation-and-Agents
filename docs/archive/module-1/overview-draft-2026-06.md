@@ -39,8 +39,6 @@ wiki_page: Module-1:-Overview2
 
     This page is kept for history. The current version is [Module 1 Overview: From Prompts to Pipelines](../../modules/module-1/overview.md).
 
-![The modern AI stack](../../assets/images/Modern_AI_Stack.png){ width="900" }
-
 ## Introduction
 
 Every powerful automation begins not with a tool, but with a question: what is actually happening in this workflow,

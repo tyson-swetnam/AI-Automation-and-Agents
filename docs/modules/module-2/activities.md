@@ -38,8 +38,6 @@ wiki_page: Module-2:-Activities
 
     This page is still being written; content may change.
 
-![Journey to AI agency](../../assets/images/Journey-to-AI-Agency.png){ width="900" }
-
 ## Self-Check Prompts
 
 *Estimated time: ~30 min*

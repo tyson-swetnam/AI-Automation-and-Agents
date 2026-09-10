@@ -34,7 +34,18 @@ wiki_page: Module-3:-Activities
 ---
 # Module 3 Activities
 
-![The path to AI memory](../../assets/images/Path-to-AI-Memory.png){ width="900" }
+The four activities run in sequence — self-check prompts (~30 min), the guided RAG lab (~2 hrs), the four-run chunking experiment (~2 hrs), and the peer discussion (~60 min) — with the lab and experiment sharing one notebook and the experiment's results feeding the discussion post.
+
+```mermaid
+flowchart TD
+  A["Self-check prompts"] --> B["Guided RAG lab"]
+  B -- same notebook --> C["Four-run chunking experiment"]
+  C -- cite a run result --> D["Discussion post"]
+  D --> E["Peer reply"]
+  C -- completed notebook --> F["Submit to GitHub"]
+  D --> G["Submit to LMS"]
+  E --> G
+```
 
 ## Self-Check Prompts
 

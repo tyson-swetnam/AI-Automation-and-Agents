@@ -8,11 +8,9 @@ hide:
   - toc
 ---
 
-# AI Automation and Agents { .course-visually-hidden }
-
 <div class="course-hero" markdown>
 
-![AI Automation and Agents course banner](assets/images/AI_Automation_Agents.png){ .course-hero__img }
+# AI Automation and Agents { .course-hero__title }
 
 Move beyond individual prompts into the world of AI agents and automated workflows: systems that take actions, use tools, manage files, and complete multi-step tasks on your behalf. Five modules, about 40 hours, from foundational agent theory to the open-source frameworks used in industry.
 { .course-hero__tagline }

@@ -111,7 +111,13 @@ The three major automation paradigms progress from highly accessible visual buil
 
 **Difference between n8n (no-code) and LangChain (low-code)**
 
-![Visual versus programmatic automation](../../assets/images/Visual_vs_Programmatic.png){ width="800" }
+n8n and LangChain sit one step apart on the same spectrum, which runs from visual builders to fully programmable environments and trades accessibility away for flexibility, cost efficiency at scale, and data governance as you move right.
+
+```mermaid
+flowchart LR
+    NC["No-code: n8n"] -- more flexibility and lower cost --> LC["Low-code: LangChain, CrewAI"]
+    LC -- full control and data governance --> CF["Code-first: Claude Code"]
+```
 
 ## Transitioning from no-code prototype to low-code framework
 

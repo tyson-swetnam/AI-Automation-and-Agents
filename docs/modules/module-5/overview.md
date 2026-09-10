@@ -37,7 +37,19 @@ wiki_page: Module-5:-Overview
 
 **Time:** 8 hours
 
-![Responsible agentic AI control](../../assets/images/ResponsibleAgenticAIControl.png){ width="900" }
+Module 5 adds four areas to the notebook agents built earlier in the course, and the capstone folds all four into a single deployment plan.
+
+```mermaid
+flowchart TD
+  P["Notebook prototype"] --> E["Evaluation"]
+  P --> O["Observability"]
+  P --> S["Security"]
+  P --> G["Governance"]
+  E --> C["Responsible deployment plan"]
+  O --> C
+  S --> C
+  G --> C
+```
 
 ## Introduction
 

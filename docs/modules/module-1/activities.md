@@ -34,7 +34,19 @@ wiki_page: Module-1:-Activities
 ---
 # Module 1 Activities
 
-![Thinking like an automation designer](../../assets/images/Automation-Designers-LP.png){ width="900" }
+The Workflow Audit project runs as a pipeline: each mapped workflow is scored on two dimensions, and its automation potential is the rule-based score divided by (consequence severity + 1).
+
+```mermaid
+flowchart LR
+    W["Candidate workflows"] --> M["Workflow map"]
+    M --> R["Rule-based score"]
+    M --> C["Consequence severity"]
+    R --> P["Automation potential"]
+    C --> P
+    P -- highest score --> T["Top-ranked workflow"]
+    T --> D["Paradigm choice"]
+    T --> N["Module 2 build"]
+```
 
 This Activity Guide contains the hands-on activities for Module 1. 
 
