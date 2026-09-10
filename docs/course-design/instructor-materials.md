@@ -224,16 +224,23 @@ never emits.
 table. Editing the Markdown under `docs/` directly will be reverted on the next
 run. `python scripts/migrate_wiki.py --check` proves the two are in step.
 
-!!! warning "The architecture figure still shows the old design"
+!!! note "The architecture figure was redrawn"
 
-    `AgentExecutor-Architecture.png` on the Module 2 foundational concepts page
-    is a five-row table using its own names: Agent (the LLM), Tool Descriptions,
-    Tool Executor, Memory / State, Stopping Criteria. Its right-hand column still
-    explains each part usefully, so it is kept and captioned as the LangChain 0.x
-    figure it is, with a row-by-row crosswalk onto the four component names and a
-    correction to its stopping-criteria row. Replacing it with a redrawn
-    four-component figure would remove the last place a learner meets two
-    vocabularies at once. That redraw is an owner task.
+    `AgentExecutor-Architecture.png` was a five-row LangChain 0.x design table
+    using its own names: Agent (the LLM), Tool Descriptions, Tool Executor,
+    Memory / State, Stopping Criteria. It is retired. In its place the Module 2
+    foundational concepts page carries a Mermaid diagram of the loop
+    `create_agent` actually runs and a table of the four components, so the
+    figure now agrees with the vocabulary the rest of the course uses and the
+    row-by-row crosswalk that made the old one readable is gone.
+
+    Three things the crosswalk taught stand on their own and were kept as prose:
+    that stopping is the loop's exit rule rather than a fifth component, that the
+    0.x stopping conditions have no equivalent in the current API, and that
+    older material names the same four components differently — which is still
+    the place a learner meets both vocabularies at once. The diagram is Mermaid
+    rather than an image so it cannot go stale as a binary; the retired PNG stays
+    in `images/` as the provenance record and is no longer published.
 
 ## Content inconsistencies inherited from the source
 

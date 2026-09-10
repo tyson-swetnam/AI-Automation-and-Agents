@@ -175,18 +175,31 @@ LangChain's `create_agent` is the current production API for constructing multi-
 
 The agent returned by `create_agent` is a compiled graph that runs the ReAct loop internally: invoke it with `{"messages": [...]}` and it repeats a reasoning → tool call → observation cycle until the model returns a message that requests no tools. That message ends the run and carries the final answer, which you read from `result["messages"][-1].content`; the step cap is the `recursion_limit` config key. Unlike `AgentExecutor`, state management, loop control, and tool dispatch are handled by the underlying LangGraph execution graph — making the agent inherently compatible with checkpointing, streaming, and multi-agent orchestration. *Thought*, *Action* and *Observation* are the ReAct paper's names for the phases of that cycle, not labels the agent emits — the model's message carries structured `tool_calls`, and it is the Module 2 lab's `show_trace` helper that gives the steps printable names (`REASONING:` — only when the model narrates before calling — then `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and `[final] ANSWER:`).
 
-The figure below is the original LangChain 0.x `AgentExecutor` design table, kept here because its right-hand column explains what each part of an agent runtime is *for*. Read it as a historical figure: it has five rows, it uses its own names for them, and its body text still refers to the `AgentExecutor` class, to a "Final Answer" token and to a maximum iteration limit — all three of which the current API has left behind.
+**The agent runtime.** Four structural components, and the loop that connects them:
 
-![A five-row table titled Component, Role and Design Considerations, describing Agent (the LLM), Tool Descriptions, Tool Executor, Memory / State and Stopping Criteria for the LangChain 0.x AgentExecutor](../../assets/images/AgentExecutor-Architecture.png){ width="800" }
+```mermaid
+flowchart TD
+    IN["User message"] --> STATE["Memory Module"]
+    STATE --> LLM["LLM Backbone"]
+    LLM --> Q{"Requests a tool?"}
+    Q -- no --> OUT["Final answer"]
+    Q -- yes --> EXEC["Action Executor"]
+    EXEC --> OBS["Observation"]
+    OBS --> STATE
+    REG["Tool Registry"] -- descriptions --> LLM
+    REG -- callables --> EXEC
+```
 
-**Reading the figure in this course's vocabulary.** Four of its five rows are the four structural components of the agent runtime, under older names:
+| Component | Role and design considerations |
+| --- | --- |
+| **LLM Backbone** | The reasoning core. Reads the system prompt, the message state and the tool descriptions, then produces either a tool call or a final answer. It never runs a tool itself: it names one and supplies the arguments. |
+| **Tool Registry** | The registered tools, each with a description and an input schema. The model reads the descriptions to choose; for a `@tool` function the description is its docstring unless an explicit `description=` overrides it. Description quality is the single largest determinant of reliable tool use — ambiguous or incomplete descriptions produce wrong choices and invented arguments. |
+| **Action Executor** | Runs the tool the model named, with the arguments it supplied, and appends the result to the state as an observation. A tool that raises propagates out and ends the run, so a production tool catches its own errors and returns them as text the model can reason about. |
+| **Memory Module** | The running message state: the conversation, every tool call and every observation. Each pass of the loop sees what the previous passes produced. Pass a `checkpointer` to `create_agent` to persist it across invocations. |
 
-* *Agent (the LLM)* is the **LLM Backbone**.
-* *Tool Descriptions* are the descriptions carried by the **Tool Registry** — the text the model reads when it chooses a tool.
-* *Tool Executor* is the **Action Executor**.
-* *Memory / State* is the **Memory Module**.
+**Stopping is a rule, not a component.** The loop ends when the model returns a message that requests no tools, and that message carries the final answer; the step cap is the `recursion_limit` config key. The LangChain 0.x design listed three stopping conditions instead — a "Final Answer" token, a maximum-iteration argument and a parsing-error threshold — and the current API has none of them. The first two are replaced by the rule and the config key above. The third has nothing left to act on: a tool-calling model emits the structured call directly, so no component parses text into an action.
 
-The fifth row, *Stopping Criteria*, is not a component at all: it is the rule that ends the loop, and it is the part that genuinely changed. A run now ends when the model returns a message with no tool calls, and the step cap is set by the `recursion_limit` config key rather than by a maximum-iteration argument. There is no parsing-error threshold either, because there is no text to parse — the model returns the call itself, as a `name` and an `args` dictionary. Note also what the figure has no row for: an output parser. Older component lists counted one between the model and the executor; this one does not, and neither does the current architecture, for the reason given in the `response_format` note above.
+**Older tutorials use different names.** Material written against the `AgentExecutor` that LangChain 1.0 removed calls these four *Agent (the LLM)*, *Tool Descriptions*, *Tool Executor* and *Memory / State*. Those component lists often run to five, and the extra entry is one of two things: an output parser, which a tool-calling model makes unnecessary, or stopping criteria, which is the loop rule above rather than a part of the runtime.
 
 **Tool Description Design - The Specification Discipline**
 
