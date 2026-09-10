@@ -7727,7 +7727,7 @@ sources:
 | B | Runs 1–4 | Controlled experiment: change one retrieval setting at a time, score ten evaluation questions | ~75 min |
 | B | Log + RAGAS | Write up the experiment, then interpret four RAGAS scores for a non-technical reader | ~30 min |
 
-The step times are for the work itself. Allow extra for setup, reading output, and writing your answers.
+The step times are for the work itself. Allow extra for setup, reading output, and writing your answers. On the free path, allow more for Part B — its introduction explains why.
 
 #### How to work through this notebook
 
@@ -8239,11 +8239,13 @@ for i, query in enumerate(TEST_QUERIES, 1):
 
 **Highly relevant context** — the query whose sources contain the exact information needed:
 
-**Marginal context** — the query whose sources are related but not directly answer-relevant, where the model appears to fill the gap from parametric knowledge:
+**Marginal context** — the query whose sources are related but not directly answer-relevant:
 
-> Annotate that second query **`potential faithfulness issue`**. It is the most analytically important observation in Step A3 and a direct demonstration of why RAGAS's faithfulness metric exists — you come back to it in the RAGAS interpretation at the end of Part B.
+**What the model did with that gap** — did it fill it from parametric knowledge, or say that the context does not answer the question? Quote the part of the answer that shows which:
 
-**How I could tell the model went beyond the context** (specific claim in the answer with no support in the retrieved chunks):
+> Annotate that query **`potential faithfulness issue`** either way. If the model filled the gap, you have watched a faithfulness failure happen — the reason RAGAS's faithfulness metric exists. If it declined, the system prompt's "say that you do not know" instruction did its job, and you have seen the defence that failure calls for. You come back to this case in the RAGAS interpretation at the end of Part B.
+
+**If the model went beyond the context:** the specific claim in its answer that the retrieved chunks do not support. If it declined instead, write "declined" and quote the sentence it used:
 
 ---
 ### Step A4 — Multi-document extension  *(~10 min)*
@@ -8374,6 +8376,8 @@ Run 2 changes chunk size and holds the retriever fixed; Run 3 changes the retrie
 | 1 | Incorrect or hallucinated |
 
 Only an answer the retrieved chunks support can earn a 4. An answer that is accurate but unsupported by its chunks is the faithfulness failure you flagged in Step A3, so score it as hallucinated. With `LLM_PROVIDER = "none"` there are no answers to score: score whether the retrieved chunks contain the reference answer instead, on the same scale, and say so in your log.
+
+**Time on the free path.** The two-hour budget assumes the paid path. With `LLM_PROVIDER = "local"`, Part B generates about 40 answers on a small CPU model — ten questions in each of Runs 1–3, and five twice in Run 4 — and that waiting is the slowest part of the lab. Do Runs 1–3 first, and Run 4 only if you have time.
 
 ```python
 # The evaluation set: ten questions about the AI RMF, each with a reference answer taken from the
@@ -8581,7 +8585,7 @@ for label, run in RUNS.items():
 
 #### Check your conclusion against the retrieval evidence
 
-Write your conclusion **before** running the next cell. The cell measures something your scores cannot: for each run, how many of the four retrieved chunks came from a page that holds the reference answer, summed over the ten questions. It checks retrieval only — a run can find the right pages and still produce a poor answer, and it cannot see an answer the model made up.
+Write your conclusion **before** running the next cell. The cell measures something your scores cannot: for each run, how many of the four retrieved chunks came from a page that holds the reference answer, summed over the ten questions. It checks retrieval only — a run can find the right pages and still produce a poor answer, and it cannot see an answer the model made up. How far the runs separate depends on the embedding model: with OpenAI embeddings the three totals can come out close or equal. That is a result, not a mistake — say what it means for your conclusion.
 
 ```python
 # Retrieval check: for each run, how many retrieved chunks came from a page holding the reference answer.
@@ -8613,7 +8617,7 @@ For each metric, write **one sentence** saying what this particular score means 
 
 **Which pipeline stage would you fix first, and which of your runs is the evidence for that choice?**
 
-**How does the query you flagged `potential faithfulness issue` in Step A3 help explain the faithfulness score?**
+**What did the query you flagged `potential faithfulness issue` in Step A3 show about grounding — did the model fill the gap or decline — and how does that relate to a faithfulness score of 0.62?**
 
 ---
 ### Before you submit
@@ -8624,7 +8628,7 @@ For each metric, write **one sentence** saying what this particular score means 
 - [ ] A1: page count, metadata fields, and your filtering-field justification
 - [ ] A2: chunk count, three inspected chunks with boundary verdicts, overlap analysis
 - [ ] A3: all five answers assessed, plus the highly-relevant and marginal cases identified
-- [ ] The marginal case is annotated `potential faithfulness issue` — you use it again in the RAGAS interpretation
+- [ ] The marginal case is annotated `potential faithfulness issue`, with what the model did — filled the gap from memory, or declined — and you use it again in the RAGAS interpretation
 - [ ] A4: per-query comparison, plus one documented irrelevant chunk from corpus 2
 
 **Part B**
@@ -16028,7 +16032,7 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 * **Update**: Repaired the [Module 3 lab and hands-on project](modules/module-3/activities.md). The Activities page described a four-run retrieval experiment and a RAGAS write-up "embedded directly in the notebook"; the [notebook](modules/module-3/lab-notebook.md) had neither, and its corpus PDFs, five test queries, evaluation set and RAGAS scores had only ever existed in the Arizona LMS, so even the guided lab could not run from this site. The wiki history showed the authors' last intent: on 2026-08-10 they moved the project instructions off the page on the promise that the notebook held them. The notebook now does. Part B carries the four runs of the original specification (256- then 512-character chunks, MMR at `lambda_mult=0.5`, and an optional metadata filter), the recovered 1–4 rubric, ten evaluation questions whose reference answers are quoted from the corpus with their pages, the experiment log with a two-paragraph mechanistic conclusion, a retrieval check the learner runs only after writing that conclusion, and the RAGAS interpretation with provided scores.
 * **Creation**: The lab corpus is NIST's [AI Risk Management Framework](materials/module3/NIST.AI.100-1.pdf) (AI 100-1) and its [Generative AI Profile](materials/module3/NIST.AI.600-1.pdf) (AI 600-1), both US government publications in the public domain and topics the course already teaches in Modules 1, 2 and 5. The notebook downloads them from this site, falling back to NIST, and checks each against a pinned SHA-256, because the evaluation questions cite specific pages and a revised edition would shift them.
-* **Update**: Verified before publishing: every code cell in the notebook runs end to end on the free path (local embeddings, no model), re-running a project cell does not duplicate chunks, and the experiment separates its runs — on that path the retrieval check puts 20, 22 and 18 of 40 retrieved chunks on a reference page for Runs 1–3, and Run 4's corpus filter removes every GenAI-Profile chunk from the four test queries it had crowded. The RAGAS scores are provided rather than computed: the current RAGAS release fails on import against LangChain 1.4 because it imports a `langchain_community` module that no longer exists, and pinning the retired `langchain-community` package back would still leave free-path learners without a model able to judge.
+* **Update**: Verified before publishing: every code cell in the notebook runs end to end on the free path (local embeddings, no model), re-running a project cell does not duplicate chunks, and the experiment separates its runs — on that path the retrieval check puts 20, 22 and 18 of 40 retrieved chunks on a reference page for Runs 1–3, and Run 4's corpus filter removes every GenAI-Profile chunk from the four test queries it had crowded. Answer generation itself was not exercised, since that needs an API key or a model download, so the Step A3 marginal-context exercise records either outcome: the model filling the gap from memory, or declining as the system prompt instructs. The notebook also says that its time budget assumes the paid path, and that a flat retrieval check under OpenAI embeddings is a result rather than a mistake. The RAGAS scores are provided rather than computed: the current RAGAS release fails on import against LangChain 1.4 because it imports a `langchain_community` module that no longer exists, and pinning the retired `langchain-community` package back would still leave free-path learners without a model able to judge.
 * **Update**: What the authors removed on 2026-08-06 — Lab B, the token-budget report and the memory-architecture brief — stays removed. The [Module 3 overview](modules/module-3/overview.md)'s deliverable row listed two of them and now lists the experiment log and RAGAS interpretation; chapter 4 quiz question 5 cited a "Unit 4 Token Budget Analysis" and a 0.5-point threshold that only the removed specification contained, and is reworded to stand on its own reasoning with the same answer. The notebook's time budget now agrees with the Activities page.
 * **Removal**: Retired all 17 illustrated posters. Every page on this site opened with an AI-generated illustration produced by NotebookLM — a hand-drawn collage of robots, gears and speech bubbles, typically two megabytes, carrying its content as unsearchable pixels. Twelve pages get an engineering diagram in place of the poster: a Mermaid schematic of the thing the page actually teaches, written from that page's own text and small enough to read — the RAG pipeline with the RAGAS metric that implicates each stage, the reasoning-paradigm progression from Chain-of-Thought to LATS, the Researcher–Analyst–Critic pipeline with its quality gate and revision cap, the Workflow Audit scoring pipeline, the portfolio setup checklist and its weekly loop.
 * **Removal**: Seven pages lose the poster and gain nothing, each for a reason. The [Module 2 activities](modules/module-2/activities.md) page sets sketching that exact diagram as self-check prompt 2, so a figure at the top would print the answer key above the question. [Module 5 foundational concepts](modules/module-5/foundational-concepts.md) is a five-chapter survey whose structure its tables already carry. The Module 1, 2 and 3 overview pages would have repeated a diagram that now appears on their own foundational-concepts page. The [landing page](index.md) banner becomes a typographic title — the course name was previously hidden from sighted readers because the picture carried it — and the archived June 2026 draft keeps its record without being re-illustrated.

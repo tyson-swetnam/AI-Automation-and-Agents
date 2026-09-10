@@ -58,7 +58,7 @@ sources:
 | B | Runs 1–4 | Controlled experiment: change one retrieval setting at a time, score ten evaluation questions | ~75 min |
 | B | Log + RAGAS | Write up the experiment, then interpret four RAGAS scores for a non-technical reader | ~30 min |
 
-The step times are for the work itself. Allow extra for setup, reading output, and writing your answers.
+The step times are for the work itself. Allow extra for setup, reading output, and writing your answers. On the free path, allow more for Part B — its introduction explains why.
 
 #### How to work through this notebook
 
@@ -570,11 +570,13 @@ for i, query in enumerate(TEST_QUERIES, 1):
 
 **Highly relevant context** — the query whose sources contain the exact information needed:
 
-**Marginal context** — the query whose sources are related but not directly answer-relevant, where the model appears to fill the gap from parametric knowledge:
+**Marginal context** — the query whose sources are related but not directly answer-relevant:
 
-> Annotate that second query **`potential faithfulness issue`**. It is the most analytically important observation in Step A3 and a direct demonstration of why RAGAS's faithfulness metric exists — you come back to it in the RAGAS interpretation at the end of Part B.
+**What the model did with that gap** — did it fill it from parametric knowledge, or say that the context does not answer the question? Quote the part of the answer that shows which:
 
-**How I could tell the model went beyond the context** (specific claim in the answer with no support in the retrieved chunks):
+> Annotate that query **`potential faithfulness issue`** either way. If the model filled the gap, you have watched a faithfulness failure happen — the reason RAGAS's faithfulness metric exists. If it declined, the system prompt's "say that you do not know" instruction did its job, and you have seen the defence that failure calls for. You come back to this case in the RAGAS interpretation at the end of Part B.
+
+**If the model went beyond the context:** the specific claim in its answer that the retrieved chunks do not support. If it declined instead, write "declined" and quote the sentence it used:
 
 ---
 ### Step A4 — Multi-document extension  *(~10 min)*
@@ -705,6 +707,8 @@ Run 2 changes chunk size and holds the retriever fixed; Run 3 changes the retrie
 | 1 | Incorrect or hallucinated |
 
 Only an answer the retrieved chunks support can earn a 4. An answer that is accurate but unsupported by its chunks is the faithfulness failure you flagged in Step A3, so score it as hallucinated. With `LLM_PROVIDER = "none"` there are no answers to score: score whether the retrieved chunks contain the reference answer instead, on the same scale, and say so in your log.
+
+**Time on the free path.** The two-hour budget assumes the paid path. With `LLM_PROVIDER = "local"`, Part B generates about 40 answers on a small CPU model — ten questions in each of Runs 1–3, and five twice in Run 4 — and that waiting is the slowest part of the lab. Do Runs 1–3 first, and Run 4 only if you have time.
 
 ```python
 # The evaluation set: ten questions about the AI RMF, each with a reference answer taken from the
@@ -912,7 +916,7 @@ for label, run in RUNS.items():
 
 #### Check your conclusion against the retrieval evidence
 
-Write your conclusion **before** running the next cell. The cell measures something your scores cannot: for each run, how many of the four retrieved chunks came from a page that holds the reference answer, summed over the ten questions. It checks retrieval only — a run can find the right pages and still produce a poor answer, and it cannot see an answer the model made up.
+Write your conclusion **before** running the next cell. The cell measures something your scores cannot: for each run, how many of the four retrieved chunks came from a page that holds the reference answer, summed over the ten questions. It checks retrieval only — a run can find the right pages and still produce a poor answer, and it cannot see an answer the model made up. How far the runs separate depends on the embedding model: with OpenAI embeddings the three totals can come out close or equal. That is a result, not a mistake — say what it means for your conclusion.
 
 ```python
 # Retrieval check: for each run, how many retrieved chunks came from a page holding the reference answer.
@@ -944,7 +948,7 @@ For each metric, write **one sentence** saying what this particular score means 
 
 **Which pipeline stage would you fix first, and which of your runs is the evidence for that choice?**
 
-**How does the query you flagged `potential faithfulness issue` in Step A3 help explain the faithfulness score?**
+**What did the query you flagged `potential faithfulness issue` in Step A3 show about grounding — did the model fill the gap or decline — and how does that relate to a faithfulness score of 0.62?**
 
 ---
 ### Before you submit
@@ -955,7 +959,7 @@ For each metric, write **one sentence** saying what this particular score means 
 - [ ] A1: page count, metadata fields, and your filtering-field justification
 - [ ] A2: chunk count, three inspected chunks with boundary verdicts, overlap analysis
 - [ ] A3: all five answers assessed, plus the highly-relevant and marginal cases identified
-- [ ] The marginal case is annotated `potential faithfulness issue` — you use it again in the RAGAS interpretation
+- [ ] The marginal case is annotated `potential faithfulness issue`, with what the model did — filled the gap from memory, or declined — and you use it again in the RAGAS interpretation
 - [ ] A4: per-query comparison, plus one documented irrelevant chunk from corpus 2
 
 **Part B**
