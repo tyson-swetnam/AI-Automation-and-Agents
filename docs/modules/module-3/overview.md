@@ -80,7 +80,7 @@ criteria.
 | **4** | Retrieval Optimization and Context Window Management | Chapter 4 Quiz |
 | **5** | RAGAS Evaluation | Chapter 5 Quiz |
 | **Lab** | Guided Lab Exercise | Colab Notebook |
-| **Project** | Hands-On Project | Optimization Experiment Log + Token Budget Report + Brief Outline |
+| **Project** | Hands-On Project | Optimization Experiment Log + RAGAS interpretation, in the lab notebook |
 | **Discussion** | Peer Discussion | Discussion Post + Response |
 
 ## Grade Weight Summary

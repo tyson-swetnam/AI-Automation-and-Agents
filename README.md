@@ -194,6 +194,8 @@ If the site ever moves to another repository, `site_url`, `repo_url`,
 `edit_uri`, and the `REPO_SLUG` constant change together, every page flips to
 `frozen`, and `docs/` becomes the source of truth.
 
+The Module 3 lab notebook also fetches its corpus from this site first: the `COURSE_MATERIALS` URL in `docs/materials/module3/Module-3-Lab.ipynb` changes with them. It falls back to NIST's copies, so a stale URL degrades the download rather than breaking it.
+
 ## Deployment
 
 Pushing to `main` runs `.github/workflows/docs.yml`: OKF validation, the

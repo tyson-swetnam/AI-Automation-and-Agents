@@ -11,7 +11,7 @@ tags:
   - ollama
   - chroma
 module: 3
-time_estimate: "~60 minutes"
+time_estimate: "Part A about 2 hours, Part B about 2 hours"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -45,20 +45,26 @@ sources:
     run the cells, open it in Google Colab with the badge above or download the
     `.ipynb` and run it in Jupyter.
 
-**Time:** ~60 minutes | **Deliverable:** this notebook (run top to bottom) + your completed Lab Notebook answers
+**Time:** Part A about 2 hours, Part B about 2 hours | **Deliverable:** this notebook, run top to bottom, with your answers typed into the *Lab Notebook* cells
 
-| Step | What you build | Time |
-|---|---|---|
-| A1 | Load the PDF corpus, inspect document metadata | ~15 min |
-| A2 | Split into chunks, embed, persist to Chroma | ~20 min |
-| A3 | Build a retrieval QA chain, run 5 test queries | ~15 min |
-| A4 | Add a second corpus, re-run the queries, compare | ~10 min |
+**Corpus:** NIST's [AI Risk Management Framework (NIST AI 100-1)](https://doi.org/10.6028/NIST.AI.100-1) and its [Generative AI Profile (NIST AI 600-1)](https://doi.org/10.6028/NIST.AI.600-1). Both are US government publications in the public domain. The Configuration step downloads them for you.
+
+| Part | Step | What you do | Time |
+|---|---|---|---|
+| A | A1 | Load the PDF corpus, inspect document metadata | ~15 min |
+| A | A2 | Split into chunks, embed, persist to Chroma | ~20 min |
+| A | A3 | Build a retrieval QA chain, run 5 test queries | ~15 min |
+| A | A4 | Add a second corpus, re-run the queries, compare | ~10 min |
+| B | Runs 1–4 | Controlled experiment: change one retrieval setting at a time, score ten evaluation questions | ~75 min |
+| B | Log + RAGAS | Write up the experiment, then interpret four RAGAS scores for a non-technical reader | ~30 min |
+
+The step times are for the work itself. Allow extra for setup, reading output, and writing your answers.
 
 #### How to work through this notebook
 
 Run the cells in order — each step depends on variables defined by the one before it.
 
-Markdown cells marked *Lab Notebook — record your answer* are where you type your findings. Fill them in as you go rather than saving them for the end. Several steps ask you to read printed output and make a judgement call; those judgements are the graded part of this lab, not the code.
+Markdown cells marked *Lab Notebook — record your answer* are where you type your findings. Fill them in as you go rather than saving them for the end. Several steps ask you to read printed output and make a judgement call; those judgements are what your submission is assessed on, not the code.
 
 This notebook runs on **LangChain 1.4.0**. The install cell pins that version and the check cell that follows confirms it before you go any further.
 
@@ -123,7 +129,7 @@ Set your options here. Everything downstream reads these variables, so this is t
 
 - `EMBEDDING_PATH` — `"openai"` or `"local"`
 - `LLM_PROVIDER` — `"openai"`, `"local"`, `"ollama"`, or `"none"`. `"local"` downloads a small model that runs on the Colab CPU, so the free path can still generate answers. Use `"none"` only if you have no model access at all: retrieval still runs and Steps A1–A2 and A4's retrieval comparison still work, but the generated answers in A3 are stubs and you will not be able to observe the faithfulness behavior the lab asks about.
-- `CORPUS_1` / `CORPUS_2` — paths to the lab PDFs. On Colab, upload them to `/content/` first (file browser in the left sidebar, or the upload cell below).
+- `CORPUS_1` / `CORPUS_2` — where the two lab PDFs are saved. The cell after the API key cell downloads them if they are not already there, so there is nothing to upload.
 
 ```python
 import os
@@ -137,8 +143,8 @@ LOCAL_EMBED_MODEL  = "sentence-transformers/all-MiniLM-L6-v2"
 LOCAL_CHAT_MODEL   = "Qwen/Qwen2.5-0.5B-Instruct"   # free-path generator
 OLLAMA_CHAT_MODEL  = "llama3.1"
 
-CORPUS_1 = "/content/Module3_Lab_Corpus.pdf"
-CORPUS_2 = "/content/Module3_Lab_Corpus_2.pdf"   # used in Step A4
+CORPUS_1 = "NIST.AI.100-1.pdf"   # AI RMF 1.0 - Steps A1-A3 and Part B
+CORPUS_2 = "NIST.AI.600-1.pdf"   # Generative AI Profile - Step A4 and Run 4
 
 CHROMA_DIR        = "./chroma_db"
 COLLECTION_NAME   = "module3_lab"
@@ -174,18 +180,41 @@ else:
 ```
 
 ```python
-# Confirm the corpus files are where the config says they are.
-# On Colab, uncomment the upload block if you have not uploaded them yet.
-import os
+# Download the two corpus PDFs if they are not here yet, and confirm they are the exact files
+# this lab was written against. Part B's evaluation questions cite specific pages, so a different
+# edition of either document would shift those page numbers.
+import hashlib, os, urllib.request
 
-# from google.colab import files
-# files.upload()   # select Module3_Lab_Corpus.pdf (and _2 later); uploads land in /content/
+COURSE_MATERIALS = "https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3"
+CORPUS_FILES = {
+    CORPUS_1: ("https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+               "7576edb531d9848825814ee88e28b1795d3a84b435b4b797d3670eafdc4a89f1"),
+    CORPUS_2: ("https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+               "6e73620ab6b64e90ef2c04bf0e0d6246185a2f4b1b13cab0df494496cff89b6a"),
+}
 
-for label, path in [("CORPUS_1", CORPUS_1), ("CORPUS_2", CORPUS_2)]:
-    status = "found" if os.path.exists(path) else "MISSING"
-    print(f"{label:<9} {status:<8} {path}")
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
 
-assert os.path.exists(CORPUS_1), f"Upload the first corpus to {CORPUS_1} before continuing."
+for path, (nist_url, expected) in CORPUS_FILES.items():
+    if not os.path.exists(path):
+        # The course copy first: it is the exact file the page references were checked against.
+        for url in (f"{COURSE_MATERIALS}/{os.path.basename(path)}", nist_url):
+            try:
+                urllib.request.urlretrieve(url, path)
+                print(f"Downloaded {path} from {url}")
+                break
+            except Exception as err:
+                print(f"Could not download from {url}: {err}")
+    assert os.path.exists(path), f"{path} is missing. Download it from {nist_url} and put it next to this notebook."
+    same = sha256(path) == expected
+    print(f"{path}: {os.path.getsize(path):,} bytes - " +
+          ("matches the lab's reference copy" if same else
+           "DIFFERS from the lab's reference copy, so Part B's page numbers may not line up"))
 ```
 
 ---
@@ -492,16 +521,16 @@ print(f"\nRetrieved {len(demo['source_documents'])} source chunks.")
 
 #### Run the five test queries
 
-Replace the placeholders below with the five queries from your Lab Notebook template in the LMS. Keep them in a list — Step A4 re-runs this exact list, and the comparison only means anything if the queries are identical.
+The five queries below are about the AI RMF. Keep them in this list and in this order: Step A4 re-runs the same list against the expanded store, and Run 4 of the project reuses it. Not all of them are easy for the pipeline — read every answer against its sources.
 
 ```python
-# REPLACE these with the five provided test queries from your Lab Notebook template.
+# The five test queries for Steps A3 and A4.
 TEST_QUERIES = [
-    "QUERY 1 - replace with the provided query",
-    "QUERY 2 - replace with the provided query",
-    "QUERY 3 - replace with the provided query",
-    "QUERY 4 - replace with the provided query",
-    "QUERY 5 - replace with the provided query",
+    "What are the three major categories of AI bias that NIST identifies?",
+    "Which specific fairness metric does the AI RMF recommend for measuring bias?",
+    "What are the four functions of the AI RMF Core?",
+    "How do AI risks differ from traditional software risks?",
+    "What does the AI RMF say about human oversight and human-AI interaction?",
 ]
 
 assert len(TEST_QUERIES) == 5, "The lab expects exactly five test queries."
@@ -543,7 +572,7 @@ for i, query in enumerate(TEST_QUERIES, 1):
 
 **Marginal context** — the query whose sources are related but not directly answer-relevant, where the model appears to fill the gap from parametric knowledge:
 
-> Annotate that second query **`potential faithfulness issue`**. It is the most analytically important observation in Step A3 and a direct demonstration of why RAGAS's faithfulness metric exists — you will reuse it in the Unit 5 RAGAS analysis.
+> Annotate that second query **`potential faithfulness issue`**. It is the most analytically important observation in Step A3 and a direct demonstration of why RAGAS's faithfulness metric exists — you come back to it in the RAGAS interpretation at the end of Part B.
 
 **How I could tell the model went beyond the context** (specific claim in the answer with no support in the retrieved chunks):
 
@@ -641,19 +670,8 @@ for label, kwargs in configs.items():
         print(f"   {d.metadata.get('corpus')} | page {d.metadata.get('page')} | {d.page_content[:90].strip()}...")
 ```
 
----
-### Before you submit
-
-- [ ] Every cell ran top to bottom without errors, and the outputs are saved in the file
-- [ ] `TEST_QUERIES` holds the five provided queries, not the placeholders
-- [ ] A1: page count, metadata fields, and your filtering-field justification
-- [ ] A2: chunk count, three inspected chunks with boundary verdicts, overlap analysis
-- [ ] A3: all five answers assessed, plus the highly-relevant and marginal cases identified
-- [ ] The marginal case is annotated `potential faithfulness issue` — carry it into Unit 5
-- [ ] A4: per-query comparison, plus one documented irrelevant chunk from corpus 2
-
 ```python
-# Optional: dump the numbers you need for the write-up in one place.
+# Optional: the Part A numbers for your write-up, in one place.
 print(f"Corpus 1 pages:       {len(documents)}")
 print(f"Corpus 1 chunks:      {len(chunks)}")
 print(f"Corpus 2 chunks:      {len(chunks2) if 'chunks2' in globals() else 'not loaded'}")
@@ -662,5 +680,293 @@ print(f"chunk_size / overlap: {CHUNK_SIZE} / {CHUNK_OVERLAP}")
 print(f"k:                    {TOP_K}")
 print(f"Embeddings:           {EMBEDDING_PATH} | LLM: {LLM_PROVIDER}")
 ```
+
+---
+### Part B — Hands-On Project: a controlled retrieval experiment  *(~2 hours)*
+
+Part A built one pipeline with one configuration. Part B asks which configuration works better for this corpus, and makes you answer with evidence. You run the same ten evaluation questions through three configurations, changing **one setting at a time**, and score every answer on the same rubric. A fourth, optional run tests metadata filtering on the two-corpus store from Step A4.
+
+| Run | chunk_size / overlap | Retriever | Changed from the run before |
+|---|---|---|---|
+| 1 | 256 / 25 | similarity, k=4 | baseline |
+| 2 | 512 / 50 | similarity, k=4 | chunk size only |
+| 3 | 512 / 50 | MMR, `lambda_mult=0.5`, k=4 | retriever only |
+| 4 (optional) | 512 / 50 | similarity, k=4, two corpora, with and without a corpus filter | metadata filter only |
+
+Run 2 changes chunk size and holds the retriever fixed; Run 3 changes the retriever and holds chunk size fixed. That is the whole design: if two settings change between runs, you cannot say which one caused the difference.
+
+**Scoring rubric.** Score each answer from 1 to 4 against the reference answer and the retrieved sources:
+
+| Score | Meaning |
+|---|---|
+| 4 | Complete and grounded in the retrieved context |
+| 3 | Correct but incomplete |
+| 2 | Partially correct |
+| 1 | Incorrect or hallucinated |
+
+Only an answer the retrieved chunks support can earn a 4. An answer that is accurate but unsupported by its chunks is the faithfulness failure you flagged in Step A3, so score it as hallucinated. With `LLM_PROVIDER = "none"` there are no answers to score: score whether the retrieved chunks contain the reference answer instead, on the same scale, and say so in your log.
+
+```python
+# The evaluation set: ten questions about the AI RMF, each with a reference answer taken from the
+# document and the page(s) that hold it. Pages are the loader's 0-based page index - the number the
+# retrieval printouts show - not the page number printed in the PDF.
+EVAL_SET = [
+    {
+        "question": "What are the characteristics of trustworthy AI systems according to the AI RMF?",
+        "reference": "Valid and reliable; safe; secure and resilient; accountable and transparent; explainable and interpretable; privacy-enhanced; and fair with harmful bias managed. Valid and reliable is the base for the others, and accountable and transparent relates to all of them.",
+        "pages": [7, 16],
+    },
+    {
+        "question": "Why is GOVERN described as a cross-cutting function?",
+        "reference": "It applies to all stages of an organization's AI risk management and is infused throughout the other three functions: aspects of GOVERN, especially those related to compliance or evaluation, should be integrated into MAP, MEASURE and MANAGE, which are applied in specific contexts and at specific stages of the AI lifecycle.",
+        "pages": [7, 24, 26],
+    },
+    {
+        "question": "What does risk tolerance mean in the AI RMF, and does the framework prescribe it?",
+        "reference": "Risk tolerance is the organization's or AI actor's readiness to bear risk in order to achieve its objectives. The AI RMF can be used to prioritize risk but does not prescribe risk tolerance; where no established guidelines exist, organizations should define a reasonable risk tolerance themselves.",
+        "pages": [11],
+    },
+    {
+        "question": "What is an AI RMF profile, and what types of profiles does the framework describe?",
+        "reference": "A profile implements the AI RMF functions, categories and subcategories for a specific setting or application. The framework describes use-case profiles (for example a hiring or fair housing profile), temporal profiles (a Current Profile and a Target Profile, whose comparison reveals gaps), and cross-sectoral profiles for risks common across sectors, such as the use of large language models. It does not prescribe profile templates.",
+        "pages": [37, 38],
+    },
+    {
+        "question": "Is use of the AI RMF mandatory for organizations?",
+        "reference": "No. The Framework is intended to be voluntary, rights-preserving, non-sector-specific and use-case agnostic.",
+        "pages": [6],
+    },
+    {
+        "question": "How should organizations prioritize AI risks?",
+        "reference": "By assessed risk level and potential impact. The highest risks in a context of use call for the most urgent prioritization and the most thorough risk management, and where risks are unacceptable, development and deployment should cease safely until they can be managed. Systems that interact with humans, are trained on sensitive data, or whose outputs affect people may call for higher initial priority than systems that interact only with other computational systems.",
+        "pages": [11, 12],
+    },
+    {
+        "question": "What makes measuring AI risk difficult?",
+        "reference": "The AI RMF lists several challenges: risks from third-party software, hardware and data; tracking emergent risks; the lack of reliable, agreed metrics; risk that differs across stages of the AI lifecycle; risk in real-world settings differing from risk measured in the lab; inscrutable systems; and the difficulty of establishing a human baseline for comparison.",
+        "pages": [9, 10],
+    },
+    {
+        "question": "What tradeoffs between trustworthiness characteristics does the AI RMF give as examples?",
+        "reference": "Interpretability versus privacy; predictive accuracy versus interpretability; and privacy-enhancing techniques that can cost accuracy under conditions such as data sparsity. It adds that highly secure but unfair, accurate but opaque, and inaccurate but secure and transparent systems are all undesirable.",
+        "pages": [16, 17],
+    },
+    {
+        "question": "Why does the AI RMF say that trying to eliminate negative risk entirely can be counterproductive?",
+        "reference": "Because not all incidents and failures can be eliminated, and unrealistic expectations about risk can lead organizations to allocate resources in ways that make risk triage inefficient or impractical, or that waste scarce resources.",
+        "pages": [11],
+    },
+    {
+        "question": "Why can AI systems need more frequent maintenance than traditional software?",
+        "reference": "Data, model, or concept drift can trigger corrective maintenance, and the datasets used to train AI systems can become detached from their original context or stale relative to the deployment context.",
+        "pages": [42],
+    },
+]
+
+print(f"{len(EVAL_SET)} evaluation questions")
+```
+
+```python
+# Helpers shared by every run. Each run gets its own store built from corpus 1 alone, so runs differ
+# in exactly the setting the table says they do. The chain is the Step A3 chain, pointed at a new retriever.
+RUNS = {}      # run label -> {"config": ..., "results": [...]}
+SCORES = {}    # run label -> your 1-4 scores, recorded after each run
+
+def build_run_store(chunk_size, chunk_overlap, name):
+    run_chunks = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size, chunk_overlap=chunk_overlap).split_documents(documents)
+    for c in run_chunks:
+        c.metadata["corpus"] = "corpus_1"
+    # In-memory collection. Delete any earlier copy first: re-running the cell would otherwise
+    # add every chunk a second time, the same trap RESET_VECTORSTORE guards against in Step A2.
+    Chroma(collection_name=name, embedding_function=embedding_model).delete_collection()
+    store = Chroma.from_documents(documents=run_chunks, embedding=embedding_model, collection_name=name)
+    print(f"{name}: {len(run_chunks)} chunks (chunk_size={chunk_size}, overlap={chunk_overlap})")
+    return store
+
+def run_eval(label, retriever, questions, config):
+    chain = RunnableParallel(question=RunnablePassthrough(), source_documents=retriever) | \
+        RunnablePassthrough.assign(result=RunnableLambda(build_prompt_inputs) | answer_step)
+    results = []
+    for i, item in enumerate(questions, 1):
+        out = chain.invoke(item["question"])
+        results.append(out)
+        print("=" * 78)
+        print(f"{label}   Q{i}: {item['question']}")
+        print("-" * 78)
+        print(f"ANSWER:\n{out['result']}\n")
+        if "reference" in item:
+            print(f"REFERENCE (page {', '.join(map(str, item['pages']))}):\n{item['reference']}\n")
+        for j, d in enumerate(out["source_documents"], 1):
+            print(f"  [{j}] {d.metadata.get('corpus')} | page {d.metadata.get('page')} | "
+                  f"{d.page_content[:160].strip()}...")
+        print()
+    RUNS[label] = {"config": config, "results": results}
+```
+
+### Run 1 — Small fixed-size chunks (baseline)
+
+`chunk_size=256`, `chunk_overlap=25`, similarity search, `k=4`. Read every answer against its reference and its sources, then record your ten scores in the cell after the output.
+
+```python
+run1_store = build_run_store(256, 25, "run1_256")
+run_eval("Run 1", run1_store.as_retriever(search_kwargs={"k": 4}), EVAL_SET,
+         {"chunk_size": 256, "retriever": "similarity"})
+```
+
+```python
+# Your 1-4 score for each question, in order. Replace every None before you move on.
+SCORES['Run 1'] = [None, None, None, None, None, None, None, None, None, None]
+```
+
+### Run 2 — Larger fixed-size chunks
+
+`chunk_size=512`, `chunk_overlap=50`, similarity search, `k=4`. Only the chunk size changes from Run 1.
+
+```python
+run2_store = build_run_store(512, 50, "run2_512")
+run_eval("Run 2", run2_store.as_retriever(search_kwargs={"k": 4}), EVAL_SET,
+         {"chunk_size": 512, "retriever": "similarity"})
+```
+
+```python
+# Your 1-4 score for each question, in order. Replace every None before you move on.
+SCORES['Run 2'] = [None, None, None, None, None, None, None, None, None, None]
+```
+
+#### Lab Notebook — Run 2 observation
+
+For at least two questions, compare the chunks Run 2 retrieved with the chunks Run 1 retrieved. Did the larger chunks give more complete context, or pull more irrelevant text into it?
+
+- Question __:
+- Question __:
+
+### Run 3 — MMR retrieval
+
+Same store as Run 2 (`chunk_size=512`, `chunk_overlap=50`, `k=4`); only the retriever changes. Maximal Marginal Relevance balances similarity to the question against diversity among the chunks it returns. At `lambda_mult=0.5` the two get equal weight: `1` is pure similarity search, `0` is pure diversity.
+
+```python
+run3_retriever = run2_store.as_retriever(search_type="mmr", search_kwargs={"k": 4, "lambda_mult": 0.5})
+run_eval("Run 3", run3_retriever, EVAL_SET, {"chunk_size": 512, "retriever": "MMR (lambda_mult=0.5)"})
+```
+
+```python
+# Your 1-4 score for each question, in order. Replace every None before you move on.
+SCORES['Run 3'] = [None, None, None, None, None, None, None, None, None, None]
+```
+
+#### Lab Notebook — Run 3 observation
+
+One question where MMR returned a meaningfully different set of sources than Run 2, and whether that improved or degraded the answer:
+
+### Run 4 (optional) — Metadata-filtered retrieval
+
+Step A4 showed corpus 2 taking retrieval slots away from corpus 1. Run 4 tests whether a source filter wins them back. It uses the two-corpus store from Step A4 and the five Part A test queries, all of which are about the AI RMF. Each query runs twice — unfiltered, then filtered to `corpus_1` — so the filter is the only thing that changes. Score both sets.
+
+```python
+RUN4_QUESTIONS = [{"question": q} for q in TEST_QUERIES]
+run_eval("Run 4 unfiltered", vectorstore.as_retriever(search_kwargs={"k": 4}), RUN4_QUESTIONS,
+         {"chunk_size": CHUNK_SIZE, "retriever": "similarity, both corpora"})
+run_eval("Run 4 filtered",
+         vectorstore.as_retriever(search_kwargs={"k": 4, "filter": {"corpus": "corpus_1"}}),
+         RUN4_QUESTIONS, {"chunk_size": CHUNK_SIZE, "retriever": "similarity, corpus_1 only"})
+```
+
+```python
+# Your 1-4 scores for the five queries, unfiltered and then filtered.
+SCORES["Run 4 unfiltered"] = [None, None, None, None, None]
+SCORES["Run 4 filtered"]   = [None, None, None, None, None]
+```
+
+#### Lab Notebook — Run 4 observation (optional)
+
+For which queries did the filter change the sources, and did the answers get better?
+
+```python
+# The Optimization Experiment Log, with means computed from the scores you recorded.
+print(f"{'Run':<18} {'chunk_size':<11} {'retriever':<28} {'scored':<8} mean (1-4)")
+print("-" * 78)
+for label, run in RUNS.items():
+    s = [x for x in SCORES.get(label, []) if x is not None]
+    mean = f"{sum(s) / len(s):.2f}" if s else "not scored"
+    print(f"{label:<18} {run['config']['chunk_size']:<11} {run['config']['retriever']:<28} "
+          f"{len(s)}/{len(run['results']):<6} {mean}")
+```
+
+#### Lab Notebook — Optimization Experiment Log
+
+| Run | chunk_size | Retriever | Mean score (1–4) | Key observation |
+|---|---|---|---|---|
+| Run 1 — small chunks |  |  |  |  |
+| Run 2 — larger chunks |  |  |  |  |
+| Run 3 — MMR |  |  |  |  |
+| Run 4 — metadata filter (optional) |  |  |  |  |
+
+**Conclusion — two paragraphs, required.**
+
+*Paragraph 1:* the single configuration change that produced the largest quality difference between any two runs, and the mechanism — why that change affects retrieval quality the way your data shows.
+
+*Paragraph 2:* one change that did not improve quality, and why the mechanism you expected did not produce the result.
+
+> **What a mechanistic explanation looks like.** Not "MMR was better", but the causal path: which questions changed, what the retriever returned before and after, and why that difference reached the answer. For example: *MMR helped on questions that need evidence from several sections, because similarity search returned near-duplicate chunks from one passage while MMR's diversity term pulled chunks from different sections.* Your data may show the opposite. Explain what it does show.
+
+#### Check your conclusion against the retrieval evidence
+
+Write your conclusion **before** running the next cell. The cell measures something your scores cannot: for each run, how many of the four retrieved chunks came from a page that holds the reference answer, summed over the ten questions. It checks retrieval only — a run can find the right pages and still produce a poor answer, and it cannot see an answer the model made up.
+
+```python
+# Retrieval check: for each run, how many retrieved chunks came from a page holding the reference answer.
+for label in ("Run 1", "Run 2", "Run 3"):
+    if label not in RUNS:
+        continue
+    per_q = [sum(d.metadata.get("page") in item["pages"] for d in out["source_documents"])
+             for item, out in zip(EVAL_SET, RUNS[label]["results"])]
+    print(f"{label}: {sum(per_q):>2}/{4 * len(per_q)} chunks on a reference page   per question: {per_q}")
+```
+
+#### Lab Notebook — does the retrieval check agree with your conclusion?
+
+If it disagrees, say which you trust and why, in one or two sentences:
+
+---
+### RAGAS metric interpretation  *(~10 min)*
+
+RAGAS scores a RAG system automatically on four metrics. Suppose a RAGAS evaluation of a production version of this assistant returned the scores below. These are provided values for you to interpret, not output from your runs.
+
+For each metric, write **one sentence** saying what this particular score means for the people who use the system. Write for a non-technical stakeholder who has never read the RAGAS paper: interpret the score, do not restate the definition.
+
+| RAGAS metric | Score | What it measures | Your plain-language interpretation |
+|---|---|---|---|
+| Faithfulness | 0.62 | The degree to which the generated answer is grounded in the retrieved context (not in parametric knowledge). Low score = hallucination. |  |
+| Answer Relevance | 0.91 | The degree to which the generated answer addresses the user's actual question. Low score = off-topic or tangential responses. |  |
+| Context Precision | 0.48 | The proportion of retrieved context chunks that are actually relevant to the question. Low score = noisy retrieval. |  |
+| Context Recall | 0.85 | The proportion of relevant information in the corpus that was successfully included in the retrieved context. Low score = retrieval misses. |  |
+
+**Which pipeline stage would you fix first, and which of your runs is the evidence for that choice?**
+
+**How does the query you flagged `potential faithfulness issue` in Step A3 help explain the faithfulness score?**
+
+---
+### Before you submit
+
+**Part A**
+
+- [ ] Every cell ran top to bottom without errors, and the outputs are saved in the file
+- [ ] A1: page count, metadata fields, and your filtering-field justification
+- [ ] A2: chunk count, three inspected chunks with boundary verdicts, overlap analysis
+- [ ] A3: all five answers assessed, plus the highly-relevant and marginal cases identified
+- [ ] The marginal case is annotated `potential faithfulness issue` — you use it again in the RAGAS interpretation
+- [ ] A4: per-query comparison, plus one documented irrelevant chunk from corpus 2
+
+**Part B**
+
+- [ ] Runs 1–3 used the parameters in the Part B table: Run 1 `chunk_size=256, chunk_overlap=25`; Runs 2 and 3 `chunk_size=512, chunk_overlap=50`; Run 3 `search_type="mmr", lambda_mult=0.5`; every run `k=4`
+- [ ] Ten scores recorded for each of Runs 1–3, with no `None` left (Run 4 is optional)
+- [ ] Run 2 and Run 3 observations written
+- [ ] Experiment log table filled in, and the two-paragraph conclusion written **before** you ran the retrieval check
+- [ ] Retrieval check run, and whether it agrees with your conclusion noted
+- [ ] RAGAS table: four plain-language sentences, plus both questions under it answered
+
+Save the notebook as `Module3_Lab_[YourName].ipynb` and add it to your GitHub portfolio.
 
 <p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module-3-Lab.ipynb](../../materials/module3/Module-3-Lab.ipynb) (`docs/materials/module3/Module-3-Lab.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>

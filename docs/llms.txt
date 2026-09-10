@@ -118,6 +118,8 @@ Files served verbatim (not Markdown); the module pages link to them.
 - [materials/module1/module1_quiz.html](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/module1_quiz.html): interactive HTML activity (self-contained, grades client-side)
 - [materials/module2/Module-2-Guided-Lab-Notebook.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module2/Module-2-Guided-Lab-Notebook.ipynb): Jupyter notebook (open in Google Colab or download)
 - [materials/module3/Module-3-Lab.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/Module-3-Lab.ipynb): Jupyter notebook (open in Google Colab or download)
+- [materials/module3/NIST.AI.100-1.pdf](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/NIST.AI.100-1.pdf): PDF
+- [materials/module3/NIST.AI.600-1.pdf](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/NIST.AI.600-1.pdf): PDF
 - [materials/module4/Module4_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module4/Module4_Learner_Starter.ipynb): Jupyter notebook (open in Google Colab or download)
 - [materials/module5/Module5_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module5/Module5_Learner_Starter.ipynb): Jupyter notebook (open in Google Colab or download)
 

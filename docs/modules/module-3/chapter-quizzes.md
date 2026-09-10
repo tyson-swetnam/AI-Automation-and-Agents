@@ -509,11 +509,11 @@ D. A RAG system serving real-time queries requiring sub-second response latency,
 
 ### Question 5
 
-A practitioner implementing the Unit 4 Token Budget Analysis identifies that the retrieved context block (k=4 chunks × chunk_size=512 tokens) accounts for 68% of total input tokens per turn. They propose reducing k from 4 to 2 as a token reduction strategy. What specific quantitative check must the Quality Impact Assessment include before adopting this strategy?
+A practitioner profiling a RAG system finds that the retrieved context block (k=4 chunks at chunk_size=512) accounts for 68% of total input tokens per turn. They propose reducing k from 4 to 2 to cut token cost. What quantitative check must they run before adopting this change?
 
 A. A check that the vector store contains at least 2 chunks for every query in the evaluation set — otherwise k=2 would return empty results.
 
-B. A comparison of the mean evaluation score at k=4 vs. k=2 on the same evaluation query set, to determine whether the approximately 50% reduction in retrieved context tokens produces a mean score degradation greater than 0.5 points on the 1–4 scale — the threshold at which the quality cost must be explicitly justified or an alternative strategy proposed.
+B. A comparison of the mean evaluation score at k=4 vs. k=2 on the same evaluation query set and rubric, to measure how much answer quality the roughly 50% cut in retrieved context tokens costs before deciding whether the saving is worth it.
 
 C. A check that the embedding model produces embeddings of consistent quality for both 4-chunk and 2-chunk retrieved sets, since different retrieval depths may produce embeddings with different semantic coherence.
 
@@ -523,13 +523,13 @@ D. A comparison of API response latency at k=4 vs. k=2, to verify that the token
 
     **Correct Answer: B**
 
-    ✅ **B is correct.** The module explicitly specifies this check: reducing k from 4 to 2 saves approximately 50% of the retrieved context tokens but risks degrading retrieval recall — fewer retrieved chunks means lower probability of including all relevant information in the context. The Quality Impact Assessment must run the same evaluation query set used in Task 1 on the reduced-k configuration and compare mean scores. The module establishes a specific threshold: if the token reduction degrades mean score by more than 0.5 points (on a 1–4 scale), the report must either justify why the token saving is worth the quality cost or propose an alternative strategy. This is not an arbitrary threshold — a 0.5-point degradation from a baseline of 3.0 (75%) to 2.5 (62.5%) represents a meaningful user-experience decline in answer completeness.
+    ✅ **B is correct.** This is the check that matters: reducing k from 4 to 2 saves approximately 50% of the retrieved context tokens but risks degrading retrieval recall — fewer retrieved chunks means lower probability of including all relevant information in the context. The only way to know whether that risk materializes is a controlled comparison — the same design as the module's retrieval experiment: hold everything else fixed, run the same evaluation queries under k=4 and k=2, score both on the same rubric, and compare the means. If quality drops by more than the token saving can justify, a different strategy is needed, such as trimming the system prompt or compressing the retrieved context.
 
     ❌ **A is incorrect.** A vector store with at least 2 chunks per query is trivially satisfied by any non-empty corpus — the check does not address the relevant quality risk. The meaningful question is not whether 2 chunks can be retrieved but whether 2 chunks are sufficient to answer the evaluation queries with acceptable quality.
 
     ❌ **C is incorrect.** Embedding model quality does not depend on k — the embedding model produces the same embedding for a given text regardless of how many chunks are retrieved. The embedding model is upstream of the retrieval step; k is a retrieval parameter, not an embedding parameter.
 
-    ❌ **D is incorrect.** Latency improvement from k reduction is a secondary benefit — the primary motivation specified in the task is token cost reduction (which reduces API expense, not necessarily latency, depending on the provider's pricing and infrastructure). More importantly, demonstrating latency improvement does not address the quality risk that the module requires the assessment to evaluate. The quality impact check (B) is explicitly required; latency profiling is not.
+    ❌ **D is incorrect.** Latency improvement from k reduction is a secondary benefit — the motivation here is token cost reduction (which reduces API expense, not necessarily latency, depending on the provider's pricing and infrastructure). More importantly, demonstrating latency improvement does not address the quality risk the change introduces. The quality check in B has to come first; latency profiling is optional.
 
 ## Chapter 5 Quiz — RAGAS Evaluation: Structured, Reproducible Diagnosis { #chapter-5-quiz }
 

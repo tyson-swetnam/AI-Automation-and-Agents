@@ -13,3 +13,5 @@ Parametric and non-parametric memory, the six-stage RAG pipeline, conversational
 ## Materials
 
 * [Module 3 RAG lab notebook](../../materials/module3/Module-3-Lab.ipynb)
+* [Lab corpus 1: NIST AI 100-1, AI Risk Management Framework (PDF)](../../materials/module3/NIST.AI.100-1.pdf)
+* [Lab corpus 2: NIST AI 600-1, Generative AI Profile (PDF)](../../materials/module3/NIST.AI.600-1.pdf)

@@ -77,6 +77,8 @@ In this lab, you will build a working RAG pipeline using LangChain, from documen
 
 **Open the lab notebook:** [Module-3-Lab.ipynb](lab-notebook.md)
 
+The corpus is NIST's AI Risk Management Framework ([NIST AI 100-1](../../materials/module3/NIST.AI.100-1.pdf)) and its Generative AI Profile ([NIST AI 600-1](../../materials/module3/NIST.AI.600-1.pdf)), both public-domain US government publications. The notebook downloads them for you.
+
 ### Guided lab notebook flow
 
 The notebook walks you through a complete RAG pipeline build sequence in four phases:
@@ -92,19 +94,20 @@ All detailed instructions, checks, and logging prompts are embedded directly in 
 
 *Estimated time: ~2 hours*
 
-In this project, you will continue in the same notebook from the guided lab to conduct a controlled chunking and retrieval optimization experiment. You will vary one parameter at a time across four experiment runs, score answer quality using a provided rubric, and write a mechanistic analysis of your results.
+In this project, you will continue in the same notebook from the guided lab to conduct a controlled chunking and retrieval optimization experiment. You will vary one parameter at a time across four experiment runs, score answer quality on a 1–4 rubric against ten evaluation questions with reference answers, and write a mechanistic analysis of your results.
 
 ### Project notebook flow
 
-The notebook walks you through a controlled 4-run parameter variation experiment:
+Part B of the notebook walks you through a controlled 4-run parameter variation experiment on ten evaluation questions about the AI RMF, each with a reference answer and the page it comes from:
 
-1. Run 1 — Small fixed-size chunking baseline (chunk_size=256, similarity search, k=4).
-2. Run 2 — Larger fixed-size chunking (chunk_size=512) to observe context completeness vs. noise tradeoffs.
+1. Run 1 — Small fixed-size chunking baseline (chunk_size=256, chunk_overlap=25, similarity search, k=4).
+2. Run 2 — Larger fixed-size chunking (chunk_size=512, chunk_overlap=50) to observe context completeness vs. noise tradeoffs.
 3. Run 3 — MMR retrieval (lambda_mult=0.5) to test diversity-based retrieval against similarity search.
-4. Run 4 (optional) — Metadata-filtered retrieval to evaluate precision gains from source-level filtering.
-5. RAGAS metric interpretation — plain-language interpretation of four RAGAS metric scores for a non-technical stakeholder.
+4. Run 4 (optional) — Metadata-filtered retrieval on the two-document store from Step A4, to evaluate precision gains from source-level filtering.
+5. Experiment log — the mean score for each run and a two-paragraph mechanistic conclusion, written before you check it against the notebook's retrieval evidence.
+6. RAGAS metric interpretation — plain-language interpretation of four provided RAGAS metric scores for a non-technical stakeholder.
 
-Detailed instructions are embedded directly in the notebook.
+The rubric, the evaluation questions and the instructions for every step are in the notebook.
 
 !!! info "What to submit"
 

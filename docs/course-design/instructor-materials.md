@@ -259,26 +259,25 @@ which side is right. Each needs an author's call:
 3. **Learning-outcome labels.** The Module 4 lab cites "LO 4.5 and LO 4.6"
    while the Module 4 overview defines five outcomes and maps the lab to
    different numbers.
-4. **Lab time budgets.** The Module 3 notebook says ~60 minutes where the
-   Activities page budgets ~2 hours; Module 4 says 100-130 minutes against
-   ~4 hours on its Activities page.
-5. **Module 3 project instructions.** The Activities page says the hands-on
-   project continues "in the same notebook" with instructions embedded there,
-   and describes a four-run parameter experiment: chunk size 256, then 512,
-   then MMR retrieval at `lambda_mult=0.5`, then metadata-filtered retrieval,
-   closing with a plain-language reading of four RAGAS metric scores. Confirmed
-   against the notebook in September 2026: none of that scaffolding exists. The
-   notebook holds a single chunk-size setting, its headings run Setup,
-   Configuration, Steps A1 to A4 and an optional metadata-filtering extension,
-   its only mention of RAGAS is a forward reference to Module 5, and its
-   submission checklist covers A1 to A4 only. The project carries no numeric
-   weight in Modules 2–5, whose module grade is the chapter quizzes, but the
-   syllabus requires all five module projects for completion, so a learner
-   cannot currently finish the module as the page describes it. The open question is whether a second notebook was
-   intended and never landed, or whether the project is meant to be authored by
-   the learner in the same file; the answer decides whether the notebook gains
-   cells or the page loses a promise, so it needs an author rather than a
-   maintainer.
+4. **Lab time budgets.** The Module 4 notebook says 100-130 minutes against
+   ~4 hours on its Activities page. Module 3 had the same mismatch (~60
+   minutes against ~2 hours) until September 2026; its notebook now gives the
+   step times and a two-hour budget per part, matching the Activities page.
+5. **Module 3 project instructions (resolved September 2026).** The Activities
+   page promised a four-run retrieval experiment and a RAGAS write-up "embedded
+   directly in the notebook", and the notebook had neither. Its corpus PDFs, five
+   test queries, evaluation set and RAGAS scores had only ever existed in the
+   Arizona LMS, so even the guided lab could not run from this site. The wiki
+   history settled which way to repair it: on 2026-08-10 the authors moved the
+   project instructions off the page on the promise that the notebook held them,
+   so the notebook now does. Its Part B carries the four runs of the original
+   specification, the recovered 1-4 rubric, ten evaluation questions with
+   reference answers quoted from the corpus, the experiment log, and the RAGAS
+   interpretation with provided scores. The corpus is NIST AI 100-1 and AI 600-1,
+   both public domain, served from `materials/module3/`. What the authors removed
+   on 2026-08-06 — Lab B, the token-budget report and the memory-architecture
+   brief — was not restored; the overview's deliverable row and a chapter 4 quiz
+   item that still cited them were corrected instead.
 6. **Default lab provider.** The Module 5 notebook defaults to the NVIDIA API,
    while the prose in [Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)
    describes Hugging Face Inference Providers as the Module 4-5 default.
