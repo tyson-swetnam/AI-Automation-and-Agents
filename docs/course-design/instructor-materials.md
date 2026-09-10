@@ -277,3 +277,13 @@ which side is right. Each needs an author's call:
 7. **Module 2 chapter 5, question 1.** The wiki's answer key reads "B or C
    depending on interpretation"; the site publishes B and flags the question
    for review.
+8. **Answer keys that explain three of four options.** Eight chapter-quiz
+   questions name the correct answer and explain two distractors, leaving one
+   with no feedback at all: Module 1 chapter 1 questions 1 (option C) and 2
+   (option A), chapter 2 question 5 (option D) and chapter 5 question 1 (option
+   B); Module 2 chapter 3 question 1 (option C) and chapter 5 question 1 (option
+   C, the item in note 7 above); Module 4 chapter 1 question 3 (options A and C)
+   and chapter 5 question 3 (option C). All eight are inherited from the wiki
+   unchanged. They matter more here than they did there because these quizzes
+   are self-evaluating: a learner who picked the unexplained option is told the
+   right answer but never why theirs was wrong.
