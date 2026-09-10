@@ -271,9 +271,10 @@ which side is right. Each needs an author's call:
    notebook holds a single chunk-size setting, its headings run Setup,
    Configuration, Steps A1 to A4 and an optional metadata-filtering extension,
    its only mention of RAGAS is a forward reference to Module 5, and its
-   submission checklist covers A1 to A4 only. Since the hands-on project is the
-   primary module grade, a learner cannot currently complete the graded work as
-   the page describes it. The open question is whether a second notebook was
+   submission checklist covers A1 to A4 only. The project carries no numeric
+   weight in Modules 2–5, whose module grade is the chapter quizzes, but the
+   syllabus requires all five module projects for completion, so a learner
+   cannot currently finish the module as the page describes it. The open question is whether a second notebook was
    intended and never landed, or whether the project is meant to be authored by
    the learner in the same file; the answer decides whether the notebook gains
    cells or the page loses a promise, so it needs an author rather than a
