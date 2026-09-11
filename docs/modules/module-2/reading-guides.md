@@ -322,7 +322,7 @@ Verify that every cell is filled from Liu et al.'s text and the lesson content �
 
 **Key Concepts to Extract**
 
-- **Six assessment dimensions (from lesson image and text):**
+- **Six assessment dimensions (from the lesson's table and text):**
     1. *Task complexity* — Number and interdependency of sub-tasks; whether backtracking capability is needed.
     2. *Inference cost* — Total token budget per query; whether per-query cost constraints are strict.
     3. *Latency requirements* — Time-to-response constraint; whether branching search latency is acceptable.

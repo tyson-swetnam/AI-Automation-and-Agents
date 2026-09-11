@@ -1,6 +1,6 @@
 ---
-title: "Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline"
-description: "Read-only rendering of the Module 5 lab notebook, LangSmith Observability & CI/CD Evaluation Pipeline, with links to open it in Google Colab or download the .ipynb file."
+title: "Module 5 Lab: LangSmith Tracing and a Comparative Observability Study"
+description: "Read-only rendering of the Module 5 lab notebook, LangSmith Tracing and a Comparative Observability Study, with links to open it in Google Colab or download the .ipynb file."
 type: Lab
 tags:
   - module-5
@@ -12,7 +12,7 @@ tags:
   - langsmith
   - ollama
 module: 5
-time_estimate: "~120 minutes"
+time_estimate: "about 3 hours (Lab A, the guided lab: about 1 hour; Lab B, the hands-on project: about 2 hours)"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -26,7 +26,7 @@ sources:
     last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
-# Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline
+# Module 5 Lab: LangSmith Tracing and a Comparative Observability Study
 
 [![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){ target=_blank }
 
@@ -46,15 +46,15 @@ sources:
     run the cells, open it in Google Colab with the badge above or download the
     `.ipynb` and run it in Jupyter.
 
-**Lab A: Observability Instrumentation → Lab B: Evaluation Pipeline**  
-Estimated time: **~120 minutes** · Learning outcomes: **LO 5.4 and LO 5.5**
+**Lab A: Observability Instrumentation → Lab B: Comparative Observability Study**  
+Estimated time: **about 3 hours** (Lab A, the guided lab: about 1 hour; Lab B, the hands-on project: about 2 hours) · Learning objectives: **2 and 3** in the Module 5 overview
 
 In this lab, you'll do two things:
 
 1. **Lab A** — Wire up LangSmith tracing on a simple agent, run it 10 times, and analyze the traces (latency, tokens, errors).
-2. **Lab B** — Build an automated test suite that catches when your agent's behavior gets worse (a "regression").
+2. **Lab B** — Run the same agent under two or three configurations, compare their traces, and recommend which one to deploy.
 
-By the end, you'll have hands-on experience with production observability and automated quality gates — two skills every ML engineer needs.
+By the end, you'll have hands-on experience with production observability and with using trace data to make a deployment decision.
 
 ### How to use this notebook
 
@@ -63,15 +63,15 @@ By the end, you'll have hands-on experience with production observability and au
 3. You'll need a **LangSmith API key** (free at [smith.langchain.com](https://smith.langchain.com)) and an LLM provider key.
 4. Keys are entered via masked prompts — never paste them into saved cells.
 5. Look for `TODO` markers — those are the cells where you write code.
-6. Before submission, keep all outputs visible and rename to `Module5_Unit3_Lab_[YourName].ipynb`.
+6. Before submission, keep all outputs visible and rename to `Module5_Lab_[YourName].ipynb`.
 
 #### Required notebook evidence
 
-- All 10 traces confirmed in LangSmith dashboard (screenshot or output verification)
-- Observability Report with four sections and specific numbers
-- Baseline evaluation score and per-category pass rates
-- Regression score showing detected performance decrease
-- Pipeline Report with mechanism analysis
+- All 10 traces confirmed in the LangSmith dashboard (screenshot or output verification)
+- Observability Report with four sections and specific numbers (Lab A)
+- A specific, falsifiable hypothesis and the conditions you compared (Lab B)
+- Comparative metrics for each condition, in a table (Lab B)
+- Comparative Observability Report with a recommendation and trade-off matrix (Lab B)
 - Answers to all three debrief questions
 
 ```python
@@ -96,7 +96,7 @@ print("Imports ready.")
 
 ### Provider and Model Configuration
 
-We use LiteLLM so you can switch between providers without rewriting code. Pick whichever provider you have a key for. The default is Hugging Face (free tier available).
+We use LiteLLM so you can switch between providers without rewriting code. Pick whichever provider you have a key for. The default is the NVIDIA API (`NVIDIA_API_KEY`); Hugging Face (free tier available), Groq, OpenAI and a local Ollama model also work.
 
 ```python
 from litellm import completion
@@ -701,7 +701,7 @@ TODO
 - [ ] Recommendation Report completed with trade-off analysis (Lab B)
 - [ ] All three debrief questions answered (2+ sentences each)
 - [ ] All cell outputs are visible
-- [ ] Notebook renamed to `Module5_Unit3_Lab_[YourName].ipynb`
+- [ ] Notebook renamed to `Module5_Lab_[YourName].ipynb`
 
 #### Troubleshooting
 

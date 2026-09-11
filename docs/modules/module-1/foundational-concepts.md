@@ -224,9 +224,9 @@ Understand the fundamental concepts, capabilities, and limitations of AI systems
 
 **Pillar: USE AI**
 
-Operate AI tools productively in authentic contexts. In Module 1, this means operating Claude Desktop or n8n, running Ollama, and completing structured tasks with an AI agent — not just reading about it.
+Operate AI tools productively in authentic contexts. In Module 1, this means running a local model with Ollama and delegating a structured task to an agent through Openwork — not just reading about it.
 
-*Module 1 focus — Unit 3 (Guided Labs: Claude Desktop, Ollama)*
+*Module 1 focus — Unit 3 (Guided Labs: Ollama, Openwork)*
 
 **Pillar: EVALUATE AI**
 

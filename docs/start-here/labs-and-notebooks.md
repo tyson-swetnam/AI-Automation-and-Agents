@@ -24,7 +24,7 @@ sources:
     author: "UA-AI2S course team"
   - id: nb-module5
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb"
-    title: "Module 5 Lab (Learner Starter) — LangSmith Observability & CI/CD Evaluation Pipeline (notebook)"
+    title: "Module 5 Lab (Learner Starter) — LangSmith Tracing and a Comparative Observability Study (notebook)"
     author: "UA-AI2S course team"
   - id: wiki-m2-activities
     resource: "https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Activities"
@@ -56,10 +56,10 @@ first; it holds the *Platform setup* and *What to submit* boxes.
 
 | Module | Lab page and notebook | What you build | Frameworks | Time |
 | :-- | :-- | :-- | :-- | :-- |
-| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | ~2 hours |
-| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare | LangChain 1.4.0 (pinned), Chroma, pypdf | ~60 minutes |
-| 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | 100-130 minutes |
-| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyses ten runs; Lab B builds an automated evaluation suite that detects a regression | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | ~120 minutes |
+| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | Lab ~2 hours, project ~2 hours |
+| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare; then a four-run retrieval experiment and a RAGAS interpretation | LangChain 1.4.0 (pinned), Chroma, pypdf | Lab ~2 hours, project ~2 hours |
+| 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | Lab ~2 hours, project ~2 hours |
+| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyzes ten runs; Lab B runs the same agent under two or three configurations and recommends one from the trace data | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | Lab ~1 hour, project ~2 hours |
 
 ### Model providers each notebook supports
 
@@ -75,10 +75,12 @@ where you choose.
 
 !!! note "Module 3 needs two PDF corpora"
 
-    The Module 3 notebook reads two PDF files from Colab's `/content/` folder
-    (`CORPUS_1` and `CORPUS_2` in the configuration cell). Upload them with the
-    file browser in Colab's left sidebar, or with the upload cell the notebook
-    provides, before you run the loading step.
+    The Module 3 notebook works from two NIST publications, AI 100-1 and AI
+    600-1 (`CORPUS_1` and `CORPUS_2` in the configuration cell). Its
+    configuration step downloads them, from this site first and from NIST if
+    that fails, and checks each against the lab's reference copy. If Colab
+    cannot reach either source, download the two PDFs yourself and upload them
+    to Colab's `/content/` folder with the file browser in the left sidebar.
 
 ## How to run a lab
 
@@ -149,8 +151,9 @@ notebook's own security note recommends the same.
   The labs use small models and short runs, but check the provider's current
   pricing and free-tier terms before you start; this site does not quote
   prices because they change.
-- **Hugging Face Inference Providers**: the default in Modules 4 and 5. A free
-  token comes with credits and quotas that can change; the notebooks say so.
+- **Hugging Face Inference Providers**: the default in Module 4 and an option
+  in Module 5, whose default is the NVIDIA API. A free token comes with
+  credits and quotas that can change; the notebooks say so.
 - **Ollama**: free, but it runs on your own machine. Models are 2-5 GB
   downloads and need a reasonably recent computer; small models are slower
   and less capable than hosted ones, which is fine for the labs.
@@ -165,9 +168,8 @@ supported end to end and earns the same certificate.
    (*Runtime -> Run all*).
 2. Rename the notebook as the module's *What to submit* box asks:
    `Module2_Lab_[YourName].ipynb`, `Module3_Lab_[YourName].ipynb`,
-   `Module4_Lab_[YourName].ipynb` or `Module5_Lab_[YourName].ipynb`. (The
-   header cells inside the Module 4 and 5 notebooks suggest slightly
-   different names; follow the activities page and your LMS.)
+   `Module4_Lab_[YourName].ipynb` or `Module5_Lab_[YourName].ipynb`, the
+   names the notebooks' own submission checklists use.
 3. *File -> Download -> Download .ipynb*.
 4. Commit the file into the matching module folder of your
    `ai-automation-agents-portfolio` repository, together with any companion

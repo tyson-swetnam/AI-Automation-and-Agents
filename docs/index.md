@@ -32,7 +32,7 @@ Move beyond individual prompts into the world of AI agents and automated workflo
 
     *Thinking Like an Automation Designer* (8 hours). The agent loop; the
     no-code, low-code, and code-first automation spectrum; workflow
-    decomposition; hands-on agent interaction with Claude Desktop; key
+    decomposition; hands-on agent interaction with Ollama and Openwork; key
     vocabulary. Anchor deliverable: the Workflow Audit.
 
     [:octicons-arrow-right-24: Module 1](modules/module-1/index.md)
@@ -135,8 +135,8 @@ progress from foundational agent theory through to structured agent frameworks u
 transferable skills applicable to any organization or platform.
 
 The course follows a layered progression. Module 1 builds the conceptual foundation: defining what agents are,
-surveying the [no-code](https://en.wikipedia.org/wiki/No-code_development_platform){target=_blank}/low-code/code-first automation spectrum, and introducing [Claude Desktop](https://claude.ai/){target=_blank} for hands-on agent
-interaction. Subsequent modules introduce the leading open-source agent frameworks ([LangChain](https://www.langchain.com/){target=_blank},
+surveying the [no-code](https://en.wikipedia.org/wiki/No-code_development_platform){target=_blank}/low-code/code-first automation spectrum, and introducing hands-on agent
+interaction with a local model ([Ollama](https://ollama.com/){target=_blank}) and agent interface ([Openwork](https://openworklabs.com/){target=_blank}). Subsequent modules introduce the leading open-source agent frameworks ([LangChain](https://www.langchain.com/){target=_blank},
 [LangGraph](https://www.langchain.com/langgraph){target=_blank}, and [CrewAI](https://crewai.com/){target=_blank}) through guided [Jupyter Notebook labs](https://jupyter.org/){target=_blank} on [Google Colab](https://colab.research.google.com/){target=_blank}, covering reasoning
 architectures, tool integration, memory, retrieval-augmented generation, and multi-agent coordination.
 Throughout, the emphasis remains practical and workforce-relevant.
@@ -159,7 +159,7 @@ Upon successful completion of this course, learners will be able to:
 
 | # | Module | Key Topics | Hours |
 | :--: | :-- | :-- | :--: |
-| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Claude Desktop; key vocabulary | 8 hours |
+| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Ollama and Openwork; key vocabulary | 8 hours |
 | 2 | [**Agent Reasoning Architectures and Tool Integration**](modules/module-2/overview.md) | Chain-of-Thought, ReAct, Tree of Thoughts, LATS; tool integration with LangChain; prompt engineering; trace evaluation; architectural trade-offs | 8 hours |
 | 3 | [**Total Recall:** Memory Architectures and Retrieval-Augmented Generation](modules/module-3/overview.md) | Parametric vs. non-parametric memory; six-stage RAG pipeline; conversational memory types; retrieval optimization; RAGAS evaluation | 8 hours |
 | 4 | [**Multi-Agent Systems**](modules/module-4/overview.md) | Coordination architectures; LangGraph multi-agent implementation; three-role pipeline design; CrewAI vs. LangGraph comparison; coordination failure diagnosis | 8 hours |

@@ -84,7 +84,7 @@ terms
 2. Classify automation paradigms (no-code, low-code, code-first) by trade-off
 dimensions.
 
-3. Operate Claude Desktop on a basic agentic task.
+3. Operate a local agent interface (Openwork, or Claude Desktop's Cowork tab) on a basic agentic task.
 4. Execute three structured LLM interactions with behavioral observation.
 5. Decompose three real workflows using the Workflow Mapping Template.
 6. Evaluate three workflows using the two-dimensional assessment framework.

@@ -43,29 +43,40 @@ sign off on a page you have reviewed.
     Everything in the course repository - including the instructor solution
     notebooks under `instructor/` - is publicly readable on GitHub, and this
     site is publicly indexed. Students who look will find the solutions and
-    the answer keys. Publishing the keys is deliberate: the quizzes are
-    self-evaluating and the owners confirmed that policy on 2026-09-09.
-    Whether the *solution notebooks* stay public is still open. Either way,
-    grade what the LMS records, not what the site could reveal.
+    the answer keys. Both are deliberate: the quizzes are self-evaluating and
+    the owners confirmed public keys on 2026-09-09, and on 2026-09-11 they
+    decided the solution notebooks stay public on GitHub without being
+    published on this site. Grade what the LMS records, not what the site
+    could reveal.
 
 ## Instructor solution notebooks
 
 The learner notebooks for Modules 2-5 are published under `docs/materials/`
-and rendered as lab pages. The two **instructor solution notebooks** are kept
-in the repository *outside* `docs/`, so they are never built into the site,
-never mirrored as Markdown, never listed in `llms.txt` or `llms-full.txt`, and
-never linked from a student-facing page.
+and rendered as lab pages. The two **instructor solution notebooks** are
+public, but only on GitHub: they sit in the repository *outside* `docs/`, so
+they are never built into the site, never mirrored as Markdown, never listed
+in `llms.txt` or `llms-full.txt`, and never linked from a student-facing page.
+The course owners settled this on 2026-09-11: the solutions stay open, but
+not one click away from the lab a learner is working on.
 
-| Module | Instructor solution | Learner starter it solves |
-| :-- | :-- | :-- |
-| 4 | [`instructor/materials/module4/Module4_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Module 4 lab](../modules/module-4/lab-notebook.md) (`Module4_Learner_Starter.ipynb`) |
-| 5 | [`instructor/materials/module5/Module5_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Module 5 lab](../modules/module-5/lab-notebook.md) (`Module5_Learner_Starter.ipynb`) |
+| Module | Read on GitHub | Run in Colab | Learner starter it solves |
+| :-- | :-- | :-- | :-- |
+| 4 | [`Module4_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Module 4 lab](../modules/module-4/lab-notebook.md) (`Module4_Learner_Starter.ipynb`) |
+| 5 | [`Module5_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Module 5 lab](../modules/module-5/lab-notebook.md) (`Module5_Learner_Starter.ipynb`) |
+
+GitHub renders a notebook in the browser with its saved outputs, which is
+enough for most reviews; Colab opens a runnable copy in your own Drive. Each
+solution opens with a banner naming the starter it solves, and
+`instructor/README.md` explains the folder to anyone who reaches it from
+GitHub. A solution's header cells mirror its starter's, so change both in the
+same commit.
 
 Modules 2 and 3 have no separate solution notebook: their learner notebooks
 are largely pre-written scaffolds with marked extension zones, and the
-assessed work is the learner's extensions and written observations. The site's lint step fails any relative link from `docs/` into
-`instructor/`, so the two notebooks above are linked only by their GitHub
-URLs.
+assessed work is the learner's extensions and written observations. The
+site's lint step fails any relative link from `docs/` into `instructor/`, so
+the links above are full GitHub and Colab URLs, and this is the only page
+that carries them.
 
 ## Answer-key policy
 
@@ -175,13 +186,22 @@ human-reviewed pages when answers conflict (see
 
 ## Open items for the course owners
 
-1. Keep the instructor solution notebooks public in this repository, or move
-   them to a private repository before the course runs. (Answer keys are
-   settled: they stay public, see the policy above.)
-2. Confirm the two-attempt rule for the concept quiz and the attempt policy
+1. Confirm the two-attempt rule for the concept quiz and the attempt policy
    for chapter quizzes in the LMS.
-3. Decide who holds verification identities (`human:<netid>`) and when the
+2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
+3. Confirm that the Module 2 hands-on project is submitted inside the lab
+   notebook, as the Module 4 and 5 projects are. The wiki's project box asked
+   for `Module2__[YourName].ipynb`, which a 2026-08-03 edit produced by
+   deleting the middle word of `Module2_Project_[YourName].ipynb`; the site
+   now reads that as one notebook, `Module2_Lab_[YourName].ipynb`. If a
+   separate project notebook is intended, restore
+   `Module2_Project_[YourName].ipynb` on the
+   [activities page](../modules/module-2/activities.md) and in the closing
+   cell of the Module 2 notebook.
+
+Whether the solution notebooks stay public, formerly the first item here, was
+decided on 2026-09-11 (see [above](#instructor-solution-notebooks)).
 
 ## Assessment revised for LangChain 1.4
 
@@ -245,24 +265,38 @@ run. `python scripts/migrate_wiki.py --check` proves the two are in step.
 ## Content inconsistencies inherited from the source
 
 A page-by-page review of the migration surfaced the following disagreements
-*between* course materials. They exist in the wiki and the notebooks
-themselves, so the migration reproduced them rather than silently deciding
-which side is right. Each needs an author's call:
+*between* course materials. They were inherited from the wiki and the
+notebooks, not introduced by the migration. All are now resolved or
+withdrawn; each entry records which side was taken and why, so an author who
+disagrees can reverse the call. A consistency check run on 2026-09-11 found
+the notebooks, activities pages, overviews and
+[Labs, Colab, and API keys](../start-here/labs-and-notebooks.md) in agreement
+on every point below.
 
-1. **Lab submission filenames.** The Module 2, 4 and 5 notebooks tell learners
-   to rename their file using a different convention from the one required on
-   the matching Activities page.
-2. **Module 5 lab title.** The notebook's own heading calls it
-   "LangSmith Observability & CI/CD Evaluation Pipeline", but its Lab B is the
-   Comparative Observability Study; there is no CI/CD pipeline in the notebook.
-   The page title follows the notebook.
-3. **Learning-outcome labels.** The Module 4 lab cites "LO 4.5 and LO 4.6"
-   while the Module 4 overview defines five outcomes and maps the lab to
-   different numbers.
-4. **Lab time budgets.** The Module 4 notebook says 100-130 minutes against
-   ~4 hours on its Activities page. Module 3 had the same mismatch (~60
-   minutes against ~2 hours) until September 2026; its notebook now gives the
-   step times and a two-hour budget per part, matching the Activities page.
+1. **Lab submission filenames (resolved 2026-09-11).** The Module 2, 4 and 5
+   notebooks asked for `Module2_Unit3_Lab_…`, `Module4_Unit4_AltFramework_…`
+   and `Module5_Unit3_Lab_…`, while the activities pages, like Module 3's,
+   ask for `ModuleN_Lab_[YourName].ipynb`. The notebooks, learner and
+   instructor copies alike, now use the activities pages' names. The Module 2
+   project box's `Module2__[YourName].ipynb` now reads
+   `Module2_Lab_[YourName].ipynb`; see open item 3.
+2. **Module 5 lab title (resolved 2026-09-11).** The notebook called itself
+   "LangSmith Observability & CI/CD Evaluation Pipeline" and described a Lab B
+   that builds a regression test suite. Its actual Lab B is the Comparative
+   Observability Study on the activities page. Its title, its Lab B
+   description and its list of required evidence now describe the lab it
+   contains: *LangSmith Tracing and a Comparative Observability Study*.
+3. **Learning-outcome labels (resolved 2026-09-11).** The Module 4 notebook
+   cited "LO 4.5 and LO 4.6", though the overview defines five objectives,
+   and Module 5's cited "LO 5.4 and LO 5.5". Each now cites the objectives
+   its overview's checklist maps to the lab and project: 2, 3 and 4 for
+   Module 4; 2 and 3 for Module 5.
+4. **Lab time budgets (resolved 2026-09-11).** The Module 4 notebook said
+   100-130 minutes for work its activities page budgets at about four hours,
+   two for the guided lab and two for the project. Module 5's said ~120
+   minutes, though its own step times add up to three hours. Both headers now
+   give the per-part budgets the activities pages give, as Module 3's has
+   since its repair, and so does the table on Labs, Colab, and API keys.
 5. **Module 3 project instructions (resolved September 2026).** The Activities
    page promised a four-run retrieval experiment and a RAGAS write-up "embedded
    directly in the notebook", and the notebook had neither. Its corpus PDFs, five
@@ -278,22 +312,57 @@ which side is right. Each needs an author's call:
    on 2026-08-06 — Lab B, the token-budget report and the memory-architecture
    brief — was not restored; the overview's deliverable row and a chapter 4 quiz
    item that still cited them were corrected instead.
-6. **Default lab provider.** The Module 5 notebook defaults to the NVIDIA API,
-   while the prose in [Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)
-   describes Hugging Face Inference Providers as the Module 4-5 default.
-7. **Module 2 chapter 5, question 1.** The wiki's answer key reads "B or C
-   depending on interpretation"; the site publishes B and flags the question
-   for review.
-8. **Answer keys that explain three of four options.** Eight chapter-quiz
-   questions name the correct answer and explain two distractors, leaving one
-   with no feedback at all: Module 1 chapter 1 questions 1 (option C) and 2
-   (option A), chapter 2 question 5 (option D) and chapter 5 question 1 (option
-   B); Module 2 chapter 3 question 1 (option C) and chapter 5 question 1 (option
-   C, the item in note 7 above); Module 4 chapter 1 question 3 (options A and C)
-   and chapter 5 question 3 (option C). All eight are inherited from the wiki
-   unchanged. They matter more here than they did there because these quizzes
-   are self-evaluating: a learner who picked the unexplained option is told the
-   right answer but never why theirs was wrong.
+6. **Default lab provider (resolved 2026-09-11).** The Module 5 notebook's
+   code defaults to the NVIDIA API, while one sentence of its prose and the
+   cost section of Labs, Colab, and API keys said Hugging Face. The prose now
+   follows the code, the only part of the notebook that runs; no code changed.
+7. **Module 2 chapter 5, question 1 (resolved 2026-09-11).** The wiki's key
+   read "B or C depending on interpretation". C was defensible because the
+   stem never said where the sales data lived: if the agent had to query a
+   database, ReAct is right. The stem now puts the figures in the prompt,
+   option C argues for ReAct from "multi-step" alone, and the key is B without
+   qualification. The same review found that chapter 3 question 1's option C
+   already named the correct root cause; it now proposes a fix that treats
+   only the symptom. Both keys stay at B.
+8. **Answer keys that explain three of four options (withdrawn
+   2026-09-11).** This item was wrong. It listed eight questions as leaving
+   one option without feedback, but every one of those options has feedback:
+   it is marked ❌ and opens "partially correct", "partially true" or
+   "partially applicable", and the review that produced this item misread
+   those as missing. A scan of all 125 questions finds feedback for every
+   option. What remains is a matter of style, not a defect: seven distractors
+   across six questions (Module 1 chapter 1 questions 1 and 2, chapter 2
+   question 5 and chapter 5 question 1; Module 4 chapter 1 question 3 and
+   chapter 5 question 3) are marked ❌ while their feedback calls them
+   partially right. On a self-evaluating quiz with no partial credit, that can
+   leave a learner unsure how wrong they were. Rewording them is an author's
+   call.
+9. **The six trade-off dimensions in Module 2 (resolved 2026-09-11).** The
+   chapter 5 lesson's table, transcribed from an image, listed latency, cost
+   per inference, reliability and error rate, scalability, interpretability,
+   and organizational integration. The
+   [reading guide](../modules/module-2/reading-guides.md) and all five
+   chapter 5 quiz questions assess a different six: task complexity,
+   inference cost, latency requirements, external information needs,
+   interpretability requirements, and deployment risk profile. The
+   [lesson](../modules/module-2/foundational-concepts.md) now teaches the six
+   the learner is assessed on, and keeps the image's guidance on scalability
+   and organizational integration as prose after the table. The image stays
+   in `images/` as the record of what it said.
+10. **The Module 5 agent (resolved 2026-09-11).** The
+    [activities page](../modules/module-5/activities.md) described a research
+    agent with live web search and webpage reading, run on ten complex
+    research prompts. The notebook's agent has a simulated search tool and a
+    calculator, with live DuckDuckGo search as an option, and runs ten prompts
+    in five categories. The page now describes the notebook.
+11. **Module 1 and Claude Desktop (resolved 2026-09-11).** Module 1's third
+    learning objective, the landing page, the syllabus and the lesson's
+    literacy-pillar text said learners operate Claude Desktop. Since the
+    authors reworked the labs on 2026-07-21 the labs use Ollama and Openwork,
+    with Claude Desktop's Cowork tab as an optional substitute, and the text
+    now says so; Claude Desktop is still introduced as a topic. Module 1's
+    closing box also promised that Module 2 would build a no-code Openwork or
+    n8n pipeline. Module 2 builds a LangChain agent, and the box now says so.
 
 ## What the retired posters said
 
@@ -321,3 +390,9 @@ Model Context Protocol and least-privilege permissions, the named EU AI Act risk
 token-budget profiling, LangSmith as the observability tool, and SRE error budgets. None of
 it was written into the pages, because inventing course content is an author's decision, not
 a maintenance one. If any of it should be taught, it needs adding as prose first.
+
+Checked again on 2026-09-11 against the current pages: the Workflow Audit
+formula, LangChain's paradigm and the memory patterns leave no trace in the
+page text. The desktop-client claim did, because Module 1's objectives, the
+landing page, the syllabus and the lesson still said learners operate Claude
+Desktop; that is item 11 in the list above.

@@ -60,8 +60,8 @@ platform.
 
 The course follows a layered progression. Module 1 builds the conceptual
 foundation: defining what agents are, surveying the no-code, low-code and
-code-first automation spectrum, and introducing Claude Desktop for hands-on
-agent interaction. Subsequent modules introduce the leading open-source agent
+code-first automation spectrum, and introducing hands-on agent interaction
+through a local model (Ollama) and agent interface (Openwork). Subsequent modules introduce the leading open-source agent
 frameworks (LangChain, LangGraph and CrewAI) through guided Jupyter Notebook
 labs on Google Colab, covering reasoning architectures, tool integration,
 memory, retrieval-augmented generation, and multi-agent coordination.
@@ -96,7 +96,7 @@ Upon successful completion of this course, learners will be able to:
 
 | # | Module | Key topics | Hours |
 | :--: | :-- | :-- | :--: |
-| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](../modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Claude Desktop; key vocabulary | 8 |
+| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](../modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Ollama and Openwork; key vocabulary | 8 |
 | 2 | [**Agent Reasoning Architectures and Tool Integration**](../modules/module-2/overview.md) | Chain-of-Thought, ReAct, Tree of Thoughts, LATS; tool integration with LangChain; prompt engineering; trace evaluation; architectural trade-offs | 8 |
 | 3 | [**Total Recall:** Memory Architectures and Retrieval-Augmented Generation](../modules/module-3/overview.md) | Parametric vs. non-parametric memory; six-stage RAG pipeline; conversational memory types; retrieval optimization; RAGAS evaluation | 8 |
 | 4 | [**Multi-Agent Systems**](../modules/module-4/overview.md) | Coordination architectures; LangGraph multi-agent implementation; three-role pipeline design; CrewAI vs. LangGraph comparison; coordination failure diagnosis | 8 |

@@ -282,8 +282,8 @@ platform.
 
 The course follows a layered progression. Module 1 builds the conceptual
 foundation: defining what agents are, surveying the no-code, low-code and
-code-first automation spectrum, and introducing Claude Desktop for hands-on
-agent interaction. Subsequent modules introduce the leading open-source agent
+code-first automation spectrum, and introducing hands-on agent interaction
+through a local model (Ollama) and agent interface (Openwork). Subsequent modules introduce the leading open-source agent
 frameworks (LangChain, LangGraph and CrewAI) through guided Jupyter Notebook
 labs on Google Colab, covering reasoning architectures, tool integration,
 memory, retrieval-augmented generation, and multi-agent coordination.
@@ -318,7 +318,7 @@ Upon successful completion of this course, learners will be able to:
 
 | # | Module | Key topics | Hours |
 | :--: | :-- | :-- | :--: |
-| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](../modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Claude Desktop; key vocabulary | 8 |
+| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](../modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Ollama and Openwork; key vocabulary | 8 |
 | 2 | [**Agent Reasoning Architectures and Tool Integration**](../modules/module-2/overview.md) | Chain-of-Thought, ReAct, Tree of Thoughts, LATS; tool integration with LangChain; prompt engineering; trace evaluation; architectural trade-offs | 8 |
 | 3 | [**Total Recall:** Memory Architectures and Retrieval-Augmented Generation](../modules/module-3/overview.md) | Parametric vs. non-parametric memory; six-stage RAG pipeline; conversational memory types; retrieval optimization; RAGAS evaluation | 8 |
 | 4 | [**Multi-Agent Systems**](../modules/module-4/overview.md) | Coordination architectures; LangGraph multi-agent implementation; three-role pipeline design; CrewAI vs. LangGraph comparison; coordination failure diagnosis | 8 |
@@ -844,7 +844,7 @@ sources:
     author: "UA-AI2S course team"
   - id: nb-module5
     resource: "https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb"
-    title: "Module 5 Lab (Learner Starter) — LangSmith Observability & CI/CD Evaluation Pipeline (notebook)"
+    title: "Module 5 Lab (Learner Starter) — LangSmith Tracing and a Comparative Observability Study (notebook)"
     author: "UA-AI2S course team"
   - id: wiki-m2-activities
     resource: "https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Activities"
@@ -876,10 +876,10 @@ first; it holds the *Platform setup* and *What to submit* boxes.
 
 | Module | Lab page and notebook | What you build | Frameworks | Time |
 | :-- | :-- | :-- | :-- | :-- |
-| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | ~2 hours |
-| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare | LangChain 1.4.0 (pinned), Chroma, pypdf | ~60 minutes |
-| 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | 100-130 minutes |
-| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyses ten runs; Lab B builds an automated evaluation suite that detects a regression | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | ~120 minutes |
+| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | Lab ~2 hours, project ~2 hours |
+| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare; then a four-run retrieval experiment and a RAGAS interpretation | LangChain 1.4.0 (pinned), Chroma, pypdf | Lab ~2 hours, project ~2 hours |
+| 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | Lab ~2 hours, project ~2 hours |
+| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyzes ten runs; Lab B runs the same agent under two or three configurations and recommends one from the trace data | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | Lab ~1 hour, project ~2 hours |
 
 ### Model providers each notebook supports
 
@@ -895,10 +895,12 @@ where you choose.
 
 !!! note "Module 3 needs two PDF corpora"
 
-    The Module 3 notebook reads two PDF files from Colab's `/content/` folder
-    (`CORPUS_1` and `CORPUS_2` in the configuration cell). Upload them with the
-    file browser in Colab's left sidebar, or with the upload cell the notebook
-    provides, before you run the loading step.
+    The Module 3 notebook works from two NIST publications, AI 100-1 and AI
+    600-1 (`CORPUS_1` and `CORPUS_2` in the configuration cell). Its
+    configuration step downloads them, from this site first and from NIST if
+    that fails, and checks each against the lab's reference copy. If Colab
+    cannot reach either source, download the two PDFs yourself and upload them
+    to Colab's `/content/` folder with the file browser in the left sidebar.
 
 ## How to run a lab
 
@@ -969,8 +971,9 @@ notebook's own security note recommends the same.
   The labs use small models and short runs, but check the provider's current
   pricing and free-tier terms before you start; this site does not quote
   prices because they change.
-- **Hugging Face Inference Providers**: the default in Modules 4 and 5. A free
-  token comes with credits and quotas that can change; the notebooks say so.
+- **Hugging Face Inference Providers**: the default in Module 4 and an option
+  in Module 5, whose default is the NVIDIA API. A free token comes with
+  credits and quotas that can change; the notebooks say so.
 - **Ollama**: free, but it runs on your own machine. Models are 2-5 GB
   downloads and need a reasonably recent computer; small models are slower
   and less capable than hosted ones, which is fine for the labs.
@@ -985,9 +988,8 @@ supported end to end and earns the same certificate.
    (*Runtime -> Run all*).
 2. Rename the notebook as the module's *What to submit* box asks:
    `Module2_Lab_[YourName].ipynb`, `Module3_Lab_[YourName].ipynb`,
-   `Module4_Lab_[YourName].ipynb` or `Module5_Lab_[YourName].ipynb`. (The
-   header cells inside the Module 4 and 5 notebooks suggest slightly
-   different names; follow the activities page and your LMS.)
+   `Module4_Lab_[YourName].ipynb` or `Module5_Lab_[YourName].ipynb`, the
+   names the notebooks' own submission checklists use.
 3. *File -> Download -> Download .ipynb*.
 4. Commit the file into the matching module folder of your
    `ai-automation-agents-portfolio` repository, together with any companion
@@ -1089,7 +1091,7 @@ terms
 2. Classify automation paradigms (no-code, low-code, code-first) by trade-off
 dimensions.
 
-3. Operate Claude Desktop on a basic agentic task.
+3. Operate a local agent interface (Openwork, or Claude Desktop's Cowork tab) on a basic agentic task.
 4. Execute three structured LLM interactions with behavioral observation.
 5. Decompose three real workflows using the Workflow Mapping Template.
 6. Evaluate three workflows using the two-dimensional assessment framework.
@@ -1383,9 +1385,9 @@ Understand the fundamental concepts, capabilities, and limitations of AI systems
 
 **Pillar: USE AI**
 
-Operate AI tools productively in authentic contexts. In Module 1, this means operating Claude Desktop or n8n, running Ollama, and completing structured tasks with an AI agent — not just reading about it.
+Operate AI tools productively in authentic contexts. In Module 1, this means running a local model with Ollama and delegating a structured task to an agent through Openwork — not just reading about it.
 
-*Module 1 focus — Unit 3 (Guided Labs: Claude Desktop, Ollama)*
+*Module 1 focus — Unit 3 (Guided Labs: Ollama, Openwork)*
 
 **Pillar: EVALUATE AI**
 
@@ -2206,7 +2208,7 @@ framework.
 
     [Module 2](../module-2/overview.md)
 
-    Module 2 begins with your top-ranked workflow from the Workflow Audit. You will build your first no-code automation pipeline using Openwork or n8n applied to that workflow. Ensure your Workflow Audit document is complete before starting — it is the anchor for all subsequent module projects.
+    Module 2 moves from mapping workflows to building agents: you will build a tool-using agent in LangChain, and its hands-on project asks you to add a tool that could support a workflow from your own work. Your top-ranked workflow from the Workflow Audit is the natural candidate, so make sure the audit is complete before you start — it is the anchor for all subsequent module projects.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Activities){target=_blank} (wiki page last changed 2026-07-22). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/activities.md){target=_blank}.</p>
 
@@ -4476,12 +4478,14 @@ choice given the specific problem context.
 
 | Dimension | Assessment Questions | Architecture Implications |
 | --- | --- | --- |
-| **Latency** | What is the acceptable response time for this use case? Is the agent operating in a real-time, near-real-time, or batch context? | CoT and ReAct have lower latency than ToT and LATS. High-latency architectures are inappropriate for real-time user-facing applications. |
-| **Cost per Inference** | What is the per-query cost at the expected volume? Can the use case sustain the inference cost of multi-branch architectures? | CoT has lowest cost. ReAct cost scales with number of tool calls. ToT and LATS costs scale super linearly with tree depth and branching factor. |
-| **Reliability and Error Rate** | What is the acceptable error rate? Is the problem type where linear reasoning produces frequent errors that branch-and-backtrack would prevent? | For structured, well-defined tasks, ReAct reliability is typically sufficient. For open-ended or highly constrained tasks, ToT or LATS reduce error rates at higher cost. |
-| **Scalability** | What is the anticipated query volume and growth trajectory? How does the architecture scale with load? | Stateless architectures (CoT, ReAct) scale horizontally more easily. Stateful architectures (ToT, LATS) require more sophisticated state management infrastructure. |
-| **Interpretability / Explainability** | Are there regulatory, organizational, or user requirements for explainability of agent decisions? Does the EU AI Act's Article 13 apply? | CoT and ReAct traces are highly interpretable. ToT and LATS traces are significantly more complex to audit. High-risk AI system deployments may require CoT or ReAct for regulatory compliance. |
-| **Organizational Integration** | What are the data governance requirements? Who will maintain the system? What monitoring infrastructure is available? | Tool choices must align with data governance policies. The maintenance burden of ToT/LATS requires more sophisticated engineering capacity than CoT/ReAct. |
+| **Task complexity** | How many sub-tasks are there, and how do they depend on each other? Does the task need backtracking — exploring alternatives and abandoning the ones that fail? | For structured, well-defined tasks, linear reasoning (CoT or ReAct) is typically sufficient. Open-ended or highly constrained tasks, where linear reasoning produces frequent errors, are where ToT and LATS earn their cost by branching and backtracking. |
+| **Inference cost** | What is the total token budget per query at the expected volume? Are per-query cost constraints strict? | CoT has the lowest cost. ReAct cost scales with the number of tool calls. ToT and LATS costs scale super-linearly with tree depth and branching factor. |
+| **Latency requirements** | What is the acceptable response time? Is the agent operating in a real-time, near-real-time, or batch context? | CoT and ReAct have lower latency than ToT and LATS. Branching search is inappropriate for real-time, user-facing applications. |
+| **External information needs** | Does the task need information that is not in the prompt — retrieval, lookups, live data — while it reasons? | If it does, CoT is ruled out: CoT reasons only over what is already in its context, and ReAct adds the ability to act and observe the result. If everything the task needs is in the prompt, tool calls add cost and failure points without adding information. |
+| **Interpretability requirements** | Must operators, auditors, or regulators be able to follow the reasoning? Does the EU AI Act's Article 13 apply? | CoT and ReAct traces are linear and comparatively easy to audit. ToT and LATS traces branch, so auditing them means logging the whole search tree, not only the path that was selected. |
+| **Deployment risk profile** | Is the domain high-risk — healthcare, legal, financial, employment — so that regulation such as EU AI Act Article 13 applies? Who is harmed if the agent is wrong? | A high-risk domain raises the bar for interpretability and review, but it does not by itself dictate a paradigm: a wrong answer from an easy-to-audit system is not safer than a correct answer from a harder-to-audit one. |
+
+Two further considerations sit alongside the six. **Scalability:** stateless paradigms (CoT, ReAct) scale horizontally more easily than stateful ones (ToT, LATS), which need more sophisticated state-management infrastructure. **Organizational integration:** tool choices must fit the organization's data-governance policies, and ToT and LATS carry a heavier maintenance burden than CoT and ReAct.
 
 The European Parliament's AI Act (2024) is directly relevant to architectural choice for high-risk
 AI systems. Article 13 of the Act requires that high-risk AI systems provide output that is
@@ -4828,7 +4832,7 @@ Verify that every cell is filled from Liu et al.'s text and the lesson content �
 
 **Key Concepts to Extract**
 
-- **Six assessment dimensions (from lesson image and text):**
+- **Six assessment dimensions (from the lesson's table and text):**
     1. *Task complexity* — Number and interdependency of sub-tasks; whether backtracking capability is needed.
     2. *Inference cost* — Total token budget per query; whether per-query cost constraints are strict.
     3. *Latency requirements* — Time-to-response constraint; whether branching search latency is acceptable.
@@ -4977,7 +4981,7 @@ This project is designed to help you transfer the lab from the sample workflow t
 
 !!! info "What to submit"
 
-    **Add to github**: Submit the `.ipynb` file with your completed extension code (all four steps). All cells must be executed with output visible — do not submit a notebook with empty output cells. Filename: `Module2__[YourName].ipynb`.
+    **Add to github**: Submit the lab notebook with your new tool added: its definition and description, the three test prompts run with output visible, and your before-and-after comparison. The project goes in the same notebook as the guided lab, so the filename is the same: `Module2_Lab_[YourName].ipynb`.
 
 ## Project proposal and peer review
 
@@ -5745,14 +5749,14 @@ Before submitting, confirm all four checks:
 
 **Submit to GitHub:**
 
-- File: `Module2_Unit3_Lab_[YourName].ipynb`
+- File: `Module2_Lab_[YourName].ipynb`
 - All cells must be executed with visible output
 
 ---
 
 ### What's next?
 
-Unit 4 builds directly on this lab. In Task 1 you will design your own complete prompt engineering suite — system instruction, tool descriptions, and few-shot demonstrations — for a domain of your choice. The agent architecture insights from Steps 2–4 are the inputs to that design task.
+The hands-on project builds directly on this lab: in this same notebook, you add a tool of your own choosing, run three prompts that test when the agent should and should not use it, and compare its behavior before and after. What Steps 2–4 taught about tool descriptions is what makes that choice reliable.
 
 ```python
 # Optional: Use this cell as your Agent Instruction Log if you prefer to keep it in the notebook.
@@ -6112,7 +6116,7 @@ A. Observation misinterpretation — the agent correctly read the error message 
 
 B. Incorrect tool selection — the agent invoked the calculator tool for a factual retrieval task (population lookup) that requires a web search tool; the fix is to revise the calculator tool's scope boundary to explicitly state "Do not use for factual lookups, geographic data, or non-mathematical queries."
 
-C. Hallucination in Thought — after the calculator error, the agent inserted a population figure from parametric memory (not from any tool result) as if it were retrieved information; the combined failure involves both incorrect tool selection (root cause) and hallucination in Thought (secondary consequence).
+C. Hallucination in Thought — after the calculator error, the agent inserted a population figure from parametric memory (not from any tool result) as if it were retrieved information; the fix is a system-prompt rule that forbids stating any figure no tool returned.
 
 D. Premature termination — the agent should have retried with the correct tool (web search) after the calculator error; instead it terminated after a single failed tool call.
 
@@ -6124,7 +6128,7 @@ D. Premature termination — the agent should have retried with the correct tool
 
     ❌ **A is incorrect.** The agent does correctly read the error message — its final message opens by acknowledging that "the calculator could not evaluate that." The failure is not in misinterpreting the error; it is in: (1) selecting the wrong tool initially, and (2) falling back on parametric memory rather than retrying with a correct tool. Observation misinterpretation applies when a valid tool result is misread, not when an error is correctly acknowledged.
 
-    ❌ **C is partially correct** but incomplete as a primary classification. The hallucination is real — the agent asserts a specific figure (13.96 million) that no tool result contained. However, Reading Guide 3 structures the five failure classes by root cause, and the root cause here is incorrect tool selection, not hallucination. Identifying the root cause is what enables the structural fix — and fixing tool selection (providing a web search option with clear scope) resolves both failures simultaneously.
+    ❌ **C is incorrect.** It names the symptom, not the root cause. The hallucination is real — the agent asserts a specific figure (13.96 million) that no tool result contained. However, Reading Guide 3 structures the five failure classes by root cause, and the root cause here is incorrect tool selection. A prompt rule against unsupported figures treats only the symptom: the agent would still send a population lookup to the calculator, and would now reply that it could not find the figure. Fixing tool selection — a web search tool with a clear scope, and a calculator description that says what it is not for — resolves both failures at once.
 
     ❌ **D is incorrect.** Premature termination means the loop stopped while the task still needed another tool call, and the test for it is whether letting the loop run longer would fix the answer. Here it would not: raising the `recursion_limit`, or adding demonstrations of multi-step reasoning, gives the agent more steps, not a better tool choice — and the calculator would still reject `Tokyo population`. The stopping condition is not where this failure lives — the tool choice upstream of it is. Nor is the shape of the ending a tell: a run that finishes normally always ends with a model message that carries no tool call, so answering after a single tool call is not by itself premature termination. The agent here believes it has sufficient information (from its parametric memory) and returns a semantically complete answer; what it actually did was substitute hallucinated content for retrieved content after the tool failed. These are distinct failure mechanisms with different fixes.
 
@@ -6364,25 +6368,25 @@ D. The ethical boundary maps to the input indicator component because it is posi
 
 ### Question 1
 
-The six-dimension trade-off assessment framework requires evaluating architectural choices across: task complexity, inference cost, latency requirements, external information needs, interpretability requirements, and deployment risk profile. A practitioner evaluating an agent for "weekly automated analysis of internal sales data to generate a board-level performance report" assesses the task as follows: complex multi-step analysis with no backtracking; moderate cost acceptable; latency of hours acceptable; no external real-time data needed; no regulatory interpretability requirement; internal low-risk deployment. Which paradigm does the framework most directly support, and which dimension most decisively rules out LATS?
+The six-dimension trade-off assessment framework requires evaluating architectural choices across: task complexity, inference cost, latency requirements, external information needs, interpretability requirements, and deployment risk profile. A practitioner is choosing a reasoning paradigm for a weekly agent that turns internal sales figures into a board-level performance report. Each week's figures are exported as a table and placed directly in the prompt, so the agent needs no retrieval or tool calls while it reasons. The analysis is complex and multi-step, but it follows the same known structure every week, with no backtracking. Moderate cost and a latency of hours are acceptable, there is no regulatory interpretability requirement, and the deployment is internal and low-risk. Which paradigm does the framework most directly support?
 
 A. LATS — because complex multi-step analysis with no strict latency or cost constraints satisfies the conditions for deliberate search, and LATS produces the highest-quality analysis for complex tasks.
 
-B. CoT — because the task requires no external data access (ruling out ReAct, ToT, and LATS as unnecessarily complex), and CoT's linear reasoning is sufficient for a structured sales data analysis task where the data is provided in the prompt.
+B. CoT — every figure the analysis needs is already in the prompt, so ReAct's tool loop would have nothing to fetch, and a known structure with no backtracking leaves ToT and LATS no alternatives worth searching; linear reasoning over the provided data is sufficient, at the lowest cost.
 
-C. ReAct — because while complex analysis is required, the task does not require backtracking (ruling out ToT/LATS as unjustified), does not require real-time external data (the sales data is internal and can be loaded directly), and the latency/cost constraints are moderate but not absent. The most decisive dimension ruling out LATS is task complexity: the task does not require deliberate search over a large state space because the analysis structure is known and backtracking is not necessary.
+C. ReAct — the analysis takes many steps, and interleaving reasoning with tool calls is the safer default for any multi-step task; the relaxed cost and latency budgets make the tool-calling overhead affordable.
 
 D. Tree of Thoughts — because the weekly board report involves complex multi-step reasoning that benefits from exploring multiple analytical framings before committing to the final report structure.
 
 ??? success "Show answer and feedback"
 
-    **Correct Answer: B** (an instructor review is pending: C is defensible under another interpretation)
+    **Correct Answer: B**
 
-    ✅ **B is correct.** Applying the six-dimension framework systematically: (1) Task complexity — structured sales analysis is a known analytical procedure, not an open-ended search problem; no backtracking is needed. (2) Inference cost — moderate; weekly cadence means cost is not a per-query constraint. (3) Latency — hours; not a differentiating constraint. (4) External information needs — none: internal data loaded directly, not requiring real-time retrieval. (5) Interpretability — low; no regulatory requirement. (6) Risk — low; internal deployment. The external information needs dimension rules out the necessity of tool-calling architecture: if all required data is available in the context window, CoT's direct reasoning over provided data is architecturally sufficient. ReAct adds tool-calling overhead that is not needed when no external retrieval is required. The most decisive dimension ruling out ReAct, ToT, and LATS is external information needs — the task can be fully specified within the prompt context without requiring any tool invocation.
+    ✅ **B is correct.** Walk the six dimensions. External information needs: none — the figures are in the prompt, and what ReAct adds over CoT is the ability to act and observe the result, which this task never needs. Task complexity: many steps, but a known structure with no backtracking, so ToT and LATS have no alternatives worth searching. Inference cost: CoT is the cheapest paradigm, ReAct's cost grows with every tool call, and branching search grows super-linearly. Latency, interpretability and deployment risk are all relaxed here, so none of them pulls toward a heavier paradigm; a relaxed budget makes a heavier paradigm affordable, not necessary. CoT is the lightest paradigm that satisfies every dimension.
 
     ❌ **A is incorrect.** LATS is ruled out by task complexity (no large state space requiring deliberate search) and inference cost (LATS's branching search cost is high even relative to "moderate" cost tolerance). Complex analysis is not sufficient to justify LATS — the analysis must involve a large state space with many candidate solution paths, where early commitment is catastrophically costly and intermediate states can be evaluated before the full solution is known. Structured sales analysis does not meet these criteria; it is complex in the sense of requiring many steps, but the steps are known and ordered, not discovered through search.
 
-    ❌ **C is plausible but less optimal than B.** ReAct is a reasonable choice if the sales data requires tool access (e.g., querying a database API) rather than being provided directly in context. However, the question specifies "internal sales data" with no external real-time data need, suggesting the data can be incorporated in the prompt. For a task where all data is in-context, CoT is more precisely correct — adding a tool-calling layer (ReAct) for data that is already in context adds architectural complexity without benefit.
+    ❌ **C is incorrect.** Multi-step is not the same as needing to act. CoT handles multi-step reasoning over data it has been given; ReAct earns its place when the agent must fetch information it does not have, such as by querying a database, searching, or calling an API. Here every figure is already in the prompt, so each tool call would add cost and a new place to fail without adding information. Had the figures lived in a database the agent had to query, ReAct would be the right answer; the stem rules that out.
 
     ❌ **D is incorrect.** Tree of Thoughts is ruled out by the same dimension that rules out LATS: the task does not involve a large state space of alternative analytical framings that require deliberate search. "Complex multi-step reasoning" does not imply "large state space requiring backtracking" — the sales analysis has a structured analytical framework (the board report format), not an open-ended problem space.
 
@@ -10262,7 +10266,7 @@ tags:
   - crewai
   - ollama
 module: 4
-time_estimate: "100–130 minutes"
+time_estimate: "about 4 hours (guided lab, sections 1–2: about 2 hours; hands-on project, sections 3–4: about 2 hours)"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -10297,9 +10301,9 @@ sources:
     `.ipynb` and run it in Jupyter.
 
 **Researcher → Analyst → Critic**  
-Estimated time: **100–130 minutes** · Learning outcomes: **LO 4.5 and LO 4.6**
+Estimated time: **about 4 hours** (guided lab, sections 1–2: about 2 hours; hands-on project, sections 3–4: about 2 hours) · Learning objectives: **2, 3 and 4** in the Module 4 overview
 
-This notebook replaces Lab A. You will specify, implement, run, and compare the same three-role workflow in two frameworks. The critic may send the work back to the analyst, but the workflow permits **at most two revision cycles**.
+This one notebook holds the guided lab (sections 1–2, LangGraph) and the hands-on project (sections 3–4, CrewAI and the framework comparison). You will specify, implement, run, and compare the same three-role workflow in two frameworks. The critic may send the work back to the analyst, but the workflow permits **at most two revision cycles**.
 
 > **Make it yours.** The included topic is only a runnable example. Replace it with a complex question from your own academic or professional domain. A personally meaningful topic will produce a much stronger debrief and framework comparison.
 
@@ -10314,14 +10318,14 @@ The base lab does **not** give the researcher a live web-search tool. Its output
 3. Alternatively choose OpenAI or Groq, or use Ollama locally without an API key.
 4. Never paste a key directly into a saved code cell. The setup cell uses a masked prompt.
 5. Run **both frameworks on exactly the same topic and model** for a fair comparison.
-6. Before submission, keep outputs visible and rename the file to `Module4_Unit4_AltFramework_[YourName].ipynb`.
+6. Before submission, keep outputs visible and rename the file to `Module4_Lab_[YourName].ipynb`.
 
 #### Required notebook evidence
 
 - Completed role-specification table (five fields for each role)
 - LangGraph output and structured execution log
 - CrewAI output and structured execution log
-- Answers to all three Lab B debrief questions (at least two sentences each)
+- Answers to the three LangGraph execution debrief questions (at least two sentences each)
 - A framework comparison of at least 200 words covering all four required dimensions
 
 ```python
@@ -10478,6 +10482,8 @@ print("Pipeline topic:\n", TOPIC)
 
 ### 1. Role specification — complete before implementation
 
+*Guided lab: sections 1–2, about 2 hours.*
+
 Complete **all five fields for all three roles before writing agent code**. Make each format and handoff condition directly testable.
 
 | Field | Researcher | Analyst | Critic |
@@ -10625,6 +10631,8 @@ langgraph_result = langgraph_pipeline.invoke(initial_state, {"recursion_limit": 
    TODO
 
 ### 3. Equivalent CrewAI implementation
+
+*Hands-on project: sections 3–4, about 2 hours.*
 
 CrewAI's `Agent`, `Task`, and `Crew` abstractions handle each role invocation. A small bounded Python loop makes the critic-triggered revision behavior directly comparable with LangGraph. Each stage is intentionally run as a one-task sequential Crew so the exact handoff text can be logged and inspected.
 
@@ -12158,7 +12166,7 @@ Describe a change to an agent that would improve one evaluation dimension while 
 
     All lab work runs in Google Colab (free tier). You do not need a paid subscription. You will need: (1) a Google account to access Colab; (2) a free LangSmith account at [smith.langchain.com](https://smith.langchain.com){target=_blank} for observability tracing; (3) an Nvidia, Groq, or OpenAI API key for the LLM provider, or a locally hosted Ollama model as a free alternative — setup instructions are included in the notebook.
 
-In this lab, you will instrument a research agent with LangSmith tracing, execute it on 10 complex research prompts using real web search tools (DuckDuckGo + webpage reading), and explore what the resulting traces reveal about how your agent actually behaves.
+In this lab, you will instrument a two-tool agent with LangSmith tracing, run it on 10 test prompts spanning five categories (factual, calculation, multi-step, format and safety), and explore what the resulting traces reveal about how your agent actually behaves. The agent's search tool returns simulated results so that every run is reproducible; the notebook shows how to switch to a live DuckDuckGo search if you want one.
 
 **Open the lab notebook:** [Module5_Learner_Starter.ipynb](lab-notebook.md)
 
@@ -12166,9 +12174,9 @@ In this lab, you will instrument a research agent with LangSmith tracing, execut
 
 The notebook walks you through a complete observability instrumentation sequence:
 
-1. Build a research agent with two real tools (web search and webpage reading) using LangGraph.
+1. Build a ReAct agent with two tools, search and a calculator, using LangChain's `create_agent`, which runs on LangGraph.
 2. Configure LangSmith tracing and verify traces appear in your dashboard.
-3. Execute the agent on 10 diverse research prompts with structured metadata tags for filtering.
+3. Execute the agent on the 10 test prompts with structured metadata tags for filtering.
 4. Compute observability metrics (latency distribution, token consumption, error rate) from trace data.
 5. Interpret what the metrics and traces reveal about how your agent behaves.
 
@@ -12182,15 +12190,15 @@ All detailed instructions, code scaffolding, and reflection questions are embedd
 
 *Estimated time: ~2 hours*
 
-In this project, you will continue in the same notebook from the guided lab to design and execute a controlled experiment comparing 2–3 agent configurations on the same research tasks, then write an evidence-based recommendation report.
+In this project, you will continue in the same notebook from the guided lab to design and execute a controlled experiment comparing 2–3 agent configurations on the same prompts, then write an evidence-based recommendation report.
 
 ### Project notebook flow
 
 The notebook walks you through a comparative observability study:
 
 1. Define a hypothesis and experimental conditions — pick one variable to test (e.g., system prompt detail level, model choice, or tool availability) while keeping everything else constant.
-2. Run each configuration on the same 10 research prompts, collecting traces and metrics for each condition.
-3. Compute comparative metrics (average latency, p90 latency, output quality, success rate) across conditions.
+2. Run each configuration on the same 10 test prompts from the guided lab, collecting traces and metrics for each condition.
+3. Compute comparative metrics (average latency, p90 latency, average output length, success rate) across conditions.
 4. Write a Recommendation Report with a trade-off analysis specifying which configuration to deploy under which conditions.
 
 Detailed instructions are embedded directly in the notebook.
@@ -12250,8 +12258,8 @@ A useful reply gives them something specific to think about. "Great post, I agre
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/
 
 ---
-title: "Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline"
-description: "Read-only rendering of the Module 5 lab notebook, LangSmith Observability & CI/CD Evaluation Pipeline, with links to open it in Google Colab or download the .ipynb file."
+title: "Module 5 Lab: LangSmith Tracing and a Comparative Observability Study"
+description: "Read-only rendering of the Module 5 lab notebook, LangSmith Tracing and a Comparative Observability Study, with links to open it in Google Colab or download the .ipynb file."
 type: Lab
 tags:
   - module-5
@@ -12263,7 +12271,7 @@ tags:
   - langsmith
   - ollama
 module: 5
-time_estimate: "~120 minutes"
+time_estimate: "about 3 hours (Lab A, the guided lab: about 1 hour; Lab B, the hands-on project: about 2 hours)"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -12277,7 +12285,7 @@ sources:
     last_modified: "2026-09-02T10:27:43-07:00"
 ---
 
-# Module 5 Lab: LangSmith Observability & CI/CD Evaluation Pipeline
+# Module 5 Lab: LangSmith Tracing and a Comparative Observability Study
 
 [![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){ target=_blank }
 
@@ -12297,15 +12305,15 @@ sources:
     run the cells, open it in Google Colab with the badge above or download the
     `.ipynb` and run it in Jupyter.
 
-**Lab A: Observability Instrumentation → Lab B: Evaluation Pipeline**  
-Estimated time: **~120 minutes** · Learning outcomes: **LO 5.4 and LO 5.5**
+**Lab A: Observability Instrumentation → Lab B: Comparative Observability Study**  
+Estimated time: **about 3 hours** (Lab A, the guided lab: about 1 hour; Lab B, the hands-on project: about 2 hours) · Learning objectives: **2 and 3** in the Module 5 overview
 
 In this lab, you'll do two things:
 
 1. **Lab A** — Wire up LangSmith tracing on a simple agent, run it 10 times, and analyze the traces (latency, tokens, errors).
-2. **Lab B** — Build an automated test suite that catches when your agent's behavior gets worse (a "regression").
+2. **Lab B** — Run the same agent under two or three configurations, compare their traces, and recommend which one to deploy.
 
-By the end, you'll have hands-on experience with production observability and automated quality gates — two skills every ML engineer needs.
+By the end, you'll have hands-on experience with production observability and with using trace data to make a deployment decision.
 
 ### How to use this notebook
 
@@ -12314,15 +12322,15 @@ By the end, you'll have hands-on experience with production observability and au
 3. You'll need a **LangSmith API key** (free at [smith.langchain.com](https://smith.langchain.com)) and an LLM provider key.
 4. Keys are entered via masked prompts — never paste them into saved cells.
 5. Look for `TODO` markers — those are the cells where you write code.
-6. Before submission, keep all outputs visible and rename to `Module5_Unit3_Lab_[YourName].ipynb`.
+6. Before submission, keep all outputs visible and rename to `Module5_Lab_[YourName].ipynb`.
 
 #### Required notebook evidence
 
-- All 10 traces confirmed in LangSmith dashboard (screenshot or output verification)
-- Observability Report with four sections and specific numbers
-- Baseline evaluation score and per-category pass rates
-- Regression score showing detected performance decrease
-- Pipeline Report with mechanism analysis
+- All 10 traces confirmed in the LangSmith dashboard (screenshot or output verification)
+- Observability Report with four sections and specific numbers (Lab A)
+- A specific, falsifiable hypothesis and the conditions you compared (Lab B)
+- Comparative metrics for each condition, in a table (Lab B)
+- Comparative Observability Report with a recommendation and trade-off matrix (Lab B)
 - Answers to all three debrief questions
 
 ```python
@@ -12347,7 +12355,7 @@ print("Imports ready.")
 
 ### Provider and Model Configuration
 
-We use LiteLLM so you can switch between providers without rewriting code. Pick whichever provider you have a key for. The default is Hugging Face (free tier available).
+We use LiteLLM so you can switch between providers without rewriting code. Pick whichever provider you have a key for. The default is the NVIDIA API (`NVIDIA_API_KEY`); Hugging Face (free tier available), Groq, OpenAI and a local Ollama model also work.
 
 ```python
 from litellm import completion
@@ -12952,7 +12960,7 @@ TODO
 - [ ] Recommendation Report completed with trade-off analysis (Lab B)
 - [ ] All three debrief questions answered (2+ sentences each)
 - [ ] All cell outputs are visible
-- [ ] Notebook renamed to `Module5_Unit3_Lab_[YourName].ipynb`
+- [ ] Notebook renamed to `Module5_Lab_[YourName].ipynb`
 
 #### Troubleshooting
 
@@ -13943,29 +13951,40 @@ sign off on a page you have reviewed.
     Everything in the course repository - including the instructor solution
     notebooks under `instructor/` - is publicly readable on GitHub, and this
     site is publicly indexed. Students who look will find the solutions and
-    the answer keys. Publishing the keys is deliberate: the quizzes are
-    self-evaluating and the owners confirmed that policy on 2026-09-09.
-    Whether the *solution notebooks* stay public is still open. Either way,
-    grade what the LMS records, not what the site could reveal.
+    the answer keys. Both are deliberate: the quizzes are self-evaluating and
+    the owners confirmed public keys on 2026-09-09, and on 2026-09-11 they
+    decided the solution notebooks stay public on GitHub without being
+    published on this site. Grade what the LMS records, not what the site
+    could reveal.
 
 ## Instructor solution notebooks
 
 The learner notebooks for Modules 2-5 are published under `docs/materials/`
-and rendered as lab pages. The two **instructor solution notebooks** are kept
-in the repository *outside* `docs/`, so they are never built into the site,
-never mirrored as Markdown, never listed in `llms.txt` or `llms-full.txt`, and
-never linked from a student-facing page.
+and rendered as lab pages. The two **instructor solution notebooks** are
+public, but only on GitHub: they sit in the repository *outside* `docs/`, so
+they are never built into the site, never mirrored as Markdown, never listed
+in `llms.txt` or `llms-full.txt`, and never linked from a student-facing page.
+The course owners settled this on 2026-09-11: the solutions stay open, but
+not one click away from the lab a learner is working on.
 
-| Module | Instructor solution | Learner starter it solves |
-| :-- | :-- | :-- |
-| 4 | [`instructor/materials/module4/Module4_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Module 4 lab](../modules/module-4/lab-notebook.md) (`Module4_Learner_Starter.ipynb`) |
-| 5 | [`instructor/materials/module5/Module5_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Module 5 lab](../modules/module-5/lab-notebook.md) (`Module5_Learner_Starter.ipynb`) |
+| Module | Read on GitHub | Run in Colab | Learner starter it solves |
+| :-- | :-- | :-- | :-- |
+| 4 | [`Module4_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Module 4 lab](../modules/module-4/lab-notebook.md) (`Module4_Learner_Starter.ipynb`) |
+| 5 | [`Module5_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Module 5 lab](../modules/module-5/lab-notebook.md) (`Module5_Learner_Starter.ipynb`) |
+
+GitHub renders a notebook in the browser with its saved outputs, which is
+enough for most reviews; Colab opens a runnable copy in your own Drive. Each
+solution opens with a banner naming the starter it solves, and
+`instructor/README.md` explains the folder to anyone who reaches it from
+GitHub. A solution's header cells mirror its starter's, so change both in the
+same commit.
 
 Modules 2 and 3 have no separate solution notebook: their learner notebooks
 are largely pre-written scaffolds with marked extension zones, and the
-assessed work is the learner's extensions and written observations. The site's lint step fails any relative link from `docs/` into
-`instructor/`, so the two notebooks above are linked only by their GitHub
-URLs.
+assessed work is the learner's extensions and written observations. The
+site's lint step fails any relative link from `docs/` into `instructor/`, so
+the links above are full GitHub and Colab URLs, and this is the only page
+that carries them.
 
 ## Answer-key policy
 
@@ -14075,13 +14094,22 @@ human-reviewed pages when answers conflict (see
 
 ## Open items for the course owners
 
-1. Keep the instructor solution notebooks public in this repository, or move
-   them to a private repository before the course runs. (Answer keys are
-   settled: they stay public, see the policy above.)
-2. Confirm the two-attempt rule for the concept quiz and the attempt policy
+1. Confirm the two-attempt rule for the concept quiz and the attempt policy
    for chapter quizzes in the LMS.
-3. Decide who holds verification identities (`human:<netid>`) and when the
+2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
+3. Confirm that the Module 2 hands-on project is submitted inside the lab
+   notebook, as the Module 4 and 5 projects are. The wiki's project box asked
+   for `Module2__[YourName].ipynb`, which a 2026-08-03 edit produced by
+   deleting the middle word of `Module2_Project_[YourName].ipynb`; the site
+   now reads that as one notebook, `Module2_Lab_[YourName].ipynb`. If a
+   separate project notebook is intended, restore
+   `Module2_Project_[YourName].ipynb` on the
+   [activities page](../modules/module-2/activities.md) and in the closing
+   cell of the Module 2 notebook.
+
+Whether the solution notebooks stay public, formerly the first item here, was
+decided on 2026-09-11 (see [above](#instructor-solution-notebooks)).
 
 ## Assessment revised for LangChain 1.4
 
@@ -14145,24 +14173,38 @@ run. `python scripts/migrate_wiki.py --check` proves the two are in step.
 ## Content inconsistencies inherited from the source
 
 A page-by-page review of the migration surfaced the following disagreements
-*between* course materials. They exist in the wiki and the notebooks
-themselves, so the migration reproduced them rather than silently deciding
-which side is right. Each needs an author's call:
+*between* course materials. They were inherited from the wiki and the
+notebooks, not introduced by the migration. All are now resolved or
+withdrawn; each entry records which side was taken and why, so an author who
+disagrees can reverse the call. A consistency check run on 2026-09-11 found
+the notebooks, activities pages, overviews and
+[Labs, Colab, and API keys](../start-here/labs-and-notebooks.md) in agreement
+on every point below.
 
-1. **Lab submission filenames.** The Module 2, 4 and 5 notebooks tell learners
-   to rename their file using a different convention from the one required on
-   the matching Activities page.
-2. **Module 5 lab title.** The notebook's own heading calls it
-   "LangSmith Observability & CI/CD Evaluation Pipeline", but its Lab B is the
-   Comparative Observability Study; there is no CI/CD pipeline in the notebook.
-   The page title follows the notebook.
-3. **Learning-outcome labels.** The Module 4 lab cites "LO 4.5 and LO 4.6"
-   while the Module 4 overview defines five outcomes and maps the lab to
-   different numbers.
-4. **Lab time budgets.** The Module 4 notebook says 100-130 minutes against
-   ~4 hours on its Activities page. Module 3 had the same mismatch (~60
-   minutes against ~2 hours) until September 2026; its notebook now gives the
-   step times and a two-hour budget per part, matching the Activities page.
+1. **Lab submission filenames (resolved 2026-09-11).** The Module 2, 4 and 5
+   notebooks asked for `Module2_Unit3_Lab_…`, `Module4_Unit4_AltFramework_…`
+   and `Module5_Unit3_Lab_…`, while the activities pages, like Module 3's,
+   ask for `ModuleN_Lab_[YourName].ipynb`. The notebooks, learner and
+   instructor copies alike, now use the activities pages' names. The Module 2
+   project box's `Module2__[YourName].ipynb` now reads
+   `Module2_Lab_[YourName].ipynb`; see open item 3.
+2. **Module 5 lab title (resolved 2026-09-11).** The notebook called itself
+   "LangSmith Observability & CI/CD Evaluation Pipeline" and described a Lab B
+   that builds a regression test suite. Its actual Lab B is the Comparative
+   Observability Study on the activities page. Its title, its Lab B
+   description and its list of required evidence now describe the lab it
+   contains: *LangSmith Tracing and a Comparative Observability Study*.
+3. **Learning-outcome labels (resolved 2026-09-11).** The Module 4 notebook
+   cited "LO 4.5 and LO 4.6", though the overview defines five objectives,
+   and Module 5's cited "LO 5.4 and LO 5.5". Each now cites the objectives
+   its overview's checklist maps to the lab and project: 2, 3 and 4 for
+   Module 4; 2 and 3 for Module 5.
+4. **Lab time budgets (resolved 2026-09-11).** The Module 4 notebook said
+   100-130 minutes for work its activities page budgets at about four hours,
+   two for the guided lab and two for the project. Module 5's said ~120
+   minutes, though its own step times add up to three hours. Both headers now
+   give the per-part budgets the activities pages give, as Module 3's has
+   since its repair, and so does the table on Labs, Colab, and API keys.
 5. **Module 3 project instructions (resolved September 2026).** The Activities
    page promised a four-run retrieval experiment and a RAGAS write-up "embedded
    directly in the notebook", and the notebook had neither. Its corpus PDFs, five
@@ -14178,22 +14220,57 @@ which side is right. Each needs an author's call:
    on 2026-08-06 — Lab B, the token-budget report and the memory-architecture
    brief — was not restored; the overview's deliverable row and a chapter 4 quiz
    item that still cited them were corrected instead.
-6. **Default lab provider.** The Module 5 notebook defaults to the NVIDIA API,
-   while the prose in [Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)
-   describes Hugging Face Inference Providers as the Module 4-5 default.
-7. **Module 2 chapter 5, question 1.** The wiki's answer key reads "B or C
-   depending on interpretation"; the site publishes B and flags the question
-   for review.
-8. **Answer keys that explain three of four options.** Eight chapter-quiz
-   questions name the correct answer and explain two distractors, leaving one
-   with no feedback at all: Module 1 chapter 1 questions 1 (option C) and 2
-   (option A), chapter 2 question 5 (option D) and chapter 5 question 1 (option
-   B); Module 2 chapter 3 question 1 (option C) and chapter 5 question 1 (option
-   C, the item in note 7 above); Module 4 chapter 1 question 3 (options A and C)
-   and chapter 5 question 3 (option C). All eight are inherited from the wiki
-   unchanged. They matter more here than they did there because these quizzes
-   are self-evaluating: a learner who picked the unexplained option is told the
-   right answer but never why theirs was wrong.
+6. **Default lab provider (resolved 2026-09-11).** The Module 5 notebook's
+   code defaults to the NVIDIA API, while one sentence of its prose and the
+   cost section of Labs, Colab, and API keys said Hugging Face. The prose now
+   follows the code, the only part of the notebook that runs; no code changed.
+7. **Module 2 chapter 5, question 1 (resolved 2026-09-11).** The wiki's key
+   read "B or C depending on interpretation". C was defensible because the
+   stem never said where the sales data lived: if the agent had to query a
+   database, ReAct is right. The stem now puts the figures in the prompt,
+   option C argues for ReAct from "multi-step" alone, and the key is B without
+   qualification. The same review found that chapter 3 question 1's option C
+   already named the correct root cause; it now proposes a fix that treats
+   only the symptom. Both keys stay at B.
+8. **Answer keys that explain three of four options (withdrawn
+   2026-09-11).** This item was wrong. It listed eight questions as leaving
+   one option without feedback, but every one of those options has feedback:
+   it is marked ❌ and opens "partially correct", "partially true" or
+   "partially applicable", and the review that produced this item misread
+   those as missing. A scan of all 125 questions finds feedback for every
+   option. What remains is a matter of style, not a defect: seven distractors
+   across six questions (Module 1 chapter 1 questions 1 and 2, chapter 2
+   question 5 and chapter 5 question 1; Module 4 chapter 1 question 3 and
+   chapter 5 question 3) are marked ❌ while their feedback calls them
+   partially right. On a self-evaluating quiz with no partial credit, that can
+   leave a learner unsure how wrong they were. Rewording them is an author's
+   call.
+9. **The six trade-off dimensions in Module 2 (resolved 2026-09-11).** The
+   chapter 5 lesson's table, transcribed from an image, listed latency, cost
+   per inference, reliability and error rate, scalability, interpretability,
+   and organizational integration. The
+   [reading guide](../modules/module-2/reading-guides.md) and all five
+   chapter 5 quiz questions assess a different six: task complexity,
+   inference cost, latency requirements, external information needs,
+   interpretability requirements, and deployment risk profile. The
+   [lesson](../modules/module-2/foundational-concepts.md) now teaches the six
+   the learner is assessed on, and keeps the image's guidance on scalability
+   and organizational integration as prose after the table. The image stays
+   in `images/` as the record of what it said.
+10. **The Module 5 agent (resolved 2026-09-11).** The
+    [activities page](../modules/module-5/activities.md) described a research
+    agent with live web search and webpage reading, run on ten complex
+    research prompts. The notebook's agent has a simulated search tool and a
+    calculator, with live DuckDuckGo search as an option, and runs ten prompts
+    in five categories. The page now describes the notebook.
+11. **Module 1 and Claude Desktop (resolved 2026-09-11).** Module 1's third
+    learning objective, the landing page, the syllabus and the lesson's
+    literacy-pillar text said learners operate Claude Desktop. Since the
+    authors reworked the labs on 2026-07-21 the labs use Ollama and Openwork,
+    with Claude Desktop's Cowork tab as an optional substitute, and the text
+    now says so; Claude Desktop is still introduced as a topic. Module 1's
+    closing box also promised that Module 2 would build a no-code Openwork or
+    n8n pipeline. Module 2 builds a LangChain agent, and the box now says so.
 
 ## What the retired posters said
 
@@ -14221,6 +14298,12 @@ Model Context Protocol and least-privilege permissions, the named EU AI Act risk
 token-budget profiling, LangSmith as the observability tool, and SRE error budgets. None of
 it was written into the pages, because inventing course content is an author's decision, not
 a maintenance one. If any of it should be taught, it needs adding as prose first.
+
+Checked again on 2026-09-11 against the current pages: the Workflow Audit
+formula, LangChain's paradigm and the memory patterns leave no trace in the
+page text. The desktop-client claim did, because Module 1's objectives, the
+landing page, the syllabus and the lesson still said learners operate Claude
+Desktop; that is item 11 in the list above.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/
 
@@ -15146,7 +15229,8 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **Downloadable materials** (notebooks, PDFs, HTML activities, the glossary
   `.docx`) live in `docs/materials/moduleN/` and are linked relatively.
   Anything only instructors should have goes in `instructor/`, outside
-  `docs/`, and is never linked from a page.
+  `docs/`. It is never rendered on the site, and only the instructor
+  materials page links to it, by its GitHub URL.
 - **Links**: internal links are relative (`../modules/module-2/overview.md`)
   and plain; external links get `{target=_blank}`. Raw HTML `src`/`href`
   attributes are not rewritten by the build, so compute them from the
@@ -16027,6 +16111,16 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/
 
 # Documentation update log
+
+## 2026-09-11
+
+* **Update**: Resolved the content contradictions recorded on the [instructor materials](course-design/instructor-materials.md) page. The lab notebooks and activities pages now agree on submission filenames (`ModuleN_Lab_[YourName].ipynb` in Modules 2-5, which also fixes the Module 2 project box's `Module2__[YourName].ipynb`), on time budgets (Module 4 about four hours and Module 5 about three, split per part as the activities pages give them), and on learning-objective labels (the Module 4 and 5 notebooks cited "LO 4.5 and LO 4.6" and "LO 5.4 and LO 5.5"; they now cite the overview objectives their checklists map). The [Module 5 lab](modules/module-5/lab-notebook.md) is retitled *LangSmith Tracing and a Comparative Observability Study*: it had described a CI/CD regression-testing Lab B that it does not contain. Its provider prose now matches its code, which defaults to the NVIDIA API. No code cell in any notebook changed.
+* **Update**: Two pages described things the labs do not do. The [Module 5 activities](modules/module-5/activities.md) page promised a research agent with live web search and webpage reading; the notebook's agent has a simulated search tool and a calculator, with live DuckDuckGo search as an option, and the page now says so. Module 1's third learning objective, the landing page, the [syllabus](start-here/syllabus.md) and the lesson's literacy-pillar text said learners operate Claude Desktop; since the authors reworked the labs on 2026-07-21 they use Ollama and Openwork, with Claude Desktop's Cowork tab optional, and the text now names those. Module 1's closing box promised a no-code Openwork or n8n pipeline in Module 2, which builds a LangChain agent; it now describes Module 2. The syllabus PDF was regenerated.
+* **Update**: Aligned the six trade-off dimensions in [Module 2 chapter 5](modules/module-2/foundational-concepts.md). The lesson's table, transcribed from an image, listed latency, cost per inference, reliability, scalability, interpretability and organizational integration; the [reading guide](modules/module-2/reading-guides.md) and all five chapter 5 quiz questions assess task complexity, inference cost, latency, external information needs, interpretability and deployment risk. The lesson now teaches the six the learner is assessed on, and keeps the image's guidance on scalability and organizational integration as prose after the table.
+* **Update**: Settled two quiz items where a distractor was defensible; both are still keyed B. [Module 2 chapter 5](modules/module-2/chapter-quizzes.md#chapter-5-quiz) question 1, which the wiki keyed "B or C depending on interpretation", never said where the sales data lived, so the stem now puts the figures in the prompt and option C argues for ReAct from "multi-step" alone. Chapter 3 question 1's option C already named the correct root cause; it now proposes a fix that treats only the symptom.
+* **Update**: Corrected an error in this log. The 2026-09-09 known-gap entry, and the instructor materials page, said eight chapter-quiz questions leave one option without feedback. They do not. Each of those options has feedback marked ❌ that opens "partially correct", "partially true" or "partially applicable", which the review misread as missing, and a scan of all 125 questions finds feedback for every option. The instructor materials page now records the item as withdrawn.
+* **Update**: The instructor solution notebooks stay public on GitHub and unpublished on this site, as the course owners decided today. [Instructor materials](course-design/instructor-materials.md) now links each solution's GitHub view and a Colab copy; each solution opens with a banner naming the starter it solves, and a new `instructor/README.md` explains the folder. `AGENTS.md` and [Contributing](about/contributing.md) now state the rule as practiced: never rendered, copied or mirrored into `docs/`, and linked only from the instructor materials page.
+* **Update**: [Labs, Colab, and API keys](start-here/labs-and-notebooks.md) still told learners to upload the Module 3 corpus PDFs by hand, which stopped being true when the Module 3 notebook began downloading and checking them; it now describes the download, with manual upload as the fallback. Its table's times now match the activities pages.
 
 ## 2026-09-10
 

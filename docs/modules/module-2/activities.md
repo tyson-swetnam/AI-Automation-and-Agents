@@ -101,7 +101,7 @@ This project is designed to help you transfer the lab from the sample workflow t
 
 !!! info "What to submit"
 
-    **Add to github**: Submit the `.ipynb` file with your completed extension code (all four steps). All cells must be executed with output visible — do not submit a notebook with empty output cells. Filename: `Module2__[YourName].ipynb`.
+    **Add to github**: Submit the lab notebook with your new tool added: its definition and description, the three test prompts run with output visible, and your before-and-after comparison. The project goes in the same notebook as the guided lab, so the filename is the same: `Module2_Lab_[YourName].ipynb`.
 
 ## Project proposal and peer review
 

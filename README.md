@@ -78,7 +78,7 @@ well; CI fails if the two disagree:
 │   ├── check_site.py               # Post-build assertions on site/
 │   └── externalize_links.py        # Appends {target=_blank} to external links
 ├── images/                       # Full-resolution PNG originals (not served)
-├── instructor/materials/         # Instructor solution notebooks (never under docs/, never linked)
+├── instructor/materials/         # Instructor solution notebooks (outside docs/, never rendered; GitHub only)
 └── docs/                         # The OKF bundle == Zensical docs_dir
     ├── index.md                  # Landing page; the only index.md with frontmatter (okf_version "0.2")
     ├── log.md                    # OKF dated change log

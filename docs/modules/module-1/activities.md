@@ -337,6 +337,6 @@ framework.
 
     [Module 2](../module-2/overview.md)
 
-    Module 2 begins with your top-ranked workflow from the Workflow Audit. You will build your first no-code automation pipeline using Openwork or n8n applied to that workflow. Ensure your Workflow Audit document is complete before starting — it is the anchor for all subsequent module projects.
+    Module 2 moves from mapping workflows to building agents: you will build a tool-using agent in LangChain, and its hands-on project asks you to add a tool that could support a workflow from your own work. Your top-ranked workflow from the Workflow Audit is the natural candidate, so make sure the audit is complete before you start — it is the anchor for all subsequent module projects.
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Activities){target=_blank} (wiki page last changed 2026-07-22). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/activities.md){target=_blank}.</p>

@@ -151,8 +151,11 @@ wiki, pinned to `WIKI_REF`) and `repo-v2` (images and notebooks, pinned to
    notebooks sit in `docs/materials/moduleN/` and are rendered to
    `modules/module-N/lab-notebook.md` by `render_notebooks.py`; the Colab,
    download, and GitHub buttons derive from the `REPO_SLUG` constant.
-   Instructor solutions live under `instructor/` and are **never** linked,
-   copied, or referenced from anything under `docs/`.
+   Instructor solutions live under `instructor/` and are **never** rendered,
+   copied, or mirrored into `docs/`, and never linked from a learner-facing
+   page. The one exception is the instructor materials page, which links
+   each solution's GitHub view and a Colab copy for instructors (decided
+   2026-09-11).
 
 5. **Markdown that renders here, not on GitHub.** Callouts are admonitions
    (`!!! note`, `!!! tip "Hint"`, `!!! warning`); GitHub `> [!NOTE]` alert

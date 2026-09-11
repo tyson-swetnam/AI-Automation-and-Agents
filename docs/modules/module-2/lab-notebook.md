@@ -698,14 +698,14 @@ Before submitting, confirm all four checks:
 
 **Submit to GitHub:**
 
-- File: `Module2_Unit3_Lab_[YourName].ipynb`
+- File: `Module2_Lab_[YourName].ipynb`
 - All cells must be executed with visible output
 
 ---
 
 ### What's next?
 
-Unit 4 builds directly on this lab. In Task 1 you will design your own complete prompt engineering suite — system instruction, tool descriptions, and few-shot demonstrations — for a domain of your choice. The agent architecture insights from Steps 2–4 are the inputs to that design task.
+The hands-on project builds directly on this lab: in this same notebook, you add a tool of your own choosing, run three prompts that test when the agent should and should not use it, and compare its behavior before and after. What Steps 2–4 taught about tool descriptions is what makes that choice reliable.
 
 ```python
 # Optional: Use this cell as your Agent Instruction Log if you prefer to keep it in the notebook.

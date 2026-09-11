@@ -75,7 +75,7 @@ Describe a change to an agent that would improve one evaluation dimension while 
 
     All lab work runs in Google Colab (free tier). You do not need a paid subscription. You will need: (1) a Google account to access Colab; (2) a free LangSmith account at [smith.langchain.com](https://smith.langchain.com){target=_blank} for observability tracing; (3) an Nvidia, Groq, or OpenAI API key for the LLM provider, or a locally hosted Ollama model as a free alternative — setup instructions are included in the notebook.
 
-In this lab, you will instrument a research agent with LangSmith tracing, execute it on 10 complex research prompts using real web search tools (DuckDuckGo + webpage reading), and explore what the resulting traces reveal about how your agent actually behaves.
+In this lab, you will instrument a two-tool agent with LangSmith tracing, run it on 10 test prompts spanning five categories (factual, calculation, multi-step, format and safety), and explore what the resulting traces reveal about how your agent actually behaves. The agent's search tool returns simulated results so that every run is reproducible; the notebook shows how to switch to a live DuckDuckGo search if you want one.
 
 **Open the lab notebook:** [Module5_Learner_Starter.ipynb](lab-notebook.md)
 
@@ -83,9 +83,9 @@ In this lab, you will instrument a research agent with LangSmith tracing, execut
 
 The notebook walks you through a complete observability instrumentation sequence:
 
-1. Build a research agent with two real tools (web search and webpage reading) using LangGraph.
+1. Build a ReAct agent with two tools, search and a calculator, using LangChain's `create_agent`, which runs on LangGraph.
 2. Configure LangSmith tracing and verify traces appear in your dashboard.
-3. Execute the agent on 10 diverse research prompts with structured metadata tags for filtering.
+3. Execute the agent on the 10 test prompts with structured metadata tags for filtering.
 4. Compute observability metrics (latency distribution, token consumption, error rate) from trace data.
 5. Interpret what the metrics and traces reveal about how your agent behaves.
 
@@ -99,15 +99,15 @@ All detailed instructions, code scaffolding, and reflection questions are embedd
 
 *Estimated time: ~2 hours*
 
-In this project, you will continue in the same notebook from the guided lab to design and execute a controlled experiment comparing 2–3 agent configurations on the same research tasks, then write an evidence-based recommendation report.
+In this project, you will continue in the same notebook from the guided lab to design and execute a controlled experiment comparing 2–3 agent configurations on the same prompts, then write an evidence-based recommendation report.
 
 ### Project notebook flow
 
 The notebook walks you through a comparative observability study:
 
 1. Define a hypothesis and experimental conditions — pick one variable to test (e.g., system prompt detail level, model choice, or tool availability) while keeping everything else constant.
-2. Run each configuration on the same 10 research prompts, collecting traces and metrics for each condition.
-3. Compute comparative metrics (average latency, p90 latency, output quality, success rate) across conditions.
+2. Run each configuration on the same 10 test prompts from the guided lab, collecting traces and metrics for each condition.
+3. Compute comparative metrics (average latency, p90 latency, average output length, success rate) across conditions.
 4. Write a Recommendation Report with a trade-off analysis specifying which configuration to deploy under which conditions.
 
 Detailed instructions are embedded directly in the notebook.

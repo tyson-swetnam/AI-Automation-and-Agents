@@ -212,7 +212,8 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **Downloadable materials** (notebooks, PDFs, HTML activities, the glossary
   `.docx`) live in `docs/materials/moduleN/` and are linked relatively.
   Anything only instructors should have goes in `instructor/`, outside
-  `docs/`, and is never linked from a page.
+  `docs/`. It is never rendered on the site, and only the instructor
+  materials page links to it, by its GitHub URL.
 - **Links**: internal links are relative (`../modules/module-2/overview.md`)
   and plain; external links get `{target=_blank}`. Raw HTML `src`/`href`
   attributes are not rewritten by the build, so compute them from the

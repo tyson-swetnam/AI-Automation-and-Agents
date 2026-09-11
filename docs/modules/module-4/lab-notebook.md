@@ -12,7 +12,7 @@ tags:
   - crewai
   - ollama
 module: 4
-time_estimate: "100–130 minutes"
+time_estimate: "about 4 hours (guided lab, sections 1–2: about 2 hours; hands-on project, sections 3–4: about 2 hours)"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -47,9 +47,9 @@ sources:
     `.ipynb` and run it in Jupyter.
 
 **Researcher → Analyst → Critic**  
-Estimated time: **100–130 minutes** · Learning outcomes: **LO 4.5 and LO 4.6**
+Estimated time: **about 4 hours** (guided lab, sections 1–2: about 2 hours; hands-on project, sections 3–4: about 2 hours) · Learning objectives: **2, 3 and 4** in the Module 4 overview
 
-This notebook replaces Lab A. You will specify, implement, run, and compare the same three-role workflow in two frameworks. The critic may send the work back to the analyst, but the workflow permits **at most two revision cycles**.
+This one notebook holds the guided lab (sections 1–2, LangGraph) and the hands-on project (sections 3–4, CrewAI and the framework comparison). You will specify, implement, run, and compare the same three-role workflow in two frameworks. The critic may send the work back to the analyst, but the workflow permits **at most two revision cycles**.
 
 > **Make it yours.** The included topic is only a runnable example. Replace it with a complex question from your own academic or professional domain. A personally meaningful topic will produce a much stronger debrief and framework comparison.
 
@@ -64,14 +64,14 @@ The base lab does **not** give the researcher a live web-search tool. Its output
 3. Alternatively choose OpenAI or Groq, or use Ollama locally without an API key.
 4. Never paste a key directly into a saved code cell. The setup cell uses a masked prompt.
 5. Run **both frameworks on exactly the same topic and model** for a fair comparison.
-6. Before submission, keep outputs visible and rename the file to `Module4_Unit4_AltFramework_[YourName].ipynb`.
+6. Before submission, keep outputs visible and rename the file to `Module4_Lab_[YourName].ipynb`.
 
 #### Required notebook evidence
 
 - Completed role-specification table (five fields for each role)
 - LangGraph output and structured execution log
 - CrewAI output and structured execution log
-- Answers to all three Lab B debrief questions (at least two sentences each)
+- Answers to the three LangGraph execution debrief questions (at least two sentences each)
 - A framework comparison of at least 200 words covering all four required dimensions
 
 ```python
@@ -228,6 +228,8 @@ print("Pipeline topic:\n", TOPIC)
 
 ### 1. Role specification — complete before implementation
 
+*Guided lab: sections 1–2, about 2 hours.*
+
 Complete **all five fields for all three roles before writing agent code**. Make each format and handoff condition directly testable.
 
 | Field | Researcher | Analyst | Critic |
@@ -375,6 +377,8 @@ langgraph_result = langgraph_pipeline.invoke(initial_state, {"recursion_limit": 
    TODO
 
 ### 3. Equivalent CrewAI implementation
+
+*Hands-on project: sections 3–4, about 2 hours.*
 
 CrewAI's `Agent`, `Task`, and `Crew` abstractions handle each role invocation. A small bounded Python loop makes the critic-triggered revision behavior directly comparable with LangGraph. Each stage is intentionally run as a one-task sequential Crew so the exact handoff text can be logged and inspected.
 
