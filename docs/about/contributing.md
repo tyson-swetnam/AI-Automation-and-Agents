@@ -185,6 +185,12 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **`scripts/postbuild_agent_surface.py`** and **`scripts/check_site.py`** -
   run after `zensical build`: add the Markdown mirror, `okf:*` meta tags and
   `robots.txt` to `site/`, then assert the build is complete.
+- **`scripts/check_consistency.py`** - checks that the lab notebooks, the
+  activities pages, the module overviews and *Labs, Colab, and API keys*
+  agree on submission filenames, time budgets, learning-objective labels,
+  provider defaults and what each lab contains, and that every quiz
+  question has feedback for every option. Run it after changing any of
+  those; it is not part of CI.
 
 ## Style notes
 

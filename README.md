@@ -47,6 +47,7 @@ Before committing content changes:
 .venv/bin/python scripts/okf_validate.py docs             # OKF conformance (CI-enforced)
 .venv/bin/python scripts/site_lint.py docs zensical.toml  # course rules (CI-enforced)
 .venv/bin/python scripts/gen_llms_txt.py                  # regenerate llms.txt indexes (CI fails on drift)
+.venv/bin/python scripts/check_consistency.py             # labs agree with the pages describing them (not in CI)
 ```
 
 If you edited `docs/start-here/syllabus.md`, re-render the downloadable PDF as
@@ -76,6 +77,7 @@ well; CI fails if the two disagree:
 │   ├── gen_llms_txt.py             # Builds docs/llms.txt + docs/llms-full.txt
 │   ├── postbuild_agent_surface.py  # After build: Markdown mirror, okf:* meta, robots.txt
 │   ├── check_site.py               # Post-build assertions on site/
+│   ├── check_consistency.py        # Lab notebooks agree with the pages that describe them
 │   └── externalize_links.py        # Appends {target=_blank} to external links
 ├── images/                       # Full-resolution PNG originals (not served)
 ├── instructor/materials/         # Instructor solution notebooks (outside docs/, never rendered; GitHub only)

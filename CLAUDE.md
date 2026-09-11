@@ -20,6 +20,7 @@ uv pip install --python .venv/bin/python -r requirements-dev.txt   # requirement
 .venv/bin/python scripts/gen_llms_txt.py                           # regenerate llms.txt indexes (CI checks drift)
 .venv/bin/python scripts/postbuild_agent_surface.py site           # after build: md mirror + okf meta + robots.txt
 .venv/bin/python scripts/check_site.py site                        # post-build assertions (CI)
+.venv/bin/python scripts/check_consistency.py                      # labs agree with the pages describing them (not CI)
 .venv/bin/python scripts/migrate_wiki.py [--check|--only <page>|--notebooks]
 .venv/bin/python scripts/render_notebooks.py
 .venv/bin/python scripts/optimize_images.py [--report]
