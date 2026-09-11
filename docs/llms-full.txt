@@ -2257,13 +2257,13 @@ Each quiz has **5 questions**. Two attempts are permitted; your best score is re
 
 ### Question 1
 
-Wooldridge and Jennings (1995) define four properties that constitute a "weakly" intelligent agent. Which property is violated by a traditional rule-based automation script that executes a fixed sequence of steps in response to a scheduled trigger?
+Wooldridge and Jennings (1995) define four properties that constitute a "weakly" intelligent agent. A traditional rule-based automation script runs at 6 a.m. every day and executes the same fixed sequence of steps whatever it finds — an empty inbox, a changed file format, a folder that no longer exists. Which property does this behavior most directly violate, and why?
 
 A. Social ability — the script cannot interact with other agents using communication protocols.
 
 B. Reactivity — the script does not respond to changes in its environment; it executes the same fixed sequence regardless of environmental state.
 
-C. Pro-activeness — the script is triggered externally and therefore cannot take initiative toward its own design objectives.
+C. Pro-activeness — the script runs on a schedule, and pro-activeness is the property of acting on external triggers such as a clock.
 
 D. Autonomy — the script requires continuous human scheduling to operate and cannot act independently.
 
@@ -2275,7 +2275,7 @@ D. Autonomy — the script requires continuous human scheduling to operate and c
 
     ❌ **A is incorrect.** Social ability concerns the capacity to communicate with other agents using agent communication languages — a property relevant to multi-agent systems. A script's failure to exhibit social ability is a genuine limitation, but it is not the property most directly violated by the description "fixed sequence of steps." Many legitimate agents also lack social ability in the technical sense.
 
-    ❌ **C is partially correct but imprecise.** Pro-activeness involves goal-directed initiative, and a script does not exhibit it in the full sense. However, the more precise violation in the description is reactivity: the script does not respond to environmental changes, period. A script could theoretically be triggered by an environmental event (making it superficially reactive) while still following a fixed sequence once triggered. The question specifies a "fixed sequence regardless of state," which targets reactivity directly.
+    ❌ **C is incorrect.** It gets pro-activeness backwards. Responding to external stimuli, a clock included, is the territory of reactivity; pro-activeness is goal-directed initiative that goes beyond reacting — in the lesson's words, a pro-active agent "does not merely react to stimuli." The script does lack initiative, but that is not what this option claims, and the evidence in the description — the same steps whatever the environment holds — points at reactivity.
 
     ❌ **D is incorrect as the best answer.** Autonomy refers to operating without continuous human direction during execution — not merely without a human scheduling trigger. Many scripts run without human intervention once initiated. The scheduling mechanism does not itself violate autonomy; the fixed, environment-ignoring execution sequence is the more salient failure point.
 
@@ -2283,7 +2283,7 @@ D. Autonomy — the script requires continuous human scheduling to operate and c
 
 In the LangChain Conceptual Guide's four-stage agent loop, what is the primary function of the **Observe** stage?
 
-A. To evaluate whether the agent's overall goal has been achieved and terminate the loop if so.
+A. To make the stop-or-continue decision — that is its only job; the tool result itself is carried into the next step by the Plan stage.
 
 B. To update the agent's context window with the result of the previous action, enabling the agent to plan the next step with current information.
 
@@ -2297,7 +2297,7 @@ D. To retrieve relevant background information from the agent's memory store bef
 
     ✅ **B is correct.** The Observe stage feeds the result of the completed tool call or action back into the agent's context window. This updated context is what the LLM uses as input to the next Plan stage. Without Observation, the agent would plan each successive step using only its original context — it would be blind to what its prior actions actually produced, making multi-step task completion unreliable. The loop's effectiveness depends entirely on this feedback mechanism.
 
-    ❌ **A is partially true but incomplete as the primary function.** Termination evaluation does occur during or after Observation — the agent determines whether the goal is met. But the primary mechanical function of the Observe stage is the context update (B), from which goal-completion evaluation derives. Describing Observation as primarily a termination check misses the broader role it plays in every iteration, not just the final one.
+    ❌ **A is incorrect.** Observe does include the stop-or-continue decision — the lesson's table says it "decides whether to loop again or conclude" — but that is not its only job, and the Plan stage does not carry the result forward. Observe reads the tool output and updates the agent's state, and the decision to loop or conclude is made from that updated state. Without the update in B there would be nothing to decide from, which is why B, not A, is the Observe stage's primary function.
 
     ❌ **C is incorrect.** Audit logging is an infrastructure concern in production deployment, not a function of the Observe stage in the conceptual agent loop. The LangChain guide does not define Observe as a logging step. Logging may be implemented alongside Observation but is architecturally distinct.
 
@@ -2497,7 +2497,7 @@ D. Code-first automation produces human-readable code that can be independently 
 
     ❌ **C is incorrect.** Code-first automation is not subject to categorically different regulatory oversight than no-code automation. Regulatory requirements apply to the data and the business process, not the tooling paradigm. If anything, the regulatory burden of demonstrating compliance may be higher for code-first because the organization owns the full system and cannot rely on vendor compliance certifications.
 
-    ❌ **D is partially true but not the primary reason for "absolute data governance."** Auditability through human-readable code is a genuine advantage of code-first automation for compliance purposes, but it addresses transparency, not data residency. An auditable system can still transmit data to third-party servers. The governance advantage identified in the Automation Landscape Overview is specifically about data residency and computational control, not code readability.
+    ❌ **D is incorrect.** Auditable code is a real advantage of code-first automation, but it answers a different question — can you inspect what the system does? — not where the data goes. An auditable system can still send every record to a third-party API. The governance advantage the Automation Landscape Overview describes is data residency: the whole system, model included, can run on infrastructure the organization controls, so the data never leaves it.
 
 ## Chapter 3 Quiz — AI Literacy as a New Professional Imperative { #chapter-3-quiz }
 
@@ -2757,7 +2757,7 @@ The NIST AI Risk Management Framework defines four core functions: Govern, Map, 
 
 A. Govern — because producing the Workflow Audit requires students to establish their personal accountability framework for AI use.
 
-B. Measure — because the two-dimensional automation assessment produces quantitative scores that characterize workflow risk.
+B. Measure — because the Workflow Audit's scores measure how the automated workflows perform once they are running.
 
 C. Map — because the Workflow Audit identifies the context, risk profiles, and stakeholder impacts of specific AI-candidate workflows before any deployment decision is made.
 
@@ -2771,7 +2771,7 @@ D. Manage — because completing the Workflow Audit is itself a management actio
 
     ❌ **A is incorrect.** The Govern function in the NIST AI RMF refers to organizational-level policies, accountability structures, and culture-setting activities — it is an enterprise governance function, not an individual student activity. While personal accountability is a course value, the Workflow Audit does not constitute governance in the NIST sense.
 
-    ❌ **B is partially correct but is the weaker answer.** The two-dimensional automation assessment does produce scores that characterize risk properties, which is a Measure-like activity. However, Measure in the NIST framework specifically refers to analyzing and assessing identified risks using defined metrics — it presupposes that the Map function has already identified what to measure. The Workflow Audit's primary function is identification and contextualization (Map), not quantitative risk assessment (Measure), even though scoring is part of it.
+    ❌ **B is incorrect.** Its premise is wrong: the Audit scores candidate workflows before anything is automated, so there is no running system whose performance could be measured. Its two scores record properties of each workflow — how rule-based it is and how severe its errors would be — and that is identifying context and risk, which is Map. In the AI RMF, Measure "uses knowledge relevant to AI risks identified in the MAP function" to analyze, assess, benchmark and monitor those risks, including by testing AI systems before deployment and regularly while in operation.
 
     ❌ **D is incorrect.** The Manage function involves implementing risk treatment plans and monitoring outcomes for deployed AI systems. The Workflow Audit occurs at the pre-deployment stage — no AI system has been deployed yet at this point. Managing implies an ongoing operational relationship with a deployed system, which is not what the Workflow Audit represents.
 
@@ -4981,7 +4981,7 @@ This project is designed to help you transfer the lab from the sample workflow t
 
 !!! info "What to submit"
 
-    **Add to github**: Submit the lab notebook with your new tool added: its definition and description, the three test prompts run with output visible, and your before-and-after comparison. The project goes in the same notebook as the guided lab, so the filename is the same: `Module2_Lab_[YourName].ipynb`.
+    **Add to github**: Submit the lab notebook with your new tool added: its definition and description, the three test prompts run with output visible, and your before-and-after comparison. The project has its own section at the end of the lab notebook, so the filename is the same: `Module2_Lab_[YourName].ipynb`.
 
 ## Project proposal and peer review
 
@@ -5062,7 +5062,7 @@ tags:
   - langgraph
   - ollama
 module: 2
-time_estimate: "~2 hours"
+time_estimate: "~2 hours for the four steps, plus ~2 hours for the hands-on project"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -5096,14 +5096,14 @@ sources:
     run the cells, open it in Google Colab with the badge above or download the
     `.ipynb` and run it in Jupyter.
 
-**Estimated time:** ~2 hours
-**What you'll build:** A LangChain agent that can search the web and run Python code — then harden it with error handling and prompt engineering.
+**Estimated time:** ~2 hours for the four steps, plus ~2 hours for the hands-on project
+**What you'll build:** A LangChain agent that can search the web and run Python code — then harden it with error handling and prompt engineering, and give it a tool of your own.
 
 ---
 
 ### How this notebook is structured
 
-There are four steps. Each step has:
+There are four steps, then a hands-on project. Each step has:
 
 - **Pre-written code** — run it as-is to understand what's happening
 - **Extension zones** — marked `# STUDENT EXTENSION POINT` — where you add or modify code
@@ -5738,14 +5738,168 @@ Record the following:
 - **(c) Few-shot influence:** Did the agent follow your demonstration's shape? Cite specific evidence from the printed messages.
 
 ---
+## Hands-On Project — Add Your Own Tool
+**Time:** ~2 hours
+
+Your agent has two tools. In this project you give it a third, one that could support a workflow from your own work, and test whether the agent knows when to use it. This section is what the activities page's *What to submit* box asks for.
+
+You will:
+
+1. **Define a tool** with a clear purpose, input format, output format, and one failure condition (part 1).
+2. **Describe it** so the agent can choose it. The docstring is the description, as in Step 2.
+3. **Run three prompts** on the agent before and after the tool is added (part 2): one where the tool should be used, one where it should not, and one where the agent must choose between your tool and an existing one.
+4. **Compare and refine** (part 3): note which description wording made the choice reliable.
+
+Good candidates are a lookup over a handful of policy or contract documents, a spreadsheet reader, a calendar lookup, or a small database query. The example in part 1 looks up three short policy documents held in the cell, so it runs as-is. Replace it with your own.
+
+```python
+# STUDENT EXTENSION POINT — Project, part 1: define your tool
+#
+# The example looks up three short policy documents held in this cell, so it runs with no
+# files or accounts. Replace the documents and the function with a tool from your own
+# domain, and keep the four things the project asks for:
+#   - purpose          the first line of the docstring
+#   - input format     Args:
+#   - output format    Returns:
+#   - one failure condition, handled by returning a message rather than raising (Step 3)
+# Say what the tool is NOT for, as the Step 2 descriptions do.
+
+POLICY_DOCS = {
+    "travel": "Travel over $500 needs a manager's approval before booking. Book economy class for flights under 6 hours.",
+    "expenses": "Submit receipts within 30 days. Meals are reimbursed up to $60 a day.",
+    "remote-work": "Staff may work remotely up to three days a week with their manager's agreement.",
+}
+
+@tool
+def lookup_policy(topic: str) -> str:
+    """Look up this organization's internal policy on a topic.
+
+    Args:
+        topic: one policy name: travel, expenses or remote-work.
+
+    Returns:
+        The policy text, or a message listing the valid topics if the topic is unknown.
+        Do not use this tool for general facts, current events or calculations.
+    """
+    key = topic.strip().lower()
+    if key not in POLICY_DOCS:
+        return f"No policy named {topic!r}. Valid topics: {', '.join(POLICY_DOCS)}."
+    return POLICY_DOCS[key]
+
+MY_TOOL = lookup_policy  # point this at your own tool
+
+```
+
+```python
+# Self-check your tool on its own, before any agent is involved: one valid input and one
+# that triggers your failure condition. Both should print a message; neither should raise.
+# STUDENT EXTENSION POINT: change the two inputs to match your tool's argument name.
+
+print("Valid input  ->", MY_TOOL.invoke({"topic": "travel"}))
+print("Failure case ->", MY_TOOL.invoke({"topic": "parking"}))
+print()
+print("The agent will see this name and description:")
+print(MY_TOOL.name, "-", MY_TOOL.description)
+
+```
+
+```python
+# STUDENT EXTENSION POINT — Project, part 2: three test prompts
+# Rewrite these for your tool. Keep one prompt of each kind.
+
+project_prompts = {
+    "should use": "Do I need approval before booking a $700 flight?",
+    "should not use": "What is 18% of 2,450?",
+    "must choose": "What is the rule here on working from home?",  # your tool, or web_search?
+}
+
+```
+
+```python
+# Run each prompt on two agents: the one from Step 3 (before your tool) and a rebuilt one
+# that also has your tool (after). Pre-written — run as-is.
+
+def tools_called(agent, question, recursion_limit=12):
+    """Run the agent once. Returns the names of the tools it called, in order, and its answer."""
+    result = agent.invoke(
+        {"messages": [{"role": "user", "content": question}]},
+        {"recursion_limit": recursion_limit},
+    )
+    names = [call["name"] for m in result["messages"] for call in (getattr(m, "tool_calls", None) or [])]
+    return names, result["messages"][-1].content
+
+agent_before = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
+agent_after = create_agent(model=llm, tools=tools + [MY_TOOL], system_prompt=SYSTEM_PROMPT)
+print("Before:", [t.name for t in tools])
+print("After: ", [t.name for t in tools + [MY_TOOL]])
+
+project_results = {}
+for kind, prompt in project_prompts.items():
+    before, _ = tools_called(agent_before, prompt)
+    after, answer = tools_called(agent_after, prompt)
+    project_results[kind] = {"before": before, "after": after}
+    print(f"\n{kind.upper()}: {prompt}")
+    print("  tools before:", before or "none")
+    print("  tools after: ", after or "none")
+    print("  answer after:", str(answer)[:300])
+
+# To watch one run turn by turn, use the Step 1 helper:
+# show_trace(agent_after, project_prompts["must choose"])
+
+```
+
+```python
+# STUDENT EXTENSION POINT — Project, part 3: try a second description wording
+# If a prompt picked the wrong tool above, rewrite the description and test again. As in
+# Step 2's Action 8, the @tool description argument overrides the docstring, so the code
+# the tool runs stays the same. Keep whichever wording selects reliably.
+#
+# Uncomment the lines below, write your revised description, and run the cell.
+
+# REVISED_DESCRIPTION = "...your revised wording..."
+# MY_TOOL_V2 = tool(MY_TOOL.name, description=REVISED_DESCRIPTION)(MY_TOOL.func)
+# agent_v2 = create_agent(model=llm, tools=tools + [MY_TOOL_V2], system_prompt=SYSTEM_PROMPT)
+# for kind, prompt in project_prompts.items():
+#     print(f"{kind.upper()}: tools called ->", tools_called(agent_v2, prompt)[0] or "none")
+
+```
+
+#### ✅ Project Self-Check
+
+Read the three rows printed above:
+
+- **should use:** the *after* agent calls your tool. The *before* agent could not; note what it did instead — searched the web, or answered from memory.
+- **should not use:** your tool does not appear in the *after* list.
+- **must choose:** the *after* agent picks your tool over the existing tool that competes with it. If it does not, sharpen the description: say what your tool covers that the others do not, and when not to use it.
+
+With the example tool, watch the **must choose** prompt. The system prompt tells the agent to "Always search for current information before making factual claims", and that instruction competes with your tool's description. Which one wins, and what wording changes the outcome, is what the log entry asks you to record.
+
+Your failure case from the self-check cell should also return a message, not a traceback — the Step 3 lesson.
+
+---
+
+#### 📝 Log Entry — Project (record in your Agent Instruction Log)
+
+**Heading:** `Project — Add Your Own Tool`
+
+Record the following:
+
+- **(a) Tool specification:** purpose, input format, output format, and the failure condition it handles
+- **(b) Selection table:** one row per prompt — its kind, the tools called before, the tools called after, and whether the *after* choice was correct
+- **(c) Description wording:** quote the sentence of your description that made selection reliable and the version it replaced, or, if the first version worked, say why you think it did
+- **(d) Transfer:** the workflow from your own work this tool supports; your top-ranked Workflow Audit candidate is a good choice
+
+---
 ## Lab Complete — Submission Instructions
 
-Before submitting, confirm all four checks:
+Before submitting, confirm each check:
 
 - [ ] All cells have been executed (no empty output cells)
-- [ ] Your Agent Instruction Log contains entries for all four steps
+- [ ] Your Agent Instruction Log contains entries for all four steps and the project
 - [ ] Step 3's final cell runs without raising
 - [ ] Step 4 shows a before/after comparison of the final answer format
+- [ ] The project section defines your own tool, not the example, and its failure case returns a message
+- [ ] The three project prompts ran on both agents, with the tools each one called visible
 
 **Submit to GitHub:**
 
@@ -5756,18 +5910,18 @@ Before submitting, confirm all four checks:
 
 ### What's next?
 
-The hands-on project builds directly on this lab: in this same notebook, you add a tool of your own choosing, run three prompts that test when the agent should and should not use it, and compare its behavior before and after. What Steps 2–4 taught about tool descriptions is what makes that choice reliable.
+Next on the activities page is the project proposal and peer review discussion. The tool you built in the project is a good starting point for it.
 
 ```python
 # Optional: Use this cell as your Agent Instruction Log if you prefer to keep it in the notebook.
-# Add your entries below — one section per step.
+# Add your entries below — one section per step, plus the project.
 
 AGENT_INSTRUCTION_LOG = """
 === AGENT INSTRUCTION LOG ===
 
 --- Step 1 — Single-Tool Agent ---
 
-1. First Thought:
+1. First tool call:
 2. Tool invoked:
 3. Observation summary:
 4. Loop count:
@@ -5789,6 +5943,15 @@ Action 8 result:
 (a) Format constraint text:
 (b) Before/after Final Answer comparison:
 (c) Few-shot influence:
+
+--- Project — Add Your Own Tool ---
+(a) Tool spec (purpose, input format, output format, failure condition):
+(b) Prompt          | Tools before | Tools after | Correct choice?
+    should use      |              |             |
+    should not use  |              |             |
+    must choose     |              |             |
+(c) Description wording that made selection reliable (before -> after):
+(d) Workflow from your own work this tool supports:
 """
 
 print(AGENT_INSTRUCTION_LOG)
@@ -10843,11 +11006,11 @@ D. The agent's instruction-following capability — the ability to execute tasks
 
 A research team needs to analyze 500 scientific papers to produce a comprehensive literature review. Each paper must be read, summarized, and its key claims extracted before cross-paper synthesis can begin. Which condition from Guo et al.'s five-condition table most precisely justifies a multi-agent architecture for this task?
 
-A. Task specialization — because reading papers and synthesizing across papers require different cognitive skills, justifying separate specialist agents for each sub-task.
+A. Task specialization — because no single model can both summarize individual papers and synthesize across them, so each sub-task needs its own specialist agent.
 
 B. Context window limitation — because 500 papers cannot be loaded simultaneously into a single agent's context window, requiring multiple agents to process distinct paper subsets in parallel before synthesis.
 
-C. Cross-agent quality control — because a separate critic agent should verify each paper summary before it is used in the final synthesis.
+C. Cross-agent quality control — because the task specification requires a separate critic agent to verify each paper summary before synthesis.
 
 D. Scale beyond single-agent capability — because 500 papers is a high-volume task that no single agent can complete in a reasonable time.
 
@@ -10857,9 +11020,9 @@ D. Scale beyond single-agent capability — because 500 papers is a high-volume 
 
     ✅ **B is correct.** The most precise and necessary justification is context window limitation: even the longest-context LLMs available cannot process 500 full scientific papers simultaneously. This is a hard architectural constraint — no amount of prompt engineering or model capability resolves it within a single-agent architecture. Multiple agents must process distinct paper subsets, and their outputs must be aggregated. This is the condition that makes MAS not merely preferable but structurally necessary for this task. The condition is both necessary (the task cannot be done single-agent) and sufficient (it directly motivates parallel agent execution across document subsets).
 
-    ❌ **A is partially applicable but is not the most precise justification.** Task specialization is relevant if reading and synthesis genuinely require different prompting strategies or tool access. However, a capable LLM can handle both reading and synthesis within a single agent. Task specialization is a weaker justification here than context window limitation, which is a hard constraint rather than a quality optimization.
+    ❌ **A is incorrect.** Its premise is false: one capable model can summarize a paper and also synthesize across papers; the two sub-tasks call for different prompts, not different models. Task specialization can improve quality, but it does not make a multi-agent design necessary here. What does is the hard limit in B: 500 full papers cannot fit into any single agent's context window.
 
-    ❌ **C is partially applicable but is not the primary justification.** Cross-agent quality control adds value if summary verification is a bottleneck or if the generator agent cannot reliably critique its own summaries. While a critic agent may improve quality, this condition does not explain why MAS is structurally necessary — it explains why it might be qualitatively superior. Context window limitation makes MAS necessary; cross-agent quality control makes it better.
+    ❌ **C is incorrect.** The task as described asks for no verification step, so a critic cannot be what justifies the architecture. A critic agent might well improve the summaries, but that would make a multi-agent design better, not necessary. The constraint the task does impose — all 500 papers read and summarized before synthesis — is one no single context window can hold.
 
     ❌ **D is incorrect as the primary justification.** "Scale beyond single-agent capability" is a real condition in the table, but its most precise meaning is workload volume that requires distribution, not just time. For 500 papers, context window limitation is the more precise and structurally primary constraint — the task literally cannot fit in one context window, which is a more fundamental constraint than execution speed alone.
 
@@ -11343,7 +11506,7 @@ A. Nothing — acknowledging trade-offs is a balanced, professional recommendati
 
 B. It describes trade-offs but never makes a decision. A formal recommendation must commit to a position (e.g., "MAS is warranted for this task class when [conditions]"), specify the boundary conditions under which that position holds, and state what would change it.
 
-C. It fails to calculate the coordination overhead ratio, which is required before making any recommendation.
+C. The only thing missing is the coordination overhead ratio; adding that number would turn the paragraph into a formal recommendation.
 
 D. It needs to be longer — at least 300 words of analysis.
 
@@ -11355,7 +11518,7 @@ D. It needs to be longer — at least 300 words of analysis.
 
     ❌ **A is incorrect.** Acknowledging trade-offs is necessary context, but a recommendation must go further and commit to a course of action with stated conditions.
 
-    ❌ **C is partially valid** but not the main issue. Calculating the ratio is required, but the primary failure is the absence of a committed position.
+    ❌ **C is incorrect.** The coordination overhead ratio is useful evidence — the lesson uses it to judge whether a system spends more effort coordinating than producing — but adding it would not fix this paragraph. It would still describe trade-offs without choosing between them. What makes a recommendation formal is a committed position with stated conditions, and no additional metric supplies that.
 
     ❌ **D is incorrect.** Quality is defined by analytical rigor, not word count. A concise recommendation with clear boundary conditions is better than a long description without a conclusion.
 
@@ -14099,21 +14262,11 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
-3. Confirm that the Module 2 hands-on project is submitted inside the lab
-   notebook, as the Module 4 and 5 projects are. The wiki's project box asked
-   for `Module2__[YourName].ipynb`, which a 2026-08-03 edit produced by
-   deleting the middle word of `Module2_Project_[YourName].ipynb`; the site
-   now reads that as one notebook, `Module2_Lab_[YourName].ipynb`. If a
-   separate project notebook is intended, restore
-   `Module2_Project_[YourName].ipynb` on the
-   [activities page](../modules/module-2/activities.md) and in the closing
-   cell of the Module 2 notebook. Either way, note that the notebook has no
-   project section of its own, unlike Module 4's sections 3-4 and Module 5's
-   Lab B, so a learner adds the tool in new cells after Step 4; if the project
-   stays in this notebook, a short scaffolded section for it would help.
 
-Whether the solution notebooks stay public, formerly the first item here, was
-decided on 2026-09-11 (see [above](#instructor-solution-notebooks)).
+Two former items were settled on 2026-09-11: the solution notebooks stay
+public on GitHub only (see [above](#instructor-solution-notebooks)), and the
+Module 2 hands-on project is submitted in the lab notebook, which now has a
+scaffolded project section.
 
 ## Assessment revised for LangChain 1.4
 
@@ -14191,7 +14344,9 @@ another on every point below; run it after changing any of them.
    ask for `ModuleN_Lab_[YourName].ipynb`. The notebooks, learner and
    instructor copies alike, now use the activities pages' names. The Module 2
    project box's `Module2__[YourName].ipynb` now reads
-   `Module2_Lab_[YourName].ipynb`; see open item 3.
+   `Module2_Lab_[YourName].ipynb`: the course owners confirmed on 2026-09-11
+   that the project is submitted in the lab notebook, which now has a
+   scaffolded project section.
 2. **Module 5 lab title (resolved 2026-09-11).** The notebook called itself
    "LangSmith Observability & CI/CD Evaluation Pipeline" and described a Lab B
    that builds a regression test suite. Its actual Lab B is the Comparative
@@ -14242,13 +14397,15 @@ another on every point below; run it after changing any of them.
    it is marked ❌ and opens "partially correct", "partially true" or
    "partially applicable", and the review that produced this item misread
    those as missing. A scan of all 125 questions finds feedback for every
-   option. What remains is a matter of style, not a defect: seven distractors
-   across six questions (Module 1 chapter 1 questions 1 and 2, chapter 2
-   question 5 and chapter 5 question 1; Module 4 chapter 1 question 3 and
-   chapter 5 question 3) are marked ❌ while their feedback calls them
-   partially right. On a self-evaluating quiz with no partial credit, that can
-   leave a learner unsure how wrong they were. Rewording them is an author's
-   call.
+   option. The seven distractors behind the misreading (Module 1 chapter 1
+   questions 1 and 2, chapter 2 question 5 and chapter 5 question 1; Module 4
+   chapter 1 question 3, two options, and chapter 5 question 3) were then
+   rewritten the same day at the owners' request. Their feedback had marked
+   them ❌ while calling them partially right, which on a self-evaluating quiz
+   with no partial credit left a learner unsure how wrong they were. Each
+   option now makes a claim that is wrong on its own terms, and its feedback
+   opens "incorrect" and says why; one of them, Module 1 chapter 2 question 5's
+   option D, needed only its feedback reworded. No key moved.
 9. **The six trade-off dimensions in Module 2 (resolved 2026-09-11).** The
    chapter 5 lesson's table, transcribed from an image, listed latency, cost
    per inference, reliability and error rate, scalability, interpretability,
@@ -16132,6 +16289,8 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 * **Update**: The instructor solution notebooks stay public on GitHub and unpublished on this site, as the course owners decided today. [Instructor materials](course-design/instructor-materials.md) now links each solution's GitHub view and a Colab copy; each solution opens with a banner naming the starter it solves, and a new `instructor/README.md` explains the folder. `AGENTS.md` and [Contributing](about/contributing.md) now state the rule as practiced: never rendered, copied or mirrored into `docs/`, and linked only from the instructor materials page.
 * **Update**: [Labs, Colab, and API keys](start-here/labs-and-notebooks.md) still told learners to upload the Module 3 corpus PDFs by hand, which stopped being true when the Module 3 notebook began downloading and checking them; it now describes the download, with manual upload as the fallback. Its table's times now match the activities pages.
 * **Creation**: `scripts/check_consistency.py` checks the agreement this entry restores (submission filenames, time budgets, objective labels, provider defaults, lab contents, the Module 2 dimension lists and every answer key) across the notebooks and the pages that describe them. It went from 26 failures to none. It runs by hand rather than in CI, because several of its expectations encode today's decisions and an author may change them on purpose. The [syllabus](start-here/syllabus.md)'s tools row now also lists Openwork and LangSmith.
+* **Creation**: The [Module 2 lab notebook](modules/module-2/lab-notebook.md) now has a scaffolded *Hands-On Project — Add Your Own Tool* section after Step 4, which the course owners confirmed is where the project is submitted. It carries a runnable example tool (a lookup over three short policy documents), a self-check that calls the tool directly, three test prompts (should use, should not use, must choose), a pre-written cell that runs them on the agent before and after the tool is added and prints the tools each run called, a cell for testing a second description wording, and a log entry. The notebook's header, submission checklist and optional log template now include the project; no other existing code cell changed. The new cells were run end to end against a stand-in chat model that calls tools, which checks their wiring but not how a real model chooses.
+* **Update**: Rewrote the seven chapter-quiz distractors whose feedback marked them ❌ while calling them partially correct: [Module 1](modules/module-1/chapter-quizzes.md) chapter 1 questions 1 and 2, chapter 2 question 5 and chapter 5 question 1, and [Module 4](modules/module-4/chapter-quizzes.md) chapter 1 question 3 (two options) and chapter 5 question 3. Each option now makes a claim that is wrong on its own terms (a misdefinition, a false premise, or a fix that would not fix the problem) and its feedback opens "incorrect" and explains why. Module 1 chapter 1 question 1's stem now describes what the script does whatever it finds, so the evidence points at the keyed property. No key moved.
 
 ## 2026-09-10
 

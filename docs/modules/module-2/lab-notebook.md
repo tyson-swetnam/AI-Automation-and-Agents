@@ -11,7 +11,7 @@ tags:
   - langgraph
   - ollama
 module: 2
-time_estimate: "~2 hours"
+time_estimate: "~2 hours for the four steps, plus ~2 hours for the hands-on project"
 status: stable
 stale_after: "2027-09-08T00:00:00Z"
 generated:
@@ -45,14 +45,14 @@ sources:
     run the cells, open it in Google Colab with the badge above or download the
     `.ipynb` and run it in Jupyter.
 
-**Estimated time:** ~2 hours
-**What you'll build:** A LangChain agent that can search the web and run Python code — then harden it with error handling and prompt engineering.
+**Estimated time:** ~2 hours for the four steps, plus ~2 hours for the hands-on project
+**What you'll build:** A LangChain agent that can search the web and run Python code — then harden it with error handling and prompt engineering, and give it a tool of your own.
 
 ---
 
 ### How this notebook is structured
 
-There are four steps. Each step has:
+There are four steps, then a hands-on project. Each step has:
 
 - **Pre-written code** — run it as-is to understand what's happening
 - **Extension zones** — marked `# STUDENT EXTENSION POINT` — where you add or modify code
@@ -687,14 +687,168 @@ Record the following:
 - **(c) Few-shot influence:** Did the agent follow your demonstration's shape? Cite specific evidence from the printed messages.
 
 ---
+## Hands-On Project — Add Your Own Tool
+**Time:** ~2 hours
+
+Your agent has two tools. In this project you give it a third, one that could support a workflow from your own work, and test whether the agent knows when to use it. This section is what the activities page's *What to submit* box asks for.
+
+You will:
+
+1. **Define a tool** with a clear purpose, input format, output format, and one failure condition (part 1).
+2. **Describe it** so the agent can choose it. The docstring is the description, as in Step 2.
+3. **Run three prompts** on the agent before and after the tool is added (part 2): one where the tool should be used, one where it should not, and one where the agent must choose between your tool and an existing one.
+4. **Compare and refine** (part 3): note which description wording made the choice reliable.
+
+Good candidates are a lookup over a handful of policy or contract documents, a spreadsheet reader, a calendar lookup, or a small database query. The example in part 1 looks up three short policy documents held in the cell, so it runs as-is. Replace it with your own.
+
+```python
+# STUDENT EXTENSION POINT — Project, part 1: define your tool
+#
+# The example looks up three short policy documents held in this cell, so it runs with no
+# files or accounts. Replace the documents and the function with a tool from your own
+# domain, and keep the four things the project asks for:
+#   - purpose          the first line of the docstring
+#   - input format     Args:
+#   - output format    Returns:
+#   - one failure condition, handled by returning a message rather than raising (Step 3)
+# Say what the tool is NOT for, as the Step 2 descriptions do.
+
+POLICY_DOCS = {
+    "travel": "Travel over $500 needs a manager's approval before booking. Book economy class for flights under 6 hours.",
+    "expenses": "Submit receipts within 30 days. Meals are reimbursed up to $60 a day.",
+    "remote-work": "Staff may work remotely up to three days a week with their manager's agreement.",
+}
+
+@tool
+def lookup_policy(topic: str) -> str:
+    """Look up this organization's internal policy on a topic.
+
+    Args:
+        topic: one policy name: travel, expenses or remote-work.
+
+    Returns:
+        The policy text, or a message listing the valid topics if the topic is unknown.
+        Do not use this tool for general facts, current events or calculations.
+    """
+    key = topic.strip().lower()
+    if key not in POLICY_DOCS:
+        return f"No policy named {topic!r}. Valid topics: {', '.join(POLICY_DOCS)}."
+    return POLICY_DOCS[key]
+
+MY_TOOL = lookup_policy  # point this at your own tool
+
+```
+
+```python
+# Self-check your tool on its own, before any agent is involved: one valid input and one
+# that triggers your failure condition. Both should print a message; neither should raise.
+# STUDENT EXTENSION POINT: change the two inputs to match your tool's argument name.
+
+print("Valid input  ->", MY_TOOL.invoke({"topic": "travel"}))
+print("Failure case ->", MY_TOOL.invoke({"topic": "parking"}))
+print()
+print("The agent will see this name and description:")
+print(MY_TOOL.name, "-", MY_TOOL.description)
+
+```
+
+```python
+# STUDENT EXTENSION POINT — Project, part 2: three test prompts
+# Rewrite these for your tool. Keep one prompt of each kind.
+
+project_prompts = {
+    "should use": "Do I need approval before booking a $700 flight?",
+    "should not use": "What is 18% of 2,450?",
+    "must choose": "What is the rule here on working from home?",  # your tool, or web_search?
+}
+
+```
+
+```python
+# Run each prompt on two agents: the one from Step 3 (before your tool) and a rebuilt one
+# that also has your tool (after). Pre-written — run as-is.
+
+def tools_called(agent, question, recursion_limit=12):
+    """Run the agent once. Returns the names of the tools it called, in order, and its answer."""
+    result = agent.invoke(
+        {"messages": [{"role": "user", "content": question}]},
+        {"recursion_limit": recursion_limit},
+    )
+    names = [call["name"] for m in result["messages"] for call in (getattr(m, "tool_calls", None) or [])]
+    return names, result["messages"][-1].content
+
+agent_before = create_agent(model=llm, tools=tools, system_prompt=SYSTEM_PROMPT)
+agent_after = create_agent(model=llm, tools=tools + [MY_TOOL], system_prompt=SYSTEM_PROMPT)
+print("Before:", [t.name for t in tools])
+print("After: ", [t.name for t in tools + [MY_TOOL]])
+
+project_results = {}
+for kind, prompt in project_prompts.items():
+    before, _ = tools_called(agent_before, prompt)
+    after, answer = tools_called(agent_after, prompt)
+    project_results[kind] = {"before": before, "after": after}
+    print(f"\n{kind.upper()}: {prompt}")
+    print("  tools before:", before or "none")
+    print("  tools after: ", after or "none")
+    print("  answer after:", str(answer)[:300])
+
+# To watch one run turn by turn, use the Step 1 helper:
+# show_trace(agent_after, project_prompts["must choose"])
+
+```
+
+```python
+# STUDENT EXTENSION POINT — Project, part 3: try a second description wording
+# If a prompt picked the wrong tool above, rewrite the description and test again. As in
+# Step 2's Action 8, the @tool description argument overrides the docstring, so the code
+# the tool runs stays the same. Keep whichever wording selects reliably.
+#
+# Uncomment the lines below, write your revised description, and run the cell.
+
+# REVISED_DESCRIPTION = "...your revised wording..."
+# MY_TOOL_V2 = tool(MY_TOOL.name, description=REVISED_DESCRIPTION)(MY_TOOL.func)
+# agent_v2 = create_agent(model=llm, tools=tools + [MY_TOOL_V2], system_prompt=SYSTEM_PROMPT)
+# for kind, prompt in project_prompts.items():
+#     print(f"{kind.upper()}: tools called ->", tools_called(agent_v2, prompt)[0] or "none")
+
+```
+
+#### ✅ Project Self-Check
+
+Read the three rows printed above:
+
+- **should use:** the *after* agent calls your tool. The *before* agent could not; note what it did instead — searched the web, or answered from memory.
+- **should not use:** your tool does not appear in the *after* list.
+- **must choose:** the *after* agent picks your tool over the existing tool that competes with it. If it does not, sharpen the description: say what your tool covers that the others do not, and when not to use it.
+
+With the example tool, watch the **must choose** prompt. The system prompt tells the agent to "Always search for current information before making factual claims", and that instruction competes with your tool's description. Which one wins, and what wording changes the outcome, is what the log entry asks you to record.
+
+Your failure case from the self-check cell should also return a message, not a traceback — the Step 3 lesson.
+
+---
+
+#### 📝 Log Entry — Project (record in your Agent Instruction Log)
+
+**Heading:** `Project — Add Your Own Tool`
+
+Record the following:
+
+- **(a) Tool specification:** purpose, input format, output format, and the failure condition it handles
+- **(b) Selection table:** one row per prompt — its kind, the tools called before, the tools called after, and whether the *after* choice was correct
+- **(c) Description wording:** quote the sentence of your description that made selection reliable and the version it replaced, or, if the first version worked, say why you think it did
+- **(d) Transfer:** the workflow from your own work this tool supports; your top-ranked Workflow Audit candidate is a good choice
+
+---
 ## Lab Complete — Submission Instructions
 
-Before submitting, confirm all four checks:
+Before submitting, confirm each check:
 
 - [ ] All cells have been executed (no empty output cells)
-- [ ] Your Agent Instruction Log contains entries for all four steps
+- [ ] Your Agent Instruction Log contains entries for all four steps and the project
 - [ ] Step 3's final cell runs without raising
 - [ ] Step 4 shows a before/after comparison of the final answer format
+- [ ] The project section defines your own tool, not the example, and its failure case returns a message
+- [ ] The three project prompts ran on both agents, with the tools each one called visible
 
 **Submit to GitHub:**
 
@@ -705,18 +859,18 @@ Before submitting, confirm all four checks:
 
 ### What's next?
 
-The hands-on project builds directly on this lab: in this same notebook, you add a tool of your own choosing, run three prompts that test when the agent should and should not use it, and compare its behavior before and after. What Steps 2–4 taught about tool descriptions is what makes that choice reliable.
+Next on the activities page is the project proposal and peer review discussion. The tool you built in the project is a good starting point for it.
 
 ```python
 # Optional: Use this cell as your Agent Instruction Log if you prefer to keep it in the notebook.
-# Add your entries below — one section per step.
+# Add your entries below — one section per step, plus the project.
 
 AGENT_INSTRUCTION_LOG = """
 === AGENT INSTRUCTION LOG ===
 
 --- Step 1 — Single-Tool Agent ---
 
-1. First Thought:
+1. First tool call:
 2. Tool invoked:
 3. Observation summary:
 4. Loop count:
@@ -738,6 +892,15 @@ Action 8 result:
 (a) Format constraint text:
 (b) Before/after Final Answer comparison:
 (c) Few-shot influence:
+
+--- Project — Add Your Own Tool ---
+(a) Tool spec (purpose, input format, output format, failure condition):
+(b) Prompt          | Tools before | Tools after | Correct choice?
+    should use      |              |             |
+    should not use  |              |             |
+    must choose     |              |             |
+(c) Description wording that made selection reliable (before -> after):
+(d) Workflow from your own work this tool supports:
 """
 
 print(AGENT_INSTRUCTION_LOG)

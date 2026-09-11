@@ -92,11 +92,11 @@ D. The agent's instruction-following capability — the ability to execute tasks
 
 A research team needs to analyze 500 scientific papers to produce a comprehensive literature review. Each paper must be read, summarized, and its key claims extracted before cross-paper synthesis can begin. Which condition from Guo et al.'s five-condition table most precisely justifies a multi-agent architecture for this task?
 
-A. Task specialization — because reading papers and synthesizing across papers require different cognitive skills, justifying separate specialist agents for each sub-task.
+A. Task specialization — because no single model can both summarize individual papers and synthesize across them, so each sub-task needs its own specialist agent.
 
 B. Context window limitation — because 500 papers cannot be loaded simultaneously into a single agent's context window, requiring multiple agents to process distinct paper subsets in parallel before synthesis.
 
-C. Cross-agent quality control — because a separate critic agent should verify each paper summary before it is used in the final synthesis.
+C. Cross-agent quality control — because the task specification requires a separate critic agent to verify each paper summary before synthesis.
 
 D. Scale beyond single-agent capability — because 500 papers is a high-volume task that no single agent can complete in a reasonable time.
 
@@ -106,9 +106,9 @@ D. Scale beyond single-agent capability — because 500 papers is a high-volume 
 
     ✅ **B is correct.** The most precise and necessary justification is context window limitation: even the longest-context LLMs available cannot process 500 full scientific papers simultaneously. This is a hard architectural constraint — no amount of prompt engineering or model capability resolves it within a single-agent architecture. Multiple agents must process distinct paper subsets, and their outputs must be aggregated. This is the condition that makes MAS not merely preferable but structurally necessary for this task. The condition is both necessary (the task cannot be done single-agent) and sufficient (it directly motivates parallel agent execution across document subsets).
 
-    ❌ **A is partially applicable but is not the most precise justification.** Task specialization is relevant if reading and synthesis genuinely require different prompting strategies or tool access. However, a capable LLM can handle both reading and synthesis within a single agent. Task specialization is a weaker justification here than context window limitation, which is a hard constraint rather than a quality optimization.
+    ❌ **A is incorrect.** Its premise is false: one capable model can summarize a paper and also synthesize across papers; the two sub-tasks call for different prompts, not different models. Task specialization can improve quality, but it does not make a multi-agent design necessary here. What does is the hard limit in B: 500 full papers cannot fit into any single agent's context window.
 
-    ❌ **C is partially applicable but is not the primary justification.** Cross-agent quality control adds value if summary verification is a bottleneck or if the generator agent cannot reliably critique its own summaries. While a critic agent may improve quality, this condition does not explain why MAS is structurally necessary — it explains why it might be qualitatively superior. Context window limitation makes MAS necessary; cross-agent quality control makes it better.
+    ❌ **C is incorrect.** The task as described asks for no verification step, so a critic cannot be what justifies the architecture. A critic agent might well improve the summaries, but that would make a multi-agent design better, not necessary. The constraint the task does impose — all 500 papers read and summarized before synthesis — is one no single context window can hold.
 
     ❌ **D is incorrect as the primary justification.** "Scale beyond single-agent capability" is a real condition in the table, but its most precise meaning is workload volume that requires distribution, not just time. For 500 papers, context window limitation is the more precise and structurally primary constraint — the task literally cannot fit in one context window, which is a more fundamental constraint than execution speed alone.
 
@@ -592,7 +592,7 @@ A. Nothing — acknowledging trade-offs is a balanced, professional recommendati
 
 B. It describes trade-offs but never makes a decision. A formal recommendation must commit to a position (e.g., "MAS is warranted for this task class when [conditions]"), specify the boundary conditions under which that position holds, and state what would change it.
 
-C. It fails to calculate the coordination overhead ratio, which is required before making any recommendation.
+C. The only thing missing is the coordination overhead ratio; adding that number would turn the paragraph into a formal recommendation.
 
 D. It needs to be longer — at least 300 words of analysis.
 
@@ -604,7 +604,7 @@ D. It needs to be longer — at least 300 words of analysis.
 
     ❌ **A is incorrect.** Acknowledging trade-offs is necessary context, but a recommendation must go further and commit to a course of action with stated conditions.
 
-    ❌ **C is partially valid** but not the main issue. Calculating the ratio is required, but the primary failure is the absence of a committed position.
+    ❌ **C is incorrect.** The coordination overhead ratio is useful evidence — the lesson uses it to judge whether a system spends more effort coordinating than producing — but adding it would not fix this paragraph. It would still describe trade-offs without choosing between them. What makes a recommendation formal is a committed position with stated conditions, and no additional metric supplies that.
 
     ❌ **D is incorrect.** Quality is defined by analytical rigor, not word count. A concise recommendation with clear boundary conditions is better than a long description without a conclusion.
 

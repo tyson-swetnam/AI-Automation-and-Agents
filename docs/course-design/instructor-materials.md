@@ -191,21 +191,11 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
-3. Confirm that the Module 2 hands-on project is submitted inside the lab
-   notebook, as the Module 4 and 5 projects are. The wiki's project box asked
-   for `Module2__[YourName].ipynb`, which a 2026-08-03 edit produced by
-   deleting the middle word of `Module2_Project_[YourName].ipynb`; the site
-   now reads that as one notebook, `Module2_Lab_[YourName].ipynb`. If a
-   separate project notebook is intended, restore
-   `Module2_Project_[YourName].ipynb` on the
-   [activities page](../modules/module-2/activities.md) and in the closing
-   cell of the Module 2 notebook. Either way, note that the notebook has no
-   project section of its own, unlike Module 4's sections 3-4 and Module 5's
-   Lab B, so a learner adds the tool in new cells after Step 4; if the project
-   stays in this notebook, a short scaffolded section for it would help.
 
-Whether the solution notebooks stay public, formerly the first item here, was
-decided on 2026-09-11 (see [above](#instructor-solution-notebooks)).
+Two former items were settled on 2026-09-11: the solution notebooks stay
+public on GitHub only (see [above](#instructor-solution-notebooks)), and the
+Module 2 hands-on project is submitted in the lab notebook, which now has a
+scaffolded project section.
 
 ## Assessment revised for LangChain 1.4
 
@@ -283,7 +273,9 @@ another on every point below; run it after changing any of them.
    ask for `ModuleN_Lab_[YourName].ipynb`. The notebooks, learner and
    instructor copies alike, now use the activities pages' names. The Module 2
    project box's `Module2__[YourName].ipynb` now reads
-   `Module2_Lab_[YourName].ipynb`; see open item 3.
+   `Module2_Lab_[YourName].ipynb`: the course owners confirmed on 2026-09-11
+   that the project is submitted in the lab notebook, which now has a
+   scaffolded project section.
 2. **Module 5 lab title (resolved 2026-09-11).** The notebook called itself
    "LangSmith Observability & CI/CD Evaluation Pipeline" and described a Lab B
    that builds a regression test suite. Its actual Lab B is the Comparative
@@ -334,13 +326,15 @@ another on every point below; run it after changing any of them.
    it is marked ❌ and opens "partially correct", "partially true" or
    "partially applicable", and the review that produced this item misread
    those as missing. A scan of all 125 questions finds feedback for every
-   option. What remains is a matter of style, not a defect: seven distractors
-   across six questions (Module 1 chapter 1 questions 1 and 2, chapter 2
-   question 5 and chapter 5 question 1; Module 4 chapter 1 question 3 and
-   chapter 5 question 3) are marked ❌ while their feedback calls them
-   partially right. On a self-evaluating quiz with no partial credit, that can
-   leave a learner unsure how wrong they were. Rewording them is an author's
-   call.
+   option. The seven distractors behind the misreading (Module 1 chapter 1
+   questions 1 and 2, chapter 2 question 5 and chapter 5 question 1; Module 4
+   chapter 1 question 3, two options, and chapter 5 question 3) were then
+   rewritten the same day at the owners' request. Their feedback had marked
+   them ❌ while calling them partially right, which on a self-evaluating quiz
+   with no partial credit left a learner unsure how wrong they were. Each
+   option now makes a claim that is wrong on its own terms, and its feedback
+   opens "incorrect" and says why; one of them, Module 1 chapter 2 question 5's
+   option D, needed only its feedback reworded. No key moved.
 9. **The six trade-off dimensions in Module 2 (resolved 2026-09-11).** The
    chapter 5 lesson's table, transcribed from an image, listed latency, cost
    per inference, reliability and error rate, scalability, interpretability,

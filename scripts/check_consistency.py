@@ -89,7 +89,7 @@ for m, nb in NB.items():
     tline = next(l for l in head.split("\n") if re.search(r"time", l, re.I))
     nums = [int(x) for x in re.findall(r"(\d+) hours?", tline)]
     if m == 2:
-        ok = nums == [2] and lh == 2
+        ok = nums == [int(lh), int(ph)]
     elif m == 3:
         ok = nums == [2, 2]
     else:
@@ -126,6 +126,10 @@ check("M5 notebook tools are search + calculator", "tools = [search, calculator]
 check("M5 notebook: no CI/CD or regression-suite Lab B",
       not re.search(r"CI/CD|regression|Evaluation Pipeline|Pipeline Report", md(NB[5])), "")
 nb4 = md(NB[4])
+nb2 = json.loads((ROOT / NB[2]).read_text())
+check("M2 notebook has a scaffolded project section before submission",
+      [c.get("id") for c in nb2["cells"]].index("project-tool") < [c.get("id") for c in nb2["cells"]].index("submission")
+      and "# Hands-On Project — Add Your Own Tool" in md(NB[2]))
 check("M4 notebook sections 1-4 exist", all(f"## {i}. " in nb4 for i in range(1, 5)))
 check("M4 notebook: no stale Lab A/Lab B labels", not re.search(r"\bLab [AB]\b", nb4),
       re.findall(r".{30}\bLab [AB]\b.{20}", nb4))
@@ -165,6 +169,10 @@ for m in range(1, 6):
             if not opts or opts - fb:
                 check(f"M{m} question with options {sorted(opts)} has feedback for each", False, sorted(fb))
 check(f"all {total} questions have feedback for every option", total == 125, total)
+partly = [f"M{m}: {l.strip()[:60]}" for m in range(1, 6)
+          for l in (D / f"modules/module-{m}/chapter-quizzes.md").read_text().split("\n")
+          if l.strip().startswith("❌") and re.match(r"❌ \*\*[A-D] is partially", l.strip())]
+check("no option is marked wrong while its feedback calls it partially right", not partly, partly)
 q2 = (D / "modules/module-2/chapter-quizzes.md").read_text()
 q1 = re.split(r"(?m)^### Question", q2.split("{ #chapter-5-quiz }")[1])[1]
 check("M2 ch5 Q1 keyed B without a pending note",

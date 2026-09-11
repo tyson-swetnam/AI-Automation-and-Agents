@@ -41,13 +41,13 @@ Each quiz has **5 questions**. Two attempts are permitted; your best score is re
 
 ### Question 1
 
-Wooldridge and Jennings (1995) define four properties that constitute a "weakly" intelligent agent. Which property is violated by a traditional rule-based automation script that executes a fixed sequence of steps in response to a scheduled trigger?
+Wooldridge and Jennings (1995) define four properties that constitute a "weakly" intelligent agent. A traditional rule-based automation script runs at 6 a.m. every day and executes the same fixed sequence of steps whatever it finds — an empty inbox, a changed file format, a folder that no longer exists. Which property does this behavior most directly violate, and why?
 
 A. Social ability — the script cannot interact with other agents using communication protocols.
 
 B. Reactivity — the script does not respond to changes in its environment; it executes the same fixed sequence regardless of environmental state.
 
-C. Pro-activeness — the script is triggered externally and therefore cannot take initiative toward its own design objectives.
+C. Pro-activeness — the script runs on a schedule, and pro-activeness is the property of acting on external triggers such as a clock.
 
 D. Autonomy — the script requires continuous human scheduling to operate and cannot act independently.
 
@@ -59,7 +59,7 @@ D. Autonomy — the script requires continuous human scheduling to operate and c
 
     ❌ **A is incorrect.** Social ability concerns the capacity to communicate with other agents using agent communication languages — a property relevant to multi-agent systems. A script's failure to exhibit social ability is a genuine limitation, but it is not the property most directly violated by the description "fixed sequence of steps." Many legitimate agents also lack social ability in the technical sense.
 
-    ❌ **C is partially correct but imprecise.** Pro-activeness involves goal-directed initiative, and a script does not exhibit it in the full sense. However, the more precise violation in the description is reactivity: the script does not respond to environmental changes, period. A script could theoretically be triggered by an environmental event (making it superficially reactive) while still following a fixed sequence once triggered. The question specifies a "fixed sequence regardless of state," which targets reactivity directly.
+    ❌ **C is incorrect.** It gets pro-activeness backwards. Responding to external stimuli, a clock included, is the territory of reactivity; pro-activeness is goal-directed initiative that goes beyond reacting — in the lesson's words, a pro-active agent "does not merely react to stimuli." The script does lack initiative, but that is not what this option claims, and the evidence in the description — the same steps whatever the environment holds — points at reactivity.
 
     ❌ **D is incorrect as the best answer.** Autonomy refers to operating without continuous human direction during execution — not merely without a human scheduling trigger. Many scripts run without human intervention once initiated. The scheduling mechanism does not itself violate autonomy; the fixed, environment-ignoring execution sequence is the more salient failure point.
 
@@ -67,7 +67,7 @@ D. Autonomy — the script requires continuous human scheduling to operate and c
 
 In the LangChain Conceptual Guide's four-stage agent loop, what is the primary function of the **Observe** stage?
 
-A. To evaluate whether the agent's overall goal has been achieved and terminate the loop if so.
+A. To make the stop-or-continue decision — that is its only job; the tool result itself is carried into the next step by the Plan stage.
 
 B. To update the agent's context window with the result of the previous action, enabling the agent to plan the next step with current information.
 
@@ -81,7 +81,7 @@ D. To retrieve relevant background information from the agent's memory store bef
 
     ✅ **B is correct.** The Observe stage feeds the result of the completed tool call or action back into the agent's context window. This updated context is what the LLM uses as input to the next Plan stage. Without Observation, the agent would plan each successive step using only its original context — it would be blind to what its prior actions actually produced, making multi-step task completion unreliable. The loop's effectiveness depends entirely on this feedback mechanism.
 
-    ❌ **A is partially true but incomplete as the primary function.** Termination evaluation does occur during or after Observation — the agent determines whether the goal is met. But the primary mechanical function of the Observe stage is the context update (B), from which goal-completion evaluation derives. Describing Observation as primarily a termination check misses the broader role it plays in every iteration, not just the final one.
+    ❌ **A is incorrect.** Observe does include the stop-or-continue decision — the lesson's table says it "decides whether to loop again or conclude" — but that is not its only job, and the Plan stage does not carry the result forward. Observe reads the tool output and updates the agent's state, and the decision to loop or conclude is made from that updated state. Without the update in B there would be nothing to decide from, which is why B, not A, is the Observe stage's primary function.
 
     ❌ **C is incorrect.** Audit logging is an infrastructure concern in production deployment, not a function of the Observe stage in the conceptual agent loop. The LangChain guide does not define Observe as a logging step. Logging may be implemented alongside Observation but is architecturally distinct.
 
@@ -281,7 +281,7 @@ D. Code-first automation produces human-readable code that can be independently 
 
     ❌ **C is incorrect.** Code-first automation is not subject to categorically different regulatory oversight than no-code automation. Regulatory requirements apply to the data and the business process, not the tooling paradigm. If anything, the regulatory burden of demonstrating compliance may be higher for code-first because the organization owns the full system and cannot rely on vendor compliance certifications.
 
-    ❌ **D is partially true but not the primary reason for "absolute data governance."** Auditability through human-readable code is a genuine advantage of code-first automation for compliance purposes, but it addresses transparency, not data residency. An auditable system can still transmit data to third-party servers. The governance advantage identified in the Automation Landscape Overview is specifically about data residency and computational control, not code readability.
+    ❌ **D is incorrect.** Auditable code is a real advantage of code-first automation, but it answers a different question — can you inspect what the system does? — not where the data goes. An auditable system can still send every record to a third-party API. The governance advantage the Automation Landscape Overview describes is data residency: the whole system, model included, can run on infrastructure the organization controls, so the data never leaves it.
 
 ## Chapter 3 Quiz — AI Literacy as a New Professional Imperative { #chapter-3-quiz }
 
@@ -541,7 +541,7 @@ The NIST AI Risk Management Framework defines four core functions: Govern, Map, 
 
 A. Govern — because producing the Workflow Audit requires students to establish their personal accountability framework for AI use.
 
-B. Measure — because the two-dimensional automation assessment produces quantitative scores that characterize workflow risk.
+B. Measure — because the Workflow Audit's scores measure how the automated workflows perform once they are running.
 
 C. Map — because the Workflow Audit identifies the context, risk profiles, and stakeholder impacts of specific AI-candidate workflows before any deployment decision is made.
 
@@ -555,7 +555,7 @@ D. Manage — because completing the Workflow Audit is itself a management actio
 
     ❌ **A is incorrect.** The Govern function in the NIST AI RMF refers to organizational-level policies, accountability structures, and culture-setting activities — it is an enterprise governance function, not an individual student activity. While personal accountability is a course value, the Workflow Audit does not constitute governance in the NIST sense.
 
-    ❌ **B is partially correct but is the weaker answer.** The two-dimensional automation assessment does produce scores that characterize risk properties, which is a Measure-like activity. However, Measure in the NIST framework specifically refers to analyzing and assessing identified risks using defined metrics — it presupposes that the Map function has already identified what to measure. The Workflow Audit's primary function is identification and contextualization (Map), not quantitative risk assessment (Measure), even though scoring is part of it.
+    ❌ **B is incorrect.** Its premise is wrong: the Audit scores candidate workflows before anything is automated, so there is no running system whose performance could be measured. Its two scores record properties of each workflow — how rule-based it is and how severe its errors would be — and that is identifying context and risk, which is Map. In the AI RMF, Measure "uses knowledge relevant to AI risks identified in the MAP function" to analyze, assess, benchmark and monitor those risks, including by testing AI systems before deployment and regularly while in operation.
 
     ❌ **D is incorrect.** The Manage function involves implementing risk treatment plans and monitoring outcomes for deployed AI systems. The Workflow Audit occurs at the pre-deployment stage — no AI system has been deployed yet at this point. Managing implies an ongoing operational relationship with a deployed system, which is not what the Workflow Audit represents.
 
