@@ -13962,8 +13962,9 @@ sign off on a page you have reviewed.
 The learner notebooks for Modules 2-5 are published under `docs/materials/`
 and rendered as lab pages. The two **instructor solution notebooks** are
 public, but only on GitHub: they sit in the repository *outside* `docs/`, so
-they are never built into the site, never mirrored as Markdown, never listed
-in `llms.txt` or `llms-full.txt`, and never linked from a student-facing page.
+they are never built into the site, never mirrored as Markdown, never indexed
+in `llms.txt`, and never linked from a student-facing page. (This page's own
+links to them do appear in `llms-full.txt`, which carries every page's text.)
 The course owners settled this on 2026-09-11: the solutions stay open, but
 not one click away from the lab a learner is working on.
 
