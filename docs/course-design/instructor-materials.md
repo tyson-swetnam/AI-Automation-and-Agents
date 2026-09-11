@@ -199,7 +199,10 @@ human-reviewed pages when answers conflict (see
    separate project notebook is intended, restore
    `Module2_Project_[YourName].ipynb` on the
    [activities page](../modules/module-2/activities.md) and in the closing
-   cell of the Module 2 notebook.
+   cell of the Module 2 notebook. Either way, note that the notebook has no
+   project section of its own, unlike Module 4's sections 3-4 and Module 5's
+   Lab B, so a learner adds the tool in new cells after Step 4; if the project
+   stays in this notebook, a short scaffolded section for it would help.
 
 Whether the solution notebooks stay public, formerly the first item here, was
 decided on 2026-09-11 (see [above](#instructor-solution-notebooks)).
@@ -269,10 +272,10 @@ A page-by-page review of the migration surfaced the following disagreements
 *between* course materials. They were inherited from the wiki and the
 notebooks, not introduced by the migration. All are now resolved or
 withdrawn; each entry records which side was taken and why, so an author who
-disagrees can reverse the call. A consistency check run on 2026-09-11 found
-the notebooks, activities pages, overviews and
-[Labs, Colab, and API keys](../start-here/labs-and-notebooks.md) in agreement
-on every point below.
+disagrees can reverse the call. `scripts/check_consistency.py` checks the
+notebooks, activities pages, overviews and
+[Labs, Colab, and API keys](../start-here/labs-and-notebooks.md) against one
+another on every point below; run it after changing any of them.
 
 1. **Lab submission filenames (resolved 2026-09-11).** The Module 2, 4 and 5
    notebooks asked for `Module2_Unit3_Lab_…`, `Module4_Unit4_AltFramework_…`

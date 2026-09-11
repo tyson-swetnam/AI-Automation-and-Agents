@@ -43,7 +43,7 @@ Center for Advanced Research Computing (CARC), University of New Mexico
 | Level | Intermediate |
 | Audience | Workforce professionals and graduate students seeking applied AI skills |
 | Time commitment | About 8 hours per module |
-| Tools used | Claude Desktop (Cowork + Code), n8n, LangChain, LangGraph, CrewAI, Ollama, Google Colab |
+| Tools used | Claude Desktop (Cowork + Code), n8n, LangChain, LangGraph, CrewAI, LangSmith, Ollama, Openwork, Google Colab |
 | Assessment | Concept quizzes, guided lab exercises, one hands-on project per module, case study analyses, peer reviews, and a capstone deployment policy |
 | Prerequisites | Basic Python knowledge |
 | Credit | Non-credit professional development; a digital certificate of completion is awarded |
