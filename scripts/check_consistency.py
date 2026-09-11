@@ -154,6 +154,14 @@ guide = re.findall(r"^\s+\d\. \*([^*]+)\*", rg.split("Six assessment dimensions"
 check("lesson table dimensions == reading guide dimensions", [t.lower() for t in table] == [g.lower() for g in guide],
       (table, guide))
 
+print("== Module 4 coordination overhead")
+m4 = {n: (D / f"modules/module-4/{n}.md").read_text() for n in ("foundational-concepts", "reading-guides", "chapter-quizzes")}
+check("M4 lesson names both coordination measures",
+      "*coordination overhead ratio*" in m4["foundational-concepts"] and "*coordination share*" in m4["foundational-concepts"])
+bad = [l.strip()[:80] for t in m4.values() for l in t.split("\n")
+       if re.search(r"(?<!\d)40%", l) and "share" not in l and not re.match(r"\s*[A-D]\. ", l)]
+check("every Module 4 use of the 40% rule names the coordination share", not bad, bad)
+
 print("== quiz keys")
 total = 0
 for m in range(1, 6):

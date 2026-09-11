@@ -156,7 +156,7 @@ D. The multi-agent system is clearly inferior because the 340% token increase ex
 
     ❌ **A is incorrect.** Treating accuracy as the sole criterion ignores the coordination overhead ratio entirely. Guo et al. explicitly frame MAS evaluation as a cost-benefit analysis where token cost, latency, and engineering complexity are legitimate production constraints that must be weighed against accuracy gains.
 
-    ❌ **C is incorrect.** There is no universal coordination overhead threshold in Guo et al.'s framework. A 340% overhead might be completely acceptable in a use case where the task runs once per week and the single-agent cost is trivially small. The threshold for acceptability is deployment-context-specific, not architecturally universal.
+    ❌ **C is incorrect.** There is no universal coordination overhead threshold in Guo et al.'s framework. A 340% overhead might be completely acceptable in a use case where the task runs once per week and the single-agent cost is trivially small. The threshold for acceptability is deployment-context-specific, not architecturally universal. The Chapter 5 lesson's 40% rule of thumb does not contradict this. It applies to a different number, the coordination share — the fraction of a multi-agent system's own tokens that go to coordination — and it tells you where to look for waste, not whether the system is justified.
 
     ❌ **D is incorrect** as a categorical claim. Declaring the system "clearly inferior" requires a cost-benefit conclusion that is necessarily context-dependent. In a domain where a 2-point accuracy gain prevents costly errors — a medical screening system, a fraud detection pipeline — the economics may clearly favor the multi-agent approach. "Clearly inferior" is the kind of unqualified conclusion that Guo et al.'s critical evaluation framework is designed to prevent.
 
@@ -604,7 +604,7 @@ D. It needs to be longer — at least 300 words of analysis.
 
     ❌ **A is incorrect.** Acknowledging trade-offs is necessary context, but a recommendation must go further and commit to a course of action with stated conditions.
 
-    ❌ **C is incorrect.** The coordination overhead ratio is useful evidence — the lesson uses it to judge whether a system spends more effort coordinating than producing — but adding it would not fix this paragraph. It would still describe trade-offs without choosing between them. What makes a recommendation formal is a committed position with stated conditions, and no additional metric supplies that.
+    ❌ **C is incorrect.** The coordination overhead ratio is useful evidence — it tells a decision-maker what the extra agents cost compared with a single agent — but adding it would not fix this paragraph. It would still describe trade-offs without choosing between them. What makes a recommendation formal is a committed position with stated conditions, and no additional metric supplies that.
 
     ❌ **D is incorrect.** Quality is defined by analytical rigor, not word count. A concise recommendation with clear boundary conditions is better than a long description without a conclusion.
 
@@ -634,7 +634,7 @@ D. More experimental conditions increase statistical power.
 
 ### Question 5
 
-A practitioner benchmarks a document classification system (10,000 docs/day): single-agent 91% accuracy, multi-agent 93%, coordination overhead 180%. Which recommendation is most appropriate?
+A practitioner benchmarks a document classification system (10,000 docs/day): single-agent 91% accuracy, multi-agent 93%, coordination overhead ratio 180% against the single-agent baseline. Which recommendation is most appropriate?
 
 A. MAS is warranted — 2-point accuracy gain always justifies overhead for enterprise use.
 
@@ -652,7 +652,7 @@ D. The benchmark is insufficient — at least 30 trials are needed before any re
 
     ❌ **A is incorrect.** "Always justifies" is an unqualified claim. A 2-point gain may matter little in low-stakes routing but matter greatly in high-stakes classification. Context determines value.
 
-    ❌ **B is incorrect.** The 40% threshold signals that coordination is disproportionate to useful work, but it is a guideline for when to investigate architectural simplification — not an absolute ceiling that vetoes all deployments above it. At this scale, the relevant question is whether the accuracy gain's business value exceeds the additional cost.
+    ❌ **B is incorrect**, twice over. The 40% rule of thumb applies to the coordination share — the fraction of a multi-agent system's own tokens spent on coordination — not to the 180% overhead ratio, which compares the system with the single-agent baseline. And even on its own measure, 40% is a signal to investigate simplification, not a ceiling that vetoes a deployment. At this scale, the relevant question is whether the accuracy gain's business value exceeds the additional cost.
 
     ❌ **D is incorrect.** Statistical limitations should be noted as a qualifying condition, but "no recommendation possible" is too strong. A qualified recommendation can be made while acknowledging limited sample size.
 

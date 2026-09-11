@@ -191,13 +191,6 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
-3. Module 4 chapter 1 question 5's key says Guo et al. give no universal
-   threshold at which coordination overhead is or is not justified, while the
-   [Chapter 5 lesson](../modules/module-4/foundational-concepts.md) treats a
-   coordination overhead ratio above 40% as a signal to simplify. The two can
-   be reconciled, since a signal to simplify is a heuristic rather than a
-   justification threshold, but neither page says so. Add a sentence to one of
-   them, or say where the 40% figure comes from.
 
 Two former items were settled on 2026-09-11: the solution notebooks stay
 public on GitHub only (see [above](#instructor-solution-notebooks)), and the
@@ -370,6 +363,22 @@ another on every point below; run it after changing any of them.
     now says so; Claude Desktop is still introduced as a topic. Module 1's
     closing box also promised that Module 2 would build a no-code Openwork or
     n8n pipeline. Module 2 builds a LangChain agent, and the box now says so.
+12. **Coordination overhead in Module 4 (resolved 2026-09-11).** The module
+    used "coordination overhead ratio" for two different numbers. The
+    chapter 5 lesson meant the share of a multi-agent system's own tokens
+    spent on coordination, and attached a 40% rule of thumb to it (the
+    authors' original table said a ratio above 40% "warrants architectural
+    simplification"). The reading guide and three quiz questions meant the
+    extra tokens relative to a single-agent baseline, for which chapter 1
+    question 5 says there is no universal threshold; chapter 5 question 5
+    then set a 180% baseline figure against the 40% rule. The
+    [lesson](../modules/module-4/foundational-concepts.md) now defines both and
+    names them apart: the *coordination overhead ratio* (the baseline
+    comparison, which no universal threshold governs) and the *coordination
+    share* (the internal measure the 40% rule applies to, as a signal to
+    investigate rather than a limit). The reading guide and the feedback on
+    both questions use the same terms. The lesson cites no source for the 40%
+    figure; an author may want to add one.
 
 ## What the retired posters said
 

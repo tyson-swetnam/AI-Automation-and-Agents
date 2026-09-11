@@ -9901,8 +9901,8 @@ As discussed in Chapter 1, multi-agent is not always the right choice. The decis
 
 **Coordination Overhead**
 
-- **Measure:** How much of the total token usage goes to agents talking to each other (delegating, checking in, combining results) versus actually doing the work.
-- **Interpret:** If the system spends more effort coordinating than producing useful output, it is over-engineered. A coordination overhead ratio above 40% is a signal to simplify the architecture.
+- **Measure:** Two numbers, which are easy to confuse. The *coordination overhead ratio* compares the multi-agent system with the single-agent baseline: (multi-agent tokens − single-agent tokens) ÷ single-agent tokens, the extra cost the added agents bring. The *coordination share* looks inside the multi-agent system: the fraction of its own tokens spent on agents talking to each other (delegating, checking in, combining results) rather than doing the work.
+- **Interpret:** Neither number decides on its own whether a multi-agent design is justified. The overhead ratio is a cost, and whether it is worth paying depends on what the accuracy gain is worth in the deployment context; there is no universal threshold for that. The coordination share is diagnostic: if more than about 40% of a multi-agent system's tokens go to coordination, it is spending a large part of its effort managing itself, so look for coordination you can remove before you weigh the system's cost against the baseline. The 40% figure is a rule of thumb for when to investigate, not a limit that rules a design out.
 
 ### Learning Resources
 
@@ -10233,6 +10233,7 @@ Wu et al.'s AutoGen paper and Hong et al.'s MetaGPT paper both provide benchmark
 | Term | Working Definition |
 |---|---|
 | **Coordination overhead ratio** | (Multi-Agent Tokens − Single-Agent Tokens) / Single-Agent Tokens, expressed as a percentage; quantifies the token cost of inter-agent communication relative to the single-agent baseline |
+| **Coordination share** | The fraction of a multi-agent system's own tokens spent on coordination (delegating, checking in, combining results) rather than on the work; the Chapter 5 lesson treats more than about 40% as a signal to look for coordination to remove, not as a threshold for whether multi-agent is justified |
 | **Task accuracy rubric** | A defined scoring scale (1–5 in Module 4) for evaluating output quality: 1=incorrect/hallucinated; 2=partially correct; 3=correct but incomplete; 4=complete; 5=complete, well-structured, and evidence-grounded |
 | **Wall-clock latency** | The elapsed time from first agent invocation to final response delivery — includes all inter-agent communication, LLM inference calls, and state transitions |
 | **Single-agent ReAct baseline** | A single advanced ReAct agent using the same underlying LLM as the multi-agent pipeline — the controlled comparison condition for benchmarking MAS value |
@@ -11075,7 +11076,7 @@ D. The multi-agent system is clearly inferior because the 340% token increase ex
 
     ❌ **A is incorrect.** Treating accuracy as the sole criterion ignores the coordination overhead ratio entirely. Guo et al. explicitly frame MAS evaluation as a cost-benefit analysis where token cost, latency, and engineering complexity are legitimate production constraints that must be weighed against accuracy gains.
 
-    ❌ **C is incorrect.** There is no universal coordination overhead threshold in Guo et al.'s framework. A 340% overhead might be completely acceptable in a use case where the task runs once per week and the single-agent cost is trivially small. The threshold for acceptability is deployment-context-specific, not architecturally universal.
+    ❌ **C is incorrect.** There is no universal coordination overhead threshold in Guo et al.'s framework. A 340% overhead might be completely acceptable in a use case where the task runs once per week and the single-agent cost is trivially small. The threshold for acceptability is deployment-context-specific, not architecturally universal. The Chapter 5 lesson's 40% rule of thumb does not contradict this. It applies to a different number, the coordination share — the fraction of a multi-agent system's own tokens that go to coordination — and it tells you where to look for waste, not whether the system is justified.
 
     ❌ **D is incorrect** as a categorical claim. Declaring the system "clearly inferior" requires a cost-benefit conclusion that is necessarily context-dependent. In a domain where a 2-point accuracy gain prevents costly errors — a medical screening system, a fraud detection pipeline — the economics may clearly favor the multi-agent approach. "Clearly inferior" is the kind of unqualified conclusion that Guo et al.'s critical evaluation framework is designed to prevent.
 
@@ -11523,7 +11524,7 @@ D. It needs to be longer — at least 300 words of analysis.
 
     ❌ **A is incorrect.** Acknowledging trade-offs is necessary context, but a recommendation must go further and commit to a course of action with stated conditions.
 
-    ❌ **C is incorrect.** The coordination overhead ratio is useful evidence — the lesson uses it to judge whether a system spends more effort coordinating than producing — but adding it would not fix this paragraph. It would still describe trade-offs without choosing between them. What makes a recommendation formal is a committed position with stated conditions, and no additional metric supplies that.
+    ❌ **C is incorrect.** The coordination overhead ratio is useful evidence — it tells a decision-maker what the extra agents cost compared with a single agent — but adding it would not fix this paragraph. It would still describe trade-offs without choosing between them. What makes a recommendation formal is a committed position with stated conditions, and no additional metric supplies that.
 
     ❌ **D is incorrect.** Quality is defined by analytical rigor, not word count. A concise recommendation with clear boundary conditions is better than a long description without a conclusion.
 
@@ -11553,7 +11554,7 @@ D. More experimental conditions increase statistical power.
 
 ### Question 5
 
-A practitioner benchmarks a document classification system (10,000 docs/day): single-agent 91% accuracy, multi-agent 93%, coordination overhead 180%. Which recommendation is most appropriate?
+A practitioner benchmarks a document classification system (10,000 docs/day): single-agent 91% accuracy, multi-agent 93%, coordination overhead ratio 180% against the single-agent baseline. Which recommendation is most appropriate?
 
 A. MAS is warranted — 2-point accuracy gain always justifies overhead for enterprise use.
 
@@ -11571,7 +11572,7 @@ D. The benchmark is insufficient — at least 30 trials are needed before any re
 
     ❌ **A is incorrect.** "Always justifies" is an unqualified claim. A 2-point gain may matter little in low-stakes routing but matter greatly in high-stakes classification. Context determines value.
 
-    ❌ **B is incorrect.** The 40% threshold signals that coordination is disproportionate to useful work, but it is a guideline for when to investigate architectural simplification — not an absolute ceiling that vetoes all deployments above it. At this scale, the relevant question is whether the accuracy gain's business value exceeds the additional cost.
+    ❌ **B is incorrect**, twice over. The 40% rule of thumb applies to the coordination share — the fraction of a multi-agent system's own tokens spent on coordination — not to the 180% overhead ratio, which compares the system with the single-agent baseline. And even on its own measure, 40% is a signal to investigate simplification, not a ceiling that vetoes a deployment. At this scale, the relevant question is whether the accuracy gain's business value exceeds the additional cost.
 
     ❌ **D is incorrect.** Statistical limitations should be noted as a qualifying condition, but "no recommendation possible" is too strong. A qualified recommendation can be made while acknowledging limited sample size.
 
@@ -14267,13 +14268,6 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
-3. Module 4 chapter 1 question 5's key says Guo et al. give no universal
-   threshold at which coordination overhead is or is not justified, while the
-   [Chapter 5 lesson](../modules/module-4/foundational-concepts.md) treats a
-   coordination overhead ratio above 40% as a signal to simplify. The two can
-   be reconciled, since a signal to simplify is a heuristic rather than a
-   justification threshold, but neither page says so. Add a sentence to one of
-   them, or say where the 40% figure comes from.
 
 Two former items were settled on 2026-09-11: the solution notebooks stay
 public on GitHub only (see [above](#instructor-solution-notebooks)), and the
@@ -14446,6 +14440,22 @@ another on every point below; run it after changing any of them.
     now says so; Claude Desktop is still introduced as a topic. Module 1's
     closing box also promised that Module 2 would build a no-code Openwork or
     n8n pipeline. Module 2 builds a LangChain agent, and the box now says so.
+12. **Coordination overhead in Module 4 (resolved 2026-09-11).** The module
+    used "coordination overhead ratio" for two different numbers. The
+    chapter 5 lesson meant the share of a multi-agent system's own tokens
+    spent on coordination, and attached a 40% rule of thumb to it (the
+    authors' original table said a ratio above 40% "warrants architectural
+    simplification"). The reading guide and three quiz questions meant the
+    extra tokens relative to a single-agent baseline, for which chapter 1
+    question 5 says there is no universal threshold; chapter 5 question 5
+    then set a 180% baseline figure against the 40% rule. The
+    [lesson](../modules/module-4/foundational-concepts.md) now defines both and
+    names them apart: the *coordination overhead ratio* (the baseline
+    comparison, which no universal threshold governs) and the *coordination
+    share* (the internal measure the 40% rule applies to, as a signal to
+    investigate rather than a limit). The reading guide and the feedback on
+    both questions use the same terms. The lesson cites no source for the 40%
+    figure; an author may want to add one.
 
 ## What the retired posters said
 
@@ -16305,6 +16315,7 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 * **Creation**: `scripts/check_consistency.py` checks the agreement this entry restores (submission filenames, time budgets, objective labels, provider defaults, lab contents, the Module 2 dimension lists and every answer key) across the notebooks and the pages that describe them. It went from 26 failures to none. It runs by hand rather than in CI, because several of its expectations encode today's decisions and an author may change them on purpose. The [syllabus](start-here/syllabus.md)'s tools row now also lists Openwork and LangSmith.
 * **Creation**: The [Module 2 lab notebook](modules/module-2/lab-notebook.md) now has a scaffolded *Hands-On Project — Add Your Own Tool* section after Step 4, which the course owners confirmed is where the project is submitted. It carries a runnable example tool (a lookup over three short policy documents), a self-check that calls the tool directly, three test prompts (should use, should not use, must choose), a pre-written cell that runs them on the agent before and after the tool is added and prints the tools each run called as the selection table the log entry asks for, a cell for testing a second description wording, and a log entry. The notebook's header, submission checklist and optional log template now include the project; no other existing code cell changed. The new cells were run end to end against a stand-in chat model that calls tools, which checks their wiring but not how a real model chooses.
 * **Update**: Rewrote the seven chapter-quiz distractors whose feedback marked them ❌ while calling them partially correct: [Module 1](modules/module-1/chapter-quizzes.md) chapter 1 questions 1 and 2, chapter 2 question 5 and chapter 5 question 1, and [Module 4](modules/module-4/chapter-quizzes.md) chapter 1 question 3 (two options) and chapter 5 question 3. Six of the options now make a claim that is wrong on its own terms (a misdefinition, a false premise, or a fix that would not fix the problem); the seventh, Module 1 chapter 2 question 5's option D, makes a true claim that does not answer the question, so only its feedback changed. All seven now open "incorrect" and explain why, and `scripts/check_consistency.py` fails if a wrong option's feedback hedges again. Module 1 chapter 1 question 1's stem now describes what the script does whatever it finds, so the evidence points at the keyed property. No key moved.
+* **Update**: Reconciled the two coordination-overhead numbers in [Module 4](modules/module-4/foundational-concepts.md). The chapter 5 lesson used "coordination overhead ratio" for the share of a multi-agent system's own tokens spent on coordination, with a rule of thumb that more than 40% signals over-engineering. The [reading guide](modules/module-4/reading-guides.md) and three [quiz](modules/module-4/chapter-quizzes.md) questions used the same name for the extra tokens relative to a single-agent baseline, for which chapter 1 question 5 says there is no universal threshold, and chapter 5 question 5 set a 180% baseline figure against the 40% rule. The lesson now defines both, the coordination overhead ratio and the coordination share. The 40% rule applies to the share, as a signal to investigate rather than a limit; whether the overhead ratio is worth paying stays a judgement about context. The reading guide gains a row for the share, and three feedback passages and one question stem now use the same terms. No key moved.
 
 ## 2026-09-10
 

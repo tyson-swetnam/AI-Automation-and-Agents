@@ -260,8 +260,8 @@ As discussed in Chapter 1, multi-agent is not always the right choice. The decis
 
 **Coordination Overhead**
 
-- **Measure:** How much of the total token usage goes to agents talking to each other (delegating, checking in, combining results) versus actually doing the work.
-- **Interpret:** If the system spends more effort coordinating than producing useful output, it is over-engineered. A coordination overhead ratio above 40% is a signal to simplify the architecture.
+- **Measure:** Two numbers, which are easy to confuse. The *coordination overhead ratio* compares the multi-agent system with the single-agent baseline: (multi-agent tokens − single-agent tokens) ÷ single-agent tokens, the extra cost the added agents bring. The *coordination share* looks inside the multi-agent system: the fraction of its own tokens spent on agents talking to each other (delegating, checking in, combining results) rather than doing the work.
+- **Interpret:** Neither number decides on its own whether a multi-agent design is justified. The overhead ratio is a cost, and whether it is worth paying depends on what the accuracy gain is worth in the deployment context; there is no universal threshold for that. The coordination share is diagnostic: if more than about 40% of a multi-agent system's tokens go to coordination, it is spending a large part of its effort managing itself, so look for coordination you can remove before you weigh the system's cost against the baseline. The 40% figure is a rule of thumb for when to investigate, not a limit that rules a design out.
 
 ### Learning Resources
 

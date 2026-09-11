@@ -315,6 +315,7 @@ Wu et al.'s AutoGen paper and Hong et al.'s MetaGPT paper both provide benchmark
 | Term | Working Definition |
 |---|---|
 | **Coordination overhead ratio** | (Multi-Agent Tokens − Single-Agent Tokens) / Single-Agent Tokens, expressed as a percentage; quantifies the token cost of inter-agent communication relative to the single-agent baseline |
+| **Coordination share** | The fraction of a multi-agent system's own tokens spent on coordination (delegating, checking in, combining results) rather than on the work; the Chapter 5 lesson treats more than about 40% as a signal to look for coordination to remove, not as a threshold for whether multi-agent is justified |
 | **Task accuracy rubric** | A defined scoring scale (1–5 in Module 4) for evaluating output quality: 1=incorrect/hallucinated; 2=partially correct; 3=correct but incomplete; 4=complete; 5=complete, well-structured, and evidence-grounded |
 | **Wall-clock latency** | The elapsed time from first agent invocation to final response delivery — includes all inter-agent communication, LLM inference calls, and state transitions |
 | **Single-agent ReAct baseline** | A single advanced ReAct agent using the same underlying LLM as the multi-agent pipeline — the controlled comparison condition for benchmarking MAS value |
