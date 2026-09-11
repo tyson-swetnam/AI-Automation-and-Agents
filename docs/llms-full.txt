@@ -2275,7 +2275,7 @@ D. Autonomy — the script requires continuous human scheduling to operate and c
 
     ❌ **A is incorrect.** Social ability concerns the capacity to communicate with other agents using agent communication languages — a property relevant to multi-agent systems. A script's failure to exhibit social ability is a genuine limitation, but it is not the property most directly violated by the description "fixed sequence of steps." Many legitimate agents also lack social ability in the technical sense.
 
-    ❌ **C is incorrect.** It gets pro-activeness backwards. Responding to external stimuli, a clock included, is the territory of reactivity; pro-activeness is goal-directed initiative that goes beyond reacting — in the lesson's words, a pro-active agent "does not merely react to stimuli." The script does lack initiative, but that is not what this option claims, and the evidence in the description — the same steps whatever the environment holds — points at reactivity.
+    ❌ **C is incorrect.** It misdefines pro-activeness. Pro-activeness is initiative that no trigger prompts — in the lesson's words, a pro-active agent "does not merely react to stimuli" — so acting when a clock fires is not what the property means. Firing on a timer does not make the script reactive either: reactivity is perceiving changes in the environment and responding to them, and the description shows the script ignoring every change it meets. That evidence is why the answer is reactivity, not the property this option misdefines.
 
     ❌ **D is incorrect as the best answer.** Autonomy refers to operating without continuous human direction during execution — not merely without a human scheduling trigger. Many scripts run without human intervention once initiated. The scheduling mechanism does not itself violate autonomy; the fixed, environment-ignoring execution sequence is the more salient failure point.
 
@@ -5842,6 +5842,11 @@ for kind, prompt in project_prompts.items():
     print("  tools before:", before or "none")
     print("  tools after: ", after or "none")
     print("  answer after:", str(answer)[:300])
+
+print("\nSelection table for log entry (b):")
+print(f"{'prompt':<16}| {'tools before':<28}| tools after")
+for kind, r in project_results.items():
+    print(f"{kind:<16}| {', '.join(r['before']) or 'none':<28}| {', '.join(r['after']) or 'none'}")
 
 # To watch one run turn by turn, use the Step 1 helper:
 # show_trace(agent_after, project_prompts["must choose"])
@@ -14262,6 +14267,13 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
+3. Module 4 chapter 1 question 5's key says Guo et al. give no universal
+   threshold at which coordination overhead is or is not justified, while the
+   [Chapter 5 lesson](../modules/module-4/foundational-concepts.md) treats a
+   coordination overhead ratio above 40% as a signal to simplify. The two can
+   be reconciled, since a signal to simplify is a heuristic rather than a
+   justification threshold, but neither page says so. Add a sentence to one of
+   them, or say where the 40% figure comes from.
 
 Two former items were settled on 2026-09-11: the solution notebooks stay
 public on GitHub only (see [above](#instructor-solution-notebooks)), and the
@@ -14402,10 +14414,12 @@ another on every point below; run it after changing any of them.
    chapter 1 question 3, two options, and chapter 5 question 3) were then
    rewritten the same day at the owners' request. Their feedback had marked
    them ❌ while calling them partially right, which on a self-evaluating quiz
-   with no partial credit left a learner unsure how wrong they were. Each
-   option now makes a claim that is wrong on its own terms, and its feedback
-   opens "incorrect" and says why; one of them, Module 1 chapter 2 question 5's
-   option D, needed only its feedback reworded. No key moved.
+   with no partial credit left a learner unsure how wrong they were. Six
+   of the options now make a claim that is wrong on its own terms; the
+   seventh, Module 1 chapter 2 question 5's option D, makes a true claim that
+   does not answer the question asked, so only its feedback changed. All seven
+   now open "incorrect" and say why, and `scripts/check_consistency.py` fails
+   if a wrong option's feedback hedges again. No key moved.
 9. **The six trade-off dimensions in Module 2 (resolved 2026-09-11).** The
    chapter 5 lesson's table, transcribed from an image, listed latency, cost
    per inference, reliability and error rate, scalability, interpretability,
@@ -16289,8 +16303,8 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 * **Update**: The instructor solution notebooks stay public on GitHub and unpublished on this site, as the course owners decided today. [Instructor materials](course-design/instructor-materials.md) now links each solution's GitHub view and a Colab copy; each solution opens with a banner naming the starter it solves, and a new `instructor/README.md` explains the folder. `AGENTS.md` and [Contributing](about/contributing.md) now state the rule as practiced: never rendered, copied or mirrored into `docs/`, and linked only from the instructor materials page.
 * **Update**: [Labs, Colab, and API keys](start-here/labs-and-notebooks.md) still told learners to upload the Module 3 corpus PDFs by hand, which stopped being true when the Module 3 notebook began downloading and checking them; it now describes the download, with manual upload as the fallback. Its table's times now match the activities pages.
 * **Creation**: `scripts/check_consistency.py` checks the agreement this entry restores (submission filenames, time budgets, objective labels, provider defaults, lab contents, the Module 2 dimension lists and every answer key) across the notebooks and the pages that describe them. It went from 26 failures to none. It runs by hand rather than in CI, because several of its expectations encode today's decisions and an author may change them on purpose. The [syllabus](start-here/syllabus.md)'s tools row now also lists Openwork and LangSmith.
-* **Creation**: The [Module 2 lab notebook](modules/module-2/lab-notebook.md) now has a scaffolded *Hands-On Project — Add Your Own Tool* section after Step 4, which the course owners confirmed is where the project is submitted. It carries a runnable example tool (a lookup over three short policy documents), a self-check that calls the tool directly, three test prompts (should use, should not use, must choose), a pre-written cell that runs them on the agent before and after the tool is added and prints the tools each run called, a cell for testing a second description wording, and a log entry. The notebook's header, submission checklist and optional log template now include the project; no other existing code cell changed. The new cells were run end to end against a stand-in chat model that calls tools, which checks their wiring but not how a real model chooses.
-* **Update**: Rewrote the seven chapter-quiz distractors whose feedback marked them ❌ while calling them partially correct: [Module 1](modules/module-1/chapter-quizzes.md) chapter 1 questions 1 and 2, chapter 2 question 5 and chapter 5 question 1, and [Module 4](modules/module-4/chapter-quizzes.md) chapter 1 question 3 (two options) and chapter 5 question 3. Each option now makes a claim that is wrong on its own terms (a misdefinition, a false premise, or a fix that would not fix the problem) and its feedback opens "incorrect" and explains why. Module 1 chapter 1 question 1's stem now describes what the script does whatever it finds, so the evidence points at the keyed property. No key moved.
+* **Creation**: The [Module 2 lab notebook](modules/module-2/lab-notebook.md) now has a scaffolded *Hands-On Project — Add Your Own Tool* section after Step 4, which the course owners confirmed is where the project is submitted. It carries a runnable example tool (a lookup over three short policy documents), a self-check that calls the tool directly, three test prompts (should use, should not use, must choose), a pre-written cell that runs them on the agent before and after the tool is added and prints the tools each run called as the selection table the log entry asks for, a cell for testing a second description wording, and a log entry. The notebook's header, submission checklist and optional log template now include the project; no other existing code cell changed. The new cells were run end to end against a stand-in chat model that calls tools, which checks their wiring but not how a real model chooses.
+* **Update**: Rewrote the seven chapter-quiz distractors whose feedback marked them ❌ while calling them partially correct: [Module 1](modules/module-1/chapter-quizzes.md) chapter 1 questions 1 and 2, chapter 2 question 5 and chapter 5 question 1, and [Module 4](modules/module-4/chapter-quizzes.md) chapter 1 question 3 (two options) and chapter 5 question 3. Six of the options now make a claim that is wrong on its own terms (a misdefinition, a false premise, or a fix that would not fix the problem); the seventh, Module 1 chapter 2 question 5's option D, makes a true claim that does not answer the question, so only its feedback changed. All seven now open "incorrect" and explain why, and `scripts/check_consistency.py` fails if a wrong option's feedback hedges again. Module 1 chapter 1 question 1's stem now describes what the script does whatever it finds, so the evidence points at the keyed property. No key moved.
 
 ## 2026-09-10
 

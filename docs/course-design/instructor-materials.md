@@ -191,6 +191,13 @@ human-reviewed pages when answers conflict (see
    for chapter quizzes in the LMS.
 2. Decide who holds verification identities (`human:<netid>`) and when the
    first verification pass happens.
+3. Module 4 chapter 1 question 5's key says Guo et al. give no universal
+   threshold at which coordination overhead is or is not justified, while the
+   [Chapter 5 lesson](../modules/module-4/foundational-concepts.md) treats a
+   coordination overhead ratio above 40% as a signal to simplify. The two can
+   be reconciled, since a signal to simplify is a heuristic rather than a
+   justification threshold, but neither page says so. Add a sentence to one of
+   them, or say where the 40% figure comes from.
 
 Two former items were settled on 2026-09-11: the solution notebooks stay
 public on GitHub only (see [above](#instructor-solution-notebooks)), and the
@@ -331,10 +338,12 @@ another on every point below; run it after changing any of them.
    chapter 1 question 3, two options, and chapter 5 question 3) were then
    rewritten the same day at the owners' request. Their feedback had marked
    them ❌ while calling them partially right, which on a self-evaluating quiz
-   with no partial credit left a learner unsure how wrong they were. Each
-   option now makes a claim that is wrong on its own terms, and its feedback
-   opens "incorrect" and says why; one of them, Module 1 chapter 2 question 5's
-   option D, needed only its feedback reworded. No key moved.
+   with no partial credit left a learner unsure how wrong they were. Six
+   of the options now make a claim that is wrong on its own terms; the
+   seventh, Module 1 chapter 2 question 5's option D, makes a true claim that
+   does not answer the question asked, so only its feedback changed. All seven
+   now open "incorrect" and say why, and `scripts/check_consistency.py` fails
+   if a wrong option's feedback hedges again. No key moved.
 9. **The six trade-off dimensions in Module 2 (resolved 2026-09-11).** The
    chapter 5 lesson's table, transcribed from an image, listed latency, cost
    per inference, reliability and error rate, scalability, interpretability,

@@ -792,6 +792,11 @@ for kind, prompt in project_prompts.items():
     print("  tools after: ", after or "none")
     print("  answer after:", str(answer)[:300])
 
+print("\nSelection table for log entry (b):")
+print(f"{'prompt':<16}| {'tools before':<28}| tools after")
+for kind, r in project_results.items():
+    print(f"{kind:<16}| {', '.join(r['before']) or 'none':<28}| {', '.join(r['after']) or 'none'}")
+
 # To watch one run turn by turn, use the Step 1 helper:
 # show_trace(agent_after, project_prompts["must choose"])
 

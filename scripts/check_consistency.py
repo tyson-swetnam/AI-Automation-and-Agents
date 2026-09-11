@@ -169,9 +169,12 @@ for m in range(1, 6):
             if not opts or opts - fb:
                 check(f"M{m} question with options {sorted(opts)} has feedback for each", False, sorted(fb))
 check(f"all {total} questions have feedback for every option", total == 125, total)
+# Hedges seen in wrong-option labels before 2026-09-11: "is partially correct", "is plausible but less
+# optimal", "is partially valid". A wrong option's label should say it is incorrect, full stop.
+HEDGES = r"partial|partly|plausible|defensible|reasonable|arguabl|also (valid|correct|right)|less optimal|weaker|half"
 partly = [f"M{m}: {l.strip()[:60]}" for m in range(1, 6)
           for l in (D / f"modules/module-{m}/chapter-quizzes.md").read_text().split("\n")
-          if l.strip().startswith("❌") and re.match(r"❌ \*\*[A-D] is partially", l.strip())]
+          if (h := re.match(r"❌ \*\*([A-D] is [^*]*)\*\*", l.strip())) and re.search(HEDGES, h.group(1), re.I)]
 check("no option is marked wrong while its feedback calls it partially right", not partly, partly)
 q2 = (D / "modules/module-2/chapter-quizzes.md").read_text()
 q1 = re.split(r"(?m)^### Question", q2.split("{ #chapter-5-quiz }")[1])[1]
