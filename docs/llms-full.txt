@@ -15515,6 +15515,20 @@ button** in the page header, beside *Edit this page* and *View source*, and a
 **Machine-readable** line at the end of the article linking the twin, the raw
 source, `llms.txt` and `llms-full.txt`.
 
+**Asking for Markdown with an `Accept` header.** A request for a page URL
+with `Accept: text/markdown` returns HTML here, and the response's `Vary`
+header lists only `Accept-Encoding`. That is the host: GitHub Pages serves
+static files and sets no response headers, so it cannot negotiate on `Accept`
+or advertise that it varies on it. Content negotiation in the
+[acceptmarkdown.com](https://acceptmarkdown.com/){target=_blank} sense needs a
+server or a proxy in front of the site. Until there is one, ask for the
+Markdown directly: the twin at a page's URL plus `index.md` is the same
+content, served as `text/markdown`, and every page declares it in
+`<link rel="alternate" type="text/markdown">`. If this course later sits
+behind a proxy, negotiation would mean returning the twin for
+`Accept: text/markdown` with `Content-Type: text/markdown; charset=utf-8` and
+`Vary: Accept, Accept-Encoding`.
+
 **Traversing the bundle.** Inside a Markdown twin, and inside
 `llms-full.txt`, every relative link has been rewritten to an absolute URL
 that points at the linked page's *own* twin, so following links keeps you in
@@ -16348,6 +16362,8 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 * **Creation**: Added the structured data that link previews, search engines and site scanners read, none of which parse OKF frontmatter. Every page now carries Open Graph and Twitter card tags and a schema.org JSON-LD record: the landing page declares an `EducationalOrganization` (CARC, with the University of New Mexico as parent and the instructor of record as contact point) and the `Course` itself, with its workload, license and the five module titles it teaches; every other page declares a `LearningResource` tied to that course, carrying its OKF type as `learningResourceType`, its time estimate as an ISO 8601 duration, its audience, and an `encoding` block that names the page's Markdown twin. `scripts/check_site.py` fails if a page loses either.
 * **Creation**: A 1200x630 social card for `og:image`, drawn from the site's palette by `scripts/make_social_card.py` (`--check` fails if the committed PNG is stale). The site still serves no raster images in its pages; this one exists for crawlers and link previews.
 * **Update**: A dead URL now returns a real 404 *with a way out*: the page lists the home page, `llms.txt`, `llms-full.txt`, `sitemap.xml`, the wiki crosswalk and the agent guide, and `/404.md` is the same list in Markdown for an agent that asked for Markdown.
+* **Update**: A dead URL's body now carries its recovery points twice: as HTML links for a reader, and as literal Markdown in a collapsed *The same recovery points as Markdown, for agents* block, because a scanner reads a 404 body as text rather than following its anchors. `scripts/check_site.py` gained the crawler checks that an audit of this kind looks for and that nothing else enforced: every built page must carry exactly one `<h1>`, at least 500 characters of server-rendered text, and no `http-equiv="refresh"`; the 404 body must name `llms.txt` and `sitemap.xml` in Markdown. All 71 pages pass, the smallest carrying 3,223 characters.
+* **Note**: [Accept-header negotiation](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/index.md) cannot be implemented on this host. GitHub Pages serves static files and sets no response headers, so a request with `Accept: text/markdown` returns HTML and `Vary` cannot list `Accept`; every recipe published at acceptmarkdown.com is server-side. The Markdown twins, the `<link rel="alternate">` declaration and the Markdown button remain the supported route, and a reverse proxy is the only way to add negotiation without leaving GitHub Pages as the origin.
 * **Note**: This work came from running the course site through [is-agentic.com](https://is-agentic.com/), which scored the *origin* `tyson-swetnam.github.io/` rather than this project path: that root is a five-line meta-refresh stub, so the checks for server-rendered content, redirect hygiene, JSON-LD, metadata and an agent instruction file all measured the stub. Two of its findings were real for this site and are fixed above. One cannot be fixed here: Markdown content negotiation (`Accept: text/markdown` with `Vary: Accept`) needs response headers, and GitHub Pages serves static files without them. The Markdown twins remain the supported route.
 
 * **Update**: Made the Markdown surface traversable rather than merely present. Every page's Markdown twin (the page URL plus `index.md`) and every page inside [llms-full.txt](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt) now have their relative links rewritten to absolute URLs that point at the linked page's *own* twin, so an agent can follow links through the whole bundle without leaving Markdown or guessing a base. The twins are written one directory below their source, so a copied relative link had been resolving one level too low; `llms-full.txt` had 128 of them with nothing to resolve against at all. The rule lives in a new `scripts/okf_links.py`, shared by the generator and the post-build step, and `scripts/check_site.py` now rebuilds each twin from its source to prove the two agree.

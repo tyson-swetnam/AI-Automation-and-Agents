@@ -19,10 +19,13 @@ materials this site promises:
      exists beside it.
      Root and section index.md files carry no type and are exempt from the
      type check.
-  4. No HTML still references the wiki-era image host
+  4. Every built page carries one `<h1>` and at least 500 characters of
+     server-rendered text, and no page redirects with a meta refresh: the
+     three things an agent crawler without JavaScript needs from the HTML.
+  5. No HTML still references the wiki-era image host
      (AI-Automation-and-Agents-v2/blob/main/images); any other
      `blob/main/images` reference is reported as a warning.
-  5. Every file under docs/materials/** exists byte-identical under
+  6. Every file under docs/materials/** exists byte-identical under
      site/materials/**.
 
 Usage: python3 scripts/check_site.py <site_dir> [docs_dir]
@@ -168,13 +171,46 @@ def check_404(site: Path) -> None:
     page = site / "404.html"
     if not page.is_file():
         failures.append("no 404.html in the build")
-    elif "course-404-recovery" not in page.read_text(encoding="utf-8"):
-        failures.append("404.html has no recovery body (postbuild_agent_surface.py adds it)")
+    else:
+        text = page.read_text(encoding="utf-8")
+        if "course-404-recovery" not in text:
+            failures.append("404.html has no recovery body (postbuild_agent_surface.py adds it)")
+        # A scanner reads the 404 body as text, so the recovery points must also be
+        # there as literal Markdown, not only as HTML anchors.
+        if "](" not in text or "llms.txt" not in text or "sitemap.xml" not in text:
+            failures.append("404.html lacks a Markdown recovery block pointing at llms.txt "
+                            "and sitemap.xml")
     md = site / "404.md"
     if not md.is_file():
         failures.append("no 404.md beside 404.html")
     elif "llms.txt" not in md.read_text(encoding="utf-8"):
         failures.append("404.md does not point at llms.txt")
+
+
+def check_crawlable_html(site: Path) -> int:
+    """What a crawler without JavaScript needs: one H1, real text, no meta refresh."""
+    checked = 0
+    for page in sorted(site.rglob("index.html")):
+        if page.relative_to(site).parts[0] in SKIP_TOP:
+            continue
+        rel = page.relative_to(site).as_posix()
+        text = page.read_text(encoding="utf-8", errors="replace")
+        body = re.sub(r"(?s)<(script|style).*?</\1>", "", text)
+        visible = " ".join(re.sub(r"<[^>]+>", " ", body).split())
+        if len(visible) < 500:
+            failures.append(f"{rel}: only {len(visible)} characters of server-rendered text "
+                            "(agent crawlers run no JavaScript; 500 is the floor)")
+        h1s = len(re.findall(r"<h1[ >]", text))
+        if h1s != 1:
+            failures.append(f"{rel}: {h1s} <h1> elements (exactly one is required)")
+        # Only a refresh in the document head redirects; a page may quote the markup as
+        # content (log.md does, describing a stub that failed an audit for exactly this).
+        head = text[:text.index("</head>")] if "</head>" in text else text
+        if re.search(r'http-equiv=["\']?refresh', head, re.I):
+            failures.append(f"{rel}: redirects with a meta refresh; serve the content or a real "
+                            "301/302 at the canonical URL")
+        checked += 1
+    return checked
 
 
 def check_llms_full(site: Path) -> None:
@@ -203,6 +239,7 @@ def main():
     check_root_files(site)
     check_404(site)
     check_llms_full(site)
+    crawlable = check_crawlable_html(site)
     pages = check_mirrors(site, docs)
     html_files = check_html_bans(site)
     materials = check_materials(site, docs)
@@ -211,9 +248,9 @@ def main():
         print(f"WARN  {w}")
     for f in failures:
         print(f"FAIL  {f}")
-    print(f"\ncheck_site: {pages} mirrored page(s) verified, {html_files} HTML file(s) scanned, "
-          f"{materials} material file(s) compared: {len(failures)} failure(s), "
-          f"{len(warnings)} warning(s).")
+    print(f"\ncheck_site: {pages} mirrored page(s) verified, {crawlable} page(s) checked for "
+          f"crawlable HTML, {html_files} HTML file(s) scanned, {materials} material file(s) "
+          f"compared: {len(failures)} failure(s), {len(warnings)} warning(s).")
     sys.exit(1 if failures else 0)
 
 

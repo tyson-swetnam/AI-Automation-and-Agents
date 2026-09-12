@@ -136,7 +136,7 @@ Files served verbatim (not Markdown); the module pages link to them.
 
 ## Meta
 
-- [Full corpus in one file](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute; about 1245 KB. Prefer it over fetching pages one at a time.
+- [Full corpus in one file](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute; about 1246 KB. Prefer it over fetching pages one at a time.
 - [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/): the endpoints, the Markdown-twin and raw-source conventions, trust signals, and the rules for tutoring learners.
 - [Course update log](https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/): dated history of changes to this bundle (OKF §9).
 - [Wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/): Where every page of the original GitHub wiki lives on this site: migrated, split, archived, or dropped.

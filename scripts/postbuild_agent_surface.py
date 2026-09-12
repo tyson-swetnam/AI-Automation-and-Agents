@@ -245,7 +245,9 @@ def social_block(fm: dict, rel: Path, base: str, title: str, description: str) -
 
 
 def head_block(fm: dict, rel: Path, base: str) -> str:
-    lines = ['<meta name="robots" content="index, follow, max-snippet:-1, '
+    # Sentinel first: the idempotency check looks for this, not for page content.
+    lines = ['<meta name="okf:surface" content="generated">',
+             '<meta name="robots" content="index, follow, max-snippet:-1, '
              'max-image-preview:large, max-video-preview:-1">',
              '<link rel="alternate" type="text/markdown" '
              'title="Markdown source (OKF v0.2 frontmatter)" href="index.md">']
@@ -296,10 +298,10 @@ def machine_readable_line(rel: Path, base: str) -> str:
 
 def add_visible_pointers(text: str, rel: Path, base: str) -> str:
     marker = 'title="View source of this page" class="md-content__button md-icon">'
-    if marker in text and "View this page as Markdown" not in text:
+    if marker in text:
         end = text.index("</a>", text.index(marker)) + len("</a>")
         text = text[:end] + "\n" + markdown_button() + text[end:]
-    if "</article>" in text and "course-machine-readable" not in text:
+    if "</article>" in text:
         text = text.replace("</article>", machine_readable_line(rel, base) + "</article>", 1)
     return text
 
@@ -317,12 +319,15 @@ RECOVERY_LINKS = [
 def recovery_html(base: str) -> str:
     items = "".join(f'<li><a href="{base}{path}">{html.escape(label)}</a></li>'
                     for path, label in RECOVERY_LINKS)
+    markdown = html.escape(recovery_markdown(base).strip())
     return ('<div class="course-404-recovery">'
             "<p>That page does not exist on this site. Try one of these instead:</p>"
             f"<ul>{items}</ul>"
             "<p>Any page URL plus <code>index.md</code> returns that page's Markdown with its "
             "OKF frontmatter; a Markdown copy of this page is at "
-            f'<a href="{base}404.md">404.md</a>.</p></div>\n')
+            f'<a href="{base}404.md">404.md</a>.</p>'
+            "<details><summary>The same recovery points as Markdown, for agents</summary>"
+            f"<pre>{markdown}</pre></details></div>\n")
 
 
 def recovery_markdown(base: str) -> str:
@@ -377,8 +382,10 @@ def main():
             continue
         rel, fm = entry
         text = htmlfile.read_text(encoding="utf-8")
-        if 'rel="alternate" type="text/markdown"' in text:
-            continue  # idempotent
+        # A page may quote the tags this step injects — about/ai-agents.md does, in
+        # inline code that no highlighter breaks up — so test for the sentinel instead.
+        if 'name="okf:surface"' in text:
+            continue  # already annotated
         title = page_title(fm, text)
         description = str(fm.get("description", "")).strip() or config_value("site_description")
         extra = "\n".join(social_block(fm, rel, base, title, description)

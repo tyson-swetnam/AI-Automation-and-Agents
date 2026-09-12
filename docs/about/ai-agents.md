@@ -62,6 +62,20 @@ button** in the page header, beside *Edit this page* and *View source*, and a
 **Machine-readable** line at the end of the article linking the twin, the raw
 source, `llms.txt` and `llms-full.txt`.
 
+**Asking for Markdown with an `Accept` header.** A request for a page URL
+with `Accept: text/markdown` returns HTML here, and the response's `Vary`
+header lists only `Accept-Encoding`. That is the host: GitHub Pages serves
+static files and sets no response headers, so it cannot negotiate on `Accept`
+or advertise that it varies on it. Content negotiation in the
+[acceptmarkdown.com](https://acceptmarkdown.com/){target=_blank} sense needs a
+server or a proxy in front of the site. Until there is one, ask for the
+Markdown directly: the twin at a page's URL plus `index.md` is the same
+content, served as `text/markdown`, and every page declares it in
+`<link rel="alternate" type="text/markdown">`. If this course later sits
+behind a proxy, negotiation would mean returning the twin for
+`Accept: text/markdown` with `Content-Type: text/markdown; charset=utf-8` and
+`Vary: Accept, Accept-Encoding`.
+
 **Traversing the bundle.** Inside a Markdown twin, and inside
 `llms-full.txt`, every relative link has been rewritten to an absolute URL
 that points at the linked page's *own* twin, so following links keeps you in
