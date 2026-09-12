@@ -13,8 +13,10 @@ materials this site promises:
      are no stray mirrors, and the counts match. llms-full.txt keeps no
      relative link either.
   3. Every mirrored page's index.html declares the Markdown alternate link, the
-     visible Markdown button and the machine-readable line, and — wherever the
-     source frontmatter has a `type` — the okf:type meta.
+     visible Markdown button, the machine-readable line, Open Graph tags and a
+     schema.org JSON-LD record, and — wherever the source frontmatter has a
+     `type` — the okf:type meta. 404.html carries the recovery body and 404.md
+     exists beside it.
      Root and section index.md files carry no type and are exempt from the
      type check.
   4. No HTML still references the wiki-era image host
@@ -120,6 +122,10 @@ def check_mirrors(site: Path, docs: Path) -> int:
             failures.append(f"{rel}: {page.relative_to(site)} lacks the visible Markdown button")
         if "course-machine-readable" not in text:
             failures.append(f"{rel}: {page.relative_to(site)} lacks the machine-readable line")
+        if 'property="og:title"' not in text or 'property="og:image"' not in text:
+            failures.append(f"{rel}: {page.relative_to(site)} lacks Open Graph tags")
+        if "application/ld+json" not in text:
+            failures.append(f"{rel}: {page.relative_to(site)} lacks a JSON-LD record")
         if frontmatter(src).get("type") and 'name="okf:type"' not in text:
             failures.append(f"{rel}: {page.relative_to(site)} lacks <meta name=\"okf:type\">")
         checked += 1
@@ -157,6 +163,20 @@ def check_materials(site: Path, docs: Path) -> int:
     return n
 
 
+def check_404(site: Path) -> None:
+    """A dead URL should hand an agent somewhere to go, in HTML and in Markdown."""
+    page = site / "404.html"
+    if not page.is_file():
+        failures.append("no 404.html in the build")
+    elif "course-404-recovery" not in page.read_text(encoding="utf-8"):
+        failures.append("404.html has no recovery body (postbuild_agent_surface.py adds it)")
+    md = site / "404.md"
+    if not md.is_file():
+        failures.append("no 404.md beside 404.html")
+    elif "llms.txt" not in md.read_text(encoding="utf-8"):
+        failures.append("404.md does not point at llms.txt")
+
+
 def check_llms_full(site: Path) -> None:
     """An agent ingesting llms-full.txt has no base to resolve a relative link against."""
     full = site / "llms-full.txt"
@@ -181,6 +201,7 @@ def main():
             sys.exit(2)
 
     check_root_files(site)
+    check_404(site)
     check_llms_full(site)
     pages = check_mirrors(site, docs)
     html_files = check_html_bans(site)

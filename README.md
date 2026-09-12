@@ -79,6 +79,7 @@ well; CI fails if the two disagree:
 │   ├── check_site.py               # Post-build assertions on site/
 │   ├── check_consistency.py        # Lab notebooks agree with the pages that describe them
 │   ├── okf_links.py                # Relative links -> absolute twin URLs (mirror, llms-full.txt)
+│   ├── make_social_card.py         # Draws docs/assets/social-card.png (og:image); --check for drift
 │   └── externalize_links.py        # Appends {target=_blank} to external links
 ├── images/                       # Full-resolution PNG originals (not served)
 ├── instructor/materials/         # Instructor solution notebooks (outside docs/, never rendered; GitHub only)

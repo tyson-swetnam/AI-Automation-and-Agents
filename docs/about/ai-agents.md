@@ -42,6 +42,20 @@ rather than scraping rendered HTML.
 | `/sitemap.xml`, `/robots.txt` | Standard crawl surface; `robots.txt` repeats these pointers |
 | [Source repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents){target=_blank} | The bundle itself under `docs/`, plus `AGENTS.md` with the contribution rules for coding agents |
 
+Every page also carries a schema.org JSON-LD record: the landing page
+declares an `EducationalOrganization` and the `Course` itself, and every other
+page a `LearningResource` tied to that course, with its
+`learningResourceType` from the OKF `type`, its `timeRequired` from
+`time_estimate`, its audience (student or instructor) from the page's audience
+tag, and an `encoding` block naming the page's Markdown twin. Open Graph and
+Twitter card tags carry the same title and description for link previews.
+
+A request for a page that does not exist returns a real HTTP 404 whose body
+lists recovery points — the home page, `llms.txt`, `llms-full.txt`,
+`sitemap.xml`, the wiki crosswalk and this page — and `/404.md` is the same
+list in Markdown, for an agent that asked for Markdown. Both are written by
+the post-build step, so neither exists under `docs/`.
+
 Every rendered page carries two *visible* pointers as well, because text
 extraction and link-derived URL allowlists never see `<head>`: a **Markdown
 button** in the page header, beside *Edit this page* and *View source*, and a

@@ -185,6 +185,11 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **`scripts/postbuild_agent_surface.py`** and **`scripts/check_site.py`** -
   run after `zensical build`: add the Markdown mirror, `okf:*` meta tags and
   `robots.txt` to `site/`, then assert the build is complete.
+- **`scripts/make_social_card.py`** - draws the 1200x630 `og:image` card
+  into `docs/assets/social-card.png` from the site palette. Re-run it after
+  changing the site name or tagline; `--check` fails if the committed PNG is
+  stale. It needs Liberation, DejaVu or macOS system fonts, so it runs on a
+  workstation rather than in CI.
 - **`scripts/okf_links.py`** - the one rule for publishing Markdown to
   agents: a relative link becomes an absolute URL pointing at the linked
   page's Markdown twin (page URL + `index.md`). Used by

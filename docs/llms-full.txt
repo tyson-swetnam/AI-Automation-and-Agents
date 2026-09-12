@@ -15387,6 +15387,11 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **`scripts/postbuild_agent_surface.py`** and **`scripts/check_site.py`** -
   run after `zensical build`: add the Markdown mirror, `okf:*` meta tags and
   `robots.txt` to `site/`, then assert the build is complete.
+- **`scripts/make_social_card.py`** - draws the 1200x630 `og:image` card
+  into `docs/assets/social-card.png` from the site palette. Re-run it after
+  changing the site name or tagline; `--check` fails if the committed PNG is
+  stale. It needs Liberation, DejaVu or macOS system fonts, so it runs on a
+  workstation rather than in CI.
 - **`scripts/okf_links.py`** - the one rule for publishing Markdown to
   agents: a relative link becomes an absolute URL pointing at the linked
   page's Markdown twin (page URL + `index.md`). Used by
@@ -15489,6 +15494,20 @@ rather than scraping rendered HTML.
 | `raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/<path>.md` | The same Markdown from GitHub, for sandboxes that allow `github.com` but not `*.github.io`. `<path>` is the site path without its trailing slash |
 | `/sitemap.xml`, `/robots.txt` | Standard crawl surface; `robots.txt` repeats these pointers |
 | [Source repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents){target=_blank} | The bundle itself under `docs/`, plus `AGENTS.md` with the contribution rules for coding agents |
+
+Every page also carries a schema.org JSON-LD record: the landing page
+declares an `EducationalOrganization` and the `Course` itself, and every other
+page a `LearningResource` tied to that course, with its
+`learningResourceType` from the OKF `type`, its `timeRequired` from
+`time_estimate`, its audience (student or instructor) from the page's audience
+tag, and an `encoding` block naming the page's Markdown twin. Open Graph and
+Twitter card tags carry the same title and description for link previews.
+
+A request for a page that does not exist returns a real HTTP 404 whose body
+lists recovery points — the home page, `llms.txt`, `llms-full.txt`,
+`sitemap.xml`, the wiki crosswalk and this page — and `/404.md` is the same
+list in Markdown, for an agent that asked for Markdown. Both are written by
+the post-build step, so neither exists under `docs/`.
 
 Every rendered page carries two *visible* pointers as well, because text
 extraction and link-derived URL allowlists never see `<head>`: a **Markdown
@@ -16325,6 +16344,11 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 # Documentation update log
 
 ## 2026-09-12
+
+* **Creation**: Added the structured data that link previews, search engines and site scanners read, none of which parse OKF frontmatter. Every page now carries Open Graph and Twitter card tags and a schema.org JSON-LD record: the landing page declares an `EducationalOrganization` (CARC, with the University of New Mexico as parent and the instructor of record as contact point) and the `Course` itself, with its workload, license and the five module titles it teaches; every other page declares a `LearningResource` tied to that course, carrying its OKF type as `learningResourceType`, its time estimate as an ISO 8601 duration, its audience, and an `encoding` block that names the page's Markdown twin. `scripts/check_site.py` fails if a page loses either.
+* **Creation**: A 1200x630 social card for `og:image`, drawn from the site's palette by `scripts/make_social_card.py` (`--check` fails if the committed PNG is stale). The site still serves no raster images in its pages; this one exists for crawlers and link previews.
+* **Update**: A dead URL now returns a real 404 *with a way out*: the page lists the home page, `llms.txt`, `llms-full.txt`, `sitemap.xml`, the wiki crosswalk and the agent guide, and `/404.md` is the same list in Markdown for an agent that asked for Markdown.
+* **Note**: This work came from running the course site through [is-agentic.com](https://is-agentic.com/), which scored the *origin* `tyson-swetnam.github.io/` rather than this project path: that root is a five-line meta-refresh stub, so the checks for server-rendered content, redirect hygiene, JSON-LD, metadata and an agent instruction file all measured the stub. Two of its findings were real for this site and are fixed above. One cannot be fixed here: Markdown content negotiation (`Accept: text/markdown` with `Vary: Accept`) needs response headers, and GitHub Pages serves static files without them. The Markdown twins remain the supported route.
 
 * **Update**: Made the Markdown surface traversable rather than merely present. Every page's Markdown twin (the page URL plus `index.md`) and every page inside [llms-full.txt](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt) now have their relative links rewritten to absolute URLs that point at the linked page's *own* twin, so an agent can follow links through the whole bundle without leaving Markdown or guessing a base. The twins are written one directory below their source, so a copied relative link had been resolving one level too low; `llms-full.txt` had 128 of them with nothing to resolve against at all. The rule lives in a new `scripts/okf_links.py`, shared by the generator and the post-build step, and `scripts/check_site.py` now rebuilds each twin from its source to prove the two agree.
 * **Update**: [llms.txt](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms.txt) now gives three addresses for every page — the rendered page, its Markdown twin, and its raw source on `raw.githubusercontent.com` — with a block showing the pattern for each, a note that some sandboxes reach github.com but not `*.github.io`, and a Meta entry for the full corpus with its size. `robots.txt` adds the raw-source pointer.

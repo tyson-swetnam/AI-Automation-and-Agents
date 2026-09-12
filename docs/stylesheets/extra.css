@@ -320,3 +320,13 @@ iframe.course-video {
 .md-typeset .course-machine-readable a:hover {
   color: var(--md-accent-fg-color);
 }
+
+/* Recovery links added to 404.html by postbuild_agent_surface.py */
+.md-typeset .course-404-recovery ul {
+  margin-top: 0.4rem;
+}
+
+.md-typeset .course-404-recovery p:last-child {
+  font-size: 0.72rem;
+  color: var(--md-default-fg-color--light);
+}

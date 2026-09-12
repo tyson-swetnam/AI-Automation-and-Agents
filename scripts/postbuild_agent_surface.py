@@ -19,6 +19,12 @@ Run AFTER `zensical build`. It:
        <link rel="alternate" type="text/markdown" href="index.md">
        <meta name="okf:type" | okf:status | okf:trust-tier | okf:generated-at
              | okf:generated-by | okf:stale-after | okf:superseded-by>
+   plus Open Graph and Twitter card tags (title, description, type, url,
+   image, site_name, locale) and a schema.org JSON-LD record: an
+   EducationalOrganization and a Course on the landing page, and a
+   LearningResource tied to that Course on every typed content page. Link
+   previews, search engines and site scanners read those rather than the
+   OKF frontmatter.
    okf:superseded-by is emitted only for deprecated pages whose frontmatter
    names a replacement; a relative Markdown path is resolved to the
    replacement's absolute page URL.
@@ -27,7 +33,11 @@ Run AFTER `zensical build`. It:
    Markdown" button beside "View source", and a "Machine-readable" line at
    the end of the article linking the Markdown twin, the raw source on
    GitHub, llms.txt and llms-full.txt.
-4. Writes robots.txt advertising sitemap.xml, /llms.txt, /llms-full.txt, the
+4. Gives 404.html a recovery body — links to the home page, llms.txt,
+   llms-full.txt, sitemap.xml, the wiki crosswalk and the agent guide — and
+   writes 404.md beside it, so an agent that lands on a dead URL is told
+   where to look instead of reading a bare "404 - Not found".
+5. Writes robots.txt advertising sitemap.xml, /llms.txt, /llms-full.txt, the
    Markdown mirror and raw-source conventions, and the agent guide at
    /about/ai-agents/.
 
@@ -39,6 +49,7 @@ Usage: python3 scripts/postbuild_agent_surface.py [site_dir]
 from __future__ import annotations
 
 import html
+import json
 import posixpath
 import re
 import sys
@@ -108,6 +119,131 @@ def superseded_url(value, rel: Path, base: str) -> str:
     return url + (f"#{fragment}" if fragment else "")
 
 
+LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/"
+PROVIDER_NAME = "Center for Advanced Research Computing, University of New Mexico"
+INSTRUCTOR = "Tyson Swetnam"
+# Published on the syllabus page already; schema.org consumers expect a contact point.
+CONTACT_EMAIL = "tswetnam@unm.edu"
+
+
+def config_value(key: str, default: str = "") -> str:
+    m = re.search(rf'^{key}\s*=\s*"([^"]*)"', (ROOT / "zensical.toml").read_text(encoding="utf-8"),
+                  re.MULTILINE)
+    return m.group(1) if m else default
+
+
+def iso_duration(value: str) -> str | None:
+    """"8 hours" -> PT8H, "45 minutes" -> PT45M; anything else -> None."""
+    m = re.match(r"\s*(\d+(?:\.\d+)?)\s*(hours?|hrs?|minutes?|mins?)", str(value), re.I)
+    if not m:
+        return None
+    n = float(m.group(1))
+    unit = "H" if m.group(2).lower().startswith(("h", "hr")) else "M"
+    return "PT" + (str(int(n)) if n.is_integer() else str(n)) + unit
+
+
+def page_title(fm: dict, text: str) -> str:
+    if fm.get("title"):
+        return str(fm["title"])
+    m = re.search(r"<title>(.*?)</title>", text, re.S)
+    return html.unescape(m.group(1)).strip() if m else config_value("site_name")
+
+
+def module_titles() -> list[str]:
+    out = []
+    for n in range(1, 6):
+        path = DOCS / f"modules/module-{n}/overview.md"
+        if path.is_file():
+            title = frontmatter(path).get("title")
+            if title:
+                out.append(str(title))
+    return out
+
+
+def jsonld(fm: dict, rel: Path, base: str, title: str, description: str) -> str:
+    """EducationalOrganization + Course on the landing page, LearningResource elsewhere."""
+    url = page_url(base, rel)
+    provider = {
+        "@type": "EducationalOrganization",
+        "@id": base + "#provider",
+        "name": PROVIDER_NAME,
+        "alternateName": "UNM CARC",
+        "url": "https://carc.unm.edu/",
+        "sameAs": ["https://github.com/UNM-CARC"],
+        "parentOrganization": {"@type": "CollegeOrUniversity",
+                               "name": "University of New Mexico",
+                               "url": "https://www.unm.edu/"},
+        "contactPoint": {"@type": "ContactPoint", "contactType": "instructor of record",
+                         "name": INSTRUCTOR, "email": CONTACT_EMAIL,
+                         "url": base + "start-here/syllabus/"},
+    }
+    if rel.as_posix() == "index.md":
+        course = {
+            "@type": "Course",
+            "@id": base + "#course",
+            "name": config_value("site_name"),
+            "url": base,
+            "description": config_value("site_description"),
+            "inLanguage": "en",
+            "isAccessibleForFree": True,
+            "license": LICENSE_URL,
+            "educationalLevel": "professional development (non-credit)",
+            "provider": {"@id": base + "#provider"},
+            "teaches": module_titles(),
+            "timeRequired": "PT40H",
+            "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "online",
+                                  "courseWorkload": "PT40H",
+                                  "instructor": {"@type": "Person", "name": INSTRUCTOR}},
+        }
+        graph = {"@context": "https://schema.org", "@graph": [provider, course]}
+    else:
+        role = "teacher" if "instructor-facing" in (fm.get("tags") or []) else "student"
+        node = {
+            "@context": "https://schema.org",
+            "@type": "LearningResource",
+            "@id": url,
+            "url": url,
+            "name": title,
+            "description": description,
+            "inLanguage": "en",
+            "isAccessibleForFree": True,
+            "license": LICENSE_URL,
+            "isPartOf": {"@id": base + "#course"},
+            "provider": {"@id": base + "#provider"},
+            "encoding": {"@type": "MediaObject", "encodingFormat": "text/markdown",
+                         "contentUrl": url + "index.md"},
+            "audience": {"@type": "EducationalAudience", "educationalRole": role},
+        }
+        if fm.get("type"):
+            node["learningResourceType"] = str(fm["type"])
+        duration = iso_duration(fm.get("time_estimate", ""))
+        if duration:
+            node["timeRequired"] = duration
+        gen = fm.get("generated") or {}
+        if isinstance(gen, dict) and gen.get("at"):
+            node["dateModified"] = str(gen["at"])
+        graph = node
+    return ('<script type="application/ld+json">'
+            + json.dumps(graph, ensure_ascii=False, separators=(",", ":")) + "</script>")
+
+
+def social_block(fm: dict, rel: Path, base: str, title: str, description: str) -> list[str]:
+    url = page_url(base, rel)
+    is_home = rel.as_posix() == "index.md"
+    esc = lambda v: html.escape(str(v), quote=True)
+    tags = [("og:title", title), ("og:description", description),
+            ("og:type", "website" if is_home else "article"),
+            ("og:url", url), ("og:site_name", config_value("site_name")),
+            ("og:locale", "en_US"), ("og:image", base + "assets/social-card.png"),
+            ("og:image:alt", config_value("site_name") + " — a University of New Mexico course")]
+    lines = [f'<meta property="{k}" content="{esc(v)}">' for k, v in tags]
+    lines += [f'<meta name="twitter:card" content="summary_large_image">',
+              f'<meta name="twitter:title" content="{esc(title)}">',
+              f'<meta name="twitter:description" content="{esc(description)}">',
+              f'<meta name="twitter:image" content="{base}assets/social-card.png">']
+    return lines
+
+
 def head_block(fm: dict, rel: Path, base: str) -> str:
     lines = ['<meta name="robots" content="index, follow, max-snippet:-1, '
              'max-image-preview:large, max-video-preview:-1">',
@@ -168,6 +304,38 @@ def add_visible_pointers(text: str, rel: Path, base: str) -> str:
     return text
 
 
+RECOVERY_LINKS = [
+    ("", "Course home — the five modules, in order"),
+    ("llms.txt", "llms.txt — a linked outline of every page, each with its Markdown twin and raw source"),
+    ("llms-full.txt", "llms-full.txt — the whole corpus in one file"),
+    ("sitemap.xml", "sitemap.xml — every URL on this site"),
+    ("about/wiki-crosswalk/", "Wiki crosswalk — where each old course-wiki URL moved to"),
+    ("about/ai-agents/", "For AI agents — the endpoints and conventions this site follows"),
+]
+
+
+def recovery_html(base: str) -> str:
+    items = "".join(f'<li><a href="{base}{path}">{html.escape(label)}</a></li>'
+                    for path, label in RECOVERY_LINKS)
+    return ('<div class="course-404-recovery">'
+            "<p>That page does not exist on this site. Try one of these instead:</p>"
+            f"<ul>{items}</ul>"
+            "<p>Any page URL plus <code>index.md</code> returns that page's Markdown with its "
+            "OKF frontmatter; a Markdown copy of this page is at "
+            f'<a href="{base}404.md">404.md</a>.</p></div>\n')
+
+
+def recovery_markdown(base: str) -> str:
+    lines = ["# 404 — page not found", "",
+             "That page does not exist on this site. Try one of these instead:", ""]
+    lines += [f"- [{label}]({base}{path})" for path, label in RECOVERY_LINKS]
+    lines += ["",
+              "Any page URL plus `index.md` returns that page's Markdown with its OKF "
+              "frontmatter. The linked outline in llms.txt is the fastest way to find the "
+              "page you meant.", ""]
+    return "\n".join(lines)
+
+
 def dest_for(rel: Path, site: Path) -> Path:
     if rel.name == "index.md":
         return site / rel
@@ -211,12 +379,27 @@ def main():
         text = htmlfile.read_text(encoding="utf-8")
         if 'rel="alternate" type="text/markdown"' in text:
             continue  # idempotent
-        text = text.replace("</head>", head_block(fm, rel, base) + "</head>", 1)
+        title = page_title(fm, text)
+        description = str(fm.get("description", "")).strip() or config_value("site_description")
+        extra = "\n".join(social_block(fm, rel, base, title, description)
+                          + [jsonld(fm, rel, base, title, description)]) + "\n"
+        text = text.replace("</head>", head_block(fm, rel, base) + extra + "</head>", 1)
         text = add_visible_pointers(text, rel, base)
         htmlfile.write_text(text, encoding="utf-8")
         injected += 1
 
-    # 3. robots.txt — explicitly welcome AI fetchers alongside the blanket allow.
+    # 3. A 404 that tells an agent where to look instead.
+    notfound = site / "404.html"
+    if notfound.is_file():
+        html_text = notfound.read_text(encoding="utf-8")
+        if "course-404-recovery" not in html_text:
+            marker = "<h1>404 - Not found</h1>"
+            if marker in html_text:
+                html_text = html_text.replace(marker, marker + recovery_html(base), 1)
+                notfound.write_text(html_text, encoding="utf-8")
+    (site / "404.md").write_text(recovery_markdown(base), encoding="utf-8")
+
+    # 4. robots.txt — explicitly welcome AI fetchers alongside the blanket allow.
     ai_agents = ["Googlebot", "Google-Extended", "GoogleOther", "Google-CloudVertexBot",
                  "GPTBot", "OAI-SearchBot", "ChatGPT-User",
                  "ClaudeBot", "Claude-User", "Claude-SearchBot", "PerplexityBot",
@@ -244,8 +427,8 @@ def main():
         encoding="utf-8")
 
     print(f"agent surface: mirrored {mirrored} markdown files (links absolutized), "
-          f"annotated {injected} pages with metadata, a Markdown button and a "
-          "machine-readable line, wrote robots.txt")
+          f"annotated {injected} pages with metadata, Open Graph tags, JSON-LD, a Markdown "
+          "button and a machine-readable line, wrote 404 recovery and robots.txt")
 
 
 if __name__ == "__main__":
