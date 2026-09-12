@@ -8,10 +8,13 @@ materials this site promises:
   1. llms.txt, llms-full.txt, robots.txt and sitemap.xml exist at the root
      (and robots.txt advertises llms.txt, proving the post-build step ran).
   2. Every content Markdown source under docs/ (assets/, materials/ and
-     stylesheets/ excluded) has a byte-identical `index.md` mirror at its
-     pretty URL, there are no stray mirrors, and the counts match.
-  3. Every mirrored page's index.html declares the Markdown alternate link
-     and — wherever the source frontmatter has a `type` — the okf:type meta.
+     stylesheets/ excluded) has an `index.md` mirror at its pretty URL whose
+     text is the source with its relative links absolutized (okf_links), there
+     are no stray mirrors, and the counts match. llms-full.txt keeps no
+     relative link either.
+  3. Every mirrored page's index.html declares the Markdown alternate link, the
+     visible Markdown button and the machine-readable line, and — wherever the
+     source frontmatter has a `type` — the okf:type meta.
      Root and section index.md files carry no type and are exempt from the
      type check.
   4. No HTML still references the wiki-era image host
@@ -32,6 +35,8 @@ import sys
 from pathlib import Path
 
 import yaml
+
+from okf_links import rewrite_relative_targets, site_url
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -82,6 +87,7 @@ def check_root_files(site: Path):
 
 
 def check_mirrors(site: Path, docs: Path) -> int:
+    base = site_url()
     sources = content_sources(docs)
     expected = {dest_for(p.relative_to(docs), site): p for p in sources}
     mirrors = {p for p in site.rglob("index.md")
@@ -99,8 +105,10 @@ def check_mirrors(site: Path, docs: Path) -> int:
         if not dest.is_file():
             failures.append(f"{rel}: no mirror at {dest.relative_to(site)}")
             continue
-        if not filecmp.cmp(src, dest, shallow=False):
-            failures.append(f"{rel}: mirror {dest.relative_to(site)} differs from the source")
+        expected = rewrite_relative_targets(src.read_text(encoding="utf-8"), rel, base)
+        if dest.read_text(encoding="utf-8") != expected:
+            failures.append(f"{rel}: mirror {dest.relative_to(site)} is not the source with its "
+                            "relative links absolutized (scripts/okf_links.py)")
         page = dest.parent / "index.html"
         if not page.is_file():
             failures.append(f"{rel}: mirror present but no rendered {page.relative_to(site)}")
@@ -108,6 +116,10 @@ def check_mirrors(site: Path, docs: Path) -> int:
         text = page.read_text(encoding="utf-8", errors="replace")
         if 'rel="alternate" type="text/markdown"' not in text:
             failures.append(f"{rel}: {page.relative_to(site)} lacks the Markdown alternate link")
+        if "View this page as Markdown" not in text:
+            failures.append(f"{rel}: {page.relative_to(site)} lacks the visible Markdown button")
+        if "course-machine-readable" not in text:
+            failures.append(f"{rel}: {page.relative_to(site)} lacks the machine-readable line")
         if frontmatter(src).get("type") and 'name="okf:type"' not in text:
             failures.append(f"{rel}: {page.relative_to(site)} lacks <meta name=\"okf:type\">")
         checked += 1
@@ -145,6 +157,17 @@ def check_materials(site: Path, docs: Path) -> int:
     return n
 
 
+def check_llms_full(site: Path) -> None:
+    """An agent ingesting llms-full.txt has no base to resolve a relative link against."""
+    full = site / "llms-full.txt"
+    if not full.is_file():
+        return
+    bad = re.findall(r"]\((\.\./[^)]*)\)", full.read_text(encoding="utf-8"))
+    if bad:
+        failures.append(f"llms-full.txt keeps {len(bad)} relative link(s), e.g. {bad[0]} — "
+                        "gen_llms_txt.py should absolutize them")
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__.strip().splitlines()[-2], file=sys.stderr)
@@ -158,6 +181,7 @@ def main():
             sys.exit(2)
 
     check_root_files(site)
+    check_llms_full(site)
     pages = check_mirrors(site, docs)
     html_files = check_html_bans(site)
     materials = check_materials(site, docs)

@@ -1,6 +1,6 @@
 # AI Automation and Agents — full corpus
 
-Each page below begins with its canonical URL followed by its original Markdown, OKF frontmatter included. Pages are grouped by section in navigation order; the linked outline is at https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms.txt.
+Each page below begins with its canonical URL followed by its original Markdown, OKF frontmatter included. Pages are grouped by section in navigation order; the linked outline is at https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms.txt. Relative links have been rewritten to absolute URLs that point at each linked page's Markdown twin (its URL plus `index.md`), so you can traverse the bundle without leaving Markdown.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/
 
@@ -52,7 +52,7 @@ shape, how your time is budgeted, what is graded, and which tools you will need.
 !!! tip "Do the diagnostic survey before anything else"
 
     Module 1 opens with a 12-question, ungraded
-    [Diagnostic Knowledge Survey](../modules/module-1/diagnostic-survey.md)
+    [Diagnostic Knowledge Survey](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/diagnostic-survey/index.md)
     (about 10 minutes). Complete it *before* you read anything: its purpose is
     to capture your current mental models, and its last question seeds the
     Workflow Audit described below.
@@ -81,10 +81,10 @@ them the same way.
    Follow the *What to submit* boxes.
 5. **Lab notebook** (Modules 2-5) - the Colab notebook for the guided lab,
    rendered as a page with an *Open in Colab* button and a download link. See
-   [Labs, Colab, and API keys](labs-and-notebooks.md) before your first lab.
+   [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) before your first lab.
    Module 1's two labs (Ollama and Openwork) run on your own computer and are
    described in full on the
-   [Module 1 activities page](../modules/module-1/activities.md).
+   [Module 1 activities page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md).
 6. **Chapter quizzes** - the five self-evaluating quizzes for the module.
    Answers and feedback are on the page, collapsed under *Show answer and
    feedback*; check them after you have committed to an answer.
@@ -92,12 +92,12 @@ them the same way.
    tools.
 
 Module 1 has a few extra pages because it is the conceptual foundation: the
-[diagnostic survey](../modules/module-1/diagnostic-survey.md), three
+[diagnostic survey](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/diagnostic-survey/index.md), three
 **readings** (what an agent is, an automation-and-multi-agent-frameworks
 comparison, and a summary of Wooldridge and Jennings' *Intelligent Agents*),
 two **worksheets** (the AI agents glossary and the automation paradigms
 comparison), and the auto-graded
-[Module 1 concept quiz](../modules/module-1/concept-quiz.md).
+[Module 1 concept quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/index.md).
 
 ## Time budget
 
@@ -124,7 +124,7 @@ Remember and Understand (vocabulary and mental models), Modules 3-4 toward
 Understand and Apply (integrating tools and building working agent systems),
 and Module 5 toward Apply and Analyze (auditing, evaluating and governing
 complete systems). The
-[formal learning design](../course-design/learning-design.md) documents the
+[formal learning design](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/index.md) documents the
 skills each module develops and the research behind the structure.
 
 ## What is assessed, and how it is weighted
@@ -136,7 +136,7 @@ summary*; this table summarises the pattern.
 | Item | Module 1 | Modules 2-5 |
 | :-- | :-- | :-- |
 | Chapter quizzes (five per module) | Self-check | **100% of the module grade, 20% each** |
-| [Concept quiz](../modules/module-1/concept-quiz.md) (Module 1 only) | Formative: two attempts, best score retained | - |
+| [Concept quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/index.md) (Module 1 only) | Formative: two attempts, best score retained | - |
 | Guided lab | Formative: required for your portfolio, not graded numerically | Submit the executed notebook to your GitHub portfolio |
 | Hands-on project | **Workflow Audit Project: the primary module grade**, scored with its rubric | Portfolio deliverable described on the activities page |
 | Discussion post and peer reply | Completion grade (participation, not content quality) | Required for the certificate; completion only |
@@ -145,7 +145,7 @@ summary*; this table summarises the pattern.
 !!! info "Your LMS is authoritative"
 
     Weights, attempt limits and due dates are configured in the learning
-    management system for your cohort. The [syllabus](syllabus.md) states that a
+    management system for your cohort. The [syllabus](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/index.md) states that a
     digital certificate of completion requires completing all five module
     projects and passing all five concept quizzes at 70% or above. When this
     site and your LMS disagree, follow the LMS and tell your instructor.
@@ -184,7 +184,7 @@ one at a time afterwards. Nothing requires a paid subscription.
 | [LangGraph](https://www.langchain.com/langgraph){target=_blank} | Module 4 (three-role pipeline) and Module 5 (instrumented agent) | Open source |
 | [CrewAI](https://crewai.com/){target=_blank} | Module 4 (the same pipeline, for a framework comparison) | Open source |
 | [LangSmith](https://smith.langchain.com){target=_blank} | Module 5 (tracing and evaluation) | Free account |
-| A model provider for the labs | OpenAI, Hugging Face Inference Providers, Groq or NVIDIA API keys, or Ollama locally | Free options exist for every lab; see [Labs, Colab, and API keys](labs-and-notebooks.md) |
+| A model provider for the labs | OpenAI, Hugging Face Inference Providers, Groq or NVIDIA API keys, or Ollama locally | Free options exist for every lab; see [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) |
 
 ### The free-tier path
 
@@ -202,21 +202,21 @@ role.
 Lab notebooks and project deliverables go into a public GitHub repository
 named `ai-automation-agents-portfolio`, with one folder per module and a
 running learning log. Set it up before your first lab by following
-[GitHub portfolio setup](github-portfolio-setup.md). Employers and
+[GitHub portfolio setup](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/index.md). Employers and
 collaborators can see it, so keep API keys out of it (the labs page explains
 how).
 
 ## Where to go next
 
-- Read the [syllabus](syllabus.md) for the course information table and
+- Read the [syllabus](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/index.md) for the course information table and
   learning outcomes, then start with the
-  [Module 1 overview](../modules/module-1/overview.md).
-- Module overviews: [Module 1](../modules/module-1/overview.md) -
-  [Module 2](../modules/module-2/overview.md) -
-  [Module 3](../modules/module-3/overview.md) -
-  [Module 4](../modules/module-4/overview.md) -
-  [Module 5](../modules/module-5/overview.md).
-- Before Module 2, read [Labs, Colab, and API keys](labs-and-notebooks.md).
+  [Module 1 overview](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md).
+- Module overviews: [Module 1](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md) -
+  [Module 2](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/overview/index.md) -
+  [Module 3](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/overview/index.md) -
+  [Module 4](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/overview/index.md) -
+  [Module 5](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/overview/index.md).
+- Before Module 2, read [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md).
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/
 
@@ -247,8 +247,8 @@ sources:
 Non-credit professional development from the Center for Advanced Research
 Computing at the University of New Mexico. Five modules, 40 hours, self-paced.
 
-[:material-file-pdf-box: Download the syllabus (PDF)](../assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){ .md-button .md-button--primary target=_blank }
-[:material-map-marker-path: How this course works](how-this-course-works.md){ .md-button }
+[:material-file-pdf-box: Download the syllabus (PDF)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){ .md-button .md-button--primary target=_blank }
+[:material-map-marker-path: How this course works](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/index.md){ .md-button }
 
 ## Instructor of record
 
@@ -318,18 +318,18 @@ Upon successful completion of this course, learners will be able to:
 
 | # | Module | Key topics | Hours |
 | :--: | :-- | :-- | :--: |
-| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](../modules/module-1/overview.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Ollama and Openwork; key vocabulary | 8 |
-| 2 | [**Agent Reasoning Architectures and Tool Integration**](../modules/module-2/overview.md) | Chain-of-Thought, ReAct, Tree of Thoughts, LATS; tool integration with LangChain; prompt engineering; trace evaluation; architectural trade-offs | 8 |
-| 3 | [**Total Recall:** Memory Architectures and Retrieval-Augmented Generation](../modules/module-3/overview.md) | Parametric vs. non-parametric memory; six-stage RAG pipeline; conversational memory types; retrieval optimization; RAGAS evaluation | 8 |
-| 4 | [**Multi-Agent Systems**](../modules/module-4/overview.md) | Coordination architectures; LangGraph multi-agent implementation; three-role pipeline design; CrewAI vs. LangGraph comparison; coordination failure diagnosis | 8 |
-| 5 | [**Responsible Agentic AI:** Production Deployment, Evaluation, and Responsible AI](../modules/module-5/overview.md) | Technical debt and production infrastructure; multi-dimensional evaluation and CI/CD; observability with LangSmith; OWASP Top 10; EU AI Act, NIST AI RMF, human-in-the-loop | 8 |
+| 1 | [**From Prompts to Pipelines:** Thinking Like an Automation Designer](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md) | Agent loop; no-code/low-code/code-first spectrum; workflow decomposition; Ollama and Openwork; key vocabulary | 8 |
+| 2 | [**Agent Reasoning Architectures and Tool Integration**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/overview/index.md) | Chain-of-Thought, ReAct, Tree of Thoughts, LATS; tool integration with LangChain; prompt engineering; trace evaluation; architectural trade-offs | 8 |
+| 3 | [**Total Recall:** Memory Architectures and Retrieval-Augmented Generation](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/overview/index.md) | Parametric vs. non-parametric memory; six-stage RAG pipeline; conversational memory types; retrieval optimization; RAGAS evaluation | 8 |
+| 4 | [**Multi-Agent Systems**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/overview/index.md) | Coordination architectures; LangGraph multi-agent implementation; three-role pipeline design; CrewAI vs. LangGraph comparison; coordination failure diagnosis | 8 |
+| 5 | [**Responsible Agentic AI:** Production Deployment, Evaluation, and Responsible AI](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/overview/index.md) | Technical debt and production infrastructure; multi-dimensional evaluation and CI/CD; observability with LangSmith; OWASP Top 10; EU AI Act, NIST AI RMF, human-in-the-loop | 8 |
 
 ??? note "Where this syllabus came from"
 
     This syllabus is generated from the page you are reading by
     `scripts/build_syllabus_pdf.py`, so the PDF and the site cannot drift
     apart. It supersedes the original
-    [University of Arizona syllabus (v2.0, April 2026)](../assets/files/AI_Automation_Agents_Syllabus_v2.pdf){target=_blank},
+    [University of Arizona syllabus (v2.0, April 2026)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/files/AI_Automation_Agents_Syllabus_v2.pdf){target=_blank},
     which is kept in this repository as the source document. That earlier PDF
     describes Modules 2-5 under their original titles, centred on Claude
     Cowork, n8n, MCP and Claude Code; the module pages on this site are the
@@ -351,14 +351,14 @@ university credit, and completing it does not enrol you in a degree program.
   portfolio-quality artifacts.
 
 Grade weights for each module are stated in that module's overview; see
-[How this course works](how-this-course-works.md) for the pattern.
+[How this course works](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/index.md) for the pattern.
 
 ## Read the syllabus online
 
-<iframe class="course-pdf" src="../assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf" title="AI Automation and Agents course syllabus (PDF)" loading="lazy"></iframe>
+<iframe class="course-pdf" src="https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf" title="AI Automation and Agents course syllabus (PDF)" loading="lazy"></iframe>
 
 If your browser cannot display the PDF above,
-[download the syllabus (PDF)](../assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){target=_blank} instead.
+[download the syllabus (PDF)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/files/AI-Automation-and-Agents-Syllabus-UNM.pdf){target=_blank} instead.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/
 
@@ -866,7 +866,7 @@ Module 1's two labs are different: they install
 [Ollama](https://ollama.com/){target=_blank} and
 [Openwork](https://openworklabs.com/){target=_blank} on your own computer and
 need no notebook. They are described on the
-[Module 1 activities page](../modules/module-1/activities.md).
+[Module 1 activities page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md).
 
 ## The four lab notebooks
 
@@ -876,10 +876,10 @@ first; it holds the *Platform setup* and *What to submit* boxes.
 
 | Module | Lab page and notebook | What you build | Frameworks | Time |
 | :-- | :-- | :-- | :-- | :-- |
-| 2 | [Module 2 lab](../modules/module-2/lab-notebook.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | Lab ~2 hours, project ~2 hours |
-| 3 | [Module 3 lab](../modules/module-3/lab-notebook.md) - [`Module-3-Lab.ipynb`](../materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare; then a four-run retrieval experiment and a RAGAS interpretation | LangChain 1.4.0 (pinned), Chroma, pypdf | Lab ~2 hours, project ~2 hours |
-| 4 | [Module 4 lab](../modules/module-4/lab-notebook.md) - [`Module4_Learner_Starter.ipynb`](../materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | Lab ~2 hours, project ~2 hours |
-| 5 | [Module 5 lab](../modules/module-5/lab-notebook.md) - [`Module5_Learner_Starter.ipynb`](../materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyzes ten runs; Lab B runs the same agent under two or three configurations and recommends one from the trace data | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | Lab ~1 hour, project ~2 hours |
+| 2 | [Module 2 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/lab-notebook/index.md) - [`Module-2-Guided-Lab-Notebook.ipynb`](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module2/Module-2-Guided-Lab-Notebook.ipynb) | A LangChain agent that searches the web (DuckDuckGo) and runs Python, then hardened with error handling and prompt engineering; you keep an *Agent Instruction Log* alongside it | LangChain 1.4.0 (`create_agent`) | Lab ~2 hours, project ~2 hours |
+| 3 | [Module 3 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/lab-notebook/index.md) - [`Module-3-Lab.ipynb`](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/Module-3-Lab.ipynb) | A retrieval-augmented generation pipeline: load a PDF corpus, chunk, embed and persist to Chroma, run a retrieval QA chain, add a second corpus and compare; then a four-run retrieval experiment and a RAGAS interpretation | LangChain 1.4.0 (pinned), Chroma, pypdf | Lab ~2 hours, project ~2 hours |
+| 4 | [Module 4 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/lab-notebook/index.md) - [`Module4_Learner_Starter.ipynb`](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module4/Module4_Learner_Starter.ipynb) | The same Researcher -> Analyst -> Critic pipeline implemented twice, in LangGraph and in CrewAI, with structured logs and a framework comparison | LangGraph, CrewAI, LiteLLM | Lab ~2 hours, project ~2 hours |
+| 5 | [Module 5 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/index.md) - [`Module5_Learner_Starter.ipynb`](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module5/Module5_Learner_Starter.ipynb) | Lab A instruments a two-tool ReAct agent with LangSmith tracing and analyzes ten runs; Lab B runs the same agent under two or three configurations and recommends one from the trace data | LangChain 1.4.0, LangGraph 1.2.11, LangSmith 0.12.4, LiteLLM | Lab ~1 hour, project ~2 hours |
 
 ### Model providers each notebook supports
 
@@ -995,7 +995,7 @@ supported end to end and earns the same certificate.
    `ai-automation-agents-portfolio` repository, together with any companion
    document the lab asks for (the Module 2 *Agent Instruction Log*, the
    Module 5 *Observability Report*). Update that module's `README.md` and your
-   learning log. [GitHub portfolio setup](github-portfolio-setup.md) walks
+   learning log. [GitHub portfolio setup](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/index.md) walks
    through the repository structure and the commit workflow.
 5. Check the diff before you push: no API keys, no personal data in outputs.
 
@@ -1134,7 +1134,7 @@ accurate mental representations of three constructs that every subsequent module
 for granted: the agent loop, the automation paradigm taxonomy, and the difference
 between an AI agent and a chatbot, script, or pipeline.
 
-Complete the 12-question [Diagnostic Knowledge Survey](diagnostic-survey.md) in the LMS before opening any
+Complete the 12-question [Diagnostic Knowledge Survey](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/diagnostic-survey/index.md) in the LMS before opening any
 readings. This is ungraded and takes approximately 10 minutes. The survey covers: prior
 experience with automation tools, your current working definition of 'AI agent,' comfort
 level with Python, and one open- ended prompt - 'Name one repetitive task at work or
@@ -1305,14 +1305,14 @@ communication protocols — essential for multi-agent systems introduced in Modu
 #### Learning Resources
 
 * [LangChain - What are Agents?](https://docs.langchain.com/oss/python/langchain/agents){target=_blank}
-* Wooldridge, M., & Jennings, N. R. (1995). [Intelligent agents: Theory and practice](readings/intelligent-agents-wooldridge-jennings.md). The knowledge engineering review, 10(2), 115-152.
+* Wooldridge, M., & Jennings, N. R. (1995). [Intelligent agents: Theory and practice](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/intelligent-agents-wooldridge-jennings/index.md). The knowledge engineering review, 10(2), 115-152.
 * [Video 1: "What are Agents?"](https://www.youtube.com/watch?v=F8NKVhkZZWI){target=_blank} - IBM Technology
 
-[**Reading Guide Chapter 1 - Redefining Intelligence, what AI agents actually are**](reading-guides.md#reading-guide-1)
+[**Reading Guide Chapter 1 - Redefining Intelligence, what AI agents actually are**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/index.md#reading-guide-1)
 
 #### Chapter 1 Quiz
 
-[Take the Chapter 1 Quiz](chapter-quizzes.md#chapter-1-quiz){ .md-button }
+[Take the Chapter 1 Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md#chapter-1-quiz){ .md-button }
 
 ### Chapter 2: The Automation Ecosystem — Three Paradigms, One Spectrum
 
@@ -1359,11 +1359,11 @@ violation, regardless of how elegant the workflow is.
 * Long, D., & Magerko, B. (2020, April). [What is AI literacy? Competencies and design considerations](https://dl.acm.org/doi/pdf/10.1145/3313831.3376727){target=_blank}. In Proceedings of the 2020 CHI conference on human factors in computing systems (pp. 1-16).
 * Ng, D. T. K., Leung, J. K. L., Chu, S. K. W., & Qiao, M. S. (2021). [Conceptualizing AI literacy: An exploratory review](https://www.sciencedirect.com/science/article/pii/S2666920X21000357){target=_blank}. Computers and Education: Artificial Intelligence, 2, 100041.
 
-[**Reading Guide Chapter 2 - Automation Landscape Overview**](reading-guides.md#reading-guide-4)
+[**Reading Guide Chapter 2 - Automation Landscape Overview**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/index.md#reading-guide-4)
 
 #### Chapter 2 Quiz
 
-[Take the Chapter 2 Quiz](chapter-quizzes.md#chapter-2-quiz){ .md-button }
+[Take the Chapter 2 Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md#chapter-2-quiz){ .md-button }
 
 ### Chapter 3: AI Literacy as a New Professional Imperative
 
@@ -1408,11 +1408,11 @@ Long and Magerko (2020) add an important nuance: AI literacy is not merely techn
 * Long, D., & Magerko, B. (2020, April). [What is AI literacy? Competencies and design considerations](https://dl.acm.org/doi/pdf/10.1145/3313831.3376727){target=_blank}. In Proceedings of the 2020 CHI conference on human factors in computing systems (pp. 1-16).
 * Ng, D. T. K., Leung, J. K. L., Chu, S. K. W., & Qiao, M. S. (2021). [Conceptualizing AI literacy: An exploratory review](https://www.sciencedirect.com/science/article/pii/S2666920X21000357){target=_blank}. Computers and Education: Artificial Intelligence, 2, 100041.
 
-[**Reading Guide Chapter 3 - AI Literacy**](reading-guides.md#reading-guide-3) - Ng et al. (2021): AI Literacy Framework
+[**Reading Guide Chapter 3 - AI Literacy**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/index.md#reading-guide-3) - Ng et al. (2021): AI Literacy Framework
 
 #### Chapter 3 Quiz
 
-[Take the Chapter 3 Quiz](chapter-quizzes.md#chapter-3-quiz){ .md-button }
+[Take the Chapter 3 Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md#chapter-3-quiz){ .md-button }
 
 ### Chapter 4: Workflow Thinking as a Professional Competency
 
@@ -1464,11 +1464,11 @@ The vocabulary of this assessment — rule-based, high-stakes, reversibility, bl
 
 * Wing, J. M. (2006). [Computational thinking](https://dl.acm.org/doi/pdf/10.1145/1118178.1118215){target=_blank}. Communications of the ACM, 49(3), 33-35
 
-[**Reading Guide Chapter 4 - Workflow thinking**](reading-guides.md#reading-guide-2) - Wooldridge & Jennings (1995): Intelligent Agents
+[**Reading Guide Chapter 4 - Workflow thinking**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/index.md#reading-guide-2) - Wooldridge & Jennings (1995): Intelligent Agents
 
 #### Chapter 4 Quiz
 
-[Take the Chapter 4 Quiz](chapter-quizzes.md#chapter-4-quiz){ .md-button }
+[Take the Chapter 4 Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md#chapter-4-quiz){ .md-button }
 
 ### Chapter 5: Responsible AI — From Principle to Practice, Starting Now
 
@@ -1507,11 +1507,11 @@ permission scoping, and audit logging for production AI systems.
 * AI, N. (2023). [Artificial intelligence risk management framework (AI RMF 1.0)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf?isid=enterprisehub_us&ikw=enterprisehub_us_lead%2Fhow-to-responsibly-use-ai-powered-hr-tools_textlink_https%3A%2F%2Fnvlpubs.nist.gov%2Fnistpubs%2Fai%2FNIST.AI.100-1.pdf){target=_blank}. URL: https://nvlpubs. nist. gov/nistpubs/ai/nist. ai, 100-1.
 * Floridi, L., Cowls, J., Beltrametti, M., Chatila, R., Chazerand, P., Dignum, V., ... & Vayena, E. (2018). [AI4People—An ethical framework for a good AI society: Opportunities, risks, principles, and recommendations](https://link.springer.com/content/pdf/10.1007/s11023-018-9482-5.pdf){target=_blank}. Minds and machines, 28(4), 689-707.
 
-[**Reading Guide Chapter 5 - Responsible AI**](reading-guides.md#reading-guide-5)
+[**Reading Guide Chapter 5 - Responsible AI**](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/index.md#reading-guide-5)
 
 #### Chapter 5 Quiz
 
-[Take the Chapter 5 Quiz](chapter-quizzes.md#chapter-5-quiz){ .md-button }
+[Take the Chapter 5 Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md#chapter-5-quiz){ .md-button }
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Foundational-Concepts){target=_blank} (wiki page last changed 2026-07-23). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-1/foundational-concepts.md){target=_blank}.</p>
 
@@ -2206,7 +2206,7 @@ framework.
 
 !!! info "Next: Module 2"
 
-    [Module 2](../module-2/overview.md)
+    [Module 2](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/overview/index.md)
 
     Module 2 moves from mapping workflows to building agents: you will build a tool-using agent in LangChain, and its hands-on project asks you to add a tool that could support a workflow from your own work. Your top-ranked workflow from the Workflow Audit is the natural candidate, so make sure the audit is complete before you start — it is the anchor for all subsequent module projects.
 
@@ -2917,22 +2917,22 @@ assesses, and you get feedback on each answer as soon as you submit.
 ## Before you start
 
 - Take the quiz after you have finished the
-  [Module 1 foundational concepts](foundational-concepts.md) and their
-  [chapter quizzes](chapter-quizzes.md); it assumes the vocabulary from all
+  [Module 1 foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/index.md) and their
+  [chapter quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md); it assumes the vocabulary from all
   five chapters.
 - In the course's grading rules the concept quiz is **formative**: you have
   **two attempts** in the LMS and your **best score is retained**. It does not
   carry a numeric weight in the Module 1 grade (the
-  [Workflow Audit Project](activities.md) does).
+  [Workflow Audit Project](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md) does).
 - The copy embedded below is for practice. It grades **entirely in your
   browser**; nothing you enter is transmitted or recorded anywhere, and you
   can retake it as often as you like. Your attempts in the LMS are what your
   instructor sees.
 
-[Open the quiz full screen](../../materials/module1/module1_quiz.html){ .md-button .md-button--primary target=_blank }
-[Printable PDF](../../materials/module1/Module_1_Quiz.pdf){ .md-button target=_blank }
+[Open the quiz full screen](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/module1_quiz.html){ .md-button .md-button--primary target=_blank }
+[Printable PDF](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Module_1_Quiz.pdf){ .md-button target=_blank }
 
-<iframe class="course-embed" src="../../materials/module1/module1_quiz.html" title="Module 1 Concept Quiz" loading="lazy"></iframe>
+<iframe class="course-embed" src="https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/module1_quiz.html" title="Module 1 Concept Quiz" loading="lazy"></iframe>
 
 If the drag-and-drop sequencing in Part C does not work on your device (some
 touch screens and screen readers), use the full-screen version or the
@@ -2953,9 +2953,9 @@ printable PDF and check your ordering against the feedback afterwards.
 
 Note the learning outcome tags on any question you missed. For LO 1.1 gaps,
 re-read *Chapter 1: Redefining Intelligence* in the
-[foundational concepts](foundational-concepts.md); for LO 1.2 gaps, re-read
+[foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/index.md); for LO 1.2 gaps, re-read
 *Chapter 2: The Automation Ecosystem* and the agent-loop section. Then
-continue to the [Module 1 activities](activities.md).
+continue to the [Module 1 activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md).
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/diagnostic-survey/
 
@@ -3005,7 +3005,7 @@ them. It is **ungraded** and takes about **10 minutes**.
 - **Write something real in the last question.** The open-ended prompt -
   *"Name one repetitive task at work or school that you wish you could hand
   off"* - seeds the most important deliverable in the course, the
-  [Workflow Audit Project](activities.md). The quality of that project
+  [Workflow Audit Project](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md). The quality of that project
   depends on choosing genuine workflows from your own practice, not generic
   examples; this is your first chance to start identifying them.
 
@@ -3018,10 +3018,10 @@ them. It is **ungraded** and takes about **10 minutes**.
 | 3 - Comfort level with Python | 8-11 | Self-rated comfort and experience with Python and notebooks (1-5 scales and checklists) |
 | 4 - Open-ended reflection | 12 | The repetitive task you would hand off |
 
-[Open the survey full screen](../../materials/module1/diagnostic_survey.html){ .md-button .md-button--primary target=_blank }
-[Printable PDF](../../materials/module1/Diagnostic_Knowledge_Survey.pdf){ .md-button target=_blank }
+[Open the survey full screen](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/diagnostic_survey.html){ .md-button .md-button--primary target=_blank }
+[Printable PDF](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Diagnostic_Knowledge_Survey.pdf){ .md-button target=_blank }
 
-<iframe class="course-embed" src="../../materials/module1/diagnostic_survey.html" title="Module 1 Diagnostic Knowledge Survey" loading="lazy"></iframe>
+<iframe class="course-embed" src="https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/diagnostic_survey.html" title="Module 1 Diagnostic Knowledge Survey" loading="lazy"></iframe>
 
 !!! info "Where your answers go"
 
@@ -3036,8 +3036,8 @@ them. It is **ungraded** and takes about **10 minutes**.
 ## Next
 
 Once you have submitted the survey in the LMS, read the
-[Module 1 overview](overview.md) if you have not already, then start the
-[foundational concepts](foundational-concepts.md).
+[Module 1 overview](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md) if you have not already, then start the
+[foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/index.md).
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/resources/
 
@@ -3906,7 +3906,7 @@ wiki_page: Module-1-Act-6:-AI-Agents-Glossary
 ---
 # Worksheet: AI Agents Glossary
 
-*Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A [Word version of this worksheet](../../../materials/module1/Illustrated_AI_Glossary.docx) is available to download.*
+*Fill in each row: the formal definition from the readings, the definition in your own words, and one concrete example. A [Word version of this worksheet](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Illustrated_AI_Glossary.docx) is available to download.*
 
 !!! note "Draft"
 
@@ -3983,7 +3983,7 @@ wiki_page: Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram
 ---
 # Worksheet: Automation Paradigms Comparison
 
-*Compare the three automation paradigms across each feature row, using Chapter 2 of the [foundational concepts](../foundational-concepts.md) and your own research.*
+*Compare the three automation paradigms across each feature row, using Chapter 2 of the [foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/index.md) and your own research.*
 
 !!! note "Draft"
 
@@ -4266,7 +4266,7 @@ ICLR 2023.
 
 ### Chapter 1 Quiz
 
-[Take the Chapter 1 quiz](chapter-quizzes.md#chapter-1-quiz){ .md-button }
+[Take the Chapter 1 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md#chapter-1-quiz){ .md-button }
 
 ## Chapter 2: Tool Integration Architecture
 
@@ -4372,7 +4372,7 @@ Reference](https://reference.langchain.com/python/langchain/agents/factory/creat
 
 ### Chapter 2 Quiz
 
-[Take the Chapter 2 quiz](chapter-quizzes.md#chapter-2-quiz){ .md-button }
+[Take the Chapter 2 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md#chapter-2-quiz){ .md-button }
 
 ## Chapter 3: Reasoning Trace Interpretation and Critique
 
@@ -4408,7 +4408,7 @@ classes, each with a different root cause and a different fix:
 
 ### Chapter 3 Quiz
 
-[Take the Chapter 3 quiz](chapter-quizzes.md#chapter-3-quiz){ .md-button }
+[Take the Chapter 3 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md#chapter-3-quiz){ .md-button }
 
 ## Chapter 4: Prompt Engineering for Agent Behavioral Control
 
@@ -4460,7 +4460,7 @@ Agents must produce outputs in formats that the AgentExecutor can parse. Output 
 
 ### Chapter 4 Quiz
 
-[Take the Chapter 4 quiz](chapter-quizzes.md#chapter-4-quiz){ .md-button }
+[Take the Chapter 4 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md#chapter-4-quiz){ .md-button }
 
 ## Chapter 5: Architectural Trade-off Assessment for Production Deployment
 
@@ -4502,7 +4502,7 @@ scrutiny that a ReAct agent would not, precisely because the branching trace is 
 
 ### Chapter 5 Quiz
 
-[Take the Chapter 5 quiz](chapter-quizzes.md#chapter-5-quiz){ .md-button }
+[Take the Chapter 5 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md#chapter-5-quiz){ .md-button }
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Foundational-Concepts){target=_blank} (wiki page last changed 2026-08-04). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-2/foundational-concepts.md){target=_blank}.</p>
 
@@ -4944,7 +4944,7 @@ the designated extension zones: the scaffolding is designed to isolate the learn
 each step, and modifying it will obscure which design decision produced which behavioral
 outcome.
 
-**Open the lab notebook:** [Module-2-Guided-Lab-Notebook.ipynb](lab-notebook.md)
+**Open the lab notebook:** [Module-2-Guided-Lab-Notebook.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/lab-notebook/index.md)
 
 ### Notebook Flow Summary
 
@@ -5078,9 +5078,9 @@ sources:
 
 # Module 2 Lab: Building a Multi-Tool Agent
 
-[![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){ target=_blank }
+[![Open in Colab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){ target=_blank }
 
-[:material-download: Download the notebook (.ipynb)](../../materials/module2/Module-2-Guided-Lab-Notebook.ipynb){ .md-button }
+[:material-download: Download the notebook (.ipynb)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){ .md-button }
 [:fontawesome-brands-github: View on GitHub](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){ .md-button target=_blank }
 
 !!! warning "API keys"
@@ -5088,7 +5088,7 @@ sources:
     Keep API keys out of the notebook. In Colab store them as **Secrets** (the key
     icon in the left sidebar) or enter them through the `getpass` prompt the setup
     cell provides; never paste a key into a code cell, and clear outputs before you
-    submit. See [Labs, Colab, and API keys](../../start-here/labs-and-notebooks.md) for the full checklist.
+    submit. See [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) for the full checklist.
 
 !!! note "Read-only rendering"
 
@@ -5962,7 +5962,7 @@ Action 8 result:
 print(AGENT_INSTRUCTION_LOG)
 ```
 
-<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module-2-Guided-Lab-Notebook.ipynb](../../materials/module2/Module-2-Guided-Lab-Notebook.ipynb) (`docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
+<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module-2-Guided-Lab-Notebook.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module2/Module-2-Guided-Lab-Notebook.ipynb) (`docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module2/Module-2-Guided-Lab-Notebook.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/
 
@@ -7021,7 +7021,7 @@ what can be efficiently encoded in parameters — a particularly important capab
 
 ### Chapter 1 Quiz
 
-[Take the Chapter 1 quiz](chapter-quizzes.md#chapter-1-quiz){ .md-button }
+[Take the Chapter 1 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md#chapter-1-quiz){ .md-button }
 
 ## Chapter 2: The Six-Stage RAG Pipeline — Architecture, Design Decisions, and Downstream Consequences
 
@@ -7075,7 +7075,7 @@ vector store indexing, semantic retrieval, and augmented generation.
 
 ### Chapter 2 Quiz
 
-[Take the Chapter 2 quiz](chapter-quizzes.md#chapter-2-quiz){ .md-button }
+[Take the Chapter 2 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md#chapter-2-quiz){ .md-button }
 
 ## Chapter 3: Conversational Memory Management — Four Patterns
 
@@ -7130,7 +7130,7 @@ For multi-agent systems (Module 4), LangGraph manages conversation state as a ty
 
 ### Chapter 3 Quiz
 
-[Take the Chapter 3 quiz](chapter-quizzes.md#chapter-3-quiz){ .md-button }
+[Take the Chapter 3 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md#chapter-3-quiz){ .md-button }
 
 ## Chapter 4: Retrieval Optimization and Context Window Management
 
@@ -7200,7 +7200,7 @@ long documents where only a portion of the chunk content is relevant to the spec
 
 ### Chapter 4 Quiz
 
-[Take the Chapter 4 quiz](chapter-quizzes.md#chapter-4-quiz){ .md-button }
+[Take the Chapter 4 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md#chapter-4-quiz){ .md-button }
 
 ## Chapter 5: RAGAS Evaluation — From Subjective Impression to Structured, Reproducible Diagnosis
 
@@ -7249,7 +7249,7 @@ arXiv:2309.15217.](https://aclanthology.org/2024.eacl-demo.16.pdf){target=_blank
 
 ### Chapter 5 Quiz
 
-[Take the Chapter 5 quiz](chapter-quizzes.md#chapter-5-quiz){ .md-button }
+[Take the Chapter 5 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md#chapter-5-quiz){ .md-button }
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Foundational-Concepts){target=_blank} (wiki page last changed 2026-08-11). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-3/foundational-concepts.md){target=_blank}.</p>
 
@@ -7758,9 +7758,9 @@ Your RAG system scores high on context recall but low on faithfulness. Is the pr
 
 In this lab, you will build a working RAG pipeline using LangChain, from document loading through retrieval-augmented question answering over a multi-document corpus.
 
-**Open the lab notebook:** [Module-3-Lab.ipynb](lab-notebook.md)
+**Open the lab notebook:** [Module-3-Lab.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/lab-notebook/index.md)
 
-The corpus is NIST's AI Risk Management Framework ([NIST AI 100-1](../../materials/module3/NIST.AI.100-1.pdf)) and its Generative AI Profile ([NIST AI 600-1](../../materials/module3/NIST.AI.600-1.pdf)), both public-domain US government publications. The notebook downloads them for you.
+The corpus is NIST's AI Risk Management Framework ([NIST AI 100-1](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/NIST.AI.100-1.pdf)) and its Generative AI Profile ([NIST AI 600-1](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/NIST.AI.600-1.pdf)), both public-domain US government publications. The notebook downloads them for you.
 
 ### Guided lab notebook flow
 
@@ -7868,9 +7868,9 @@ sources:
 
 # Module 3 Lab: Building a RAG Pipeline with LangChain + Chroma
 
-[![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb){ target=_blank }
+[![Open in Colab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb){ target=_blank }
 
-[:material-download: Download the notebook (.ipynb)](../../materials/module3/Module-3-Lab.ipynb){ .md-button }
+[:material-download: Download the notebook (.ipynb)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/Module-3-Lab.ipynb){ .md-button }
 [:fontawesome-brands-github: View on GitHub](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb){ .md-button target=_blank }
 
 !!! warning "API keys"
@@ -7878,7 +7878,7 @@ sources:
     Keep API keys out of the notebook. In Colab store them as **Secrets** (the key
     icon in the left sidebar) or enter them through the `getpass` prompt the setup
     cell provides; never paste a key into a code cell, and clear outputs before you
-    submit. See [Labs, Colab, and API keys](../../start-here/labs-and-notebooks.md) for the full checklist.
+    submit. See [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) for the full checklist.
 
 !!! note "Read-only rendering"
 
@@ -8814,7 +8814,7 @@ For each metric, write **one sentence** saying what this particular score means 
 
 Save the notebook as `Module3_Lab_[YourName].ipynb` and add it to your GitHub portfolio.
 
-<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module-3-Lab.ipynb](../../materials/module3/Module-3-Lab.ipynb) (`docs/materials/module3/Module-3-Lab.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
+<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module-3-Lab.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/Module-3-Lab.ipynb) (`docs/materials/module3/Module-3-Lab.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module3/Module-3-Lab.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/
 
@@ -9711,7 +9711,7 @@ That coordination adds cost and complexity, so it should only be considered when
 
 ### Learning Resources
 
-* Wooldridge, M., & Jennings, N. R. (1995). [Intelligent agents: Theory and practice](../module-1/readings/intelligent-agents-wooldridge-jennings.md). The knowledge engineering review, 10(2), 115-152.
+* Wooldridge, M., & Jennings, N. R. (1995). [Intelligent agents: Theory and practice](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/intelligent-agents-wooldridge-jennings/index.md). The knowledge engineering review, 10(2), 115-152.
 * Stone, P., & Veloso, M. (2000). [Multiagent systems: A survey from a machine learning perspective](https://link.springer.com/article/10.1023/A:1008942012299){target=_blank}. Autonomous Robots, 8(3), 345-383.
 * Hutchins, E. (1995). [Cognition in the Wild](https://www.ida.liu.se/~nilda08/CST-papers/Hutchins.pdf){target=_blank}. MIT press.
 * Guo, T., Chen, X., Wang, Y., Chang, R., Pei, S., Chawla, N. V., ... & Zhang, X. (2024). [Large language model based multi-agents: A survey of progress and challenges](https://arxiv.org/pdf/2402.01680){target=_blank}. arXiv preprint arXiv:2402.01680.
@@ -9724,7 +9724,7 @@ That coordination adds cost and complexity, so it should only be considered when
 
 ### Chapter 1 Quiz
 
-[Take the Chapter 1 quiz](chapter-quizzes.md#chapter-1-quiz){ .md-button }
+[Take the Chapter 1 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md#chapter-1-quiz){ .md-button }
 
 ## Chapter 2: How do agents coordinate with one another?
 
@@ -9783,7 +9783,7 @@ How agents coordinate — who talks to whom, who holds authority, who sees what 
 
 ### Chapter 2 Quiz
 
-[Take the Chapter 2 quiz](chapter-quizzes.md#chapter-2-quiz){ .md-button }
+[Take the Chapter 2 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md#chapter-2-quiz){ .md-button }
 
 ## Chapter 3: The Three Orchestration Frameworks — LangGraph, AutoGen, and CrewAI
 
@@ -9812,7 +9812,7 @@ implications for the maintainability, debuggability, and scalability of the resu
 
 ### Chapter 3 Quiz
 
-[Take the Chapter 3 quiz](chapter-quizzes.md#chapter-3-quiz){ .md-button }
+[Take the Chapter 3 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md#chapter-3-quiz){ .md-button }
 
 ## Chapter 4: Coordination Failure Taxonomy — The MAST Framework
 
@@ -9870,7 +9870,7 @@ The tables below detail each failure mode within these categories, along with mi
 
 ### Chapter 4 Quiz
 
-[Take the Chapter 4 quiz](chapter-quizzes.md#chapter-4-quiz){ .md-button }
+[Take the Chapter 4 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md#chapter-4-quiz){ .md-button }
 
 ## Chapter 5: Evidence-Based Benchmarking — When Does Multi-Agent Add Value?
 
@@ -9910,7 +9910,7 @@ As discussed in Chapter 1, multi-agent is not always the right choice. The decis
 
 ### Chapter 5 Quiz
 
-[Take the Chapter 5 quiz](chapter-quizzes.md#chapter-5-quiz){ .md-button }
+[Take the Chapter 5 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md#chapter-5-quiz){ .md-button }
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Foundational-Concepts){target=_blank} (wiki page last changed 2026-08-12). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-4/foundational-concepts.md){target=_blank}.</p>
 
@@ -10355,7 +10355,7 @@ A three-agent pipeline (Researcher → Analyst → Critic) runs indefinitely: th
 
 In this lab, you will specify, implement, and run a three-role multi-agent pipeline (Researcher → Analyst → Critic) in LangGraph, with a deterministic quality gate and critic-triggered revision cycles capped at two iterations.
 
-**Open the lab notebook:** [Module4_Learner_Starter.ipynb](lab-notebook.md)
+**Open the lab notebook:** [Module4_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/lab-notebook/index.md)
 
 ### Guided lab notebook flow
 
@@ -10451,9 +10451,9 @@ sources:
 
 # Module 4 Lab: Three-Role Pipeline in LangGraph and CrewAI
 
-[![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb){ target=_blank }
+[![Open in Colab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb){ target=_blank }
 
-[:material-download: Download the notebook (.ipynb)](../../materials/module4/Module4_Learner_Starter.ipynb){ .md-button }
+[:material-download: Download the notebook (.ipynb)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module4/Module4_Learner_Starter.ipynb){ .md-button }
 [:fontawesome-brands-github: View on GitHub](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb){ .md-button target=_blank }
 
 !!! warning "API keys"
@@ -10461,7 +10461,7 @@ sources:
     Keep API keys out of the notebook. In Colab store them as **Secrets** (the key
     icon in the left sidebar) or enter them through the `getpass` prompt the setup
     cell provides; never paste a key into a code cell, and clear outputs before you
-    submit. See [Labs, Colab, and API keys](../../start-here/labs-and-notebooks.md) for the full checklist.
+    submit. See [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) for the full checklist.
 
 !!! note "Read-only rendering"
 
@@ -10914,7 +10914,7 @@ Use evidence from **your own code and execution**. Count only implementation lin
 [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers/en/index) ·
 [LiteLLM providers](https://docs.litellm.ai/)
 
-<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module4_Learner_Starter.ipynb](../../materials/module4/Module4_Learner_Starter.ipynb) (`docs/materials/module4/Module4_Learner_Starter.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
+<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module4_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module4/Module4_Learner_Starter.ipynb) (`docs/materials/module4/Module4_Learner_Starter.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module4/Module4_Learner_Starter.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/
 
@@ -11782,7 +11782,7 @@ Understanding what these layers do helps you (1) design your agent in ways that 
 
 ### Chapter 1 Quiz
 
-[Take the Chapter 1 quiz](chapter-quizzes.md#chapter-1-quiz){ .md-button }
+[Take the Chapter 1 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md#chapter-1-quiz){ .md-button }
 
 ## Chapter 2: Evaluating AI Agents
 
@@ -11824,7 +11824,7 @@ This is the same CI/CD discipline that software engineering applies to code chan
 
 ### Chapter 2 Quiz
 
-[Take the Chapter 2 quiz](chapter-quizzes.md#chapter-2-quiz){ .md-button }
+[Take the Chapter 2 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md#chapter-2-quiz){ .md-button }
 
 ## Chapter 3: Observability
 
@@ -11885,7 +11885,7 @@ These are the signals that indicate something is going wrong in a production age
 
 ### Chapter 3 Quiz
 
-[Take the Chapter 3 quiz](chapter-quizzes.md#chapter-3-quiz){ .md-button }
+[Take the Chapter 3 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md#chapter-3-quiz){ .md-button }
 
 ## Chapter 4: Security Risks for LLM Applications — The OWASP Top 10
 
@@ -11939,7 +11939,7 @@ The LLM Top 10 covers risks for any LLM-powered application. The Agentic Top 10 
 
 ### Chapter 4 Quiz
 
-[Take the Chapter 4 quiz](chapter-quizzes.md#chapter-4-quiz){ .md-button }
+[Take the Chapter 4 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md#chapter-4-quiz){ .md-button }
 
 ## Chapter 5: Responsible AI — Governance, Compliance, and Accountability
 
@@ -12024,7 +12024,7 @@ These are the artifacts that demonstrate accountability when regulators, auditor
 
 ### Chapter 5 Quiz
 
-[Take the Chapter 5 quiz](chapter-quizzes.md#chapter-5-quiz){ .md-button }
+[Take the Chapter 5 quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md#chapter-5-quiz){ .md-button }
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Foundational-Concepts){target=_blank} (wiki page last changed 2026-08-28). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/modules/module-5/foundational-concepts.md){target=_blank}.</p>
 
@@ -12337,7 +12337,7 @@ Describe a change to an agent that would improve one evaluation dimension while 
 
 In this lab, you will instrument a two-tool agent with LangSmith tracing, run it on 10 test prompts spanning five categories (factual, calculation, multi-step, format and safety), and explore what the resulting traces reveal about how your agent actually behaves. The agent's search tool returns simulated results so that every run is reproducible; the notebook shows how to switch to a live DuckDuckGo search if you want one.
 
-**Open the lab notebook:** [Module5_Learner_Starter.ipynb](lab-notebook.md)
+**Open the lab notebook:** [Module5_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/index.md)
 
 ### Guided lab notebook flow
 
@@ -12456,9 +12456,9 @@ sources:
 
 # Module 5 Lab: LangSmith Tracing and a Comparative Observability Study
 
-[![Open in Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){ target=_blank }
+[![Open in Colab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/colab-badge.svg)](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){ target=_blank }
 
-[:material-download: Download the notebook (.ipynb)](../../materials/module5/Module5_Learner_Starter.ipynb){ .md-button }
+[:material-download: Download the notebook (.ipynb)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module5/Module5_Learner_Starter.ipynb){ .md-button }
 [:fontawesome-brands-github: View on GitHub](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){ .md-button target=_blank }
 
 !!! warning "API keys"
@@ -12466,7 +12466,7 @@ sources:
     Keep API keys out of the notebook. In Colab store them as **Secrets** (the key
     icon in the left sidebar) or enter them through the `getpass` prompt the setup
     cell provides; never paste a key into a code cell, and clear outputs before you
-    submit. See [Labs, Colab, and API keys](../../start-here/labs-and-notebooks.md) for the full checklist.
+    submit. See [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) for the full checklist.
 
 !!! note "Read-only rendering"
 
@@ -13144,7 +13144,7 @@ TODO
 
 [LangSmith Docs](https://docs.langchain.com/langsmith/home) · [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents) · [LiteLLM Providers](https://docs.litellm.ai/)
 
-<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module5_Learner_Starter.ipynb](../../materials/module5/Module5_Learner_Starter.ipynb) (`docs/materials/module5/Module5_Learner_Starter.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
+<p class="course-provenance" markdown>Rendered by nbconvert from the notebook [Module5_Learner_Starter.ipynb](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module5/Module5_Learner_Starter.ipynb) (`docs/materials/module5/Module5_Learner_Starter.ipynb` in the [course repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/docs/materials/module5/Module5_Learner_Starter.ipynb){target=_blank}); outputs cleared. Spotted a problem? Fix the notebook, not this page.</p>
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/
 
@@ -14139,8 +14139,8 @@ not one click away from the lab a learner is working on.
 
 | Module | Read on GitHub | Run in Colab | Learner starter it solves |
 | :-- | :-- | :-- | :-- |
-| 4 | [`Module4_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Module 4 lab](../modules/module-4/lab-notebook.md) (`Module4_Learner_Starter.ipynb`) |
-| 5 | [`Module5_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Module 5 lab](../modules/module-5/lab-notebook.md) (`Module5_Learner_Starter.ipynb`) |
+| 4 | [`Module4_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module4/Module4_Instructor_Solution.ipynb){target=_blank} | [Module 4 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/lab-notebook/index.md) (`Module4_Learner_Starter.ipynb`) |
+| 5 | [`Module5_Instructor_Solution.ipynb`](https://github.com/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Open in Colab](https://colab.research.google.com/github/tyson-swetnam/AI-Automation-and-Agents/blob/main/instructor/materials/module5/Module5_Instructor_Solution.ipynb){target=_blank} | [Module 5 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/index.md) (`Module5_Learner_Starter.ipynb`) |
 
 GitHub renders a notebook in the browser with its saved outputs, which is
 enough for most reviews; Colab opens a runnable copy in your own Drive. Each
@@ -14170,11 +14170,11 @@ self-checked.
 - **Chapter quizzes** (five per module, 25 questions per module, 125 in
   total). Each question's answer and feedback sits in a
   `??? success "Show answer and feedback"` collapsible on the module's
-  *Chapter quizzes* page ([Module 1](../modules/module-1/chapter-quizzes.md),
-  [Module 2](../modules/module-2/chapter-quizzes.md),
-  [Module 3](../modules/module-3/chapter-quizzes.md),
-  [Module 4](../modules/module-4/chapter-quizzes.md),
-  [Module 5](../modules/module-5/chapter-quizzes.md)). Collapsed for readers,
+  *Chapter quizzes* page ([Module 1](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md),
+  [Module 2](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md),
+  [Module 3](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md),
+  [Module 4](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md),
+  [Module 5](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md)). Collapsed for readers,
   but present in the page's Markdown mirror (`…/index.md`) and in
   `llms-full.txt`, so search engines and AI assistants can read them.
 - **Module 1 concept quiz.** The interactive HTML at
@@ -14183,7 +14183,7 @@ self-checked.
   `data-answer` attributes in the page's own JavaScript and HTML, and the
   page renders an *Instructor Answer Key & Rationale* table at the bottom
   that is **visible without submitting** (it is not hidden by CSS or
-  script). Grading is client-side; nothing is transmitted. The [concept quiz page](../modules/module-1/concept-quiz.md)
+  script). Grading is client-side; nothing is transmitted. The [concept quiz page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/index.md)
   tells students this. The two-attempt / best-score rule can only be enforced
   by the LMS copy.
 - **Archived self-assessment quizzes** (the superseded Module 2 set under
@@ -14195,7 +14195,7 @@ self-checked.
 If the owners decide keys must be private, the cleanest change is to host
 quizzes in the LMS and replace the collapsibles with a pointer; the
 migration script's answer-key converter is the single place that would
-change. Record the decision in the [update log](../log.md).
+change. Record the decision in the [update log](https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/index.md).
 
 ## LMS gating notes
 
@@ -14244,21 +14244,21 @@ Rules enforced by the site's lint step:
 The rendered page then carries `<meta name="okf:trust-tier"
 content="human-reviewed">`, and AI assistants are told to prefer
 human-reviewed pages when answers conflict (see
-[For AI agents](../about/ai-agents.md)). Add a line to the
-[update log](../log.md) when you verify a batch of pages.
+[For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/index.md)). Add a line to the
+[update log](https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/index.md) when you verify a batch of pages.
 
 ## Related pages
 
-- [Formal learning design](learning-design.md) - the standard activity
+- [Formal learning design](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/index.md) - the standard activity
   structure, Bloom's spiral, general course skills and module-specific
   skills.
-- [Development plan](development-plan.md) - milestones and the development
+- [Development plan](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/development-plan/index.md) - milestones and the development
   roadmap.
-- [Course review, July 2026](course-review-2026-07.md) - a historical review
+- [Course review, July 2026](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/index.md) - a historical review
   of the course design, kept for reference.
-- [Contributing](../about/contributing.md) - how to edit pages, the
+- [Contributing](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/index.md) - how to edit pages, the
   frontmatter contract and the local build.
-- [License and attribution](../about/license-and-attribution.md) - CC BY 4.0
+- [License and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/index.md) - CC BY 4.0
   for the content, BSD 3-Clause for the site code, and who holds copyright
   over which part.
 
@@ -14281,14 +14281,14 @@ because LangChain 1.0 removed `AgentExecutor`, `create_react_agent`,
 `RetrievalQA`, `langchain.chains`, `langchain.memory` and `langchain.prompts`
 outright. The assessment content that examined those APIs has now been revised
 to match, across the
-[Module 2 chapter quizzes](../modules/module-2/chapter-quizzes.md) and
-[reading guides](../modules/module-2/reading-guides.md), the
-[Module 3 chapter quizzes](../modules/module-3/chapter-quizzes.md),
-[reading guides](../modules/module-3/reading-guides.md) and
-[activities](../modules/module-3/activities.md), and the
-[Module 2 foundational concepts](../modules/module-2/foundational-concepts.md)
+[Module 2 chapter quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md) and
+[reading guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/index.md), the
+[Module 3 chapter quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md),
+[reading guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/reading-guides/index.md) and
+[activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/activities/index.md), and the
+[Module 2 foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md)
 lesson the quizzes cite. This is the change the
-[July 2026 course review](course-review-2026-07.md) asked for when it flagged
+[July 2026 course review](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/index.md) asked for when it flagged
 the `AgentExecutor` dependency.
 
 **What was preserved.** Both quiz pages still hold 25 questions with 25 answer
@@ -14301,7 +14301,7 @@ rather than being made obviously wrong.
 **Two conventions now hold across every page.** First, one component vocabulary:
 **LLM Backbone**, **Tool Registry**, **Action Executor** and **Memory Module**,
 the four already used on the
-[Module 2 resources](../modules/module-2/resources.md) page. The old five-item
+[Module 2 resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/resources/index.md) page. The old five-item
 list's fifth member, the output parser, is genuinely gone, because a
 tool-calling model returns a structured call rather than text that has to be
 parsed. That disappearance is taught rather than papered over. Second, one trace
@@ -14341,7 +14341,7 @@ notebooks, not introduced by the migration. All are now resolved or
 withdrawn; each entry records which side was taken and why, so an author who
 disagrees can reverse the call. `scripts/check_consistency.py` checks the
 notebooks, activities pages, overviews and
-[Labs, Colab, and API keys](../start-here/labs-and-notebooks.md) against one
+[Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) against one
 another on every point below; run it after changing any of them.
 
 1. **Lab submission filenames (resolved 2026-09-11).** The Module 2, 4 and 5
@@ -14418,16 +14418,16 @@ another on every point below; run it after changing any of them.
    chapter 5 lesson's table, transcribed from an image, listed latency, cost
    per inference, reliability and error rate, scalability, interpretability,
    and organizational integration. The
-   [reading guide](../modules/module-2/reading-guides.md) and all five
+   [reading guide](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/index.md) and all five
    chapter 5 quiz questions assess a different six: task complexity,
    inference cost, latency requirements, external information needs,
    interpretability requirements, and deployment risk profile. The
-   [lesson](../modules/module-2/foundational-concepts.md) now teaches the six
+   [lesson](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md) now teaches the six
    the learner is assessed on, and keeps the image's guidance on scalability
    and organizational integration as prose after the table. The image stays
    in `images/` as the record of what it said.
 10. **The Module 5 agent (resolved 2026-09-11).** The
-    [activities page](../modules/module-5/activities.md) described a research
+    [activities page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/activities/index.md) described a research
     agent with live web search and webpage reading, run on ten complex
     research prompts. The notebook's agent has a simulated search tool and a
     calculator, with live DuckDuckGo search as an option, and runs ten prompts
@@ -14449,7 +14449,7 @@ another on every point below; run it after changing any of them.
     extra tokens relative to a single-agent baseline, for which chapter 1
     question 5 says there is no universal threshold; chapter 5 question 5
     then set a 180% baseline figure against the 40% rule. The
-    [lesson](../modules/module-4/foundational-concepts.md) now defines both and
+    [lesson](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/foundational-concepts/index.md) now defines both and
     names them apart: the *coordination overhead ratio* (the baseline
     comparison, which no universal threshold governs) and the *coordination
     share* (the internal measure the 40% rule applies to, as a signal to
@@ -15097,7 +15097,7 @@ sources:
 
 # License and attribution
 
-[![Creative Commons Attribution 4.0 International](../assets/cc-by.png){ width="100" }](https://creativecommons.org/licenses/by/4.0/){target=_blank}
+[![Creative Commons Attribution 4.0 International](https://tyson-swetnam.github.io/AI-Automation-and-Agents/assets/cc-by.png){ width="100" }](https://creativecommons.org/licenses/by/4.0/){target=_blank}
 
 *AI Automation and Agents* is published under the
 [Creative Commons Attribution 4.0 International license (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}.
@@ -15195,8 +15195,8 @@ covered by the Creative Commons license.
 
 The site is built with [Zensical](https://zensical.org){target=_blank} and
 structured as an [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md){target=_blank}
-knowledge bundle; see [Contributing](contributing.md) for how it is
-maintained and [For AI agents](ai-agents.md) for how machines should read it.
+knowledge bundle; see [Contributing](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/index.md) for how it is
+maintained and [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/index.md) for how machines should read it.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/
 
@@ -15310,7 +15310,7 @@ Key by key:
 - **Never write `verified`.** Only an instructor adds
   `verified: { by: "human:<netid>", at: … }` after reviewing a page; the
   linter rejects anything else. How and when is described in
-  [Instructor materials](../course-design/instructor-materials.md).
+  [Instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md).
 
 Section `index.md` files are OKF directory listings and carry **no
 frontmatter**; the pipeline generates them, so do not hand-edit them. The
@@ -15387,6 +15387,12 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **`scripts/postbuild_agent_surface.py`** and **`scripts/check_site.py`** -
   run after `zensical build`: add the Markdown mirror, `okf:*` meta tags and
   `robots.txt` to `site/`, then assert the build is complete.
+- **`scripts/okf_links.py`** - the one rule for publishing Markdown to
+  agents: a relative link becomes an absolute URL pointing at the linked
+  page's Markdown twin (page URL + `index.md`). Used by
+  `postbuild_agent_surface.py` when it mirrors a page and by
+  `gen_llms_txt.py` when it builds `llms-full.txt`; the sources under `docs/`
+  keep their relative links.
 - **`scripts/check_consistency.py`** - checks that the lab notebooks, the
   activities pages, the module overviews and *Labs, Colab, and API keys*
   agree on submission filenames, time budgets, learning-objective labels,
@@ -15477,11 +15483,26 @@ rather than scraping rendered HTML.
 
 | Endpoint | What you get |
 | :-- | :-- |
-| [`/llms.txt`](../llms.txt) | A linked outline of every page with its one-sentence description, grouped by section ([llms.txt convention](https://llmstxt.org){target=_blank}) |
-| [`/llms-full.txt`](../llms-full.txt) | The entire corpus in one file (about 1 MB): every page's Markdown with frontmatter, each prefixed by its canonical URL |
-| Any page URL + `index.md` | That page's Markdown source with full OKF frontmatter, for example `/modules/module-2/foundational-concepts/index.md` |
+| [`/llms.txt`](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms.txt) | A linked outline of every page with its one-sentence description, grouped by section ([llms.txt convention](https://llmstxt.org){target=_blank}). Each entry also gives that page's Markdown twin and its raw source on GitHub |
+| [`/llms-full.txt`](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt) | The entire corpus in one file (about 1 MB): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute. Prefer it over fetching pages one at a time |
+| Any page URL + `index.md` | That page's Markdown source with full OKF frontmatter, served as `text/markdown` — for example `/modules/module-2/foundational-concepts/index.md`. Section listings too, such as `/modules/index.md` |
+| `raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/<path>.md` | The same Markdown from GitHub, for sandboxes that allow `github.com` but not `*.github.io`. `<path>` is the site path without its trailing slash |
 | `/sitemap.xml`, `/robots.txt` | Standard crawl surface; `robots.txt` repeats these pointers |
 | [Source repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents){target=_blank} | The bundle itself under `docs/`, plus `AGENTS.md` with the contribution rules for coding agents |
+
+Every rendered page carries two *visible* pointers as well, because text
+extraction and link-derived URL allowlists never see `<head>`: a **Markdown
+button** in the page header, beside *Edit this page* and *View source*, and a
+**Machine-readable** line at the end of the article linking the twin, the raw
+source, `llms.txt` and `llms-full.txt`.
+
+**Traversing the bundle.** Inside a Markdown twin, and inside
+`llms-full.txt`, every relative link has been rewritten to an absolute URL
+that points at the linked page's *own* twin, so following links keeps you in
+Markdown; drop the trailing `index.md` to reach the rendered page. Links to
+files served verbatim (`/materials/`, `/assets/`) point at the file. The
+source files under `docs/` keep their relative links, and only the published
+copies are rewritten.
 
 Every rendered page also declares its Markdown twin and OKF signals in HTML:
 
@@ -15506,10 +15527,10 @@ Every module has the same page set, in the order learners follow it:
 *Activities* (labs, hands-on project, discussion), *Lab notebook*
 (Modules 2-5), *Chapter quizzes*, *Additional resources* (Modules 1-3).
 Module 1 adds *Readings*, *Worksheets*, a *Concept quiz* and a *Diagnostic
-survey*. [How this course works](../start-here/how-this-course-works.md)
+survey*. [How this course works](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/index.md)
 explains the path and the grading pattern; use it to orient before answering
 "where do I find…" questions. Old wiki URLs are mapped to site pages in the
-[wiki crosswalk](wiki-crosswalk.md).
+[wiki crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/index.md).
 
 ## Reading the OKF frontmatter
 
@@ -15571,7 +15592,7 @@ relying on it:
   instructor or the discussion forum.
 - **Respect the free-tier path.** When a learner asks about tools or costs,
   present the free option each lab offers
-  ([Labs, Colab, and API keys](../start-here/labs-and-notebooks.md)) before
+  ([Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md)) before
   paid ones, and never suggest pasting an API key into a notebook cell.
 - **Do not fetch instructor material.** Files under `instructor/` in the
   repository are not part of this bundle and are not for learners.
@@ -15586,7 +15607,7 @@ source or the script's `PATCHES`, not the file); every new page needs OKF
 frontmatter with a `type`; external links get `{target=_blank}`; answer keys
 go only in `???` collapsibles; run `okf_validate.py`, `site_lint.py` and
 `gen_llms_txt.py` before committing; add a `docs/log.md` entry; and never
-write a `verified` key. [Contributing](contributing.md) has the human
+write a `verified` key. [Contributing](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/index.md) has the human
 version.
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/
@@ -15613,47 +15634,47 @@ The course content was migrated from the [GitHub wiki](https://github.com/UA-AI2
 
 | Wiki page | Site page(s) | Disposition |
 | --- | --- | --- |
-| [Course-Review-Analysis-v1](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Course-Review-Analysis-v1){target=_blank} | [Course Review Analysis (July 2026)](../course-design/course-review-2026-07.md) | archived (deprecated) |
-| [Development-Plan](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Development-Plan){target=_blank} | [Course Development Plan](../course-design/development-plan.md) | migrated |
-| [Formal-Learning-Design-Information](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Formal-Learning-Design-Information){target=_blank} | [Formal Learning Design](../course-design/learning-design.md) | migrated |
-| [Github-Portfolio-Tutorial](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Github-Portfolio-Tutorial){target=_blank} | [GitHub Portfolio Setup Guide](../start-here/github-portfolio-setup.md) | migrated |
-| [Home](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Home){target=_blank} | [Home](../index.md) | hand-written landing page |
-| [Module-1-Act-11:-Guided-Workflow-Mapping-Exercise](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-11:-Guided-Workflow-Mapping-Exercise){target=_blank} | [Guided Workflow Mapping Exercise (Stub)](../archive/module-1/guided-workflow-mapping-stub.md) | archived (deprecated) |
-| [Module-1-Act-3:-What-is-an-agent?](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-3:-What-is-an-agent%3F){target=_blank} | [What Is an AI Agent?](../modules/module-1/readings/what-is-an-agent.md) | migrated |
-| [Module-1-Act-5:-AI-Automation-and-Multi‐Agent-Frameworks](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-5:-AI-Automation-and-Multi%E2%80%90Agent-Frameworks){target=_blank} | [AI Automation and Multi-Agent Frameworks: A Strategic Comparison](../modules/module-1/readings/automation-and-multi-agent-frameworks.md) | migrated |
-| [Module-1-Act-6:-AI-Agents-Glossary](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-6:-AI-Agents-Glossary){target=_blank} | [Worksheet: AI Agents Glossary](../modules/module-1/worksheets/ai-agents-glossary.md) | migrated |
-| [Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram){target=_blank} | [Worksheet: Automation Paradigms Comparison](../modules/module-1/worksheets/automation-paradigms-comparison.md) | migrated |
-| [Module-1-Act-8:-Module-1-Concept-Quiz](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-8:-Module-1-Concept-Quiz){target=_blank} | [Module 1 Concept Quiz (Specification Draft)](../archive/module-1/concept-quiz-spec-draft.md) | archived (deprecated) |
-| [Module-1-Unit-3-Lab-A](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Unit-3-Lab-A){target=_blank} | [Lab Checklist: Claude Desktop Orientation (Superseded)](../archive/module-1/lab-checklist-claude-desktop.md) | archived (deprecated) |
-| [Module-1-Unit-3-Lab-B](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Unit-3-Lab-B){target=_blank} | [Lab Checklist: Local LLM with Ollama (Superseded)](../archive/module-1/lab-checklist-ollama.md) | archived (deprecated) |
-| [Module-1.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1.2-Addendum){target=_blank} | [Module 1 Reading Guides](../modules/module-1/reading-guides.md), [Module 1 Chapter Quizzes](../modules/module-1/chapter-quizzes.md) | split into two pages |
-| [Module-1:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Activities){target=_blank} | [Module 1 Activities](../modules/module-1/activities.md) | migrated |
-| [Module-1:-Additional-Suggested-Resources](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Additional-Suggested-Resources){target=_blank} | [Module 1: Additional Suggested Resources](../modules/module-1/resources.md) | migrated |
-| [Module-1:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Foundational-Concepts){target=_blank} | [Module 1: Foundational Concepts](../modules/module-1/foundational-concepts.md) | migrated |
-| [Module-1:-Intelligent-Agents-(book-summary)](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Intelligent-Agents-(book-summary)){target=_blank} | [Intelligent Agents: Theory and Practice (Reading Summary)](../modules/module-1/readings/intelligent-agents-wooldridge-jennings.md) | migrated |
-| [Module-1:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Overview){target=_blank} | [Module 1 Overview: From Prompts to Pipelines](../modules/module-1/overview.md) | migrated |
-| [Module-1:-Overview2](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Overview2){target=_blank} | [Module 1 Overview (June 2026 Draft)](../archive/module-1/overview-draft-2026-06.md) | archived (deprecated) |
-| [Module-2.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-Addendum){target=_blank} | [Module 2 Reading Guides](../modules/module-2/reading-guides.md), [Module 2 Chapter Quizzes](../modules/module-2/chapter-quizzes.md) | split into two pages |
-| [Module-2.2-Addendum-‐-OLD](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-Addendum-%E2%80%90-OLD){target=_blank} | [Module 2 Self-Assessment Quizzes (Retired)](../archive/module-2/self-assessment-quizzes.md) | archived (deprecated) |
-| [Module-2.2-‐-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-%E2%80%90-Addendum){target=_blank} | [Module 2 Reading Guides](../modules/module-2/reading-guides.md) | dropped: near-duplicate of Module-2.2-Addendum |
-| [Module-2:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Activities){target=_blank} | [Module 2 Activities](../modules/module-2/activities.md) | migrated |
-| [Module-2:-Additional-Suggested--Resources](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Additional-Suggested--Resources){target=_blank} | [Module 2: Additional Suggested Resources](../modules/module-2/resources.md) | migrated |
-| [Module-2:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Foundational-Concepts){target=_blank} | [Module 2: Foundational Concepts](../modules/module-2/foundational-concepts.md) | migrated |
-| [Module-2:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Overview){target=_blank} | [Module 2 Overview: Agent Reasoning Architectures and Tool Integration](../modules/module-2/overview.md) | migrated |
-| [Module-3.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3.2-Addendum){target=_blank} | [Module 3 Reading Guides](../modules/module-3/reading-guides.md), [Module 3 Chapter Quizzes](../modules/module-3/chapter-quizzes.md) | split into two pages |
-| [Module-3:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Activities){target=_blank} | [Module 3 Activities](../modules/module-3/activities.md) | migrated |
-| [Module-3:-Additional-Suggested-Resources](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Additional-Suggested-Resources){target=_blank} | [Module 3: Additional Suggested Resources](../modules/module-3/resources.md) | migrated |
-| [Module-3:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Foundational-Concepts){target=_blank} | [Module 3: Foundational Concepts](../modules/module-3/foundational-concepts.md) | migrated |
-| [Module-3:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Overview){target=_blank} | [Module 3 Overview: Memory Architectures and RAG](../modules/module-3/overview.md) | migrated |
-| [Module-4.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4.2-Addendum){target=_blank} | [Module 4 Reading Guides](../modules/module-4/reading-guides.md), [Module 4 Chapter Quizzes](../modules/module-4/chapter-quizzes.md) | split into two pages |
-| [Module-4:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Activities){target=_blank} | [Module 4 Activities](../modules/module-4/activities.md) | migrated |
-| [Module-4:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Foundational-Concepts){target=_blank} | [Module 4: Foundational Concepts](../modules/module-4/foundational-concepts.md) | migrated |
-| [Module-4:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Overview){target=_blank} | [Module 4 Overview: Multi-Agent Systems](../modules/module-4/overview.md) | migrated |
-| [Module-5.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5.2-Addendum){target=_blank} | [Module 5 Reading Guides](../modules/module-5/reading-guides.md), [Module 5 Chapter Quizzes](../modules/module-5/chapter-quizzes.md) | split into two pages |
-| [Module-5:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Activities){target=_blank} | [Module 5 Activities](../modules/module-5/activities.md) | migrated |
-| [Module-5:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Foundational-Concepts){target=_blank} | [Module 5: Foundational Concepts](../modules/module-5/foundational-concepts.md) | migrated |
-| [Module-5:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Overview){target=_blank} | [Module 5 Overview: Responsible Agentic AI](../modules/module-5/overview.md) | migrated |
-| [_Footer](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/_Footer){target=_blank} | [License and attribution](license-and-attribution.md) | footer text moved to the site footer and this page |
+| [Course-Review-Analysis-v1](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Course-Review-Analysis-v1){target=_blank} | [Course Review Analysis (July 2026)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/index.md) | archived (deprecated) |
+| [Development-Plan](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Development-Plan){target=_blank} | [Course Development Plan](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/development-plan/index.md) | migrated |
+| [Formal-Learning-Design-Information](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Formal-Learning-Design-Information){target=_blank} | [Formal Learning Design](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/index.md) | migrated |
+| [Github-Portfolio-Tutorial](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Github-Portfolio-Tutorial){target=_blank} | [GitHub Portfolio Setup Guide](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/github-portfolio-setup/index.md) | migrated |
+| [Home](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Home){target=_blank} | [Home](https://tyson-swetnam.github.io/AI-Automation-and-Agents/index.md) | hand-written landing page |
+| [Module-1-Act-11:-Guided-Workflow-Mapping-Exercise](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-11:-Guided-Workflow-Mapping-Exercise){target=_blank} | [Guided Workflow Mapping Exercise (Stub)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/guided-workflow-mapping-stub/index.md) | archived (deprecated) |
+| [Module-1-Act-3:-What-is-an-agent?](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-3:-What-is-an-agent%3F){target=_blank} | [What Is an AI Agent?](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/what-is-an-agent/index.md) | migrated |
+| [Module-1-Act-5:-AI-Automation-and-Multi‐Agent-Frameworks](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-5:-AI-Automation-and-Multi%E2%80%90Agent-Frameworks){target=_blank} | [AI Automation and Multi-Agent Frameworks: A Strategic Comparison](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/automation-and-multi-agent-frameworks/index.md) | migrated |
+| [Module-1-Act-6:-AI-Agents-Glossary](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-6:-AI-Agents-Glossary){target=_blank} | [Worksheet: AI Agents Glossary](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/worksheets/ai-agents-glossary/index.md) | migrated |
+| [Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-7:-Automation-Paradigms-Comparison-Diagram){target=_blank} | [Worksheet: Automation Paradigms Comparison](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/worksheets/automation-paradigms-comparison/index.md) | migrated |
+| [Module-1-Act-8:-Module-1-Concept-Quiz](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-8:-Module-1-Concept-Quiz){target=_blank} | [Module 1 Concept Quiz (Specification Draft)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/concept-quiz-spec-draft/index.md) | archived (deprecated) |
+| [Module-1-Unit-3-Lab-A](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Unit-3-Lab-A){target=_blank} | [Lab Checklist: Claude Desktop Orientation (Superseded)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/lab-checklist-claude-desktop/index.md) | archived (deprecated) |
+| [Module-1-Unit-3-Lab-B](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Unit-3-Lab-B){target=_blank} | [Lab Checklist: Local LLM with Ollama (Superseded)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/lab-checklist-ollama/index.md) | archived (deprecated) |
+| [Module-1.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1.2-Addendum){target=_blank} | [Module 1 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/reading-guides/index.md), [Module 1 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md) | split into two pages |
+| [Module-1:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Activities){target=_blank} | [Module 1 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md) | migrated |
+| [Module-1:-Additional-Suggested-Resources](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Additional-Suggested-Resources){target=_blank} | [Module 1: Additional Suggested Resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/resources/index.md) | migrated |
+| [Module-1:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Foundational-Concepts){target=_blank} | [Module 1: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/index.md) | migrated |
+| [Module-1:-Intelligent-Agents-(book-summary)](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Intelligent-Agents-(book-summary)){target=_blank} | [Intelligent Agents: Theory and Practice (Reading Summary)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/intelligent-agents-wooldridge-jennings/index.md) | migrated |
+| [Module-1:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Overview){target=_blank} | [Module 1 Overview: From Prompts to Pipelines](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md) | migrated |
+| [Module-1:-Overview2](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1:-Overview2){target=_blank} | [Module 1 Overview (June 2026 Draft)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/overview-draft-2026-06/index.md) | archived (deprecated) |
+| [Module-2.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-Addendum){target=_blank} | [Module 2 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/index.md), [Module 2 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md) | split into two pages |
+| [Module-2.2-Addendum-‐-OLD](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-Addendum-%E2%80%90-OLD){target=_blank} | [Module 2 Self-Assessment Quizzes (Retired)](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-2/self-assessment-quizzes/index.md) | archived (deprecated) |
+| [Module-2.2-‐-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2.2-%E2%80%90-Addendum){target=_blank} | [Module 2 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/index.md) | dropped: near-duplicate of Module-2.2-Addendum |
+| [Module-2:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Activities){target=_blank} | [Module 2 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/activities/index.md) | migrated |
+| [Module-2:-Additional-Suggested--Resources](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Additional-Suggested--Resources){target=_blank} | [Module 2: Additional Suggested Resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/resources/index.md) | migrated |
+| [Module-2:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Foundational-Concepts){target=_blank} | [Module 2: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md) | migrated |
+| [Module-2:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-2:-Overview){target=_blank} | [Module 2 Overview: Agent Reasoning Architectures and Tool Integration](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/overview/index.md) | migrated |
+| [Module-3.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3.2-Addendum){target=_blank} | [Module 3 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/reading-guides/index.md), [Module 3 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md) | split into two pages |
+| [Module-3:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Activities){target=_blank} | [Module 3 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/activities/index.md) | migrated |
+| [Module-3:-Additional-Suggested-Resources](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Additional-Suggested-Resources){target=_blank} | [Module 3: Additional Suggested Resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/resources/index.md) | migrated |
+| [Module-3:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Foundational-Concepts){target=_blank} | [Module 3: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/foundational-concepts/index.md) | migrated |
+| [Module-3:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-3:-Overview){target=_blank} | [Module 3 Overview: Memory Architectures and RAG](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/overview/index.md) | migrated |
+| [Module-4.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4.2-Addendum){target=_blank} | [Module 4 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/reading-guides/index.md), [Module 4 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md) | split into two pages |
+| [Module-4:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Activities){target=_blank} | [Module 4 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/activities/index.md) | migrated |
+| [Module-4:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Foundational-Concepts){target=_blank} | [Module 4: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/foundational-concepts/index.md) | migrated |
+| [Module-4:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-4:-Overview){target=_blank} | [Module 4 Overview: Multi-Agent Systems](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/overview/index.md) | migrated |
+| [Module-5.2-Addendum](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5.2-Addendum){target=_blank} | [Module 5 Reading Guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/reading-guides/index.md), [Module 5 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md) | split into two pages |
+| [Module-5:-Activities](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Activities){target=_blank} | [Module 5 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/activities/index.md) | migrated |
+| [Module-5:-Foundational-Concepts](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Foundational-Concepts){target=_blank} | [Module 5: Foundational Concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/foundational-concepts/index.md) | migrated |
+| [Module-5:-Overview](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-5:-Overview){target=_blank} | [Module 5 Overview: Responsible Agentic AI](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/overview/index.md) | migrated |
+| [_Footer](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/_Footer){target=_blank} | [License and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/index.md) | footer text moved to the site footer and this page |
 | [_Sidebar](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/_Sidebar){target=_blank} | site navigation | not a page: became the nav in zensical.toml |
 
 ---8<--- https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/module-1/concept-quiz-spec-draft/
@@ -15690,7 +15711,7 @@ wiki_page: Module-1-Act-8:-Module-1-Concept-Quiz
 
 !!! warning "Superseded"
 
-    This page is kept for history. The current version is [Module 1 Concept Quiz](../../modules/module-1/concept-quiz.md).
+    This page is kept for history. The current version is [Module 1 Concept Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/index.md).
 
 A 15-question auto-graded quiz with two attempts permitted, with the best score recorded. 
 
@@ -15719,7 +15740,7 @@ D. Obligation
     - Desires represent pro-attitudes of states of affairs the agent wishes to bring about, rather than its knowledge of the current state.
     - Obligations are social or contractual constraints on behavior, not the agent's internal knowledge base.
 
-*Questions 2-15 were never authored in this wiki draft; the complete quiz is the live [Module 1 Concept Quiz](../../modules/module-1/concept-quiz.md).*
+*Questions 2-15 were never authored in this wiki draft; the complete quiz is the live [Module 1 Concept Quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/index.md).*
 
 <p class="course-provenance" markdown>Migrated from the [course wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki/Module-1-Act-8:-Module-1-Concept-Quiz){target=_blank} (wiki page last changed 2026-05-07). Spotted a problem? [Edit this page](https://github.com/tyson-swetnam/AI-Automation-and-Agents/edit/main/docs/archive/module-1/concept-quiz-spec-draft.md){target=_blank}.</p>
 
@@ -15757,7 +15778,7 @@ wiki_page: Module-1-Act-11:-Guided-Workflow-Mapping-Exercise
 
 !!! warning "Superseded"
 
-    This page is kept for history. The current version is [Module 1 Activities](../../modules/module-1/activities.md).
+    This page is kept for history. The current version is [Module 1 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md).
 
 Students receive a pre-written scenario describing an administrative invoice-review process and map it using the Workflow Mapping Template: trigger, steps with input/output formats, tools, conditional branches, and output. 
 
@@ -15802,7 +15823,7 @@ wiki_page: Module-1-Unit-3-Lab-A
 
 !!! warning "Superseded"
 
-    This page is kept for history. The current version is [Module 1 Activities](../../modules/module-1/activities.md).
+    This page is kept for history. The current version is [Module 1 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md).
 
 The goal of this Lab is to help and guide the user to understand the agentic functionalities of Claude Desktop.
 
@@ -15855,7 +15876,7 @@ wiki_page: Module-1-Unit-3-Lab-B
 
 !!! warning "Superseded"
 
-    This page is kept for history. The current version is [Module 1 Activities](../../modules/module-1/activities.md).
+    This page is kept for history. The current version is [Module 1 Activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md).
 
 The goal of this Lab is to help and guide the user to understand the process of installing and accessing a local AI model, building baseline intuition for LLM capabilities required for agent frameworks in later Modules (Modules 3 and 4).
 
@@ -15919,7 +15940,7 @@ wiki_page: Module-1:-Overview2
 
 !!! warning "Superseded"
 
-    This page is kept for history. The current version is [Module 1 Overview: From Prompts to Pipelines](../../modules/module-1/overview.md).
+    This page is kept for history. The current version is [Module 1 Overview: From Prompts to Pipelines](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md).
 
 ## Introduction
 
@@ -16058,7 +16079,7 @@ wiki_page: Module-2.2-Addendum-‐-OLD
 
 !!! warning "Superseded"
 
-    This page is kept for history. The current version is [Module 2 Chapter Quizzes](../../modules/module-2/chapter-quizzes.md).
+    This page is kept for history. The current version is [Module 2 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md).
 
 Five quizzes of five questions each, one per chapter. Questions are multiple-choice with a single correct answer. Answer keys appear at the end of each quiz. These assessments are not graded; their purpose is to verify comprehension of the lesson content and assigned readings before proceeding to the chapter quiz.
 
@@ -16303,59 +16324,65 @@ Five quizzes of five questions each, one per chapter. Questions are multiple-cho
 
 # Documentation update log
 
+## 2026-09-12
+
+* **Update**: Made the Markdown surface traversable rather than merely present. Every page's Markdown twin (the page URL plus `index.md`) and every page inside [llms-full.txt](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt) now have their relative links rewritten to absolute URLs that point at the linked page's *own* twin, so an agent can follow links through the whole bundle without leaving Markdown or guessing a base. The twins are written one directory below their source, so a copied relative link had been resolving one level too low; `llms-full.txt` had 128 of them with nothing to resolve against at all. The rule lives in a new `scripts/okf_links.py`, shared by the generator and the post-build step, and `scripts/check_site.py` now rebuilds each twin from its source to prove the two agree.
+* **Update**: [llms.txt](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms.txt) now gives three addresses for every page — the rendered page, its Markdown twin, and its raw source on `raw.githubusercontent.com` — with a block showing the pattern for each, a note that some sandboxes reach github.com but not `*.github.io`, and a Meta entry for the full corpus with its size. `robots.txt` adds the raw-source pointer.
+* **Update**: Every rendered page gained two visible pointers, since `<head>` metadata survives no text extraction: a **Markdown** button in the page header beside *Edit this page* and *View source*, and a *Machine-readable* line at the end of the article linking the twin, the raw source, `llms.txt` and `llms-full.txt`. [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/index.md) documents the endpoints, the traversal rule and the buttons. The conventions follow CARC's [DUST 2026](https://unm-carc.github.io/dust-2026/) training site; that repository is GPL-3 and this one is BSD-3, so the behaviour was reimplemented here rather than copied.
+
 ## 2026-09-11
 
-* **Update**: Resolved the content contradictions recorded on the [instructor materials](course-design/instructor-materials.md) page. The lab notebooks and activities pages now agree on submission filenames (`ModuleN_Lab_[YourName].ipynb` in Modules 2-5, which also fixes the Module 2 project box's `Module2__[YourName].ipynb`), on time budgets (Module 4 about four hours and Module 5 about three, split per part as the activities pages give them), and on learning-objective labels (the Module 4 and 5 notebooks cited "LO 4.5 and LO 4.6" and "LO 5.4 and LO 5.5"; they now cite the overview objectives their checklists map). The [Module 5 lab](modules/module-5/lab-notebook.md) is retitled *LangSmith Tracing and a Comparative Observability Study*: it had described a CI/CD regression-testing Lab B that it does not contain. Its provider prose now matches its code, which defaults to the NVIDIA API. No code cell in any notebook changed.
-* **Update**: Two pages described things the labs do not do. The [Module 5 activities](modules/module-5/activities.md) page promised a research agent with live web search and webpage reading; the notebook's agent has a simulated search tool and a calculator, with live DuckDuckGo search as an option, and the page now says so. Module 1's third learning objective, the landing page, the [syllabus](start-here/syllabus.md) and the lesson's literacy-pillar text said learners operate Claude Desktop; since the authors reworked the labs on 2026-07-21 they use Ollama and Openwork, with Claude Desktop's Cowork tab optional, and the text now names those. Module 1's closing box promised a no-code Openwork or n8n pipeline in Module 2, which builds a LangChain agent; it now describes Module 2. The syllabus PDF was regenerated.
-* **Update**: Aligned the six trade-off dimensions in [Module 2 chapter 5](modules/module-2/foundational-concepts.md). The lesson's table, transcribed from an image, listed latency, cost per inference, reliability, scalability, interpretability and organizational integration; the [reading guide](modules/module-2/reading-guides.md) and all five chapter 5 quiz questions assess task complexity, inference cost, latency, external information needs, interpretability and deployment risk. The lesson now teaches the six the learner is assessed on, and keeps the image's guidance on scalability and organizational integration as prose after the table.
-* **Update**: Settled two quiz items where a distractor was defensible; both are still keyed B. [Module 2 chapter 5](modules/module-2/chapter-quizzes.md#chapter-5-quiz) question 1, which the wiki keyed "B or C depending on interpretation", never said where the sales data lived, so the stem now puts the figures in the prompt and option C argues for ReAct from "multi-step" alone. Chapter 3 question 1's option C already named the correct root cause; it now proposes a fix that treats only the symptom.
+* **Update**: Resolved the content contradictions recorded on the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page. The lab notebooks and activities pages now agree on submission filenames (`ModuleN_Lab_[YourName].ipynb` in Modules 2-5, which also fixes the Module 2 project box's `Module2__[YourName].ipynb`), on time budgets (Module 4 about four hours and Module 5 about three, split per part as the activities pages give them), and on learning-objective labels (the Module 4 and 5 notebooks cited "LO 4.5 and LO 4.6" and "LO 5.4 and LO 5.5"; they now cite the overview objectives their checklists map). The [Module 5 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/index.md) is retitled *LangSmith Tracing and a Comparative Observability Study*: it had described a CI/CD regression-testing Lab B that it does not contain. Its provider prose now matches its code, which defaults to the NVIDIA API. No code cell in any notebook changed.
+* **Update**: Two pages described things the labs do not do. The [Module 5 activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/activities/index.md) page promised a research agent with live web search and webpage reading; the notebook's agent has a simulated search tool and a calculator, with live DuckDuckGo search as an option, and the page now says so. Module 1's third learning objective, the landing page, the [syllabus](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/index.md) and the lesson's literacy-pillar text said learners operate Claude Desktop; since the authors reworked the labs on 2026-07-21 they use Ollama and Openwork, with Claude Desktop's Cowork tab optional, and the text now names those. Module 1's closing box promised a no-code Openwork or n8n pipeline in Module 2, which builds a LangChain agent; it now describes Module 2. The syllabus PDF was regenerated.
+* **Update**: Aligned the six trade-off dimensions in [Module 2 chapter 5](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md). The lesson's table, transcribed from an image, listed latency, cost per inference, reliability, scalability, interpretability and organizational integration; the [reading guide](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/index.md) and all five chapter 5 quiz questions assess task complexity, inference cost, latency, external information needs, interpretability and deployment risk. The lesson now teaches the six the learner is assessed on, and keeps the image's guidance on scalability and organizational integration as prose after the table.
+* **Update**: Settled two quiz items where a distractor was defensible; both are still keyed B. [Module 2 chapter 5](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md#chapter-5-quiz) question 1, which the wiki keyed "B or C depending on interpretation", never said where the sales data lived, so the stem now puts the figures in the prompt and option C argues for ReAct from "multi-step" alone. Chapter 3 question 1's option C already named the correct root cause; it now proposes a fix that treats only the symptom.
 * **Update**: Corrected an error in this log. The 2026-09-09 known-gap entry, and the instructor materials page, said eight chapter-quiz questions leave one option without feedback. They do not. Each of those options has feedback marked ❌ that opens "partially correct", "partially true" or "partially applicable", which the review misread as missing, and a scan of all 125 questions finds feedback for every option. The instructor materials page now records the item as withdrawn.
-* **Update**: The instructor solution notebooks stay public on GitHub and unpublished on this site, as the course owners decided today. [Instructor materials](course-design/instructor-materials.md) now links each solution's GitHub view and a Colab copy; each solution opens with a banner naming the starter it solves, and a new `instructor/README.md` explains the folder. `AGENTS.md` and [Contributing](about/contributing.md) now state the rule as practiced: never rendered, copied or mirrored into `docs/`, and linked only from the instructor materials page.
-* **Update**: [Labs, Colab, and API keys](start-here/labs-and-notebooks.md) still told learners to upload the Module 3 corpus PDFs by hand, which stopped being true when the Module 3 notebook began downloading and checking them; it now describes the download, with manual upload as the fallback. Its table's times now match the activities pages.
-* **Creation**: `scripts/check_consistency.py` checks the agreement this entry restores (submission filenames, time budgets, objective labels, provider defaults, lab contents, the Module 2 dimension lists and every answer key) across the notebooks and the pages that describe them. It went from 26 failures to none. It runs by hand rather than in CI, because several of its expectations encode today's decisions and an author may change them on purpose. The [syllabus](start-here/syllabus.md)'s tools row now also lists Openwork and LangSmith.
-* **Creation**: The [Module 2 lab notebook](modules/module-2/lab-notebook.md) now has a scaffolded *Hands-On Project — Add Your Own Tool* section after Step 4, which the course owners confirmed is where the project is submitted. It carries a runnable example tool (a lookup over three short policy documents), a self-check that calls the tool directly, three test prompts (should use, should not use, must choose), a pre-written cell that runs them on the agent before and after the tool is added and prints the tools each run called as the selection table the log entry asks for, a cell for testing a second description wording, and a log entry. The notebook's header, submission checklist and optional log template now include the project; no other existing code cell changed. The new cells were run end to end against a stand-in chat model that calls tools, which checks their wiring but not how a real model chooses.
-* **Update**: Rewrote the seven chapter-quiz distractors whose feedback marked them ❌ while calling them partially correct: [Module 1](modules/module-1/chapter-quizzes.md) chapter 1 questions 1 and 2, chapter 2 question 5 and chapter 5 question 1, and [Module 4](modules/module-4/chapter-quizzes.md) chapter 1 question 3 (two options) and chapter 5 question 3. Six of the options now make a claim that is wrong on its own terms (a misdefinition, a false premise, or a fix that would not fix the problem); the seventh, Module 1 chapter 2 question 5's option D, makes a true claim that does not answer the question, so only its feedback changed. All seven now open "incorrect" and explain why, and `scripts/check_consistency.py` fails if a wrong option's feedback hedges again. Module 1 chapter 1 question 1's stem now describes what the script does whatever it finds, so the evidence points at the keyed property. No key moved.
-* **Update**: Reconciled the two coordination-overhead numbers in [Module 4](modules/module-4/foundational-concepts.md). The chapter 5 lesson used "coordination overhead ratio" for the share of a multi-agent system's own tokens spent on coordination, with a rule of thumb that more than 40% signals over-engineering. The [reading guide](modules/module-4/reading-guides.md) and three [quiz](modules/module-4/chapter-quizzes.md) questions used the same name for the extra tokens relative to a single-agent baseline, for which chapter 1 question 5 says there is no universal threshold, and chapter 5 question 5 set a 180% baseline figure against the 40% rule. The lesson now defines both, the coordination overhead ratio and the coordination share. The 40% rule applies to the share, as a signal to investigate rather than a limit; whether the overhead ratio is worth paying stays a judgement about context. The reading guide gains a row for the share, and three feedback passages and one question stem now use the same terms. No key moved.
+* **Update**: The instructor solution notebooks stay public on GitHub and unpublished on this site, as the course owners decided today. [Instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) now links each solution's GitHub view and a Colab copy; each solution opens with a banner naming the starter it solves, and a new `instructor/README.md` explains the folder. `AGENTS.md` and [Contributing](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/index.md) now state the rule as practiced: never rendered, copied or mirrored into `docs/`, and linked only from the instructor materials page.
+* **Update**: [Labs, Colab, and API keys](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/labs-and-notebooks/index.md) still told learners to upload the Module 3 corpus PDFs by hand, which stopped being true when the Module 3 notebook began downloading and checking them; it now describes the download, with manual upload as the fallback. Its table's times now match the activities pages.
+* **Creation**: `scripts/check_consistency.py` checks the agreement this entry restores (submission filenames, time budgets, objective labels, provider defaults, lab contents, the Module 2 dimension lists and every answer key) across the notebooks and the pages that describe them. It went from 26 failures to none. It runs by hand rather than in CI, because several of its expectations encode today's decisions and an author may change them on purpose. The [syllabus](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/index.md)'s tools row now also lists Openwork and LangSmith.
+* **Creation**: The [Module 2 lab notebook](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/lab-notebook/index.md) now has a scaffolded *Hands-On Project — Add Your Own Tool* section after Step 4, which the course owners confirmed is where the project is submitted. It carries a runnable example tool (a lookup over three short policy documents), a self-check that calls the tool directly, three test prompts (should use, should not use, must choose), a pre-written cell that runs them on the agent before and after the tool is added and prints the tools each run called as the selection table the log entry asks for, a cell for testing a second description wording, and a log entry. The notebook's header, submission checklist and optional log template now include the project; no other existing code cell changed. The new cells were run end to end against a stand-in chat model that calls tools, which checks their wiring but not how a real model chooses.
+* **Update**: Rewrote the seven chapter-quiz distractors whose feedback marked them ❌ while calling them partially correct: [Module 1](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/chapter-quizzes/index.md) chapter 1 questions 1 and 2, chapter 2 question 5 and chapter 5 question 1, and [Module 4](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md) chapter 1 question 3 (two options) and chapter 5 question 3. Six of the options now make a claim that is wrong on its own terms (a misdefinition, a false premise, or a fix that would not fix the problem); the seventh, Module 1 chapter 2 question 5's option D, makes a true claim that does not answer the question, so only its feedback changed. All seven now open "incorrect" and explain why, and `scripts/check_consistency.py` fails if a wrong option's feedback hedges again. Module 1 chapter 1 question 1's stem now describes what the script does whatever it finds, so the evidence points at the keyed property. No key moved.
+* **Update**: Reconciled the two coordination-overhead numbers in [Module 4](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/foundational-concepts/index.md). The chapter 5 lesson used "coordination overhead ratio" for the share of a multi-agent system's own tokens spent on coordination, with a rule of thumb that more than 40% signals over-engineering. The [reading guide](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/reading-guides/index.md) and three [quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/chapter-quizzes/index.md) questions used the same name for the extra tokens relative to a single-agent baseline, for which chapter 1 question 5 says there is no universal threshold, and chapter 5 question 5 set a 180% baseline figure against the 40% rule. The lesson now defines both, the coordination overhead ratio and the coordination share. The 40% rule applies to the share, as a signal to investigate rather than a limit; whether the overhead ratio is worth paying stays a judgement about context. The reading guide gains a row for the share, and three feedback passages and one question stem now use the same terms. No key moved.
 
 ## 2026-09-10
 
-* **Update**: Repaired the [Module 3 lab and hands-on project](modules/module-3/activities.md). The Activities page described a four-run retrieval experiment and a RAGAS write-up "embedded directly in the notebook"; the [notebook](modules/module-3/lab-notebook.md) had neither, and its corpus PDFs, five test queries, evaluation set and RAGAS scores had only ever existed in the Arizona LMS, so even the guided lab could not run from this site. The wiki history showed the authors' last intent: on 2026-08-10 they moved the project instructions off the page on the promise that the notebook held them. The notebook now does. Part B carries the four runs of the original specification (256- then 512-character chunks, MMR at `lambda_mult=0.5`, and an optional metadata filter), the recovered 1–4 rubric, ten evaluation questions whose reference answers are quoted from the corpus with their pages, the experiment log with a two-paragraph mechanistic conclusion, a retrieval check the learner runs only after writing that conclusion, and the RAGAS interpretation with provided scores.
-* **Creation**: The lab corpus is NIST's [AI Risk Management Framework](materials/module3/NIST.AI.100-1.pdf) (AI 100-1) and its [Generative AI Profile](materials/module3/NIST.AI.600-1.pdf) (AI 600-1), both US government publications in the public domain and topics the course already teaches in Modules 1, 2 and 5. The notebook downloads them from this site, falling back to NIST, and checks each against a pinned SHA-256, because the evaluation questions cite specific pages and a revised edition would shift them.
+* **Update**: Repaired the [Module 3 lab and hands-on project](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/activities/index.md). The Activities page described a four-run retrieval experiment and a RAGAS write-up "embedded directly in the notebook"; the [notebook](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/lab-notebook/index.md) had neither, and its corpus PDFs, five test queries, evaluation set and RAGAS scores had only ever existed in the Arizona LMS, so even the guided lab could not run from this site. The wiki history showed the authors' last intent: on 2026-08-10 they moved the project instructions off the page on the promise that the notebook held them. The notebook now does. Part B carries the four runs of the original specification (256- then 512-character chunks, MMR at `lambda_mult=0.5`, and an optional metadata filter), the recovered 1–4 rubric, ten evaluation questions whose reference answers are quoted from the corpus with their pages, the experiment log with a two-paragraph mechanistic conclusion, a retrieval check the learner runs only after writing that conclusion, and the RAGAS interpretation with provided scores.
+* **Creation**: The lab corpus is NIST's [AI Risk Management Framework](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/NIST.AI.100-1.pdf) (AI 100-1) and its [Generative AI Profile](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module3/NIST.AI.600-1.pdf) (AI 600-1), both US government publications in the public domain and topics the course already teaches in Modules 1, 2 and 5. The notebook downloads them from this site, falling back to NIST, and checks each against a pinned SHA-256, because the evaluation questions cite specific pages and a revised edition would shift them.
 * **Update**: Verified before publishing: every code cell in the notebook runs end to end on the free path (local embeddings, no model), re-running a project cell does not duplicate chunks, and the experiment separates its runs — on that path the retrieval check puts 20, 22 and 18 of 40 retrieved chunks on a reference page for Runs 1–3, and Run 4's corpus filter removes every GenAI-Profile chunk from the four test queries it had crowded. Answer generation itself was not exercised, since that needs an API key or a model download, so the Step A3 marginal-context exercise records either outcome: the model filling the gap from memory, or declining as the system prompt instructs. The notebook also says that its time budget assumes the paid path, and that a flat retrieval check under OpenAI embeddings is a result rather than a mistake. The RAGAS scores are provided rather than computed: the current RAGAS release fails on import against LangChain 1.4 because it imports a `langchain_community` module that no longer exists, and pinning the retired `langchain-community` package back would still leave free-path learners without a model able to judge.
-* **Update**: What the authors removed on 2026-08-06 — Lab B, the token-budget report and the memory-architecture brief — stays removed. The [Module 3 overview](modules/module-3/overview.md)'s deliverable row listed two of them and now lists the experiment log and RAGAS interpretation; chapter 4 quiz question 5 cited a "Unit 4 Token Budget Analysis" and a 0.5-point threshold that only the removed specification contained, and is reworded to stand on its own reasoning with the same answer. The notebook's time budget now agrees with the Activities page.
+* **Update**: What the authors removed on 2026-08-06 — Lab B, the token-budget report and the memory-architecture brief — stays removed. The [Module 3 overview](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/overview/index.md)'s deliverable row listed two of them and now lists the experiment log and RAGAS interpretation; chapter 4 quiz question 5 cited a "Unit 4 Token Budget Analysis" and a 0.5-point threshold that only the removed specification contained, and is reworded to stand on its own reasoning with the same answer. The notebook's time budget now agrees with the Activities page.
 * **Removal**: Retired all 17 illustrated posters. Every page on this site opened with an AI-generated illustration produced by NotebookLM — a hand-drawn collage of robots, gears and speech bubbles, typically two megabytes, carrying its content as unsearchable pixels. Twelve pages get an engineering diagram in place of the poster: a Mermaid schematic of the thing the page actually teaches, written from that page's own text and small enough to read — the RAG pipeline with the RAGAS metric that implicates each stage, the reasoning-paradigm progression from Chain-of-Thought to LATS, the Researcher–Analyst–Critic pipeline with its quality gate and revision cap, the Workflow Audit scoring pipeline, the portfolio setup checklist and its weekly loop.
-* **Removal**: Seven pages lose the poster and gain nothing, each for a reason. The [Module 2 activities](modules/module-2/activities.md) page sets sketching that exact diagram as self-check prompt 2, so a figure at the top would print the answer key above the question. [Module 5 foundational concepts](modules/module-5/foundational-concepts.md) is a five-chapter survey whose structure its tables already carry. The Module 1, 2 and 3 overview pages would have repeated a diagram that now appears on their own foundational-concepts page. The [landing page](index.md) banner becomes a typographic title — the course name was previously hidden from sighted readers because the picture carried it — and the archived June 2026 draft keeps its record without being re-illustrated.
-* **Update**: `docs/assets/images/` is now empty: the site serves no raster images at all, down from 42 files and 39.2 MB. All 103 originals stay in `images/` as the provenance record of what the wiki contained. Reading the 17 posters against their pages found 121 claims that appear in a poster and in no page text; the four that contradicted the page — including a Workflow Audit formula missing the `+ 1` in its denominator — are recorded on the [instructor materials](course-design/instructor-materials.md) page, along with the subject matter that existed only in the pictures.
-* **Update**: Replaced 25 figures that were tables shipped as PNG screenshots with real Markdown tables. A table stored as a picture is invisible to search and to `llms.txt`, unreadable by a screen reader, impossible to copy from, and it cannot reflow on a phone — the rubric a learner is graded against was a 2096-pixel-wide image. The 25 span [Module 1 activities](modules/module-1/activities.md), [foundational concepts](modules/module-1/foundational-concepts.md) and [overview](modules/module-1/overview.md), [Module 2](modules/module-2/foundational-concepts.md), [Module 3](modules/module-3/foundational-concepts.md) and [Module 4 foundational concepts](modules/module-4/foundational-concepts.md), and the [formal learning design](course-design/learning-design.md). Four of them were not grids but coloured definition blocks — the four-pillar literacy model, the four-dimension prompt architecture, the three RAG paradigms and the Bloom's progression — and are now headed prose rather than being forced into a table.
+* **Removal**: Seven pages lose the poster and gain nothing, each for a reason. The [Module 2 activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/activities/index.md) page sets sketching that exact diagram as self-check prompt 2, so a figure at the top would print the answer key above the question. [Module 5 foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/foundational-concepts/index.md) is a five-chapter survey whose structure its tables already carry. The Module 1, 2 and 3 overview pages would have repeated a diagram that now appears on their own foundational-concepts page. The [landing page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/index.md) banner becomes a typographic title — the course name was previously hidden from sighted readers because the picture carried it — and the archived June 2026 draft keeps its record without being re-illustrated.
+* **Update**: `docs/assets/images/` is now empty: the site serves no raster images at all, down from 42 files and 39.2 MB. All 103 originals stay in `images/` as the provenance record of what the wiki contained. Reading the 17 posters against their pages found 121 claims that appear in a poster and in no page text; the four that contradicted the page — including a Workflow Audit formula missing the `+ 1` in its denominator — are recorded on the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page, along with the subject matter that existed only in the pictures.
+* **Update**: Replaced 25 figures that were tables shipped as PNG screenshots with real Markdown tables. A table stored as a picture is invisible to search and to `llms.txt`, unreadable by a screen reader, impossible to copy from, and it cannot reflow on a phone — the rubric a learner is graded against was a 2096-pixel-wide image. The 25 span [Module 1 activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/activities/index.md), [foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/foundational-concepts/index.md) and [overview](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/overview/index.md), [Module 2](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md), [Module 3](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/foundational-concepts/index.md) and [Module 4 foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-4/foundational-concepts/index.md), and the [formal learning design](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/index.md). Four of them were not grids but coloured definition blocks — the four-pillar literacy model, the four-dimension prompt architecture, the three RAG paradigms and the Bloom's progression — and are now headed prose rather than being forced into a table.
 * **Update**: Each table was transcribed from the full-resolution original in `images/`, not from the published copy, and then checked cell by cell against its image by a second reader; row and column counts were compared independently. Three were additionally verified by hand, including the graded Workflow Audit rubric. The originals stay in `images/` as the provenance record and are no longer published. `docs/assets/images/` drops from 42 files to 17, and the served image payload from 39.2 MB to 31.1 MB.
-* **Update**: [Contributing](about/contributing.md) now states the convention the site follows: diagrams are Mermaid in a fence, tables are Markdown, and images are for photographs and screenshots of real interfaces.
-* **Update**: Redrew the agent architecture figure on the [Module 2 foundational concepts](modules/module-2/foundational-concepts.md) page. The wiki shipped `AgentExecutor-Architecture.png`, a five-row LangChain 0.x design table naming its parts Agent (the LLM), Tool Descriptions, Tool Executor, Memory / State and Stopping Criteria. It is replaced by a Mermaid diagram of the loop `create_agent` actually runs and a table of the four components the rest of the course names, so the figure no longer disagrees with the pages that cite it. Being Mermaid, it is text in the repository rather than a binary that can silently go stale, and the course team can edit it without image tooling.
+* **Update**: [Contributing](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/contributing/index.md) now states the convention the site follows: diagrams are Mermaid in a fence, tables are Markdown, and images are for photographs and screenshots of real interfaces.
+* **Update**: Redrew the agent architecture figure on the [Module 2 foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md) page. The wiki shipped `AgentExecutor-Architecture.png`, a five-row LangChain 0.x design table naming its parts Agent (the LLM), Tool Descriptions, Tool Executor, Memory / State and Stopping Criteria. It is replaced by a Mermaid diagram of the loop `create_agent` actually runs and a table of the four components the rest of the course names, so the figure no longer disagrees with the pages that cite it. Being Mermaid, it is text in the repository rather than a binary that can silently go stale, and the course team can edit it without image tooling.
 * **Removal**: The retired PNG is no longer published. It stays in `images/` as the provenance record of what the wiki contained; `scripts/optimize_images.py` dropped the served copy once no page referenced it.
 * **Update**: The row-by-row crosswalk that made the old figure readable is gone with it, but the three points it carried that stand on their own are kept as prose: stopping is the rule that ends the loop rather than a fifth component; the 0.x stopping conditions — a Final Answer token, a maximum-iteration argument and a parsing-error threshold — have no equivalent in the current API; and older material names the same four components differently, which is still where a learner meets both vocabularies at once. No quiz question or reading guide referenced the figure, so no assessment item changed.
 
 ## 2026-09-09
 
-* **Update**: Moved the course onto current LangChain. LangChain 1.0 removed `AgentExecutor`, `create_react_agent`, `create_tool_calling_agent`, `initialize_agent`, `langchain.chains`, `langchain.memory`, `langchain.prompts` and `langchain.tools.Tool` from the `langchain` package with no deprecation shim, so those imports now fail with `AttributeError` or `ModuleNotFoundError` rather than a warning. The [Module 2 lab](modules/module-2/lab-notebook.md) was built entirely on `AgentExecutor` and installed LangChain unpinned, so it raised `ImportError` on its agent-building cell for every learner; it is rewritten on `create_agent`, which is what the module's own [foundational concepts](modules/module-2/foundational-concepts.md) page already documented. The [Module 2 resources](modules/module-2/resources.md) page carried two LangChain 0.x code samples with the same problem; both are rewritten. Its conceptual model of an agent runtime is framework-agnostic and is unchanged.
+* **Update**: Moved the course onto current LangChain. LangChain 1.0 removed `AgentExecutor`, `create_react_agent`, `create_tool_calling_agent`, `initialize_agent`, `langchain.chains`, `langchain.memory`, `langchain.prompts` and `langchain.tools.Tool` from the `langchain` package with no deprecation shim, so those imports now fail with `AttributeError` or `ModuleNotFoundError` rather than a warning. The [Module 2 lab](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/lab-notebook/index.md) was built entirely on `AgentExecutor` and installed LangChain unpinned, so it raised `ImportError` on its agent-building cell for every learner; it is rewritten on `create_agent`, which is what the module's own [foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md) page already documented. The [Module 2 resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/resources/index.md) page carried two LangChain 0.x code samples with the same problem; both are rewritten. Its conceptual model of an agent runtime is framework-agnostic and is unchanged.
 * **Update**: The lab's four-step shape, its student extension points, its self-checks and its log entries are preserved. What changed is how the reasoning loop is observed: `create_agent` returns a LangGraph graph rather than an `AgentExecutor`, so there is no `verbose=True` text trace printing `Thought:`, `Action:` and `Observation:`. A `show_trace` helper streams the graph instead and prints the same loop as structured data, and Step 1 now explains why the old labels are gone. Two sunset dependencies were dropped: `langchain-experimental`, which the lab imported but never installed, and `langchain-community`, whose DuckDuckGo wrapper now needs the renamed `ddgs` package. Both tools are defined in the notebook instead.
 * **Update**: Pinned every notebook to the same current stack: LangChain 1.4.0, LangGraph 1.2.11 and LangSmith 0.12.4. Modules 3 and 5 had drifted to different LangChain patch versions, and Module 2 had no pin at all. Module 5's optional live-search cell installed the renamed `duckduckgo-search` package and never installed the library it imported, so it failed twice if a learner uncommented it. Its LangSmith setup now uses the documented `LANGSMITH_*` variables and clears the older `LANGCHAIN_*` ones first, because the older names take precedence and the value is matched against the literal lowercase string `true`; either trap turns tracing off silently and leaves an empty project with no error.
 * **Update**: The four lab pages regained the `last_modified` date in their `sources` entry. `scripts/render_notebooks.py` was still looking for the notebook clone under `.cache/`, which `zensical build --clean` deletes because it is Zensical's own build cache; it now reads `.sources/` like the migration pipeline does, so it can read the notebooks' git history again.
-* **Update**: Revised the assessment content that examined the removed LangChain APIs, closing the gap recorded below. 99 changes across the [Module 2 chapter quizzes](modules/module-2/chapter-quizzes.md) and [reading guides](modules/module-2/reading-guides.md), the [Module 3 chapter quizzes](modules/module-3/chapter-quizzes.md), [reading guides](modules/module-3/reading-guides.md) and [activities](modules/module-3/activities.md), and the [Module 2 foundational concepts](modules/module-2/foundational-concepts.md) lesson the quizzes cite by name. Both quiz pages still hold 25 questions and 25 answer keys, no correct answer moved to a different letter, and no question was added or dropped. Questions that asked a learner to reason about a mechanism still do rather than becoming vocabulary recall, and distractors were rewritten to stay plausible against the current API. This is what the [July 2026 course review](course-design/course-review-2026-07.md) asked for when it flagged the `AgentExecutor` dependency.
-* **Update**: Two conventions now hold across those pages. One component vocabulary, the four names already used on the [Module 2 resources](modules/module-2/resources.md) page: LLM Backbone, Tool Registry, Action Executor and Memory Module. The old list's fifth member, the output parser, is genuinely gone because a tool-calling model returns a structured call rather than text to parse, and that disappearance is now taught rather than papered over. And one trace format: every trace a learner is shown is what the lab's `show_trace` helper prints, so `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and `[final] ANSWER:` rather than the `Thought:` and `Action:` labels a current agent never emits. The `AgentExecutor` architecture figure is kept and captioned as the LangChain 0.x table it is, with a row-by-row crosswalk onto the four names; its alt text, which wrongly described a loop diagram, now describes the table that is actually there.
-* **Known gap**: Eight chapter-quiz questions across Modules 1, 2 and 4 name the correct answer and explain only two of the three distractors, leaving one option with no feedback. All eight are inherited from the wiki unchanged, and a review of every key on all five quiz pages found no other gap: each key resolves to a stated option and each ✅ and ❌ marks the letter it should. Because the quizzes are self-evaluating, a learner who picked the unexplained option learns the right answer but not why theirs was wrong. Listed question by question on the [instructor materials](course-design/instructor-materials.md) page.
-* **Known gap**: The Module 3 hands-on project remains blocked on an author's decision. The [activities page](modules/module-3/activities.md) describes a four-run parameter experiment with a RAGAS write-up and says the instructions are embedded in the lab notebook; the notebook has no such cells. The project carries no numeric weight — Modules 2–5 are graded on their chapter quizzes — but the syllabus requires all five module projects for completion, so a learner cannot finish the module as described. Whether the notebook gains cells or the page loses a promise is a curriculum decision, so it is recorded on the [instructor materials](course-design/instructor-materials.md) page rather than guessed at here.
-* **Update**: Rebranded the site to the University of New Mexico. The header logo is the CARC starburst and the favicon is the UNM mark; the palette moves from Arizona Blue and Red to UNM Cherry `#BA0C2F` and Turquoise `#007A86` with CARC's cherry-to-turquoise header gradient. Institutional identity now reads University of New Mexico across the site description, the [syllabus](start-here/syllabus.md), [How this course works](start-here/how-this-course-works.md), the landing page, `llms.txt`, `robots.txt`, the README and the contributor contract. **Provenance is deliberately unchanged**: every page's `sources` entries, wiki URLs, provenance footers, the [wiki crosswalk](about/wiki-crosswalk.md), the entries below and the origin section of the [license page](about/license-and-attribution.md) still record that the course was written by the AI2S team at the University of Arizona. Branding says who publishes the site today; provenance says who wrote the material, and rewriting it would be false.
-* **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here. Dropped the AI Education Series professional badge and the "Course 2 of the series" framing from the syllabus, [How this course works](start-here/how-this-course-works.md) and the [instructor materials](course-design/instructor-materials.md): the series is a University of Arizona program, and rebranding those sentences to UNM would have described a Course 1 and a badge that do not exist here.
-* **Creation**: The downloadable syllabus PDF is now generated from [the syllabus page](start-here/syllabus.md) by `scripts/build_syllabus_pdf.py`, so the two cannot drift; CI fails when the committed PDF no longer matches the page, and separately when the renderer drops a section of it. Output is deterministic, so rebuilding an unchanged syllabus produces an identical file rather than a spurious diff. It replaces the University of Arizona syllabus v2.0 as the linked download. That earlier PDF stays in the repository as the source document and is still linked from the syllabus page.
-* **Update**: Resolved the licensing conflict recorded below. The course content is now published under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}, replacing both the wiki footer's CC BY-NC-SA notice and the repository's CC0 `LICENSE` file. CC BY is approved for Free Cultural Works and meets the Open Definition, so the course qualifies as an open educational resource under the strict reading; a NonCommercial clause would have blocked the workforce and paid-certificate reuse the course is written for. Copyright is **The Regents of the University of New Mexico, Center for Advanced Research Computing**. The course was developed at the Arizona Institute for Artificial Intelligence and the Office of Responsible AI at the University of Arizona and released there under the [CC0 1.0 public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/){target=_blank}, which is what allows this site to be licensed CC BY; that original stays public domain and available upstream. CC0 imposes no conditions, so the credit to Carlos Lizárraga-Celaya, Michelle Yung, Michele Cosi and Tyson Swetnam recorded on the license page is scholarly practice rather than a license requirement. The site's own source code (the `scripts/` pipeline, the site configuration and the stylesheet) is licensed separately under the **BSD 3-Clause License** in `LICENSE-CODE`, copyright UNM Regents, matching the notice CARC uses on its documentation; Creative Commons licenses are not intended for software. Updated the `LICENSE` file, the site footer, the landing page badge, the [license and attribution](about/license-and-attribution.md) page, the [instructor materials](course-design/instructor-materials.md) page, and the README. Third-party material and both universities' marks remain outside these licenses.
-* **Update**: The course owners confirmed that quiz answer keys stay **public but collapsed**: the quizzes are written to be self-evaluating. The [instructor materials](course-design/instructor-materials.md) page now records this as a decision rather than an open question, and notes that the keys are consequently visible in `llms-full.txt` and in each page's Markdown mirror.
+* **Update**: Revised the assessment content that examined the removed LangChain APIs, closing the gap recorded below. 99 changes across the [Module 2 chapter quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/chapter-quizzes/index.md) and [reading guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/reading-guides/index.md), the [Module 3 chapter quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/chapter-quizzes/index.md), [reading guides](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/reading-guides/index.md) and [activities](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/activities/index.md), and the [Module 2 foundational concepts](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/foundational-concepts/index.md) lesson the quizzes cite by name. Both quiz pages still hold 25 questions and 25 answer keys, no correct answer moved to a different letter, and no question was added or dropped. Questions that asked a learner to reason about a mechanism still do rather than becoming vocabulary recall, and distractors were rewritten to stay plausible against the current API. This is what the [July 2026 course review](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/index.md) asked for when it flagged the `AgentExecutor` dependency.
+* **Update**: Two conventions now hold across those pages. One component vocabulary, the four names already used on the [Module 2 resources](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-2/resources/index.md) page: LLM Backbone, Tool Registry, Action Executor and Memory Module. The old list's fifth member, the output parser, is genuinely gone because a tool-calling model returns a structured call rather than text to parse, and that disappearance is now taught rather than papered over. And one trace format: every trace a learner is shown is what the lab's `show_trace` helper prints, so `TOOL CALL:`, `ARGUMENTS:`, `OBSERVATION:` and `[final] ANSWER:` rather than the `Thought:` and `Action:` labels a current agent never emits. The `AgentExecutor` architecture figure is kept and captioned as the LangChain 0.x table it is, with a row-by-row crosswalk onto the four names; its alt text, which wrongly described a loop diagram, now describes the table that is actually there.
+* **Known gap**: Eight chapter-quiz questions across Modules 1, 2 and 4 name the correct answer and explain only two of the three distractors, leaving one option with no feedback. All eight are inherited from the wiki unchanged, and a review of every key on all five quiz pages found no other gap: each key resolves to a stated option and each ✅ and ❌ marks the letter it should. Because the quizzes are self-evaluating, a learner who picked the unexplained option learns the right answer but not why theirs was wrong. Listed question by question on the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page.
+* **Known gap**: The Module 3 hands-on project remains blocked on an author's decision. The [activities page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-3/activities/index.md) describes a four-run parameter experiment with a RAGAS write-up and says the instructions are embedded in the lab notebook; the notebook has no such cells. The project carries no numeric weight — Modules 2–5 are graded on their chapter quizzes — but the syllabus requires all five module projects for completion, so a learner cannot finish the module as described. Whether the notebook gains cells or the page loses a promise is a curriculum decision, so it is recorded on the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page rather than guessed at here.
+* **Update**: Rebranded the site to the University of New Mexico. The header logo is the CARC starburst and the favicon is the UNM mark; the palette moves from Arizona Blue and Red to UNM Cherry `#BA0C2F` and Turquoise `#007A86` with CARC's cherry-to-turquoise header gradient. Institutional identity now reads University of New Mexico across the site description, the [syllabus](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/index.md), [How this course works](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/index.md), the landing page, `llms.txt`, `robots.txt`, the README and the contributor contract. **Provenance is deliberately unchanged**: every page's `sources` entries, wiki URLs, provenance footers, the [wiki crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/index.md), the entries below and the origin section of the [license page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/index.md) still record that the course was written by the AI2S team at the University of Arizona. Branding says who publishes the site today; provenance says who wrote the material, and rewriting it would be false.
+* **Update**: Scoped the site explicitly as **non-credit professional development** offered by CARC. The syllabus now states this in a Credit row and in the completion section, lists rolling enrollment, sets the level to Intermediate, and names the instructor of record. A separate for-credit version of the course, with its own assessments, quizzes, tests and final exams, is planned at the UNM Department of Computer Science and is not published here. Dropped the AI Education Series professional badge and the "Course 2 of the series" framing from the syllabus, [How this course works](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/how-this-course-works/index.md) and the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md): the series is a University of Arizona program, and rebranding those sentences to UNM would have described a Course 1 and a badge that do not exist here.
+* **Creation**: The downloadable syllabus PDF is now generated from [the syllabus page](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/syllabus/index.md) by `scripts/build_syllabus_pdf.py`, so the two cannot drift; CI fails when the committed PDF no longer matches the page, and separately when the renderer drops a section of it. Output is deterministic, so rebuilding an unchanged syllabus produces an identical file rather than a spurious diff. It replaces the University of Arizona syllabus v2.0 as the linked download. That earlier PDF stays in the repository as the source document and is still linked from the syllabus page.
+* **Update**: Resolved the licensing conflict recorded below. The course content is now published under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/){target=_blank}, replacing both the wiki footer's CC BY-NC-SA notice and the repository's CC0 `LICENSE` file. CC BY is approved for Free Cultural Works and meets the Open Definition, so the course qualifies as an open educational resource under the strict reading; a NonCommercial clause would have blocked the workforce and paid-certificate reuse the course is written for. Copyright is **The Regents of the University of New Mexico, Center for Advanced Research Computing**. The course was developed at the Arizona Institute for Artificial Intelligence and the Office of Responsible AI at the University of Arizona and released there under the [CC0 1.0 public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/){target=_blank}, which is what allows this site to be licensed CC BY; that original stays public domain and available upstream. CC0 imposes no conditions, so the credit to Carlos Lizárraga-Celaya, Michelle Yung, Michele Cosi and Tyson Swetnam recorded on the license page is scholarly practice rather than a license requirement. The site's own source code (the `scripts/` pipeline, the site configuration and the stylesheet) is licensed separately under the **BSD 3-Clause License** in `LICENSE-CODE`, copyright UNM Regents, matching the notice CARC uses on its documentation; Creative Commons licenses are not intended for software. Updated the `LICENSE` file, the site footer, the landing page badge, the [license and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/index.md) page, the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page, and the README. Third-party material and both universities' marks remain outside these licenses.
+* **Update**: The course owners confirmed that quiz answer keys stay **public but collapsed**: the quizzes are written to be self-evaluating. The [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page now records this as a decision rather than an open question, and notes that the keys are consequently visible in `llms-full.txt` and in each page's Markdown mirror.
 
 ## 2026-09-08
 
 * **Initialization**: Created this site as an [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md){target=_blank} knowledge bundle built with [Zensical](https://zensical.org){target=_blank}, following the pattern of the [UNM CARC documentation](https://carc.unm.edu/docs/){target=_blank}. Every content page carries frontmatter with `type`, provenance (`generated`, `sources`, `authorship`) and lifecycle (`status`, `stale_after`); section `index.md` files are directory listings; this file is the dated change log.
-* **Migration**: Migrated the 42 pages of the [AI Automation and Agents v2 GitHub wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki){target=_blank} (commit `fcc9835d10d3`) with `scripts/migrate_wiki.py`: 38 wiki files became 43 site pages (the five "Addendum" pages were each split into a reading-guides page and a chapter-quizzes page). Raw HTML heroes became responsive images, GitHub alerts and one-column callout tables became admonitions, exposed answer keys became collapsed `??? success` blocks, letter and roman heading prefixes were removed, wiki links were rewritten to relative site links, and each page's `Created/Updated` footer moved into the frontmatter. Every migrated page is **unverified** pending instructor review; see the [wiki-to-site crosswalk](about/wiki-crosswalk.md) for the full mapping.
-* **Creation**: Wrote the landing page, [Start here](start-here/index.md) (how the course works, syllabus, labs and notebooks), the [Module 1 concept quiz](modules/module-1/concept-quiz.md) and [diagnostic survey](modules/module-1/diagnostic-survey.md) pages that embed the interactive HTML activities, the [instructor materials](course-design/instructor-materials.md) page, and the [About](about/index.md) section (license and attribution, contributing, for AI agents, crosswalk). Rendered the four learner lab notebooks as read-only pages with Open-in-Colab buttons (`scripts/render_notebooks.py`).
+* **Migration**: Migrated the 42 pages of the [AI Automation and Agents v2 GitHub wiki](https://github.com/UA-AI2S/AI-Automation-and-Agents-v2/wiki){target=_blank} (commit `fcc9835d10d3`) with `scripts/migrate_wiki.py`: 38 wiki files became 43 site pages (the five "Addendum" pages were each split into a reading-guides page and a chapter-quizzes page). Raw HTML heroes became responsive images, GitHub alerts and one-column callout tables became admonitions, exposed answer keys became collapsed `??? success` blocks, letter and roman heading prefixes were removed, wiki links were rewritten to relative site links, and each page's `Created/Updated` footer moved into the frontmatter. Every migrated page is **unverified** pending instructor review; see the [wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/index.md) for the full mapping.
+* **Creation**: Wrote the landing page, [Start here](https://tyson-swetnam.github.io/AI-Automation-and-Agents/start-here/index.md) (how the course works, syllabus, labs and notebooks), the [Module 1 concept quiz](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/concept-quiz/index.md) and [diagnostic survey](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/diagnostic-survey/index.md) pages that embed the interactive HTML activities, the [instructor materials](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/instructor-materials/index.md) page, and the [About](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/index.md) section (license and attribution, contributing, for AI agents, crosswalk). Rendered the four learner lab notebooks as read-only pages with Open-in-Colab buttons (`scripts/render_notebooks.py`).
 * **Creation**: Added the machine-readable surface: `llms.txt` and `llms-full.txt`, a Markdown mirror of every page at its URL plus `index.md`, `okf:*` meta tags, and `robots.txt` (`scripts/gen_llms_txt.py`, `scripts/postbuild_agent_surface.py`). Course images referenced by pages were copied into `docs/assets/images/` downscaled to at most 1600 px wide (`scripts/optimize_images.py`); originals stay in `images/`.
-* **Deprecation**: Moved superseded wiki pages to the [archive](archive/index.md) with `status: deprecated` and a pointer to the live page: the June 2026 Module 1 overview draft, the two early Module 1 lab checklists (Claude Desktop, Ollama), the Module 1 concept-quiz specification stub, the guided workflow-mapping stub, and the retired Module 2 self-assessment quizzes. The [July 2026 course review](course-design/course-review-2026-07.md) is kept under Course design as a historical document.
-* **Removal**: Dropped the wiki page `Module-2.2-‐-Addendum` (a near-duplicate of `Module-2.2-Addendum` created minutes earlier; it differed only in the quiz heading wording, one accent, and blank lines). Removed the repository's `docs/WhatisAnAIAgent.md` (an older copy of the wiki reading now at [What Is an AI Agent?](modules/module-1/readings/what-is-an-agent.md)) and the one-line `docs/Readme.md`.
+* **Deprecation**: Moved superseded wiki pages to the [archive](https://tyson-swetnam.github.io/AI-Automation-and-Agents/archive/index.md) with `status: deprecated` and a pointer to the live page: the June 2026 Module 1 overview draft, the two early Module 1 lab checklists (Claude Desktop, Ollama), the Module 1 concept-quiz specification stub, the guided workflow-mapping stub, and the retired Module 2 self-assessment quizzes. The [July 2026 course review](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/course-review-2026-07/index.md) is kept under Course design as a historical document.
+* **Removal**: Dropped the wiki page `Module-2.2-‐-Addendum` (a near-duplicate of `Module-2.2-Addendum` created minutes earlier; it differed only in the quiz heading wording, one accent, and blank lines). Removed the repository's `docs/WhatisAnAIAgent.md` (an older copy of the wiki reading now at [What Is an AI Agent?](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-1/readings/what-is-an-agent/index.md)) and the one-line `docs/Readme.md`.
 * **Update**: Applied the wiki's own reviewer directives in Module 1 Foundational Concepts (removed the Merrill 2002 and Wiggins & McTighe 2005 sources marked "Remove this source"), stripped the remaining reviewer annotations, and flagged the ambiguous Module 2 chapter 5 quiz question 1 key for instructor review. Marked as `draft`: Module 2 Activities (peer-feedback guidance still to be written), the two Module 1 worksheets, and the development plan stub.
-* **Update**: License notice: the course footer states CC BY-NC-SA 4.0 while the repository `LICENSE` file is CC0 1.0. The site follows the authors' footer notice; the repository license is unchanged pending a decision by the course owners (see [License and attribution](about/license-and-attribution.md)).
+* **Update**: License notice: the course footer states CC BY-NC-SA 4.0 while the repository `LICENSE` file is CC0 1.0. The site follows the authors' footer notice; the repository license is unchanged pending a decision by the course owners (see [License and attribution](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/license-and-attribution/index.md)).

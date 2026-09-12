@@ -35,6 +35,8 @@ from pathlib import Path
 
 import yaml
 
+from okf_links import raw_source_url, rewrite_relative_targets
+
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 CONFIG = ROOT / "zensical.toml"
@@ -161,7 +163,7 @@ def content_pages() -> set[Path]:
     return out
 
 
-def header(base: str) -> list[str]:
+def header(base: str, raw_root: str) -> list[str]:
     return [
         "# AI Automation and Agents",
         "",
@@ -181,10 +183,25 @@ def header(base: str) -> list[str]:
         "",
         f"Full corpus for ingestion: {base}llms-full.txt",
         "",
-        "Every page's Markdown source (OKF frontmatter included) is served at "
-        "its URL plus `index.md` — for example "
-        f"{base}modules/module-1/overview/index.md. Agent guide: "
-        f"{base}about/ai-agents/",
+        "Every entry below lists three addresses that return the same content: the "
+        "rendered page, its Markdown twin (the page URL plus `index.md`, served as "
+        "text/markdown with the OKF frontmatter), and the raw source file on GitHub. "
+        "Fetch whichever your sandbox allows; some permit github.com and "
+        "raw.githubusercontent.com but not *.github.io.",
+        "",
+        "```",
+        f"Site page        {base}<path>/",
+        f"Markdown twin    {base}<path>/index.md",
+        f"Raw source       {raw_root}<path>.md",
+        "",
+        f"Content page     /modules/module-1/overview/  ->  {raw_root}modules/module-1/overview.md",
+        f"Section listing  /modules/                    ->  {raw_root}modules/index.md",
+        "```",
+        "",
+        "Inside a Markdown twin, and inside llms-full.txt, links to other pages are "
+        "absolute and already point at those pages' Markdown twins, so an agent can "
+        "traverse the whole bundle without leaving Markdown; drop the trailing "
+        f"`index.md` to reach the rendered page. Agent guide: {base}about/ai-agents/",
         "",
         "Trust and lifecycle signals:",
         "",
@@ -215,13 +232,16 @@ def main():
     cfg = load_config()
     base = site_url(cfg)
     order = nav_order(cfg)
-    lines = header(base)
+    lines = header(base, raw_source_url(""))
     full = [
         "# AI Automation and Agents — full corpus",
         "",
         "Each page below begins with its canonical URL followed by its "
         "original Markdown, OKF frontmatter included. Pages are grouped by "
-        f"section in navigation order; the linked outline is at {base}llms.txt.",
+        f"section in navigation order; the linked outline is at {base}llms.txt. "
+        "Relative links have been rewritten to absolute URLs that point at each "
+        "linked page's Markdown twin (its URL plus `index.md`), so you can traverse "
+        "the bundle without leaving Markdown.",
         "",
     ]
 
@@ -246,8 +266,12 @@ def main():
                 suffix = " (deprecated; kept for history)"
             elif fm.get("status") == "draft":
                 suffix = " (draft)"
-            lines.append(f"- [{title}]({url}): {desc}{suffix}")
-            full += [f"---8<--- {url}", "", path.read_text(encoding="utf-8").rstrip(), ""]
+            raw = raw_source_url(rel.as_posix())
+            alt = f" Markdown twin: {url}index.md" + (f" Raw source: {raw}" if raw else "")
+            lines.append(f"- [{title}]({url}): {desc}{suffix}{alt}")
+            body = rewrite_relative_targets(path.read_text(encoding="utf-8"),
+                                            rel.as_posix(), base)
+            full += [f"---8<--- {url}", "", body.rstrip(), ""]
             listed.add(path)
             n += 1
         lines.append("")
@@ -266,7 +290,13 @@ def main():
         lines.append("")
 
     # Root pages and the redirect table for wiki-era URLs.
+    kb = len("\n".join(full).encode("utf-8")) // 1024
     lines += ["## Meta", "",
+              f"- [Full corpus in one file]({base}llms-full.txt): every page's Markdown with "
+              f"frontmatter, each prefixed by its canonical URL, links made absolute; about "
+              f"{kb} KB. Prefer it over fetching pages one at a time.",
+              f"- [For AI agents]({base}about/ai-agents/): the endpoints, the Markdown-twin and "
+              "raw-source conventions, trust signals, and the rules for tutoring learners.",
               f"- [Course update log]({base}log/): dated history of changes to this bundle (OKF §9)."]
     crosswalk = DOCS / "about" / "wiki-crosswalk.md"
     if crosswalk.exists():
@@ -277,7 +307,9 @@ def main():
     lines.append("")
     log = DOCS / "log.md"
     if log.exists():
-        full += [f"---8<--- {base}log/", "", log.read_text(encoding="utf-8").rstrip(), ""]
+        full += [f"---8<--- {base}log/", "",
+                 rewrite_relative_targets(log.read_text(encoding="utf-8"),
+                                          "log.md", base).rstrip(), ""]
 
     (DOCS / "llms.txt").write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
     (DOCS / "llms-full.txt").write_text("\n".join(full).rstrip() + "\n", encoding="utf-8")

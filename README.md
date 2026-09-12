@@ -78,6 +78,7 @@ well; CI fails if the two disagree:
 │   ├── postbuild_agent_surface.py  # After build: Markdown mirror, okf:* meta, robots.txt
 │   ├── check_site.py               # Post-build assertions on site/
 │   ├── check_consistency.py        # Lab notebooks agree with the pages that describe them
+│   ├── okf_links.py                # Relative links -> absolute twin URLs (mirror, llms-full.txt)
 │   └── externalize_links.py        # Appends {target=_blank} to external links
 ├── images/                       # Full-resolution PNG originals (not served)
 ├── instructor/materials/         # Instructor solution notebooks (outside docs/, never rendered; GitHub only)

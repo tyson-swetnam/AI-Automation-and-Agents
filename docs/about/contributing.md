@@ -185,6 +185,12 @@ requirements-dev.txt`. `requirements.txt` alone is enough to build; the
 - **`scripts/postbuild_agent_surface.py`** and **`scripts/check_site.py`** -
   run after `zensical build`: add the Markdown mirror, `okf:*` meta tags and
   `robots.txt` to `site/`, then assert the build is complete.
+- **`scripts/okf_links.py`** - the one rule for publishing Markdown to
+  agents: a relative link becomes an absolute URL pointing at the linked
+  page's Markdown twin (page URL + `index.md`). Used by
+  `postbuild_agent_surface.py` when it mirrors a page and by
+  `gen_llms_txt.py` when it builds `llms-full.txt`; the sources under `docs/`
+  keep their relative links.
 - **`scripts/check_consistency.py`** - checks that the lab notebooks, the
   activities pages, the module overviews and *Labs, Colab, and API keys*
   agree on submission filenames, time budgets, learning-objective labels,

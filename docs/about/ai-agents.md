@@ -35,11 +35,26 @@ rather than scraping rendered HTML.
 
 | Endpoint | What you get |
 | :-- | :-- |
-| [`/llms.txt`](../llms.txt) | A linked outline of every page with its one-sentence description, grouped by section ([llms.txt convention](https://llmstxt.org){target=_blank}) |
-| [`/llms-full.txt`](../llms-full.txt) | The entire corpus in one file (about 1 MB): every page's Markdown with frontmatter, each prefixed by its canonical URL |
-| Any page URL + `index.md` | That page's Markdown source with full OKF frontmatter, for example `/modules/module-2/foundational-concepts/index.md` |
+| [`/llms.txt`](../llms.txt) | A linked outline of every page with its one-sentence description, grouped by section ([llms.txt convention](https://llmstxt.org){target=_blank}). Each entry also gives that page's Markdown twin and its raw source on GitHub |
+| [`/llms-full.txt`](../llms-full.txt) | The entire corpus in one file (about 1 MB): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute. Prefer it over fetching pages one at a time |
+| Any page URL + `index.md` | That page's Markdown source with full OKF frontmatter, served as `text/markdown` — for example `/modules/module-2/foundational-concepts/index.md`. Section listings too, such as `/modules/index.md` |
+| `raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/<path>.md` | The same Markdown from GitHub, for sandboxes that allow `github.com` but not `*.github.io`. `<path>` is the site path without its trailing slash |
 | `/sitemap.xml`, `/robots.txt` | Standard crawl surface; `robots.txt` repeats these pointers |
 | [Source repository](https://github.com/tyson-swetnam/AI-Automation-and-Agents){target=_blank} | The bundle itself under `docs/`, plus `AGENTS.md` with the contribution rules for coding agents |
+
+Every rendered page carries two *visible* pointers as well, because text
+extraction and link-derived URL allowlists never see `<head>`: a **Markdown
+button** in the page header, beside *Edit this page* and *View source*, and a
+**Machine-readable** line at the end of the article linking the twin, the raw
+source, `llms.txt` and `llms-full.txt`.
+
+**Traversing the bundle.** Inside a Markdown twin, and inside
+`llms-full.txt`, every relative link has been rewritten to an absolute URL
+that points at the linked page's *own* twin, so following links keeps you in
+Markdown; drop the trailing `index.md` to reach the rendered page. Links to
+files served verbatim (`/materials/`, `/assets/`) point at the file. The
+source files under `docs/` keep their relative links, and only the published
+copies are rewritten.
 
 Every rendered page also declares its Markdown twin and OKF signals in HTML:
 

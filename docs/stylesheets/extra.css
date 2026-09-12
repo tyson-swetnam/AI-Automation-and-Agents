@@ -302,3 +302,21 @@ iframe.course-video {
 [data-md-color-scheme="slate"] .md-typeset .question > summary::before {
   background-color: var(--unm-turquoise-bright);
 }
+
+/* Machine-readable pointers appended to every page by postbuild_agent_surface.py */
+.md-typeset .course-machine-readable {
+  margin-top: 1.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  font-size: 0.68rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .course-machine-readable a {
+  color: var(--md-default-fg-color--light);
+  text-decoration: underline;
+}
+
+.md-typeset .course-machine-readable a:hover {
+  color: var(--md-accent-fg-color);
+}

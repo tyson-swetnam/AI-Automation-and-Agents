@@ -9,8 +9,12 @@ Run AFTER `zensical build`. It:
        docs/a/index.md    -> site/a/index.md
        docs/index.md      -> site/index.md
    so any agent can turn a page URL into its canonical Markdown by appending
-   `index.md`. docs/assets, docs/materials and docs/stylesheets hold no
-   content pages and are never mirrored.
+   `index.md`. Relative links in the mirror are rewritten to absolute URLs
+   that point at the linked page's own Markdown twin (scripts/okf_links.py):
+   the mirror sits one directory deeper than its source, and an agent reading
+   Markdown should keep getting Markdown as it traverses. The sources under
+   docs/ are never modified. docs/assets, docs/materials and docs/stylesheets
+   hold no content pages and are never mirrored.
 2. Injects agent-discoverable metadata into each page's <head>:
        <link rel="alternate" type="text/markdown" href="index.md">
        <meta name="okf:type" | okf:status | okf:trust-tier | okf:generated-at
@@ -18,8 +22,14 @@ Run AFTER `zensical build`. It:
    okf:superseded-by is emitted only for deprecated pages whose frontmatter
    names a replacement; a relative Markdown path is resolved to the
    replacement's absolute page URL.
-3. Writes robots.txt advertising sitemap.xml, /llms.txt, /llms-full.txt, the
-   Markdown mirror convention, and the agent guide at /about/ai-agents/.
+3. Adds two *visible* pointers to every page, because text extraction and
+   link-derived URL allowlists never see <head>: a "View this page as
+   Markdown" button beside "View source", and a "Machine-readable" line at
+   the end of the article linking the Markdown twin, the raw source on
+   GitHub, llms.txt and llms-full.txt.
+4. Writes robots.txt advertising sitemap.xml, /llms.txt, /llms-full.txt, the
+   Markdown mirror and raw-source conventions, and the agent guide at
+   /about/ai-agents/.
 
 Adapted from UNM-CARC/docs (scripts/postbuild_agent_surface.py).
 
@@ -31,23 +41,18 @@ from __future__ import annotations
 import html
 import posixpath
 import re
-import shutil
 import sys
 from pathlib import Path
 
 import yaml
+
+from okf_links import raw_source_url, rewrite_relative_targets, site_url
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 
 # Top-level directories under docs/ that hold no content pages.
 SKIP_TOP = {"assets", "materials", "stylesheets"}
-
-
-def site_url() -> str:
-    text = (ROOT / "zensical.toml").read_text(encoding="utf-8")
-    m = re.search(r'^site_url\s*=\s*"([^"]+)"', text, re.MULTILINE)
-    return (m.group(1) if m else "/").rstrip("/") + "/"
 
 
 def frontmatter(path: Path) -> dict:
@@ -126,6 +131,43 @@ def head_block(fm: dict, rel: Path, base: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+# A document glyph for the Markdown button: two strokes of text on a dog-eared page.
+MD_ICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" '
+           'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+           'stroke-linejoin="round" aria-hidden="true">'
+           '<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/></svg>')
+
+
+def markdown_button() -> str:
+    """A third content-header button, beside Edit this page and View source."""
+    return ('<a href="index.md" title="View this page as Markdown (for AI agents and '
+            'screen readers)" class="md-content__button md-icon" '
+            'type="text/markdown">' + MD_ICON + "</a>\n")
+
+
+def machine_readable_line(rel: Path, base: str) -> str:
+    """Pointers in the body: <head> metadata survives no text extraction."""
+    url = page_url(base, rel)
+    raw = raw_source_url(rel.as_posix())
+    parts = [f'<a href="{url}index.md" type="text/markdown">this page as Markdown</a>']
+    if raw:
+        parts.append(f'<a href="{raw}">raw source on GitHub</a>')
+    parts += [f'<a href="{base}llms.txt">llms.txt</a>',
+              f'<a href="{base}llms-full.txt">llms-full.txt (whole site)</a>']
+    return ('<p class="course-machine-readable">Machine-readable: ' + " · ".join(parts)
+            + f'. See <a href="{base}about/ai-agents/">For AI agents</a>.</p>\n')
+
+
+def add_visible_pointers(text: str, rel: Path, base: str) -> str:
+    marker = 'title="View source of this page" class="md-content__button md-icon">'
+    if marker in text and "View this page as Markdown" not in text:
+        end = text.index("</a>", text.index(marker)) + len("</a>")
+        text = text[:end] + "\n" + markdown_button() + text[end:]
+    if "</article>" in text and "course-machine-readable" not in text:
+        text = text.replace("</article>", machine_readable_line(rel, base) + "</article>", 1)
+    return text
+
+
 def dest_for(rel: Path, site: Path) -> Path:
     if rel.name == "index.md":
         return site / rel
@@ -154,7 +196,8 @@ def main():
             continue
         dest = dest_for(rel, site)
         dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(path, dest)
+        dest.write_text(rewrite_relative_targets(path.read_text(encoding="utf-8"),
+                                                 rel.as_posix(), base), encoding="utf-8")
         pages[dest.parent.resolve()] = (rel, frontmatter(path))
         mirrored += 1
 
@@ -169,6 +212,7 @@ def main():
         if 'rel="alternate" type="text/markdown"' in text:
             continue  # idempotent
         text = text.replace("</head>", head_block(fm, rel, base) + "</head>", 1)
+        text = add_visible_pointers(text, rel, base)
         htmlfile.write_text(text, encoding="utf-8")
         injected += 1
 
@@ -193,12 +237,15 @@ def main():
         f"#   Machine-readable outline:  {base}llms.txt\n"
         f"#   Full corpus (one file):    {base}llms-full.txt\n"
         "#   Markdown source of any page (OKF v0.2 frontmatter: type, provenance,\n"
-        "#   trust, lifecycle): append `index.md` to the page URL.\n"
+        "#   trust, lifecycle): append `index.md` to the page URL. Its links are\n"
+        "#   absolute and point at other pages' Markdown twins.\n"
+        f"#   Raw Markdown on GitHub:    {raw_source_url()}<path>.md\n"
         f"#   Agent guide:               {base}about/ai-agents/\n",
         encoding="utf-8")
 
-    print(f"agent surface: mirrored {mirrored} markdown files, "
-          f"annotated {injected} pages, wrote robots.txt")
+    print(f"agent surface: mirrored {mirrored} markdown files (links absolutized), "
+          f"annotated {injected} pages with metadata, a Markdown button and a "
+          "machine-readable line, wrote robots.txt")
 
 
 if __name__ == "__main__":
