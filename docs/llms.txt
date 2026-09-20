@@ -94,7 +94,7 @@ Trust and lifecycle signals:
 
 ## Guest lectures
 
-- [Guest Lecture: Agentic AI Loops](https://tyson-swetnam.github.io/AI-Automation-and-Agents/guest-lectures/agentic-ai-loops/): An interactive 38-slide guest lecture for UNM's Ethical AI for Autonomous Systems course that reads the agent loop through sequence, selection and iteration, with discussion prompts, a PDF download and numbered references. Markdown twin: https://tyson-swetnam.github.io/AI-Automation-and-Agents/guest-lectures/agentic-ai-loops/index.md Raw source: https://raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/guest-lectures/agentic-ai-loops.md
+- [Guest Lecture: Agentic AI Loops](https://tyson-swetnam.github.io/AI-Automation-and-Agents/guest-lectures/agentic-ai-loops/): An interactive guest lecture for UNM's Ethical AI for Autonomous Systems course, written for a mixed technical and non-technical class: what agentic AI is, how it differs from predictive models and language models, and how sequence, selection and iteration explain the agent loop. Markdown twin: https://tyson-swetnam.github.io/AI-Automation-and-Agents/guest-lectures/agentic-ai-loops/index.md Raw source: https://raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/guest-lectures/agentic-ai-loops.md
 
 ## Course design
 
@@ -141,7 +141,7 @@ Files served verbatim (not Markdown); the module pages link to them.
 
 ## Meta
 
-- [Full corpus in one file](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute; about 1267 KB. Prefer it over fetching pages one at a time.
+- [Full corpus in one file](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute; about 1272 KB. Prefer it over fetching pages one at a time.
 - [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/): the endpoints, the Markdown-twin and raw-source conventions, trust signals, and the rules for tutoring learners.
 - [Course update log](https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/): dated history of changes to this bundle (OKF §9).
 - [Wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/): Where every page of the original GitHub wiki lives on this site: migrated, split, archived, or dropped.
