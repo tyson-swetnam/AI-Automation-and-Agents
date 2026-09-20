@@ -79,6 +79,17 @@ Move beyond individual prompts into the world of AI agents and automated workflo
 
     [:octicons-arrow-right-24: Module 5](modules/module-5/index.md)
 
+-   :material-presentation-play:{ .lg .middle } __Guest lectures__
+
+    ---
+
+    Standalone lectures from the course team, with interactive slides, a PDF
+    and numbered references. First: *Agentic AI Loops*, the agent loop read
+    through sequence, selection and iteration, for UNM's Ethical AI for
+    Autonomous Systems course.
+
+    [:octicons-arrow-right-24: Guest lectures](guest-lectures/index.md)
+
 -   :material-school:{ .lg .middle } __Course design (for instructors)__
 
     ---

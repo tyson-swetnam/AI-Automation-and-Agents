@@ -44,6 +44,7 @@ Rules (E = error, fails the run; W = warning):
   Materials and assets
     W  file under materials/, assets/images/, assets/files/ referenced from no .md
     E  HTML under materials/ with http(s):// in src=, href=, or CSS url()
+       (an <a href> hyperlink is navigation, not a request, and is allowed)
   Consistency (W)
     site_url, repo_url, repo_name, edit_uri in zensical.toml and REPO_SLUG in
     scripts/render_notebooks.py describe the same repository and docs dir
@@ -126,6 +127,9 @@ HTML_ATTR_RE = re.compile(r"""\b(?:src|href)\s*=\s*(?:"([^"]*)"|'([^']*)')""", r
 EXTERNAL_RESOURCE_RE = re.compile(
     r"""(?:\b(?:src|href)\s*=\s*["']?|url\(\s*["']?)\s*(https?://[^"'\s)>]+)""", re.IGNORECASE
 )
+# Opening <a ...> tags: a hyperlink the reader may click loads nothing, so it is not an
+# external resource. <link href>, <base href>, src= and CSS url() still are.
+ANCHOR_TAG_RE = re.compile(r"<a\b[^>]*>", re.IGNORECASE)
 KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 REPO_SLUG_RE = re.compile(r'REPO_SLUG\s*=\s*"([^"]+)"')
 GITHUB_REPO_RE = re.compile(r"^https?://github\.com/([^/\s]+)/([^/\s]+?)(?:\.git)?/?$")
@@ -684,6 +688,8 @@ def check_materials_html(docs: Path, report: Report) -> None:
     for path in sorted(base.rglob("*.html")):
         rel = path.relative_to(docs).as_posix()
         text = path.read_text(encoding="utf-8", errors="replace")
+        # blank the anchors in place (newlines kept) so the reported line numbers stay true
+        text = ANCHOR_TAG_RE.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), text)
         hits = [(text.count("\n", 0, m.start()) + 1, m.group(1)) for m in EXTERNAL_RESOURCE_RE.finditer(text)]
         for line, url in hits[:10]:
             report.error(rel, f"external resource {url} (materials HTML must be self-contained)", line=line)

@@ -86,6 +86,10 @@ nav = [
       "modules/module-5/chapter-quizzes.md",
     ] },
   ] },
+  { "Guest lectures" = [
+    { "Contents" = "guest-lectures/index.md" },
+    "guest-lectures/agentic-ai-loops.md",
+  ] },
   { "Course design" = [
     { "Contents" = "course-design/index.md" },
     "course-design/learning-design.md",

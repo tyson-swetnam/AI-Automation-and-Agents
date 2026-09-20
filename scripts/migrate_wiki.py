@@ -944,6 +944,7 @@ SECTION_META: dict[str, tuple[str, str]] = {
     "modules/module-3": ("Module 3: Memory Architectures and RAG", "Parametric and non-parametric memory, the six-stage RAG pipeline, conversational memory patterns, retrieval optimization, and RAGAS evaluation."),
     "modules/module-4": ("Module 4: Multi-Agent Systems", "Coordination architectures, LangGraph and CrewAI implementation, the three-role pipeline, and coordination-failure diagnosis."),
     "modules/module-5": ("Module 5: Responsible Agentic AI", "Production deployment, multi-dimensional evaluation, observability with LangSmith, OWASP Top 10 for LLM applications, and EU AI Act / NIST AI RMF governance."),
+    "guest-lectures": ("Guest lectures", "Standalone lectures the course team gives to other programs, each published with interactive slides, a PDF and numbered references."),
     "course-design": ("Course design", "Instructor-facing design documents: the formal learning design, development plan, instructor materials, and the July 2026 course review."),
     "about": ("About", "License and attribution, how to contribute, how AI agents should consume this site, and the wiki-to-site crosswalk."),
     "archive": ("Archive", "Superseded wiki pages kept for history. Each page names the live page that replaced it."),
