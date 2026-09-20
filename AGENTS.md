@@ -85,7 +85,8 @@ wiki, pinned to `WIKI_REF`) and `repo-v2` (images and notebooks, pinned to
    **Hand-written pages** are edited directly: `docs/index.md`,
    `start-here/*` (except the portfolio tutorial until it is frozen),
    `about/*` (except the crosswalk), `course-design/instructor-materials.md`,
-   `modules/module-1/{concept-quiz,diagnostic-survey}.md`, and `log.md`.
+   `modules/module-1/{concept-quiz,diagnostic-survey}.md`, `guest-lectures/*`
+   (except its generated `index.md`), and `log.md`.
    **Generated files** are never edited by hand: every section `index.md`,
    `about/wiki-crosswalk.md`, `docs/llms.txt`, `docs/llms-full.txt`.
    Run `migrate_wiki.py --check` after changing the script; it must exit 0.
@@ -148,7 +149,8 @@ wiki, pinned to `WIKI_REF`) and `repo-v2` (images and notebooks, pinned to
    or use `<p><img ...>`; the lint rejects both.
 
 4. **Materials are self-contained and live under `docs/materials/`.** HTML
-   activities make no `http(s)://` requests (the lint checks). Learner
+   activities make no `http(s)://` requests (the lint checks `src=`, `href=`
+   and CSS `url()`; an `<a href>` hyperlink a reader may click is allowed). Learner
    notebooks sit in `docs/materials/moduleN/` and are rendered to
    `modules/module-N/lab-notebook.md` by `render_notebooks.py`; the Colab,
    download, and GitHub buttons derive from the `REPO_SLUG` constant.

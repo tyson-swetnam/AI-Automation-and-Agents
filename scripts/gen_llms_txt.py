@@ -51,6 +51,7 @@ SECTION_ORDER = [
     "modules/module-3",
     "modules/module-4",
     "modules/module-5",
+    "guest-lectures",
     "course-design",
     "about",
     "archive",
@@ -67,6 +68,10 @@ MATERIAL_KINDS = {
     ".pdf": "PDF",
     ".ipynb": "Jupyter notebook (open in Google Colab or download)",
     ".docx": "Word document",
+}
+# Materials whose kind depends on where they live, not on their extension.
+MATERIAL_KINDS_BY_DIR = {
+    ("materials/guest-lectures/", ".html"): "interactive HTML slides (self-contained viewer with speaker notes)",
 }
 
 
@@ -286,6 +291,9 @@ def main():
             rel = f.relative_to(DOCS).as_posix()
             url = base + urllib.parse.quote(rel, safe="/")
             kind = MATERIAL_KINDS.get(f.suffix.lower(), f.suffix.lstrip(".").upper() + " file")
+            for (prefix, suffix), by_dir in MATERIAL_KINDS_BY_DIR.items():
+                if rel.startswith(prefix) and f.suffix.lower() == suffix:
+                    kind = by_dir
             lines.append(f"- [{rel}]({url}): {kind}")
         lines.append("")
 

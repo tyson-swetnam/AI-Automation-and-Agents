@@ -92,6 +92,10 @@ Trust and lifecycle signals:
 - [Module 5 Lab: LangSmith Tracing and a Comparative Observability Study](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/): Read-only rendering of the Module 5 lab notebook, LangSmith Tracing and a Comparative Observability Study, with links to open it in Google Colab or download the .ipynb file. Markdown twin: https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/lab-notebook/index.md Raw source: https://raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/modules/module-5/lab-notebook.md
 - [Module 5 Chapter Quizzes](https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/): Five self-evaluating five-question chapter quizzes with collapsed answer keys and per-option feedback for Module 5, Responsible Agentic AI. Markdown twin: https://tyson-swetnam.github.io/AI-Automation-and-Agents/modules/module-5/chapter-quizzes/index.md Raw source: https://raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/modules/module-5/chapter-quizzes.md
 
+## Guest lectures
+
+- [Guest Lecture: Agentic AI Loops](https://tyson-swetnam.github.io/AI-Automation-and-Agents/guest-lectures/agentic-ai-loops/): An interactive 38-slide guest lecture for UNM's Ethical AI for Autonomous Systems course that reads the agent loop through sequence, selection and iteration, with discussion prompts, a PDF download and numbered references. Markdown twin: https://tyson-swetnam.github.io/AI-Automation-and-Agents/guest-lectures/agentic-ai-loops/index.md Raw source: https://raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/guest-lectures/agentic-ai-loops.md
+
 ## Course design
 
 - [Formal Learning Design](https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/): Course-level instructional design document mapping the standard per-module activity structure to Bloom's Taxonomy and defining the general course competencies and the module-specific skills for Modules 1-5. Markdown twin: https://tyson-swetnam.github.io/AI-Automation-and-Agents/course-design/learning-design/index.md Raw source: https://raw.githubusercontent.com/tyson-swetnam/AI-Automation-and-Agents/main/docs/course-design/learning-design.md
@@ -122,6 +126,7 @@ Trust and lifecycle signals:
 
 Files served verbatim (not Markdown); the module pages link to them.
 
+- [materials/guest-lectures/agentic-ai-loops.html](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/guest-lectures/agentic-ai-loops.html): interactive HTML slides (self-contained viewer with speaker notes)
 - [materials/module1/Diagnostic_Knowledge_Survey.pdf](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Diagnostic_Knowledge_Survey.pdf): PDF
 - [materials/module1/Illustrated_AI_Glossary.docx](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Illustrated_AI_Glossary.docx): Word document
 - [materials/module1/Module_1_Quiz.pdf](https://tyson-swetnam.github.io/AI-Automation-and-Agents/materials/module1/Module_1_Quiz.pdf): PDF
@@ -136,7 +141,7 @@ Files served verbatim (not Markdown); the module pages link to them.
 
 ## Meta
 
-- [Full corpus in one file](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute; about 1246 KB. Prefer it over fetching pages one at a time.
+- [Full corpus in one file](https://tyson-swetnam.github.io/AI-Automation-and-Agents/llms-full.txt): every page's Markdown with frontmatter, each prefixed by its canonical URL, links made absolute; about 1267 KB. Prefer it over fetching pages one at a time.
 - [For AI agents](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/ai-agents/): the endpoints, the Markdown-twin and raw-source conventions, trust signals, and the rules for tutoring learners.
 - [Course update log](https://tyson-swetnam.github.io/AI-Automation-and-Agents/log/): dated history of changes to this bundle (OKF §9).
 - [Wiki-to-site crosswalk](https://tyson-swetnam.github.io/AI-Automation-and-Agents/about/wiki-crosswalk/): Where every page of the original GitHub wiki lives on this site: migrated, split, archived, or dropped.
