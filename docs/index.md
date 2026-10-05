@@ -132,8 +132,8 @@ flowchart LR
     WA -.-> M4
     WA -.-> M5
 
-    classDef module fill:#0c234b,stroke:#001c48,color:#ffffff
-    classDef artifact fill:#ab0520,stroke:#8b0015,color:#ffffff
+    classDef module stroke:#007a86,stroke-width:3px
+    classDef artifact stroke:#ba0c2f,stroke-width:3px
     class M1,M2,M3,M4,M5 module
     class WA artifact
 ```
