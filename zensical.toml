@@ -89,6 +89,7 @@ nav = [
   { "Guest lectures" = [
     { "Contents" = "guest-lectures/index.md" },
     "guest-lectures/agentic-ai-loops.md",
+    "guest-lectures/say-what-you-mean.md",
   ] },
   { "Course design" = [
     { "Contents" = "course-design/index.md" },

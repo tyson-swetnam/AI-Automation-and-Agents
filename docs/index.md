@@ -84,9 +84,10 @@ Move beyond individual prompts into the world of AI agents and automated workflo
     ---
 
     Standalone lectures from the course team, with interactive slides, a PDF
-    and numbered references. First: *Agentic AI Loops*, the agent loop read
-    through sequence, selection and iteration, for UNM's Ethical AI for
-    Autonomous Systems course.
+    and numbered references: *Agentic AI Loops*, the agent loop read through
+    sequence, selection and iteration, and *Say What You Mean*, AI ethics,
+    agentic AI and CARC's resources for UNM's CS 491/591 Introduction to
+    HCI.
 
     [:octicons-arrow-right-24: Guest lectures](guest-lectures/index.md)
 
