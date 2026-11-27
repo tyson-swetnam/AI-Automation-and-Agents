@@ -85,9 +85,11 @@ Move beyond individual prompts into the world of AI agents and automated workflo
 
     Standalone lectures from the course team, with interactive slides, a PDF
     and numbered references: *Agentic AI Loops*, the agent loop read through
-    sequence, selection and iteration, and *Say What You Mean*, AI ethics,
+    sequence, selection and iteration; *Say What You Mean*, AI ethics,
     agentic AI and CARC's resources for UNM's CS 491/591 Introduction to
-    HCI.
+    HCI; and *Agentic AI for Engineering Research*, agents, watermarks and a
+    hands-on Mars hazard-assessment agent for UNM's Introduction to
+    Reliability Engineering.
 
     [:octicons-arrow-right-24: Guest lectures](guest-lectures/index.md)
 
